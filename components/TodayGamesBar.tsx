@@ -10,23 +10,33 @@ interface TodayGamesBarProps {
 }
 
 export default function TodayGamesBar({ refreshInterval = 30000 }: TodayGamesBarProps) {
+  const wpaThreshold = 0.08;
   const { data, error, isLoading } = useSWR<{
     source: string;
     ts: string;
     wpa_threshold?: number;
     data: TodayGame[];
-  }>("/api/today-games", apiGet, {
+  }>(['/api/today-games', wpaThreshold], () => apiGet('/api/today-games'), {
     refreshInterval,
     revalidateOnFocus: false,
   });
 
   const [lastUpdate, setLastUpdate] = useState<string>("");
+  const [lastUpdateMinutes, setLastUpdateMinutes] = useState<number>(0);
   const [isRealMode, setIsRealMode] = useState(false);
 
   useEffect(() => {
     if (data) {
-      setLastUpdate(new Date().toLocaleTimeString());
+      const now = new Date();
+      setLastUpdate(now.toLocaleTimeString());
       setIsRealMode(data.source === "real");
+      
+      // Calculate minutes since API timestamp
+      if (data.ts) {
+        const apiTime = new Date(data.ts);
+        const minutesDiff = Math.floor((now.getTime() - apiTime.getTime()) / (1000 * 60));
+        setLastUpdateMinutes(minutesDiff);
+      }
     }
   }, [data]);
 
@@ -107,7 +117,9 @@ export default function TodayGamesBar({ refreshInterval = 30000 }: TodayGamesBar
           </div>
           
           <div className="flex items-center gap-3 text-sm text-gray-500">
-            <span>最終更新: {lastUpdate}</span>
+            <span className="flex items-center gap-1">
+              🕐 更新: {lastUpdateMinutes === 0 ? "最新" : `${lastUpdateMinutes}分前`}
+            </span>
             <span>閾値: {data?.wpa_threshold ? `${(data.wpa_threshold * 100).toFixed(0)}%` : "8%"}</span>
           </div>
         </div>
@@ -119,6 +131,7 @@ export default function TodayGamesBar({ refreshInterval = 30000 }: TodayGamesBar
               key={game.game_id}
               href={`/games/${game.game_id}`}
               className="block"
+              aria-label={`${game.away_team} vs ${game.home_team} の詳細（WP推移・ハイライト）を見る`}
             >
               <div className="relative bg-gray-50 hover:bg-gray-100 transition-colors rounded-lg p-4 border border-gray-200 hover:border-gray-300">
                 {/* Highlights Badge */}
