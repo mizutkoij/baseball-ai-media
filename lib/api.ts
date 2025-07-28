@@ -113,5 +113,6 @@ export interface WPSeriesResponse {
 
 // WARランキングデータ取得関数
 export async function getWarLeaders(): Promise<string[]> {
-  return apiGet<string[]>("/api/war-leaders");
+  return apiGet<string[]>("war-leaders"); 
 }
+
