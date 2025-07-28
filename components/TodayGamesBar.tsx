@@ -2,24 +2,26 @@
 
 import { useEffect, useState } from "react";
 import useSWR from "swr";
-import { apiGet, TodayGame } from "@/lib/api";
+import { apiGet, TodayGame, TodayGamesResponse } from "@/lib/api";
 import Link from "next/link";
 
 interface TodayGamesBarProps {
   refreshInterval?: number;
+  defaultLeague?: string;
 }
 
-export default function TodayGamesBar({ refreshInterval = 30000 }: TodayGamesBarProps) {
+export default function TodayGamesBar({ refreshInterval = 30000, defaultLeague = "first" }: TodayGamesBarProps) {
   const wpaThreshold = 0.08;
-  const { data, error, isLoading } = useSWR<{
-    source: string;
-    ts: string;
-    wpa_threshold?: number;
-    data: TodayGame[];
-  }>(['/api/today-games', wpaThreshold], () => apiGet('/api/today-games'), {
-    refreshInterval,
-    revalidateOnFocus: false,
-  });
+  const [currentLeague, setCurrentLeague] = useState<string>(defaultLeague);
+  
+  const { data, error, isLoading } = useSWR<TodayGamesResponse>(
+    ['/api/today-games', currentLeague, wpaThreshold], 
+    () => apiGet(`/api/today-games?league=${currentLeague}`), 
+    {
+      refreshInterval,
+      revalidateOnFocus: false,
+    }
+  );
 
   const [lastUpdate, setLastUpdate] = useState<string>("");
   const [lastUpdateMinutes, setLastUpdateMinutes] = useState<number>(0);
@@ -98,6 +100,31 @@ export default function TodayGamesBar({ refreshInterval = 30000 }: TodayGamesBar
             <h2 className="text-lg font-semibold text-gray-800">
               ⚾️ 今日の試合
             </h2>
+            
+            {/* League Tabs */}
+            <div className="flex items-center bg-gray-100 rounded-lg p-1">
+              <button
+                onClick={() => setCurrentLeague("first")}
+                className={`px-3 py-1 text-xs font-medium rounded transition-colors ${
+                  currentLeague === "first"
+                    ? "bg-white text-gray-900 shadow-sm"
+                    : "text-gray-600 hover:text-gray-800"
+                }`}
+              >
+                一軍
+              </button>
+              <button
+                onClick={() => setCurrentLeague("farm")}
+                className={`px-3 py-1 text-xs font-medium rounded transition-colors ${
+                  currentLeague === "farm"
+                    ? "bg-white text-gray-900 shadow-sm"
+                    : "text-gray-600 hover:text-gray-800"
+                }`}
+              >
+                二軍
+              </button>
+            </div>
+            
             <div className="flex items-center gap-2">
               <span
                 className={`px-2 py-1 rounded-full text-xs font-medium ${
@@ -108,6 +135,12 @@ export default function TodayGamesBar({ refreshInterval = 30000 }: TodayGamesBar
               >
                 {isRealMode ? "🔴 REAL" : "📊 BASIC"}
               </span>
+              
+              {/* League Badge */}
+              <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium">
+                {currentLeague === "first" ? "一軍" : "二軍"} ({data?.games || 0}試合)
+              </span>
+              
               {totalHighlights > 0 && (
                 <span className="px-2 py-1 bg-amber-100 text-amber-800 rounded-full text-xs font-medium">
                   ⭐️ {totalHighlights} ハイライト

@@ -26,6 +26,7 @@ export interface TodayGame {
   home_score: number | null;
   venue: string;
   tv: string | null;
+  league: string;                   // NEW: リーグ（first/farm）
   highlights_count?: number;        // NEW: ハイライト件数
   last_highlight_ts?: string;       // NEW: 最終ハイライト時刻
 }
@@ -74,6 +75,8 @@ export interface WPPoint {
 // API Response types
 export interface TodayGamesResponse {
   source: string;
+  league: string;                   // NEW: リーグ
+  games: number;                    // NEW: 試合数
   ts: string;
   wpa_threshold?: number;           // NEW: ハイライト閾値
   data: TodayGame[];
