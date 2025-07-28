@@ -6,7 +6,7 @@ module.exports = {
     return [
       {
         source: '/api/:path*',
-        destination: `${process.env.API_ORIGIN || 'https://example.com'}/api/:path*`, // fallbackも追加
+        destination: `${process.env.API_ORIGIN || 'https://example.com'}/api/:path*`,
       },
     ];
   },
