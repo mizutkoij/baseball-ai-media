@@ -1,13 +1,12 @@
 module.exports = {
+  env: {
+    API_ORIGIN: process.env.API_ORIGIN,
+  },
   async rewrites() {
-    const destination = process.env.API_ORIGIN
-      ? `${process.env.API_ORIGIN}/api/:path*`
-      : "https://example.com/api/:path*"; // fallback to avoid build error
-
     return [
       {
         source: '/api/:path*',
-        destination,
+        destination: `${process.env.API_ORIGIN || 'https://example.com'}/api/:path*`, // fallbackも追加
       },
     ];
   },
