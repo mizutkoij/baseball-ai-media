@@ -15,7 +15,7 @@ export default function WarLeadersContainer() {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const result = await getWarLeaders(10);
+        const result = await getWarLeaders();
         setData(result?.data ?? []);
         setSource(result?.source ?? "unknown");
       } catch (error) {
