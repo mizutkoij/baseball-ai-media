@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import useSWR, { mutate } from 'swr';
 import Link from 'next/link';
 import { ArrowLeft, Clock, Users, BarChart3 } from 'lucide-react';
+import { useSSE } from '@/lib/sse-hook';
 
 type PBPEvent = {
   game_id: string;
@@ -55,7 +56,7 @@ const API = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000/api";
 const fetcher = (url: string) => fetch(url, { cache: "no-store" }).then(r => r.json());
 
 export default function GameLive({ params }: { params: { game_id: string } }) {
-  const [sseStatus, setSseStatus] = useState<'disconnected' | 'connecting' | 'connected'>('disconnected');
+  const [sseStatus, setSseStatus] = useState<'disconnected' | 'connecting' | 'connected' | 'error' | 'disabled'>('disconnected');
   const [sseEvents, setSseEvents] = useState<number>(0);
 
   const { data: pbpData, error: pbpError } = useSWR<PBPResponse>(
@@ -63,49 +64,21 @@ export default function GameLive({ params }: { params: { game_id: string } }) {
     fetcher, 
     { refreshInterval: 15000, revalidateOnFocus: false }
   );
-
-  // SSE connection for real-time updates (game-2 only)
-  useEffect(() => {
-    const SSE_ENABLE = process.env.NEXT_PUBLIC_SSE_ENABLE !== "false";
-    if (!SSE_ENABLE || params.game_id !== "game-2") return;
-
-    setSseStatus('connecting');
-    const eventSource = new EventSource(`${API}/pbp/stream/${params.game_id}`);
-    
-    eventSource.onopen = () => {
-      setSseStatus('connected');
-      console.log('SSE connected for', params.game_id);
-    };
-    
-    eventSource.onmessage = (event) => {
-      try {
-        const data = JSON.parse(event.data);
-        if (data.type === 'heartbeat') {
-          console.log('SSE heartbeat:', data.connection_seconds);
-          return;
-        }
-        
-        setSseEvents(prev => prev + 1);
-        console.log('SSE new event:', data.pitch_seq, data.result);
-        
-        // Trigger SWR revalidation for fresh data
-        mutate(`${API}/pbp?game_id=${params.game_id}&limit=50`);
-        
-      } catch (e) {
-        console.error('SSE parse error:', e);
-      }
-    };
-    
-    eventSource.onerror = () => {
-      setSseStatus('disconnected');
-      console.log('SSE disconnected');
-    };
-    
-    return () => {
-      eventSource.close();
-      setSseStatus('disconnected');
-    };
-  }, [params.game_id]);
+  
+  // SSE connection with feature flag and auto-reconnect
+  const sseState = useSSE({
+    gameId: params.game_id,
+    apiBase: API,
+    enabled: process.env.NEXT_PUBLIC_ENABLE_SSE === 'true',
+    onEvent: (data) => {
+      setSseEvents(prev => prev + 1);
+      // Trigger SWR revalidation for fresh data
+      mutate(`${API}/pbp?game_id=${params.game_id}&limit=50`);
+    },
+    onConnectionChange: (status) => {
+      setSseStatus(status === 'disabled' ? 'disconnected' : status);
+    }
+  });
 
   const { data: summaryData } = useSWR<GameSummary>(
     `${API}/pbp/summary/${params.game_id}`, 
@@ -173,18 +146,27 @@ export default function GameLive({ params }: { params: { game_id: string } }) {
                 <Clock className="w-4 h-4" />
                 {pbpData?.last_updated && `最終更新: ${formatTime(pbpData.last_updated)}`}
               </div>
-              {params.game_id === "game-2" && (
+              {process.env.NEXT_PUBLIC_ENABLE_SSE === 'true' && (
                 <div className="flex items-center gap-2">
                   <div className={`w-2 h-2 rounded-full ${
                     sseStatus === 'connected' ? 'bg-green-500' : 
                     sseStatus === 'connecting' ? 'bg-yellow-500 animate-pulse' : 
+                    sseStatus === 'error' ? 'bg-orange-500' :
+                    sseStatus === 'disabled' ? 'bg-gray-500' :
                     'bg-red-500'
                   }`} />
                   <span className="text-xs">
                     {sseStatus === 'connected' ? `LIVE (${sseEvents}イベント)` : 
                      sseStatus === 'connecting' ? 'SSE接続中...' : 
+                     sseStatus === 'error' ? `エラー (${sseState.retryCount}回再試行)` :
+                     sseStatus === 'disabled' ? 'SSE無効' :
                      'ポーリング'}
                   </span>
+                  {sseState.lastEventTime && (
+                    <span className="text-xs text-slate-500">
+                      最終: {sseState.lastEventTime.toLocaleTimeString()}
+                    </span>
+                  )}
                 </div>
               )}
             </div>
@@ -323,7 +305,7 @@ export default function GameLive({ params }: { params: { game_id: string } }) {
 
         {/* Auto-refresh notice */}
         <div className="mt-4 text-center text-xs text-slate-500">
-          {params.game_id === "game-2" && sseStatus === 'connected' ? 
+          {process.env.NEXT_PUBLIC_ENABLE_SSE === 'true' && sseStatus === 'connected' ? 
             "🔴 リアルタイム接続中（SSE）" : 
             "📡 15秒間隔で自動更新中..."
           }
