@@ -104,3 +104,8 @@ export interface WPSeriesResponse {
   points: WPPoint[];
   count: number;
 }
+
+// WARランキングデータ取得関数
+export async function getWarLeaders(): Promise<string[]> {
+  return apiGet<string[]>("/api/war-leaders");
+}
