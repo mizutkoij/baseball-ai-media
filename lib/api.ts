@@ -1,13 +1,14 @@
 // lib/api.ts - Updated types for highlights
 export async function apiGet<T>(path: string): Promise<T> {
+  // 絶対URLかどうか判定
   const isAbsolute = path.startsWith("http://") || path.startsWith("https://");
 
-  // 完全な URL が指定されていればそのまま、それ以外は相対で処理
+  // 最終的に使うURL
   const url = isAbsolute
     ? path
     : path.startsWith("/api/")
-      ? path // 相対パス → そのまま（Next.js proxy）
-      : `${process.env.API_ORIGIN ?? ""}/api/${path.replace(/^\/+/, "")}`;
+      ? path // そのまま相対パス
+      : `/api/${path.replace(/^\/+/, "")}`; // 自動的に /api/ を補う
 
   const r = await fetch(url, {
     next: { revalidate: 0 },
@@ -17,6 +18,7 @@ export async function apiGet<T>(path: string): Promise<T> {
   if (!r.ok) throw new Error(`API Error ${r.status}: ${r.statusText}`);
   return r.json();
 }
+
 
 
 // Updated type definitions
