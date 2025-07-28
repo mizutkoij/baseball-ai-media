@@ -1,10 +1,13 @@
 // lib/api.ts - Updated types for highlights
 export async function apiGet<T>(path: string): Promise<T> {
-  const base = process.env.NEXT_PUBLIC_API_BASE_URL || ""; // 空=同一オリジン  
-  const r = await fetch(`${base}${path}`, { 
-    next: { revalidate: 0 },
-    cache: 'no-store'
-  });
+  const base = process.env.API_ORIGIN ?? process.env.NEXT_PUBLIC_API_BASE_URL ?? "";
+
+const url = path.startsWith("http") ? path : `${base}${path}`;
+const r = await fetch(url, {
+  next: { revalidate: 0 },
+  cache: 'no-store',
+});
+
   
   if (!r.ok) {
     throw new Error(`API Error ${r.status}: ${r.statusText}`);
