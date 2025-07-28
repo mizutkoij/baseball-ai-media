@@ -16,8 +16,8 @@ export default function WarLeadersContainer() {
       try {
         setIsLoading(true);
         const result = await getWarLeaders();
-        setData(result?.data ?? []);
-        setSource(result?.source ?? "unknown");
+        setData(result ?? []);
+        setSource("local");
       } catch (error) {
         console.error("Failed to fetch WAR leaders:", error);
         setData([]);
