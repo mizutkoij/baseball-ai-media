@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import useSWR from "swr";
 import { apiGet, TodayGame, TodayGamesResponse } from "@/lib/api";
 import Link from "next/link";
@@ -11,8 +12,15 @@ interface TodayGamesBarProps {
 }
 
 export default function TodayGamesBar({ refreshInterval = 30000, defaultLeague = "first" }: TodayGamesBarProps) {
-  const wpaThreshold = 0.08;
+  const searchParams = useSearchParams();
+  const urlWpaThreshold = searchParams.get('wpa') ? parseFloat(searchParams.get('wpa')!) : null;
+  const wpaThreshold = urlWpaThreshold && urlWpaThreshold >= 0.01 && urlWpaThreshold <= 0.5 
+    ? urlWpaThreshold 
+    : 0.08;
+  
   const [currentLeague, setCurrentLeague] = useState<string>(defaultLeague);
+  const [showHighlightsOnly, setShowHighlightsOnly] = useState<boolean>(false);
+  const [customThreshold, setCustomThreshold] = useState<string>((wpaThreshold * 100).toFixed(0));
   
   const { data, error, isLoading } = useSWR<TodayGamesResponse>(
     ['/api/today-games', currentLeague, wpaThreshold], 
@@ -22,6 +30,16 @@ export default function TodayGamesBar({ refreshInterval = 30000, defaultLeague =
       revalidateOnFocus: false,
     }
   );
+
+  const handleThresholdChange = (newThreshold: string) => {
+    const numThreshold = parseFloat(newThreshold) / 100;
+    if (numThreshold >= 0.01 && numThreshold <= 0.5) {
+      const url = new URL(window.location.href);
+      url.searchParams.set('wpa', numThreshold.toFixed(3));
+      window.history.replaceState({}, '', url.toString());
+      window.location.reload(); // Simple approach for immediate effect
+    }
+  };
 
   const [lastUpdate, setLastUpdate] = useState<string>("");
   const [lastUpdateMinutes, setLastUpdateMinutes] = useState<number>(0);
@@ -90,6 +108,16 @@ export default function TodayGamesBar({ refreshInterval = 30000, defaultLeague =
   };
 
   const totalHighlights = data?.data?.reduce((sum, game) => sum + (game.highlights_count || 0), 0) || 0;
+  
+  // Filter games based on highlights toggle
+  const filteredGames = data?.data?.filter(game => {
+    if (showHighlightsOnly) {
+      return game.highlights_count && game.highlights_count > 0;
+    }
+    return true;
+  }) || [];
+  
+  const highlightGamesCount = data?.data?.filter(game => game.highlights_count && game.highlights_count > 0).length || 0;
 
   return (
     <div className="bg-white border-b border-gray-200 sticky top-0 z-40">
@@ -146,6 +174,20 @@ export default function TodayGamesBar({ refreshInterval = 30000, defaultLeague =
                   ⭐️ {totalHighlights} ハイライト
                 </span>
               )}
+              
+              {/* Highlights Filter Toggle */}
+              {highlightGamesCount > 0 && (
+                <button
+                  onClick={() => setShowHighlightsOnly(!showHighlightsOnly)}
+                  className={`px-2 py-1 rounded-full text-xs font-medium transition-colors ${
+                    showHighlightsOnly
+                      ? "bg-amber-200 text-amber-900 border border-amber-300"
+                      : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                  }`}
+                >
+                  {showHighlightsOnly ? "📌 ハイライトのみ" : "🔍 全試合"}
+                </button>
+              )}
             </div>
           </div>
           
@@ -153,13 +195,45 @@ export default function TodayGamesBar({ refreshInterval = 30000, defaultLeague =
             <span className="flex items-center gap-1">
               🕐 更新: {lastUpdateMinutes === 0 ? "最新" : `${lastUpdateMinutes}分前`}
             </span>
-            <span>閾値: {data?.wpa_threshold ? `${(data.wpa_threshold * 100).toFixed(0)}%` : "8%"}</span>
+            
+            {/* WPA Threshold Control */}
+            <div className="flex items-center gap-1">
+              <span>閾値:</span>
+              <input
+                type="number"
+                min="1"
+                max="50"
+                step="1"
+                value={customThreshold}
+                onChange={(e) => setCustomThreshold(e.target.value)}
+                onBlur={() => handleThresholdChange(customThreshold)}
+                onKeyPress={(e) => e.key === 'Enter' && handleThresholdChange(customThreshold)}
+                className="w-10 px-1 text-xs border border-gray-300 rounded text-center focus:outline-none focus:border-blue-500"
+              />
+              <span>%</span>
+              {urlWpaThreshold && (
+                <span className="text-xs text-blue-600">(カスタム)</span>
+              )}
+            </div>
           </div>
         </div>
 
         {/* Games Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {data?.data?.map((game) => (
+          {showHighlightsOnly && filteredGames.length === 0 && (
+            <div className="col-span-full text-center py-8 text-gray-500">
+              <div className="mb-2">⭐️</div>
+              <p className="text-sm">現在、ハイライトがある試合はありません</p>
+              <button
+                onClick={() => setShowHighlightsOnly(false)}
+                className="mt-2 text-xs text-blue-600 hover:text-blue-800 underline"
+              >
+                全試合を表示
+              </button>
+            </div>
+          )}
+          
+          {filteredGames.map((game) => (
             <Link
               key={game.game_id}
               href={`/games/${game.game_id}`}
@@ -218,24 +292,51 @@ export default function TodayGamesBar({ refreshInterval = 30000, defaultLeague =
 
                   {/* Highlight Info */}
                   {game.highlights_count && game.highlights_count > 0 && (
-                    <div className="text-xs text-amber-600 mt-1">
-                      📈 {game.highlights_count}件の重要場面
+                    <div className="text-xs text-amber-600 mt-1 flex items-center justify-between">
+                      <span>📈 {game.highlights_count}件の重要場面</span>
+                      {game.last_highlight_ts && (
+                        <span className="text-xs text-gray-400">
+                          最新: {new Date(game.last_highlight_ts).toLocaleTimeString('ja-JP', { 
+                            hour: '2-digit', 
+                            minute: '2-digit' 
+                          })}
+                        </span>
+                      )}
+                    </div>
+                  )}
+                  
+                  {/* Highlight Visual Indicator */}
+                  {game.highlights_count && game.highlights_count > 0 && (
+                    <div className="flex gap-1 mt-1">
+                      {Array.from({ length: Math.min(game.highlights_count, 5) }, (_, i) => (
+                        <div
+                          key={i}
+                          className="w-2 h-1 bg-amber-400 rounded-full"
+                          title={`${game.highlights_count}件のハイライト`}
+                        />
+                      ))}
+                      {game.highlights_count > 5 && (
+                        <span className="text-xs text-amber-600 ml-1">+{game.highlights_count - 5}</span>
+                      )}
                     </div>
                   )}
                 </div>
               </div>
             </Link>
-          )) || (
+          )) || (!showHighlightsOnly && (
             <div className="col-span-full text-center py-8 text-gray-500">
               試合データがありません
             </div>
-          )}
+          ))}
         </div>
 
         {/* Footer Info */}
         {data?.data && data.data.length > 0 && (
           <div className="mt-3 text-xs text-gray-500 text-center">
-            {data.data.length}試合 | 
+            {showHighlightsOnly ? 
+              `${filteredGames.length}/${data.data.length}試合（ハイライトあり）` :
+              `${data.data.length}試合`
+            } | 
             {isRealMode ? " リアルタイム更新" : " 基本モード"} | 
             ハイライト基準: 勝率変動 ≥ {data?.wpa_threshold ? `${(data.wpa_threshold * 100).toFixed(0)}%` : "8%"}
           </div>
