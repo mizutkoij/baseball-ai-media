@@ -1,20 +1,23 @@
 // lib/api.ts - Updated types for highlights
 export async function apiGet<T>(path: string): Promise<T> {
-  const base = process.env.API_ORIGIN ?? process.env.NEXT_PUBLIC_API_BASE_URL ?? "";
+  const isAbsolute = path.startsWith("http://") || path.startsWith("https://");
 
-const url = path.startsWith("http") ? path : `${base}${path}`;
-const r = await fetch(url, {
-  next: { revalidate: 0 },
-  cache: 'no-store',
-});
+  // 完全な URL が指定されていればそのまま、それ以外は相対で処理
+  const url = isAbsolute
+    ? path
+    : path.startsWith("/api/")
+      ? path // 相対パス → そのまま（Next.js proxy）
+      : `${process.env.API_ORIGIN ?? ""}/api/${path.replace(/^\/+/, "")}`;
 
-  
-  if (!r.ok) {
-    throw new Error(`API Error ${r.status}: ${r.statusText}`);
-  }
-  
+  const r = await fetch(url, {
+    next: { revalidate: 0 },
+    cache: 'no-store',
+  });
+
+  if (!r.ok) throw new Error(`API Error ${r.status}: ${r.statusText}`);
   return r.json();
 }
+
 
 // Updated type definitions
 export interface TodayGame {
