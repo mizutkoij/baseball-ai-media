@@ -1,5 +1,8 @@
-import WarLeadersCard from "@/components/WarLeadersCard";
+import WarLeadersContainer from "@/components/WarLeadersContainer";
 import MatchupPreviewCard from "@/components/MatchupPreviewCard";
+import BasicBanner from "@/components/BasicBanner";
+import DataStatus from "@/components/DataStatus";
+import TodayGamesBar from "@/components/TodayGamesBar";
 import { Suspense } from "react";
 import { TrendingUp, Target, BarChart3, Zap } from "lucide-react";
 
@@ -119,6 +122,15 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen">
+      {/* Today Games Bar - Fixed Top */}
+      <TodayGamesBar />
+      
+      {/* Basic Mode Banner */}
+      <BasicBanner />
+      
+      {/* Data Status */}
+      <DataStatus />
+      
       {/* Hero Section */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-baseball-gradient opacity-20"></div>
@@ -153,9 +165,7 @@ export default async function Home() {
           
           {/* WAR Leaders Card */}
           <div className="animate-slide-up">
-            <Suspense fallback={<LoadingCard title="WAR Leaders (Neutral)" />}>
-              <WarLeadersCard data={leaders} />
-            </Suspense>
+            <WarLeadersContainer />
           </div>
 
           {/* Matchup Preview Card */}

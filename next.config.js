@@ -1,7 +1,9 @@
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   env: {
     API_ORIGIN: process.env.API_ORIGIN,
   },
+  // API キャッシュ設定
   async rewrites() {
     return [
       {
@@ -10,4 +12,12 @@ module.exports = {
       },
     ];
   },
+  // 画像最適化設定
+  images: {
+    domains: ['localhost', '100.88.12.26'],
+  },
+  // 静的生成設定
+  output: 'standalone',
 };
+
+module.exports = nextConfig;
