@@ -14,9 +14,22 @@ interface TodayGamesBarProps {
 export default function TodayGamesBar({ refreshInterval = 30000, defaultLeague = "first" }: TodayGamesBarProps) {
   const searchParams = useSearchParams();
   const urlWpaThreshold = searchParams.get('wpa') ? parseFloat(searchParams.get('wpa')!) : null;
+  
+  // Load saved threshold from localStorage
+  const getSavedThreshold = () => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('wpaThreshold');
+      if (saved) {
+        const num = parseFloat(saved);
+        if (num >= 0.01 && num <= 0.5) return num;
+      }
+    }
+    return 0.08;
+  };
+  
   const wpaThreshold = urlWpaThreshold && urlWpaThreshold >= 0.01 && urlWpaThreshold <= 0.5 
     ? urlWpaThreshold 
-    : 0.08;
+    : getSavedThreshold();
   
   const [currentLeague, setCurrentLeague] = useState<string>(defaultLeague);
   const [showHighlightsOnly, setShowHighlightsOnly] = useState<boolean>(false);
@@ -34,6 +47,9 @@ export default function TodayGamesBar({ refreshInterval = 30000, defaultLeague =
   const handleThresholdChange = (newThreshold: string) => {
     const numThreshold = parseFloat(newThreshold) / 100;
     if (numThreshold >= 0.01 && numThreshold <= 0.5) {
+      // Save to localStorage for persistence
+      localStorage.setItem('wpaThreshold', numThreshold.toString());
+      
       const url = new URL(window.location.href);
       url.searchParams.set('wpa', numThreshold.toFixed(3));
       window.history.replaceState({}, '', url.toString());
@@ -130,24 +146,30 @@ export default function TodayGamesBar({ refreshInterval = 30000, defaultLeague =
             </h2>
             
             {/* League Tabs */}
-            <div className="flex items-center bg-gray-100 rounded-lg p-1">
+            <div className="flex items-center bg-gray-100 rounded-lg p-1" role="tablist" aria-label="リーグ選択">
               <button
                 onClick={() => setCurrentLeague("first")}
-                className={`px-3 py-1 text-xs font-medium rounded transition-colors ${
+                className={`px-3 py-1 text-xs font-medium rounded transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 ${
                   currentLeague === "first"
                     ? "bg-white text-gray-900 shadow-sm"
                     : "text-gray-600 hover:text-gray-800"
                 }`}
+                role="tab"
+                aria-selected={currentLeague === "first"}
+                aria-controls="games-panel"
               >
                 一軍
               </button>
               <button
                 onClick={() => setCurrentLeague("farm")}
-                className={`px-3 py-1 text-xs font-medium rounded transition-colors ${
+                className={`px-3 py-1 text-xs font-medium rounded transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 ${
                   currentLeague === "farm"
                     ? "bg-white text-gray-900 shadow-sm"
                     : "text-gray-600 hover:text-gray-800"
                 }`}
+                role="tab"
+                aria-selected={currentLeague === "farm"}
+                aria-controls="games-panel"
               >
                 二軍
               </button>
@@ -179,11 +201,14 @@ export default function TodayGamesBar({ refreshInterval = 30000, defaultLeague =
               {highlightGamesCount > 0 && (
                 <button
                   onClick={() => setShowHighlightsOnly(!showHighlightsOnly)}
-                  className={`px-2 py-1 rounded-full text-xs font-medium transition-colors ${
+                  className={`px-2 py-1 rounded-full text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-1 ${
                     showHighlightsOnly
                       ? "bg-amber-200 text-amber-900 border border-amber-300"
                       : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                   }`}
+                  role="button"
+                  aria-pressed={showHighlightsOnly}
+                  aria-label={showHighlightsOnly ? "全試合を表示する" : "ハイライトのある試合のみ表示する"}
                 >
                   {showHighlightsOnly ? "📌 ハイライトのみ" : "🔍 全試合"}
                 </button>
@@ -208,7 +233,8 @@ export default function TodayGamesBar({ refreshInterval = 30000, defaultLeague =
                 onChange={(e) => setCustomThreshold(e.target.value)}
                 onBlur={() => handleThresholdChange(customThreshold)}
                 onKeyPress={(e) => e.key === 'Enter' && handleThresholdChange(customThreshold)}
-                className="w-10 px-1 text-xs border border-gray-300 rounded text-center focus:outline-none focus:border-blue-500"
+                className="w-10 px-1 text-xs border border-gray-300 rounded text-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                aria-label="WPAハイライト閾値パーセント"
               />
               <span>%</span>
               {urlWpaThreshold && (
@@ -219,17 +245,38 @@ export default function TodayGamesBar({ refreshInterval = 30000, defaultLeague =
         </div>
 
         {/* Games Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="games-panel" role="tabpanel">
           {showHighlightsOnly && filteredGames.length === 0 && (
-            <div className="col-span-full text-center py-8 text-gray-500">
-              <div className="mb-2">⭐️</div>
-              <p className="text-sm">現在、ハイライトがある試合はありません</p>
-              <button
-                onClick={() => setShowHighlightsOnly(false)}
-                className="mt-2 text-xs text-blue-600 hover:text-blue-800 underline"
-              >
-                全試合を表示
-              </button>
+            <div className="col-span-full text-center py-8 bg-amber-50 border border-amber-200 rounded-lg">
+              <div className="mb-3">⭐️</div>
+              <p className="text-sm text-gray-700 mb-4">現在、ハイライトがある試合はありません</p>
+              
+              <div className="flex flex-col gap-2 items-center">
+                <p className="text-xs text-gray-600 mb-2">以下の方法をお試しください：</p>
+                
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => setShowHighlightsOnly(false)}
+                    className="px-3 py-1 text-xs bg-blue-100 text-blue-800 rounded hover:bg-blue-200 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
+                  >
+                    🔍 全試合を表示
+                  </button>
+                  
+                  <button
+                    onClick={() => {
+                      setCustomThreshold("5");
+                      handleThresholdChange("5");
+                    }}
+                    className="px-3 py-1 text-xs bg-amber-100 text-amber-800 rounded hover:bg-amber-200 transition-colors focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-1"
+                  >
+                    📉 閾値を5%に下げる
+                  </button>
+                </div>
+                
+                <p className="text-xs text-gray-500 mt-2">
+                  試合が進行すると、重要な場面でハイライトが自動生成されます
+                </p>
+              </div>
             </div>
           )}
           
@@ -243,9 +290,16 @@ export default function TodayGamesBar({ refreshInterval = 30000, defaultLeague =
               <div className="relative bg-gray-50 hover:bg-gray-100 transition-colors rounded-lg p-4 border border-gray-200 hover:border-gray-300">
                 {/* Highlights Badge */}
                 {game.highlights_count && game.highlights_count > 0 && (
-                  <div className="absolute top-2 right-2 px-2 py-0.5 rounded-full text-xs bg-amber-100 text-amber-800 border border-amber-300 font-medium">
+                  <Link
+                    href={`/games/${game.game_id}#highlights`}
+                    className="absolute top-2 right-2 px-2 py-0.5 rounded-full text-xs bg-amber-100 text-amber-800 border border-amber-300 font-medium hover:bg-amber-200 transition-colors focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-1"
+                    aria-label={`${game.highlights_count}件のハイライトを詳細表示`}
+                    role="button"
+                    tabIndex={0}
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     ⭐️ {game.highlights_count}
-                  </div>
+                  </Link>
                 )}
 
                 {/* Teams */}
