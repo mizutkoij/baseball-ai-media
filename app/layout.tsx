@@ -54,6 +54,9 @@ export default function RootLayout({
                     <a href="/players" className="text-sm hover:text-blue-400 transition-colors">
                       選手データベース
                     </a>
+                    <a href="/teams" className="text-sm hover:text-blue-400 transition-colors">
+                      チーム
+                    </a>
                     <a href="/rankings" className="text-sm hover:text-blue-400 transition-colors">
                       ランキング
                     </a>
