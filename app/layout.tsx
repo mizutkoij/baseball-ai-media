@@ -51,6 +51,11 @@ export default function RootLayout({
                     <a href="/" className="text-sm hover:text-blue-400 transition-colors">
                       ホーム
                     </a>
+                    {process.env.NEXT_PUBLIC_ENABLE_PLAYER_DATABASE === 'true' && (
+                      <a href="/players" className="text-sm hover:text-blue-400 transition-colors">
+                        選手データベース
+                      </a>
+                    )}
                     <a href="/rankings" className="text-sm hover:text-blue-400 transition-colors">
                       ランキング
                     </a>
