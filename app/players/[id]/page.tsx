@@ -4,6 +4,7 @@ import { useState } from "react";
 import useSWR from "swr";
 import Link from "next/link";
 import { ArrowLeft, Activity, BarChart3, Target, TrendingUp, ExternalLink } from "lucide-react";
+import Head from "next/head";
 
 type YearRow = Record<string, any>;
 
@@ -184,8 +185,62 @@ export default function PlayerDetailPage({ params }: { params: { id: string } })
     setActiveTab("batting");
   }
 
+  // Generate JSON-LD structured data
+  const generatePlayerJsonLd = () => {
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": player.name,
+      "alternateName": player.name_kana,
+      "url": `https://baseball-ai-media.vercel.app/players/${player.player_id}`,
+      "sameAs": player.url ? [player.url] : [],
+      "jobTitle": player.primary_pos === "P" ? "プロ野球投手" : "プロ野球選手",
+      "memberOf": {
+        "@type": "SportsTeam",
+        "name": "NPB (日本プロ野球)",
+        "sport": "野球"
+      },
+      "knowsAbout": [
+        "野球",
+        "NPB",
+        "日本プロ野球",
+        player.primary_pos === "P" ? "投手" : "打撃"
+      ],
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "ポジション",
+          "value": player.primary_pos === "P" ? "投手" : "野手"
+        },
+        {
+          "@type": "PropertyValue", 
+          "name": "現役状況",
+          "value": player.is_active ? "現役推定" : "OB"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "活動期間",
+          "value": player.first_year && player.last_year 
+            ? `${player.first_year}年-${player.last_year}年`
+            : player.first_year
+            ? `${player.first_year}年-`
+            : "期間不明"
+        }
+      ]
+    };
+
+    return JSON.stringify(jsonLd);
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 p-6">
+    <>
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: generatePlayerJsonLd() }}
+        />
+      </Head>
+      <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 p-6">
       <div className="max-w-6xl mx-auto">
         {/* 戻るボタン */}
         <div className="mb-4">
@@ -358,6 +413,7 @@ export default function PlayerDetailPage({ params }: { params: { id: string } })
           <p>現役判定は最終年度に基づくヒューリスティック推定です。</p>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }
