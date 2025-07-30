@@ -4,6 +4,7 @@ import useSWR, { mutate } from 'swr';
 import Link from 'next/link';
 import { ArrowLeft, Clock, Users, BarChart3 } from 'lucide-react';
 import { useSSE } from '@/lib/sse-hook';
+import PlayerLink from '@/components/PlayerLink';
 
 type PBPEvent = {
   game_id: string;
@@ -267,8 +268,12 @@ export default function GameLive({ params }: { params: { game_id: string } }) {
                     >
                       <td className="px-3 py-2 font-mono text-sm">{event.pitch_seq}</td>
                       <td className="px-3 py-2 text-sm">{formatInning(event.inning, event.half)}</td>
-                      <td className="px-3 py-2 text-sm">{event.batter}</td>
-                      <td className="px-3 py-2 text-sm">{event.pitcher}</td>
+                      <td className="px-3 py-2 text-sm">
+                        <PlayerLink name={event.batter} className="text-blue-400 hover:text-blue-300 underline" />
+                      </td>
+                      <td className="px-3 py-2 text-sm">
+                        <PlayerLink name={event.pitcher} className="text-green-400 hover:text-green-300 underline" />
+                      </td>
                       <td className="px-3 py-2">
                         <span className={getResultBadge(event.result)}>
                           {event.result}
