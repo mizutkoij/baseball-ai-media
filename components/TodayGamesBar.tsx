@@ -15,6 +15,10 @@ export default function TodayGamesBar({ refreshInterval = 30000, defaultLeague =
   const searchParams = useSearchParams();
   const urlWpaThreshold = searchParams.get('wpa') ? parseFloat(searchParams.get('wpa')!) : null;
   
+  // スクロール時の表示/非表示制御
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  
   // Load saved threshold from localStorage
   const getSavedThreshold = () => {
     if (typeof window !== 'undefined') {
@@ -76,6 +80,31 @@ export default function TodayGamesBar({ refreshInterval = 30000, defaultLeague =
     }
   }, [data]);
 
+  // スクロール時の表示制御
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // スクロール方向を判定
+      if (currentScrollY < lastScrollY) {
+        // 上スクロール時は表示
+        setIsVisible(true);
+      } else if (currentScrollY > 100 && currentScrollY > lastScrollY) {
+        // 下スクロール時かつ100px以上スクロールしたら非表示
+        setIsVisible(false);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    // パッシブリスナーでパフォーマンス向上
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [lastScrollY]);
+
   if (error) {
     return (
       <div className="bg-red-50 border border-red-200 rounded-lg p-4">
@@ -136,12 +165,14 @@ export default function TodayGamesBar({ refreshInterval = 30000, defaultLeague =
   const highlightGamesCount = data?.data?.filter(game => game.highlights_count && game.highlights_count > 0).length || 0;
 
   return (
-    <div className="bg-white border-b border-gray-200 sticky top-0 z-40">
-      <div className="max-w-7xl mx-auto px-4 py-3">
+    <div className={`bg-white border-b border-gray-200 sticky top-0 z-40 transition-transform duration-300 ${
+      isVisible ? 'translate-y-0' : '-translate-y-full'
+    }`}>
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 py-2 sm:py-3">
         {/* Header */}
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-3">
-            <h2 className="text-lg font-semibold text-gray-800">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <h2 className="text-base sm:text-lg font-semibold text-gray-800">
               ⚾️ 今日の試合
             </h2>
             
@@ -175,7 +206,7 @@ export default function TodayGamesBar({ refreshInterval = 30000, defaultLeague =
               </button>
             </div>
             
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 sm:gap-2 flex-wrap">
               <span
                 className={`px-2 py-1 rounded-full text-xs font-medium ${
                   isRealMode
@@ -224,13 +255,13 @@ export default function TodayGamesBar({ refreshInterval = 30000, defaultLeague =
             </div>
           </div>
           
-          <div className="flex items-center gap-3 text-sm text-gray-500">
+          <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-gray-500">
             <span className="flex items-center gap-1">
               🕐 更新: {lastUpdateMinutes === 0 ? "最新" : `${lastUpdateMinutes}分前`}
             </span>
             
-            {/* WPA Threshold Control */}
-            <div className="flex items-center gap-1">
+            {/* WPA Threshold Control - モバイルでは非表示 */}
+            <div className="hidden sm:flex items-center gap-1">
               <span>閾値:</span>
               <input
                 type="number"
@@ -253,7 +284,7 @@ export default function TodayGamesBar({ refreshInterval = 30000, defaultLeague =
         </div>
 
         {/* Games Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="games-panel" role="tabpanel">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4" id="games-panel" role="tabpanel">
           {showHighlightsOnly && filteredGames.length === 0 && (
             <div className="col-span-full text-center py-8 bg-amber-50 border border-amber-200 rounded-lg">
               <div className="mb-3">⭐️</div>
@@ -295,7 +326,7 @@ export default function TodayGamesBar({ refreshInterval = 30000, defaultLeague =
               className="block"
               aria-label={`${game.away_team} vs ${game.home_team} の詳細（WP推移・ハイライト）を見る`}
             >
-              <div className="relative bg-gray-50 hover:bg-gray-100 transition-colors rounded-lg p-4 border border-gray-200 hover:border-gray-300">
+              <div className="relative bg-gray-50 hover:bg-gray-100 transition-colors rounded-lg p-3 sm:p-4 border border-gray-200 hover:border-gray-300">
                 {/* Highlights Badge */}
                 {game.highlights_count && game.highlights_count > 0 && (
                   <Link

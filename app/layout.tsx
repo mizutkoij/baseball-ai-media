@@ -43,40 +43,40 @@ export default function RootLayout({
           {/* Navigation Header */}
           <header className="sticky top-0 z-50 border-b border-white/10 bg-black/20 backdrop-blur-md">
             <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="flex justify-between items-center h-16">
-                <div className="flex items-center space-x-8">
-                  <h1 className="text-xl font-bold text-gradient">
+              <div className="flex justify-between items-center h-14 sm:h-16">
+                <div className="flex items-center space-x-4 sm:space-x-8">
+                  <h1 className="text-lg sm:text-xl font-bold text-gradient">
                     ⚾ Baseball AI Media
                   </h1>
-                  <div className="hidden md:flex space-x-6">
-                    <a href="/" className="text-sm hover:text-blue-400 transition-colors">
+                  <div className="hidden lg:flex space-x-4 xl:space-x-6">
+                    <a href="/" className="text-xs xl:text-sm hover:text-blue-400 transition-colors">
                       ホーム
                     </a>
-                    <a href="/players" className="text-sm hover:text-blue-400 transition-colors">
+                    <a href="/players" className="text-xs xl:text-sm hover:text-blue-400 transition-colors">
                       選手データベース
                     </a>
-                    <a href="/teams" className="text-sm hover:text-blue-400 transition-colors">
+                    <a href="/teams" className="text-xs xl:text-sm hover:text-blue-400 transition-colors">
                       チーム
                     </a>
-                    <a href="/rankings" className="text-sm hover:text-blue-400 transition-colors">
+                    <a href="/rankings" className="text-xs xl:text-sm hover:text-blue-400 transition-colors">
                       ランキング
                     </a>
-                    <a href="/records" className="text-sm hover:text-blue-400 transition-colors">
+                    <a href="/records" className="text-xs xl:text-sm hover:text-blue-400 transition-colors">
                       記録
                     </a>
-                    <a href="/matchups" className="text-sm hover:text-blue-400 transition-colors">
+                    <a href="/matchups" className="text-xs xl:text-sm hover:text-blue-400 transition-colors">
                       対戦分析
                     </a>
-                    <a href="/columns" className="text-sm hover:text-blue-400 transition-colors">
+                    <a href="/columns" className="text-xs xl:text-sm hover:text-blue-400 transition-colors">
                       AIコラム
                     </a>
-                    <a href="/about" className="text-sm hover:text-blue-400 transition-colors">
+                    <a href="/about" className="text-xs xl:text-sm hover:text-blue-400 transition-colors">
                       About
                     </a>
                   </div>
                 </div>
-                <div className="flex items-center space-x-4">
-                  <div className="hidden md:flex items-center space-x-4">
+                <div className="flex items-center space-x-2 sm:space-x-4">
+                  <div className="hidden md:flex items-center space-x-2 sm:space-x-4">
                     <span className="text-xs text-slate-400">
                       リアルタイム分析
                     </span>
@@ -134,8 +134,6 @@ export default function RootLayout({
                   <a href="/about" className="hover:text-white transition-colors">About</a>
                   <span className="text-slate-600">|</span>
                   <a href="/about/methodology" className="hover:text-white transition-colors">分析手法</a>
-                  <span className="text-slate-600">|</span>
-                  <a href="https://github.com/mizutkoij/baseball-ai-media" target="_blank" rel="noopener" className="hover:text-white transition-colors">GitHub</a>
                 </div>
               </div>
             </div>
