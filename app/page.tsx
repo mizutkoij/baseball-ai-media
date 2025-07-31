@@ -5,6 +5,7 @@ import DataStatus from "@/components/DataStatus";
 import TodayGamesBar from "@/components/TodayGamesBar";
 import StatsGlossary from "@/components/StatsGlossary";
 import GameOfTheDay from "@/components/GameOfTheDay";
+import LatestBrief, { LatestBriefStatic } from "@/components/LatestBrief";
 import Link from "next/link";
 import { Suspense } from "react";
 import { TrendingUp, Target, BarChart3, Zap, Calendar, Users, Trophy } from "lucide-react";
@@ -209,19 +210,26 @@ export default async function Home() {
       {/* Main Content */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Game of the Day - Featured Section */}
-        <div className="mb-12 animate-slide-up">
+        <div className="mb-8 animate-slide-up">
           <GameOfTheDay />
+        </div>
+
+        {/* Latest Brief Section */}
+        <div className="mb-12 animate-slide-up animation-delay-150">
+          <Suspense fallback={<LatestBriefStatic />}>
+            <LatestBrief />
+          </Suspense>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           
           {/* WAR Leaders Card */}
-          <div className="animate-slide-up animation-delay-150">
+          <div className="animate-slide-up animation-delay-300">
             <WarLeadersContainer />
           </div>
 
           {/* Matchup Preview Card */}
-          <div className="animate-slide-up animation-delay-300">
+          <div className="animate-slide-up animation-delay-450">
             <Suspense fallback={<LoadingCard title="今日の見どころ" />}>
               <MatchupPreviewCard data={preview} />
             </Suspense>

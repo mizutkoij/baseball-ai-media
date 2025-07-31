@@ -5,6 +5,7 @@ import useSWR from "swr";
 import Link from "next/link";
 import { ArrowLeft, Activity, BarChart3, Target, TrendingUp, ExternalLink, Users } from "lucide-react";
 import Head from "next/head";
+import PlayerSummary, { PlayerSummaryLoading, PlayerSummaryError } from "@/components/PlayerSummary";
 
 type YearRow = Record<string, any>;
 
@@ -145,11 +146,12 @@ export default function PlayerDetailPage({ params }: { params: { id: string } })
         <div className="max-w-6xl mx-auto">
           <div className="animate-pulse">
             <div className="h-8 bg-gray-300 rounded mb-6 w-64"></div>
-            <div className="bg-black/20 backdrop-blur-md border border-white/10 rounded-lg p-6">
+            <div className="bg-black/20 backdrop-blur-md border border-white/10 rounded-lg p-6 mb-6">
               <div className="h-4 bg-slate-600 rounded mb-4 w-full"></div>
               <div className="h-4 bg-slate-600 rounded mb-4 w-3/4"></div>
               <div className="h-4 bg-slate-600 rounded w-1/2"></div>
             </div>
+            <PlayerSummaryLoading />
           </div>
         </div>
       </div>
@@ -313,6 +315,9 @@ export default function PlayerDetailPage({ params }: { params: { id: string } })
             </div>
           </div>
         </div>
+
+        {/* 選手サマリ */}
+        <PlayerSummary player={player} />
 
         {/* 通算成績サマリー */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
