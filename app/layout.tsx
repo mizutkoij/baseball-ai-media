@@ -124,10 +124,19 @@ export default function RootLayout({
               </div>
               <div className="border-t border-white/10 mt-8 pt-8 text-center">
                 <p className="text-xs text-slate-500">
-                  © 2024 Baseball AI Media. All rights reserved. | 
-                  <a href="/privacy" className="hover:text-white ml-1">プライバシーポリシー</a> | 
-                  <a href="/dmca" className="hover:text-white ml-1">DMCA</a>
+                  © 2024 Baseball AI Media. All rights reserved.
                 </p>
+                <div className="mt-2 flex flex-wrap justify-center gap-3 text-xs">
+                  <a href="/privacy" className="hover:text-white transition-colors">プライバシーポリシー</a>
+                  <span className="text-slate-600">|</span>
+                  <a href="/terms" className="hover:text-white transition-colors">利用規約</a>
+                  <span className="text-slate-600">|</span>
+                  <a href="/about" className="hover:text-white transition-colors">About</a>
+                  <span className="text-slate-600">|</span>
+                  <a href="/about/methodology" className="hover:text-white transition-colors">分析手法</a>
+                  <span className="text-slate-600">|</span>
+                  <a href="https://github.com/mizutkoij/baseball-ai-media" target="_blank" rel="noopener" className="hover:text-white transition-colors">GitHub</a>
+                </div>
               </div>
             </div>
           </footer>

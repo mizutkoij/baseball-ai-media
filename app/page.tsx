@@ -4,8 +4,10 @@ import BasicBanner from "@/components/BasicBanner";
 import DataStatus from "@/components/DataStatus";
 import TodayGamesBar from "@/components/TodayGamesBar";
 import StatsGlossary from "@/components/StatsGlossary";
+import GameOfTheDay from "@/components/GameOfTheDay";
+import Link from "next/link";
 import { Suspense } from "react";
-import { TrendingUp, Target, BarChart3, Zap } from "lucide-react";
+import { TrendingUp, Target, BarChart3, Zap, Calendar, Users, Trophy } from "lucide-react";
 
 // Force dynamic rendering to prevent build-time API calls
 export const dynamic = 'force-dynamic';
@@ -164,17 +166,38 @@ export default async function Home() {
               <span className="text-gradient">NPB AI Analytics</span>
             </h1>
             <p className="text-xl text-slate-300 mb-8 max-w-3xl mx-auto animate-fade-in animation-delay-150">
-              高度なセイバーメトリクスとAI予測による
+              <strong>完全独立のNPBセイバーメトリクス基盤</strong>を実現。
+              自前推定の係数・定数による高精度な統計分析で、第三者データベースとは一線を画す独自の洞察を提供。
+              透明性保証・学術準拠の分析手法により、真のデータドリブン野球観戦をサポートします。
               <br />
               日本プロ野球の新しい分析体験
             </p>
-            <div className="flex justify-center space-x-4 animate-fade-in animation-delay-300">
-              <button className="button-primary">
-                📊 今日の分析を見る
-              </button>
-              <button className="button-secondary">
-                ⚾ ランキング
-              </button>
+            
+            {/* 3-Button Navigation */}
+            <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 animate-fade-in animation-delay-300">
+              <Link 
+                href="/today" 
+                className="group flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+              >
+                <Calendar className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                <span className="font-semibold">今日の試合</span>
+              </Link>
+              
+              <Link 
+                href="/players" 
+                className="group flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+              >
+                <Users className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                <span className="font-semibold">選手データベース</span>
+              </Link>
+              
+              <Link 
+                href="/records" 
+                className="group flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+              >
+                <Trophy className="w-5 h-5 group-hover:bounce transition-transform" />
+                <span className="font-semibold">記録</span>
+              </Link>
             </div>
           </div>
           
@@ -185,15 +208,20 @@ export default async function Home() {
 
       {/* Main Content */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Game of the Day - Featured Section */}
+        <div className="mb-12 animate-slide-up">
+          <GameOfTheDay />
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           
           {/* WAR Leaders Card */}
-          <div className="animate-slide-up">
+          <div className="animate-slide-up animation-delay-150">
             <WarLeadersContainer />
           </div>
 
           {/* Matchup Preview Card */}
-          <div className="animate-slide-up animation-delay-150">
+          <div className="animate-slide-up animation-delay-300">
             <Suspense fallback={<LoadingCard title="今日の見どころ" />}>
               <MatchupPreviewCard data={preview} />
             </Suspense>
