@@ -144,14 +144,13 @@ function buildBatterSummary(name: string, best: PlayerSeason, recent: PlayerSeas
  */
 export function buildFallbackSummary(p: PlayerDetail): string {
   const isPitcher = p.primary_pos?.startsWith("P") || p.primary_pos === "投手";
-  const career = isPitcher ? p.career_stats?.pitching : p.career_stats?.batting;
 
   let summary = `${p.name}は${isPitcher ? '投手' : '野手'}。`;
 
-  if (isPitcher && career?.era) {
-    summary += `通算ERA ${career.era}の実績を持ちます。`;
-  } else if (!isPitcher && career?.ops) {
-    summary += `通算OPS ${career.ops}の成績を残しています。`;
+  if (isPitcher && p.career_stats?.pitching?.era) {
+    summary += `通算ERA ${p.career_stats.pitching.era}の実績を持ちます。`;
+  } else if (!isPitcher && p.career_stats?.batting?.ops) {
+    summary += `通算OPS ${p.career_stats.batting.ops}の成績を残しています。`;
   }
 
   summary += `詳細な分析データは順次追加予定です。NPB公式データを基に独自の係数・定数で環境補正を行い、最も精確な評価を目指しています。`;
