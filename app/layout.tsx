@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter, Noto_Sans_JP } from 'next/font/google'
 import './globals.css'
+import MobileNav from './components/MobileNav'
 
 const inter = Inter({ subsets: ['latin'] })
 const notoSansJP = Noto_Sans_JP({ 
@@ -60,19 +61,28 @@ export default function RootLayout({
                     <a href="/rankings" className="text-sm hover:text-blue-400 transition-colors">
                       ランキング
                     </a>
+                    <a href="/records" className="text-sm hover:text-blue-400 transition-colors">
+                      記録
+                    </a>
                     <a href="/matchups" className="text-sm hover:text-blue-400 transition-colors">
                       対戦分析
                     </a>
                     <a href="/columns" className="text-sm hover:text-blue-400 transition-colors">
                       AIコラム
                     </a>
+                    <a href="/about" className="text-sm hover:text-blue-400 transition-colors">
+                      About
+                    </a>
                   </div>
                 </div>
                 <div className="flex items-center space-x-4">
-                  <span className="text-xs text-slate-400">
-                    リアルタイム分析
-                  </span>
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  <div className="hidden md:flex items-center space-x-4">
+                    <span className="text-xs text-slate-400">
+                      リアルタイム分析
+                    </span>
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  </div>
+                  <MobileNav />
                 </div>
               </div>
             </nav>
@@ -103,12 +113,12 @@ export default function RootLayout({
                   </ul>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-4">データソース</h3>
+                  <h3 className="font-semibold mb-4">独自データ</h3>
                   <ul className="text-sm text-slate-400 space-y-2">
-                    <li>NPB公式データ</li>
-                    <li>Yahoo Sports詳細統計</li>
-                    <li>1point02.jp球詳データ</li>
-                    <li className="text-xs">※合法収集・出典明記</li>
+                    <li>NPB公式サイト（公開統計のみ）</li>
+                    <li>自前算出指標（wOBA, FIP等）</li>
+                    <li>透明性保証（式・係数を公開）</li>
+                    <li className="text-xs">※第三者DB複製なし</li>
                   </ul>
                 </div>
               </div>

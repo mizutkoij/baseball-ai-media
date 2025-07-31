@@ -7,7 +7,7 @@
   "last_year": 2004,
   "primary_pos": "P",
   "is_active": false,
-  "active_source": "heuristic",
+  "active_source": "confirmed_retired",
   "batting": [
     {
       "年度": 1988,
@@ -1148,5 +1148,6 @@
       "奪三振": 1282.0,
       "防御率": null
     }
-  }
+  },
+  "active_confidence": "確定"
 }

@@ -7,7 +7,7 @@
   "last_year": 2022,
   "primary_pos": "P",
   "is_active": false,
-  "active_source": "heuristic",
+  "active_source": "likely_retired",
   "batting": [
     {
       "年度": 2021,
@@ -236,5 +236,6 @@
       "奪三振": 37.0,
       "防御率": null
     }
-  }
+  },
+  "active_confidence": "推定"
 }

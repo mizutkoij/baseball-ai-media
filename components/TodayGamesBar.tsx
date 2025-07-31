@@ -186,6 +186,14 @@ export default function TodayGamesBar({ refreshInterval = 30000, defaultLeague =
                 {isRealMode ? "🔴 REAL" : "📊 BASIC"}
               </span>
               
+              {/* Week Schedule Link */}
+              <Link
+                href="/schedule"
+                className="px-2 py-1 bg-purple-100 text-purple-800 rounded-full text-xs font-medium hover:bg-purple-200 transition-colors"
+              >
+                📅 週表示
+              </Link>
+              
               {/* League Badge */}
               <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium">
                 {currentLeague === "first" ? "一軍" : "二軍"} ({data?.games || 0}試合)

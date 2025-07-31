@@ -39,6 +39,12 @@ type LeaderboardData = {
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
+type StatInfo = {
+  name: string;
+  desc: string;
+  higherBetter: boolean;
+};
+
 export default function RankingsPage() {
   const [selectedYear, setSelectedYear] = useState(2024);
   const [selectedCategory, setSelectedCategory] = useState<"batting" | "pitching">("batting");
@@ -55,7 +61,10 @@ export default function RankingsPage() {
     }
   );
 
-  const statOptions = {
+  const statOptions: {
+    batting: Record<string, StatInfo>;
+    pitching: Record<string, StatInfo>;
+  } = {
     batting: {
       ops_plus: { name: "OPS+", desc: "パークファクター調整OPS（100=リーグ平均）", higherBetter: true },
       wrc_plus: { name: "wRC+", desc: "加重得点創出能力（100=リーグ平均）", higherBetter: true }
@@ -119,7 +128,7 @@ export default function RankingsPage() {
   }
 
   const currentLeaders = getCurrentLeaders();
-  const currentStatInfo = statOptions[selectedCategory][selectedStat as keyof typeof statOptions[typeof selectedCategory]];
+  const currentStatInfo: StatInfo | null = statOptions[selectedCategory]?.[selectedStat] || null;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 p-6">
@@ -222,7 +231,7 @@ export default function RankingsPage() {
                   <TrendingUp className="w-5 h-5 text-blue-400" /> : 
                   <Activity className="w-5 h-5 text-red-400" />
                 }
-                {selectedYear}年 {currentStatInfo?.name} ランキング
+                {selectedYear}年 {currentStatInfo ? currentStatInfo.name : '統計'} ランキング
                 <span className="text-sm text-slate-400">
                   （上位{currentLeaders.length}位）
                 </span>
@@ -236,7 +245,7 @@ export default function RankingsPage() {
                     <th className="px-4 py-3 text-left text-sm font-medium text-white">順位</th>
                     <th className="px-4 py-3 text-left text-sm font-medium text-white">選手名</th>
                     <th className="px-4 py-3 text-left text-sm font-medium text-white">チーム</th>
-                    <th className="px-4 py-3 text-right text-sm font-medium text-white">{currentStatInfo?.name}</th>
+                    <th className="px-4 py-3 text-right text-sm font-medium text-white">{currentStatInfo ? currentStatInfo.name : '値'}</th>
                     {selectedCategory === "batting" ? (
                       <>
                         <th className="px-4 py-3 text-right text-sm font-medium text-white">試合</th>

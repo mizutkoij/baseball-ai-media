@@ -3,7 +3,7 @@
 import { useState } from "react";
 import useSWR from "swr";
 import Link from "next/link";
-import { ArrowLeft, Users, TrendingUp, Calendar, Filter } from "lucide-react";
+import { ArrowLeft, Users, TrendingUp, Calendar, Filter, Star, Target, Activity } from "lucide-react";
 
 type TeamPlayer = {
   player_id: string;
@@ -11,6 +11,7 @@ type TeamPlayer = {
   name_kana?: string;
   primary_pos: "P" | "B";
   is_active: boolean;
+  active_confidence?: string;
 };
 
 type TeamData = {
@@ -29,6 +30,24 @@ type YearData = {
   teams: TeamData[];
 };
 
+type YearsData = {
+  total_years: number;
+  year_range: {
+    earliest: number;
+    latest: number;
+  };
+  recent_years: Array<{
+    year: number;
+    team_count: number;
+    total_players: number;
+  }>;
+  all_years: Array<{
+    year: number;
+    team_count: number;
+    total_players: number;
+  }>;
+};
+
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function TeamsByYear({ params }: { params: { year: string } }) {
@@ -42,6 +61,16 @@ export default function TeamsByYear({ params }: { params: { year: string } }) {
     {
       revalidateOnFocus: false,
       dedupingInterval: 300000, // 5分間キャッシュ
+    }
+  );
+
+  // 年度一覧データをロード
+  const { data: yearsData } = useSWR<YearsData>(
+    "/data/players/years_available.json",
+    fetcher,
+    {
+      revalidateOnFocus: false,
+      dedupingInterval: 600000, // 10分間キャッシュ
     }
   );
 
@@ -87,6 +116,19 @@ export default function TeamsByYear({ params }: { params: { year: string } }) {
     return true;
   });
 
+  // 主力選手を特定する関数
+  const getStarPlayers = (team: TeamData) => {
+    // 現役選手を優先、かつポジション別にバランスを取る
+    const activePlayers = team.players.filter(p => p.is_active);
+    const allPlayers = activePlayers.length >= 3 ? activePlayers : team.players;
+    
+    // 投手と野手を分ける
+    const pitchers = allPlayers.filter(p => p.primary_pos === "P").slice(0, 2);
+    const batters = allPlayers.filter(p => p.primary_pos === "B").slice(0, 3);
+    
+    return [...pitchers, ...batters].slice(0, 4); // 最大4人
+  };
+
   const getFilteredPlayers = (players: TeamPlayer[]) => {
     return players.filter((player) => {
       if (showActiveOnly && !player.is_active) return false;
@@ -116,6 +158,61 @@ export default function TeamsByYear({ params }: { params: { year: string } }) {
             {data.total_teams}チーム・{data.total_players}人の選手データ
           </p>
         </div>
+
+        {/* Year Navigation */}
+        {yearsData && (
+          <div className="bg-black/20 backdrop-blur-md border border-white/10 rounded-lg p-4 mb-6">
+            <div className="flex items-center gap-2 mb-3">
+              <TrendingUp className="w-4 h-4 text-blue-400" />
+              <span className="text-sm font-medium text-white">年度を選択</span>
+              <span className="text-xs text-slate-400">
+                ({yearsData.year_range.earliest}-{yearsData.year_range.latest})
+              </span>
+            </div>
+            
+            <div className="flex flex-wrap gap-2">
+              {yearsData.recent_years.map((yearInfo) => (
+                <Link
+                  key={yearInfo.year}
+                  href={`/teams/${yearInfo.year}`}
+                  className={`px-3 py-1 text-sm rounded-lg transition-colors ${
+                    parseInt(params.year) === yearInfo.year
+                      ? "bg-blue-600 text-white"
+                      : "bg-black/20 text-slate-300 hover:bg-black/30 hover:text-white"
+                  }`}
+                >
+                  {yearInfo.year}
+                  <span className="ml-1 text-xs text-slate-400">
+                    ({yearInfo.team_count}球団)
+                  </span>
+                </Link>
+              ))}
+              
+              {yearsData.all_years.length > yearsData.recent_years.length && (
+                <details className="relative">
+                  <summary className="px-3 py-1 text-sm rounded-lg bg-black/20 text-slate-300 hover:bg-black/30 cursor-pointer">
+                    他の年度...
+                  </summary>
+                  <div className="absolute top-8 left-0 z-10 bg-slate-800 border border-white/20 rounded-lg p-2 min-w-48 max-h-48 overflow-y-auto">
+                    <div className="grid grid-cols-3 gap-1">
+                      {yearsData.all_years
+                        .filter(y => !yearsData.recent_years.some(r => r.year === y.year))
+                        .map((yearInfo) => (
+                        <Link
+                          key={yearInfo.year}
+                          href={`/teams/${yearInfo.year}`}
+                          className="px-2 py-1 text-xs rounded text-slate-300 hover:bg-slate-700 hover:text-white"
+                        >
+                          {yearInfo.year}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </details>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* Filters */}
         <div className="bg-black/20 backdrop-blur-md border border-white/10 rounded-lg p-4 mb-6">
@@ -182,28 +279,80 @@ export default function TeamsByYear({ params }: { params: { year: string } }) {
                   </div>
                 </div>
 
-                {/* Top Players */}
+                {/* Star Players */}
                 <div className="mb-4">
-                  <h4 className="text-sm font-medium text-slate-300 mb-2">主な選手</h4>
-                  <ul className="space-y-1">
-                    {displayPlayers.map((player) => (
-                      <li key={player.player_id} className="flex items-center gap-2">
-                        <span className={`w-1 h-1 rounded-full ${
-                          player.primary_pos === "P" ? "bg-red-400" : "bg-blue-400"
-                        }`} />
-                        <Link
-                          href={`/players/${player.player_id}`}
-                          className="text-sm text-blue-400 hover:text-blue-300 underline truncate"
-                        >
-                          {player.name}
-                        </Link>
-                        {player.is_active && (
-                          <span className="text-xs text-green-400">●</span>
-                        )}
-                      </li>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Star className="w-4 h-4 text-yellow-400" />
+                    <h4 className="text-sm font-medium text-slate-300">主力選手</h4>
+                  </div>
+                  <div className="space-y-1">
+                    {getStarPlayers(team).map((player) => (
+                      <div key={player.player_id} className="flex items-center gap-2 p-2 bg-black/20 rounded-lg">
+                        <div className="flex items-center gap-2 flex-1">
+                          <span className={`w-2 h-2 rounded-full ${
+                            player.primary_pos === "P" ? "bg-red-400" : "bg-blue-400"
+                          }`} />
+                          <Link
+                            href={`/players/${player.player_id}`}
+                            className="text-sm text-blue-400 hover:text-blue-300 underline truncate font-medium"
+                          >
+                            {player.name}
+                          </Link>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          {player.is_active && (
+                            <span className={`text-xs ${
+                              player.active_confidence === "確定" ? "text-green-400" : "text-yellow-400"
+                            }`}>●</span>
+                          )}
+                          {!player.is_active && player.active_confidence === "確定" && (
+                            <span className="text-xs text-gray-400">●</span>
+                          )}
+                          <span className={`text-xs px-1 py-0.5 rounded ${
+                            player.primary_pos === "P" 
+                              ? "bg-red-100 text-red-800" 
+                              : "bg-blue-100 text-blue-800"
+                          }`}>
+                            {player.primary_pos === "P" ? "投" : "野"}
+                          </span>
+                        </div>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
+
+                {/* Other Players Preview */}
+                {filteredPlayers.length > getStarPlayers(team).length && (
+                  <div className="mb-4">
+                    <h4 className="text-sm font-medium text-slate-300 mb-2">その他の選手</h4>
+                    <ul className="space-y-1">
+                      {filteredPlayers
+                        .filter(p => !getStarPlayers(team).some(star => star.player_id === p.player_id))
+                        .slice(0, 3)
+                        .map((player) => (
+                        <li key={player.player_id} className="flex items-center gap-2">
+                          <span className={`w-1 h-1 rounded-full ${
+                            player.primary_pos === "P" ? "bg-red-400" : "bg-blue-400"
+                          }`} />
+                          <Link
+                            href={`/players/${player.player_id}`}
+                            className="text-sm text-blue-400 hover:text-blue-300 underline truncate"
+                          >
+                            {player.name}
+                          </Link>
+                          {player.is_active && (
+                            <span className={`text-xs ${
+                              player.active_confidence === "確定" ? "text-green-400" : "text-yellow-400"
+                            }`}>●</span>
+                          )}
+                          {!player.is_active && player.active_confidence === "確定" && (
+                            <span className="text-xs text-gray-400">●</span>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
                 {/* Show All Button */}
                 {filteredPlayers.length > 3 && (
@@ -231,7 +380,12 @@ export default function TeamsByYear({ params }: { params: { year: string } }) {
                             {player.name}
                           </Link>
                           {player.is_active && (
-                            <span className="text-xs text-green-400">●</span>
+                            <span className={`text-xs ${
+                              player.active_confidence === "確定" ? "text-green-400" : "text-yellow-400"
+                            }`}>●</span>
+                          )}
+                          {!player.is_active && player.active_confidence === "確定" && (
+                            <span className="text-xs text-gray-400">●</span>
                           )}
                         </div>
                       ))}

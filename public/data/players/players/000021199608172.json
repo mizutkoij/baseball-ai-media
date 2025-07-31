@@ -7,7 +7,7 @@
   "last_year": 2024,
   "primary_pos": "P",
   "is_active": true,
-  "active_source": "heuristic",
+  "active_source": "likely_active",
   "batting": [
     {
       "年度": 2024,
@@ -132,5 +132,6 @@
       "奪三振": 35.0,
       "防御率": null
     }
-  }
+  },
+  "active_confidence": "推定"
 }

@@ -7,7 +7,7 @@
   "last_year": 2020,
   "primary_pos": "P",
   "is_active": false,
-  "active_source": "heuristic",
+  "active_source": "likely_retired",
   "batting": [
     {
       "年度": 1999,
@@ -1867,5 +1867,6 @@
       "奪三振": 920.0,
       "防御率": null
     }
-  }
+  },
+  "active_confidence": "推定"
 }

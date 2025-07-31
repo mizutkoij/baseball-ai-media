@@ -3,7 +3,7 @@
 import { useState } from "react";
 import useSWR from "swr";
 import Link from "next/link";
-import { ArrowLeft, Activity, BarChart3, Target, TrendingUp, ExternalLink } from "lucide-react";
+import { ArrowLeft, Activity, BarChart3, Target, TrendingUp, ExternalLink, Users } from "lucide-react";
 import Head from "next/head";
 
 type YearRow = Record<string, any>;
@@ -18,6 +18,7 @@ type Player = {
   primary_pos: "P" | "B";
   is_active: boolean;
   active_source: string;
+  active_confidence?: string;
   batting: YearRow[];
   pitching: YearRow[];
   career: {
@@ -215,7 +216,9 @@ export default function PlayerDetailPage({ params }: { params: { id: string } })
         {
           "@type": "PropertyValue", 
           "name": "現役状況",
-          "value": player.is_active ? "現役推定" : "OB"
+          "value": player.is_active 
+            ? `現役${player.active_confidence === "確定" ? "" : "推定"}`
+            : (player.active_confidence === "確定" ? "OB" : "OB推定")
         },
         {
           "@type": "PropertyValue",
@@ -272,8 +275,17 @@ export default function PlayerDetailPage({ params }: { params: { id: string } })
                   {player.primary_pos === "P" ? "投手" : "野手"}
                 </span>
                 {player.is_active && (
-                  <span className="px-3 py-1 text-sm rounded-full bg-green-100 text-green-800 font-medium">
-                    現役推定
+                  <span className={`px-3 py-1 text-sm rounded-full font-medium ${
+                    player.active_confidence === "確定" 
+                      ? "bg-green-100 text-green-800" 
+                      : "bg-yellow-100 text-yellow-800"
+                  }`}>
+                    現役{player.active_confidence === "確定" ? "" : "推定"}
+                  </span>
+                )}
+                {!player.is_active && player.active_confidence === "確定" && (
+                  <span className="px-3 py-1 text-sm rounded-full bg-gray-100 text-gray-800 font-medium">
+                    OB
                   </span>
                 )}
               </div>
@@ -407,10 +419,110 @@ export default function PlayerDetailPage({ params }: { params: { id: string } })
           </div>
         </div>
 
+        {/* 関連ハイライト */}
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* 記録ハイライト */}
+          <div className="bg-black/20 backdrop-blur-md border border-white/10 rounded-lg p-4">
+            <div className="flex items-center gap-2 mb-3">
+              <TrendingUp className="w-5 h-5 text-yellow-500" />
+              <h3 className="font-semibold text-white">記録ハイライト</h3>
+            </div>
+            <div className="space-y-2">
+              {hasBattingData && (
+                <Link
+                  href="/records"
+                  className="block text-sm text-blue-400 hover:text-blue-300 underline"
+                >
+                  歴代本塁打記録を見る
+                </Link>
+              )}
+              {hasPitchingData && (
+                <Link
+                  href="/records"
+                  className="block text-sm text-blue-400 hover:text-blue-300 underline"
+                >
+                  歴代奪三振記録を見る
+                </Link>
+              )}
+              <Link
+                href="/rankings"
+                className="block text-sm text-blue-400 hover:text-blue-300 underline"
+              >
+                年度別ランキングを見る
+              </Link>
+            </div>
+          </div>
+
+          {/* チーム関連 */}
+          <div className="bg-black/20 backdrop-blur-md border border-white/10 rounded-lg p-4">
+            <div className="flex items-center gap-2 mb-3">
+              <Users className="w-5 h-5 text-blue-500" />
+              <h3 className="font-semibold text-white">チーム情報</h3>
+            </div>
+            <div className="space-y-2">
+              {player.last_year && (
+                <Link
+                  href={`/teams/${player.last_year}`}
+                  className="block text-sm text-blue-400 hover:text-blue-300 underline"
+                >
+                  {player.last_year}年のチーム選手を見る
+                </Link>
+              )}
+              {player.first_year && player.last_year && player.first_year !== player.last_year && (
+                <Link
+                  href={`/teams/${player.first_year}`}
+                  className="block text-sm text-blue-400 hover:text-blue-300 underline"
+                >
+                  {player.first_year}年のチーム選手を見る
+                </Link>
+              )}
+              <Link
+                href="/teams"
+                className="block text-sm text-blue-400 hover:text-blue-300 underline"
+              >
+                全チーム一覧を見る
+              </Link>
+            </div>
+          </div>
+
+          {/* 関連選手 */}
+          <div className="bg-black/20 backdrop-blur-md border border-white/10 rounded-lg p-4">
+            <div className="flex items-center gap-2 mb-3">
+              <Target className="w-5 h-5 text-green-500" />
+              <h3 className="font-semibold text-white">関連選手</h3>
+            </div>
+            <div className="space-y-2">
+              <Link
+                href={`/players?pos=${player.primary_pos}&active=${player.is_active ? 'ACTIVE' : 'OB'}`}
+                className="block text-sm text-blue-400 hover:text-blue-300 underline"
+              >
+                {player.primary_pos === "P" ? "同じ投手" : "同じ野手"}
+                {player.is_active ? "の現役選手" : "のOB選手"}
+              </Link>
+              <Link
+                href="/players"
+                className="block text-sm text-blue-400 hover:text-blue-300 underline"
+              >
+                全選手データベース
+              </Link>
+              {player.url && (
+                <a
+                  href={player.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-sm text-blue-400 hover:text-blue-300 underline"
+                >
+                  NPB公式プロフィール
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+
         {/* フッター注記 */}
         <div className="mt-6 text-xs text-slate-400 text-center">
           <p>OPS+, wRC+, ERA-, FIP等の指標は年別リーグ平均を基準とした相対評価です。</p>
-          <p>現役判定は最終年度に基づくヒューリスティック推定です。</p>
+          <p>現役判定：確定=公式確認済み、推定=最終年度等から推測</p>
         </div>
       </div>
       </div>

@@ -6,8 +6,8 @@
   "first_year": 2020,
   "last_year": 2023,
   "primary_pos": "P",
-  "is_active": false,
-  "active_source": "heuristic",
+  "is_active": true,
+  "active_source": "likely_active",
   "batting": [
     {
       "年度": 2020,
@@ -437,5 +437,6 @@
       "奪三振": 176.0,
       "防御率": null
     }
-  }
+  },
+  "active_confidence": "推定"
 }

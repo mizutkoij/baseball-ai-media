@@ -7,7 +7,7 @@
   "last_year": 2025,
   "primary_pos": "P",
   "is_active": true,
-  "active_source": "heuristic",
+  "active_source": "likely_active",
   "batting": [
     {
       "年度": 2014,
@@ -1267,5 +1267,6 @@
       "奪三振": 606.0,
       "防御率": null
     }
-  }
+  },
+  "active_confidence": "推定"
 }

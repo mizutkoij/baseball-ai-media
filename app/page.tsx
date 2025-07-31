@@ -3,6 +3,7 @@ import MatchupPreviewCard from "@/components/MatchupPreviewCard";
 import BasicBanner from "@/components/BasicBanner";
 import DataStatus from "@/components/DataStatus";
 import TodayGamesBar from "@/components/TodayGamesBar";
+import StatsGlossary from "@/components/StatsGlossary";
 import { Suspense } from "react";
 import { TrendingUp, Target, BarChart3, Zap } from "lucide-react";
 
@@ -176,6 +177,11 @@ export default async function Home() {
           </div>
         </div>
 
+        {/* Stats Glossary Section */}
+        <div className="mt-12 mb-8">
+          <StatsGlossary compact={true} />
+        </div>
+
         {/* 추가 섹션 */}
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
           
@@ -209,13 +215,13 @@ export default async function Home() {
           {/* データソース情報 */}
           <div className="card animate-slide-up animation-delay-[600ms]">
             <h3 className="font-bold mb-3 flex items-center">
-              📊 Data Sources
+              📊 独自データ
             </h3>
             <ul className="text-sm text-slate-400 space-y-1">
-              <li>• NPB公式データ (7,633選手)</li>
-              <li>• Yahoo Sports 詳細統計</li>
-              <li>• 1point02.jp 球詳データ</li>
-              <li className="text-xs text-slate-500">合法収集・出典明記</li>
+              <li>• NPB公式サイト（公開統計のみ）</li>
+              <li>• 自前算出指標（wOBA, FIP等）</li>
+              <li>• 透明性保証（式・係数を公開）</li>
+              <li className="text-xs text-slate-500">第三者DB複製なし</li>
             </ul>
           </div>
         </div>

@@ -7,7 +7,7 @@ export async function loadPlayerIndex(): Promise<PlayerIndex> {
   if (indexCache) return indexCache;
   
   try {
-    const res = await fetch("/data/players/players_index.json", { 
+    const res = await fetch("/data/players/players_index_light.json", { 
       cache: "force-cache" 
     });
     

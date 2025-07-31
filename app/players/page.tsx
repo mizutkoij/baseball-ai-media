@@ -13,6 +13,7 @@ type PlayerIndex = {
   first_year?: number;
   last_year?: number;
   is_active: boolean;
+  active_confidence?: string;
   url?: string;
 };
 
@@ -20,7 +21,7 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function PlayersPage() {
   const { data: players, isLoading } = useSWR<PlayerIndex[]>(
-    "/data/players/players_index.json",
+    "/data/players/players_index_light.json",
     fetcher,
     {
       revalidateOnFocus: false,
@@ -176,8 +177,17 @@ export default function PlayersPage() {
                     {player.primary_pos === "P" ? "投手" : "野手"}
                   </span>
                   {player.is_active && (
-                    <span className="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800 font-medium">
-                      現役推定
+                    <span className={`px-2 py-1 text-xs rounded-full font-medium ${
+                      player.active_confidence === "確定" 
+                        ? "bg-green-100 text-green-800" 
+                        : "bg-yellow-100 text-yellow-800"
+                    }`}>
+                      現役{player.active_confidence === "確定" ? "" : "推定"}
+                    </span>
+                  )}
+                  {!player.is_active && player.active_confidence === "確定" && (
+                    <span className="px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-800 font-medium">
+                      OB
                     </span>
                   )}
                 </div>

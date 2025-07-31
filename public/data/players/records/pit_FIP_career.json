@@ -1,0 +1,639 @@
+{
+  "stat": "FIP",
+  "stat_name": "FIP",
+  "better": "low",
+  "type": "career",
+  "data": [
+    {
+      "player_id": "000011192001064",
+      "name": "野口　二郎",
+      "total": 0.67,
+      "seasons": 12,
+      "first_year": 1939,
+      "last_year": 1952,
+      "teams": [
+        "セネタース",
+        "大洋",
+        "阪急",
+        "翼",
+        "西鉄"
+      ]
+    },
+    {
+      "player_id": "000011191402080",
+      "name": "浅岡　三郎",
+      "total": 0.94,
+      "seasons": 4,
+      "first_year": 1939,
+      "last_year": 1942,
+      "teams": [
+        "大洋",
+        "翼",
+        "セネタース"
+      ]
+    },
+    {
+      "player_id": "000011192003066",
+      "name": "村松　幸雄",
+      "total": 1.02,
+      "seasons": 3,
+      "first_year": 1939,
+      "last_year": 1941,
+      "teams": [
+        "名古屋"
+      ]
+    },
+    {
+      "player_id": "000011192203155",
+      "name": "広瀬　習一",
+      "total": 1.04,
+      "seasons": 2,
+      "first_year": 1941,
+      "last_year": 1942,
+      "teams": [
+        "巨人"
+      ]
+    },
+    {
+      "player_id": "000011192301065",
+      "name": "長谷川　善三",
+      "total": 1.07,
+      "seasons": 2,
+      "first_year": 1941,
+      "last_year": 1942,
+      "teams": [
+        "南海"
+      ]
+    },
+    {
+      "player_id": "000011192210015",
+      "name": "別所　毅彦",
+      "total": 1.09,
+      "seasons": 17,
+      "first_year": 1942,
+      "last_year": 1960,
+      "teams": [
+        "南海",
+        "グレートリング",
+        "読売"
+      ]
+    },
+    {
+      "player_id": "000011193307242",
+      "name": "白崎　泰夫",
+      "total": 1.09,
+      "seasons": 3,
+      "first_year": 1956,
+      "last_year": 1958,
+      "teams": [
+        "南海"
+      ]
+    },
+    {
+      "player_id": "000011191807082",
+      "name": "清水　秀雄",
+      "total": 1.11,
+      "seasons": 12,
+      "first_year": 1940,
+      "last_year": 1953,
+      "teams": [
+        "南海",
+        "大洋",
+        "中日",
+        "中部日本",
+        "近畿日本",
+        "グレートリング",
+        "洋松"
+      ]
+    },
+    {
+      "player_id": "000011192204035",
+      "name": "林　安夫",
+      "total": 1.12,
+      "seasons": 2,
+      "first_year": 1942,
+      "last_year": 1943,
+      "teams": [
+        "朝日"
+      ]
+    },
+    {
+      "player_id": "000011191505296",
+      "name": "森　弘太郎",
+      "total": 1.15,
+      "seasons": 10,
+      "first_year": 1939,
+      "last_year": 1950,
+      "teams": [
+        "阪急",
+        "西日本",
+        "東急"
+      ]
+    },
+    {
+      "player_id": "000011191805185",
+      "name": "藤本　英雄",
+      "total": 1.16,
+      "seasons": 12,
+      "first_year": 1942,
+      "last_year": 1954,
+      "teams": [
+        "巨人",
+        "中日",
+        "読売"
+      ]
+    },
+    {
+      "player_id": "000011193209250",
+      "name": "井上　佳明",
+      "total": 1.23,
+      "seasons": 7,
+      "first_year": 1951,
+      "last_year": 1957,
+      "teams": [
+        "国鉄"
+      ]
+    },
+    {
+      "player_id": "000011193407281",
+      "name": "小山　正明",
+      "total": 1.23,
+      "seasons": 21,
+      "first_year": 1953,
+      "last_year": 1973,
+      "teams": [
+        "大洋",
+        "ロッテ",
+        "東京",
+        "阪神"
+      ]
+    },
+    {
+      "player_id": "000011191702012",
+      "name": "沢村　栄治",
+      "total": 1.29,
+      "seasons": 3,
+      "first_year": 1940,
+      "last_year": 1943,
+      "teams": [
+        "巨人"
+      ]
+    },
+    {
+      "player_id": "000011190803019",
+      "name": "若林　忠志",
+      "total": 1.32,
+      "seasons": 12,
+      "first_year": 1939,
+      "last_year": 1951,
+      "teams": [
+        "毎日",
+        "タイガース",
+        "阪神"
+      ]
+    },
+    {
+      "player_id": "000011192004101",
+      "name": "木下　勇",
+      "total": 1.34,
+      "seasons": 9,
+      "first_year": 1939,
+      "last_year": 1952,
+      "teams": [
+        "西鉄",
+        "タイガース",
+        "大陽",
+        "阪神"
+      ]
+    },
+    {
+      "player_id": "000011191608215",
+      "name": "橋本　正吾",
+      "total": 1.5,
+      "seasons": 2,
+      "first_year": 1941,
+      "last_year": 1942,
+      "teams": [
+        "阪急"
+      ]
+    },
+    {
+      "player_id": "000011191504126",
+      "name": "森井　茂",
+      "total": 1.57,
+      "seasons": 6,
+      "first_year": 1941,
+      "last_year": 1950,
+      "teams": [
+        "産業",
+        "名古屋",
+        "中部日本",
+        "広島"
+      ]
+    },
+    {
+      "player_id": "000011191912014",
+      "name": "中尾　碩志",
+      "total": 1.57,
+      "seasons": 15,
+      "first_year": 1939,
+      "last_year": 1956,
+      "teams": [
+        "巨人",
+        "読売"
+      ]
+    },
+    {
+      "player_id": "000011191807191",
+      "name": "近藤　久",
+      "total": 1.58,
+      "seasons": 2,
+      "first_year": 1939,
+      "last_year": 1940,
+      "teams": [
+        "ライオン"
+      ]
+    },
+    {
+      "player_id": "000011192008146",
+      "name": "三富　恒雄",
+      "total": 1.59,
+      "seasons": 10,
+      "first_year": 1940,
+      "last_year": 1953,
+      "teams": [
+        "大洋",
+        "名古屋",
+        "中日",
+        "金星",
+        "翼"
+      ]
+    },
+    {
+      "player_id": "000011192005081",
+      "name": "河村　章",
+      "total": 1.61,
+      "seasons": 6,
+      "first_year": 1940,
+      "last_year": 1950,
+      "teams": [
+        "名古屋",
+        "大映",
+        "西鉄",
+        "金星"
+      ]
+    },
+    {
+      "player_id": "000011193308011",
+      "name": "金田　正一",
+      "total": 1.63,
+      "seasons": 20,
+      "first_year": 1950,
+      "last_year": 1969,
+      "teams": [
+        "国鉄",
+        "読売"
+      ]
+    },
+    {
+      "player_id": "000011191401170",
+      "name": "石原　繁三",
+      "total": 1.67,
+      "seasons": 3,
+      "first_year": 1940,
+      "last_year": 1942,
+      "teams": [
+        "翼",
+        "大和",
+        "黒鷲"
+      ]
+    },
+    {
+      "player_id": "000011193309300",
+      "name": "小野　正一",
+      "total": 1.67,
+      "seasons": 15,
+      "first_year": 1956,
+      "last_year": 1970,
+      "teams": [
+        "大洋",
+        "毎日",
+        "中日",
+        "大毎",
+        "東京"
+      ]
+    },
+    {
+      "player_id": "000011191603254",
+      "name": "内藤　幸三",
+      "total": 1.69,
+      "seasons": 12,
+      "first_year": 1939,
+      "last_year": 1951,
+      "teams": [
+        "朝日",
+        "広島",
+        "金星",
+        "ゴールドスター",
+        "阪急",
+        "金鯱"
+      ]
+    },
+    {
+      "player_id": "000011192503074",
+      "name": "野口　正明",
+      "total": 1.7,
+      "seasons": 8,
+      "first_year": 1943,
+      "last_year": 1953,
+      "teams": [
+        "名古屋",
+        "西鉄",
+        "急映",
+        "産業",
+        "大映"
+      ]
+    },
+    {
+      "player_id": "000011193109175",
+      "name": "藤井　清一郎",
+      "total": 1.73,
+      "seasons": 3,
+      "first_year": 1952,
+      "last_year": 1954,
+      "teams": [
+        "高橋",
+        "近鉄"
+      ]
+    },
+    {
+      "player_id": "000011191510010",
+      "name": "浅野　勝三郎",
+      "total": 1.74,
+      "seasons": 3,
+      "first_year": 1939,
+      "last_year": 1941,
+      "teams": [
+        "阪急"
+      ]
+    },
+    {
+      "player_id": "000011191601166",
+      "name": "御園生　崇男",
+      "total": 1.74,
+      "seasons": 9,
+      "first_year": 1939,
+      "last_year": 1950,
+      "teams": [
+        "タイガース",
+        "阪神"
+      ]
+    },
+    {
+      "player_id": "000011192712147",
+      "name": "米川　泰夫",
+      "total": 1.75,
+      "seasons": 11,
+      "first_year": 1949,
+      "last_year": 1959,
+      "teams": [
+        "西鉄",
+        "東急",
+        "東映"
+      ]
+    },
+    {
+      "player_id": "000011193401095",
+      "name": "弘瀬　昌彦",
+      "total": 1.75,
+      "seasons": 10,
+      "first_year": 1954,
+      "last_year": 1965,
+      "teams": [
+        "阪急",
+        "広島",
+        "阪神"
+      ]
+    },
+    {
+      "player_id": "000011191105045",
+      "name": "古谷　倉之助",
+      "total": 1.76,
+      "seasons": 4,
+      "first_year": 1939,
+      "last_year": 1942,
+      "teams": [
+        "大洋",
+        "金鯱"
+      ]
+    },
+    {
+      "player_id": "000011191706236",
+      "name": "溝部　武夫",
+      "total": 1.76,
+      "seasons": 6,
+      "first_year": 1941,
+      "last_year": 1948,
+      "teams": [
+        "阪急",
+        "阪神"
+      ]
+    },
+    {
+      "player_id": "000011193501050",
+      "name": "植村　義信",
+      "total": 1.76,
+      "seasons": 9,
+      "first_year": 1953,
+      "last_year": 1961,
+      "teams": [
+        "毎日",
+        "大毎"
+      ]
+    },
+    {
+      "player_id": "000011193504081",
+      "name": "梶本　隆夫",
+      "total": 1.76,
+      "seasons": 20,
+      "first_year": 1954,
+      "last_year": 1973,
+      "teams": [
+        "阪急"
+      ]
+    },
+    {
+      "player_id": "000011192109014",
+      "name": "西沢　道夫",
+      "total": 1.79,
+      "seasons": 6,
+      "first_year": 1939,
+      "last_year": 1946,
+      "teams": [
+        "名古屋",
+        "中部日本"
+      ]
+    },
+    {
+      "player_id": "000011193309190",
+      "name": "石川　克彦",
+      "total": 1.8,
+      "seasons": 6,
+      "first_year": 1952,
+      "last_year": 1959,
+      "teams": [
+        "名古屋",
+        "中日"
+      ]
+    },
+    {
+      "player_id": "000011192508293",
+      "name": "武智　修",
+      "total": 1.82,
+      "seasons": 4,
+      "first_year": 1944,
+      "last_year": 1950,
+      "teams": [
+        "阪急",
+        "広島",
+        "阪神"
+      ]
+    },
+    {
+      "player_id": "000011193411254",
+      "name": "西村　貞朗",
+      "total": 1.85,
+      "seasons": 8,
+      "first_year": 1953,
+      "last_year": 1961,
+      "teams": [
+        "西鉄"
+      ]
+    },
+    {
+      "player_id": "000011192105071",
+      "name": "川崎　徳次",
+      "total": 1.86,
+      "seasons": 14,
+      "first_year": 1940,
+      "last_year": 1957,
+      "teams": [
+        "南海",
+        "西鉄",
+        "読売"
+      ]
+    },
+    {
+      "player_id": "000011192110055",
+      "name": "藤村　隆男",
+      "total": 1.86,
+      "seasons": 13,
+      "first_year": 1940,
+      "last_year": 1957,
+      "teams": [
+        "太陽",
+        "広島",
+        "阪神"
+      ]
+    },
+    {
+      "player_id": "000011191604131",
+      "name": "笠松　実",
+      "total": 1.87,
+      "seasons": 8,
+      "first_year": 1941,
+      "last_year": 1952,
+      "teams": [
+        "阪急",
+        "広島"
+      ]
+    },
+    {
+      "player_id": "000011192305272",
+      "name": "真田　重蔵",
+      "total": 1.89,
+      "seasons": 11,
+      "first_year": 1943,
+      "last_year": 1955,
+      "teams": [
+        "朝日",
+        "パシフィック",
+        "阪神",
+        "松竹",
+        "太陽",
+        "大陽"
+      ]
+    },
+    {
+      "player_id": "000011193402011",
+      "name": "蔵　文男",
+      "total": 1.9,
+      "seasons": 2,
+      "first_year": 1955,
+      "last_year": 1956,
+      "teams": [
+        "阪急"
+      ]
+    },
+    {
+      "player_id": "000011193405011",
+      "name": "権藤　正利",
+      "total": 1.9,
+      "seasons": 21,
+      "first_year": 1953,
+      "last_year": 1973,
+      "teams": [
+        "大洋",
+        "阪神",
+        "洋松",
+        "東映"
+      ]
+    },
+    {
+      "player_id": "000011192404253",
+      "name": "天保　義夫",
+      "total": 1.91,
+      "seasons": 13,
+      "first_year": 1942,
+      "last_year": 1955,
+      "teams": [
+        "阪急"
+      ]
+    },
+    {
+      "player_id": "000011192411231",
+      "name": "川畑　博",
+      "total": 1.91,
+      "seasons": 2,
+      "first_year": 1942,
+      "last_year": 1943,
+      "teams": [
+        "巨人"
+      ]
+    },
+    {
+      "player_id": "000011192509172",
+      "name": "杉下　茂",
+      "total": 1.92,
+      "seasons": 11,
+      "first_year": 1949,
+      "last_year": 1961,
+      "teams": [
+        "名古屋",
+        "中日",
+        "大毎"
+      ]
+    },
+    {
+      "player_id": "000011192207240",
+      "name": "石丸　進一",
+      "total": 1.93,
+      "seasons": 2,
+      "first_year": 1942,
+      "last_year": 1943,
+      "teams": [
+        "名古屋"
+      ]
+    }
+  ]
+}

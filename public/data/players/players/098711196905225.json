@@ -7,7 +7,7 @@
   "last_year": 1997,
   "primary_pos": "P",
   "is_active": false,
-  "active_source": "heuristic",
+  "active_source": "confirmed_retired",
   "batting": [
     {
       "年度": 1992,
@@ -645,5 +645,6 @@
       "奪三振": 186.0,
       "防御率": null
     }
-  }
+  },
+  "active_confidence": "確定"
 }

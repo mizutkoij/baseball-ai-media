@@ -6,8 +6,8 @@
   "first_year": 2022,
   "last_year": 2023,
   "primary_pos": "P",
-  "is_active": false,
-  "active_source": "heuristic",
+  "is_active": true,
+  "active_source": "likely_active",
   "batting": [
     {
       "年度": 2022,
@@ -238,5 +238,6 @@
       "奪三振": 48.0,
       "防御率": null
     }
-  }
+  },
+  "active_confidence": "推定"
 }
