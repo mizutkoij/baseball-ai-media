@@ -61,7 +61,8 @@ function selectGameOfTheDay(games: GameData[]): GameData | null {
     }
 
     // 2. 接戦度（スコア差が小さいほど高評価）
-    if (game.home_score !== null && game.away_score !== null) {
+    if (game.home_score !== null && game.away_score !== null && 
+        game.home_score !== undefined && game.away_score !== undefined) {
       const scoreDiff = Math.abs(game.home_score - game.away_score);
       if (scoreDiff === 0) score += 30; // 同点
       else if (scoreDiff <= 1) score += 25; // 1点差
@@ -70,7 +71,8 @@ function selectGameOfTheDay(games: GameData[]): GameData | null {
     }
 
     // 3. 高得点試合ボーナス
-    if (game.home_score !== null && game.away_score !== null) {
+    if (game.home_score !== null && game.away_score !== null && 
+        game.home_score !== undefined && game.away_score !== undefined) {
       const totalRuns = game.home_score + game.away_score;
       if (totalRuns >= 15) score += 20; // 15点以上の乱打戦
       else if (totalRuns >= 10) score += 10; // 10点以上
@@ -153,7 +155,8 @@ function generateBriefSummary(games: GameData[]): BriefData['summary'] {
   let minScoreDiff = Infinity;
 
   for (const game of completedGames) {
-    if (game.home_score !== null && game.away_score !== null) {
+    if (game.home_score !== null && game.away_score !== null && 
+        game.home_score !== undefined && game.away_score !== undefined) {
       const totalRuns = game.home_score + game.away_score;
       const scoreDiff = Math.abs(game.home_score - game.away_score);
       
