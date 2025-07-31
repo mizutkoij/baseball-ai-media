@@ -10,7 +10,11 @@ import { TrendingUp, Target, BarChart3, Zap } from "lucide-react";
 // API データ取得関数
 async function fetchWarLeaders() {
   try {
-    const api = process.env.NEXT_PUBLIC_API_BASE_URL!;
+    const api = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000/api';
+    if (!api || api === 'undefined') {
+      throw new Error('API base URL not configured');
+    }
+    
     const res = await fetch(`${api}/war-leaders?limit=15`, { 
       next: { revalidate: 300 } // 5分キャッシュ
     });
@@ -29,7 +33,11 @@ async function fetchWarLeaders() {
 
 async function fetchMatchupPreview() {
   try {
-    const api = process.env.NEXT_PUBLIC_API_BASE_URL!;
+    const api = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000/api';
+    if (!api || api === 'undefined') {
+      throw new Error('API base URL not configured');
+    }
+    
     const res = await fetch(`${api}/matchup-preview`, { 
       next: { revalidate: 300 } // 5分キャッシュ
     });

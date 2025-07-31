@@ -4,10 +4,11 @@ import path from 'path'
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { chunk: string } }
+  { params }: { params: Promise<{ chunk: string }> | { chunk: string } }
 ) {
   const baseUrl = 'https://baseball-ai-media.vercel.app'
-  const chunkNumber = parseInt(params.chunk)
+  const resolvedParams = await Promise.resolve(params)
+  const chunkNumber = parseInt(resolvedParams.chunk)
   
   if (isNaN(chunkNumber) || chunkNumber < 1) {
     return new Response('Invalid chunk number', { status: 400 })

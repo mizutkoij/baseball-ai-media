@@ -4,13 +4,16 @@ import path from 'path';
 import { addNPBProvenance } from '@/lib/provenance';
 
 interface RouteContext {
-  params: {
+  params: Promise<{
+    gameId: string;
+  }> | {
     gameId: string;
   };
 }
 
 export async function GET(request: NextRequest, { params }: RouteContext) {
-  const { gameId } = params;
+  const resolvedParams = await Promise.resolve(params);
+  const { gameId } = resolvedParams;
   
   try {
     // Try to connect to database
