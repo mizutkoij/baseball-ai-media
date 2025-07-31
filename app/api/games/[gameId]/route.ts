@@ -3,6 +3,9 @@ import Database from 'better-sqlite3';
 import path from 'path';
 import { addNPBProvenance } from '@/lib/provenance';
 
+// Prevent static generation during build
+export const dynamic = 'force-dynamic';
+
 interface RouteContext {
   params: Promise<{
     gameId: string;
@@ -11,8 +14,19 @@ interface RouteContext {
   };
 }
 
-export async function GET(request: NextRequest, { params }: RouteContext) {
-  const resolvedParams = await Promise.resolve(params);
+export async function GET(request: NextRequest, context: RouteContext) {
+  let resolvedParams: { gameId: string };
+  try {
+    resolvedParams = await Promise.resolve(context.params);
+  } catch (error) {
+    console.error('Error resolving params:', error);
+    return NextResponse.json({ error: 'Invalid parameters' }, { status: 400 });
+  }
+  
+  if (!resolvedParams || !resolvedParams.gameId) {
+    return NextResponse.json({ error: 'Game ID parameter missing' }, { status: 400 });
+  }
+  
   const { gameId } = resolvedParams;
   
   try {

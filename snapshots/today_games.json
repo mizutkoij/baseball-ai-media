@@ -1,0 +1,116 @@
+{
+  "source": "real",
+  "provider": "npb",
+  "updated_at": "2025-07-31T09:03:45.710748+09:00",
+  "games": 6,
+  "data": [
+    {
+      "date": "2025-07-31",
+      "league": "first",
+      "game_id": "20250731-17:45---npb",
+      "away_team": "-",
+      "home_team": "17:45",
+      "away_score": null,
+      "home_score": null,
+      "status": "SCHEDULED",
+      "inning": null,
+      "start_time_jst": "17:45",
+      "venue": null,
+      "links": {
+        "index": "https://npb.jp/scores/2025/0731/db-s-15/index.html",
+        "pbp": "https://npb.jp/scores/2025/0731/db-s-15/playbyplay.html",
+        "box": "https://npb.jp/scores/2025/0731/db-s-15/box.html"
+      }
+    },
+    {
+      "date": "2025-07-31",
+      "league": "first",
+      "game_id": "20250731-18:00---npb",
+      "away_team": "-",
+      "home_team": "18:00",
+      "away_score": null,
+      "home_score": null,
+      "status": "SCHEDULED",
+      "inning": null,
+      "start_time_jst": "18:00",
+      "venue": null,
+      "links": {
+        "index": "https://npb.jp/scores/2025/0731/d-g-16/index.html",
+        "pbp": "https://npb.jp/scores/2025/0731/d-g-16/playbyplay.html",
+        "box": "https://npb.jp/scores/2025/0731/d-g-16/box.html"
+      }
+    },
+    {
+      "date": "2025-07-31",
+      "league": "first",
+      "game_id": "20250731-18:00---npb",
+      "away_team": "-",
+      "home_team": "18:00",
+      "away_score": null,
+      "home_score": null,
+      "status": "SCHEDULED",
+      "inning": null,
+      "start_time_jst": "18:00",
+      "venue": null,
+      "links": {
+        "index": "https://npb.jp/scores/2025/0731/t-c-18/index.html",
+        "pbp": "https://npb.jp/scores/2025/0731/t-c-18/playbyplay.html",
+        "box": "https://npb.jp/scores/2025/0731/t-c-18/box.html"
+      }
+    },
+    {
+      "date": "2025-07-31",
+      "league": "first",
+      "game_id": "20250731-18:00---npb",
+      "away_team": "-",
+      "home_team": "18:00",
+      "away_score": null,
+      "home_score": null,
+      "status": "SCHEDULED",
+      "inning": null,
+      "start_time_jst": "18:00",
+      "venue": null,
+      "links": {
+        "index": "https://npb.jp/scores/2025/0731/f-h-16/index.html",
+        "pbp": "https://npb.jp/scores/2025/0731/f-h-16/playbyplay.html",
+        "box": "https://npb.jp/scores/2025/0731/f-h-16/box.html"
+      }
+    },
+    {
+      "date": "2025-07-31",
+      "league": "first",
+      "game_id": "20250731-18:30---npb",
+      "away_team": "-",
+      "home_team": "18:30",
+      "away_score": null,
+      "home_score": null,
+      "status": "SCHEDULED",
+      "inning": null,
+      "start_time_jst": "18:30",
+      "venue": null,
+      "links": {
+        "index": "https://npb.jp/scores/2025/0731/m-e-16/index.html",
+        "pbp": "https://npb.jp/scores/2025/0731/m-e-16/playbyplay.html",
+        "box": "https://npb.jp/scores/2025/0731/m-e-16/box.html"
+      }
+    },
+    {
+      "date": "2025-07-31",
+      "league": "first",
+      "game_id": "20250731-18:00---npb",
+      "away_team": "-",
+      "home_team": "18:00",
+      "away_score": null,
+      "home_score": null,
+      "status": "SCHEDULED",
+      "inning": null,
+      "start_time_jst": "18:00",
+      "venue": null,
+      "links": {
+        "index": "https://npb.jp/scores/2025/0731/b-l-16/index.html",
+        "pbp": "https://npb.jp/scores/2025/0731/b-l-16/playbyplay.html",
+        "box": "https://npb.jp/scores/2025/0731/b-l-16/box.html"
+      }
+    }
+  ]
+}

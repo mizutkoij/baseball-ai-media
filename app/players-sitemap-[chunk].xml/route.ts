@@ -2,12 +2,28 @@ import { NextRequest } from 'next/server'
 import fs from 'fs'
 import path from 'path'
 
+// Prevent static generation during build
+export const dynamic = 'force-dynamic'
+
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ chunk: string }> | { chunk: string } }
+  context: { params: Promise<{ chunk: string }> | { chunk: string } }
 ) {
   const baseUrl = 'https://baseball-ai-media.vercel.app'
-  const resolvedParams = await Promise.resolve(params)
+  
+  // Handle both Promise and non-Promise params safely
+  let resolvedParams: { chunk: string };
+  try {
+    resolvedParams = await Promise.resolve(context.params);
+  } catch (error) {
+    console.error('Error resolving params:', error);
+    return new Response('Invalid parameters', { status: 400 });
+  }
+  
+  if (!resolvedParams || !resolvedParams.chunk) {
+    return new Response('Chunk parameter missing', { status: 400 });
+  }
+  
   const chunkNumber = parseInt(resolvedParams.chunk)
   
   if (isNaN(chunkNumber) || chunkNumber < 1) {

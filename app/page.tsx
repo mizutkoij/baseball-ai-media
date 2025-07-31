@@ -7,12 +7,21 @@ import StatsGlossary from "@/components/StatsGlossary";
 import { Suspense } from "react";
 import { TrendingUp, Target, BarChart3, Zap } from "lucide-react";
 
-// API データ取得関数
+// Force dynamic rendering to prevent build-time API calls
+export const dynamic = 'force-dynamic';
+
+// API データ取得関数（ビルド時はスキップ）
 async function fetchWarLeaders() {
+  // ビルド時（API使用不可）はスキップ
+  if (process.env.NODE_ENV === 'production' && !process.env.NEXT_PUBLIC_API_BASE_URL) {
+    console.log('Skipping WAR leaders fetch during build');
+    return [];
+  }
+
   try {
     const api = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000/api';
-    if (!api || api === 'undefined') {
-      throw new Error('API base URL not configured');
+    if (!api || api === 'undefined' || api.includes('localhost') && process.env.NODE_ENV === 'production') {
+      throw new Error('API base URL not configured for production');
     }
     
     const res = await fetch(`${api}/war-leaders?limit=15`, { 
@@ -32,10 +41,16 @@ async function fetchWarLeaders() {
 }
 
 async function fetchMatchupPreview() {
+  // ビルド時（API使用不可）はスキップ
+  if (process.env.NODE_ENV === 'production' && !process.env.NEXT_PUBLIC_API_BASE_URL) {
+    console.log('Skipping matchup preview fetch during build');
+    return [];
+  }
+
   try {
     const api = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000/api';
-    if (!api || api === 'undefined') {
-      throw new Error('API base URL not configured');
+    if (!api || api === 'undefined' || api.includes('localhost') && process.env.NODE_ENV === 'production') {
+      throw new Error('API base URL not configured for production');
     }
     
     const res = await fetch(`${api}/matchup-preview`, { 
