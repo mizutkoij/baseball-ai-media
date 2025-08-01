@@ -421,3 +421,19 @@ export default function TeamPage({ params }: TeamPageProps) {
     </>
   );
 }
+
+// Enable ISR with 24-hour revalidation for static generation
+export const revalidate = 60 * 60 * 24; // 24 hours
+
+// Generate static params for all years and teams
+export async function generateStaticParams() {
+  const YEARS = Array.from({ length: 2025 - 2016 + 1 }, (_, i) => 2016 + i);
+  const TEAMS = ['T', 'S', 'C', 'YS', 'D', 'G', 'H', 'L', 'E', 'M', 'F', 'B'];
+  
+  return YEARS.flatMap((year) => 
+    TEAMS.map((team) => ({
+      year: year.toString(),
+      team: team
+    }))
+  );
+}

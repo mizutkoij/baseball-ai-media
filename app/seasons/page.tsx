@@ -11,6 +11,9 @@ const SEASONS = [
   { year: 2021, status: "完了", description: "ヤクルト20年ぶり日本一" },
   { year: 2020, status: "完了", description: "コロナ禍短縮シーズン" },
   { year: 2019, status: "完了", description: "巨人岩隈・丸獲得" },
+  { year: 2018, status: "完了", description: "広島3連覇・西武日本一" },
+  { year: 2017, status: "完了", description: "侍ジャパンWBC準決勝" },
+  { year: 2016, status: "完了", description: "広島25年ぶりリーグ優勝" },
 ];
 
 export default function SeasonsIndexPage() {
@@ -56,8 +59,8 @@ export default function SeasonsIndexPage() {
               <h3 className="text-lg font-semibold text-white">データ範囲</h3>
             </div>
             <div className="space-y-2">
-              <div className="text-2xl font-bold text-white">2019-2025</div>
-              <div className="text-sm text-slate-300">7年間のシーズンデータ</div>
+              <div className="text-2xl font-bold text-white">2016-2025</div>
+              <div className="text-sm text-slate-300">10年間のシーズンデータ</div>
             </div>
           </div>
 

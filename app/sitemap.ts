@@ -1,25 +1,28 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://baseball-ai-media.vercel.app'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://baseball-ai-media.vercel.app'
   
-  // Generate seasons entries (2019-2025)
-  const years = Array.from({length: 7}, (_, i) => 2019 + i);
-  const seasons = years.map(year => ({
+  // Generate seasons entries (2016-2025) - 10 years for maximum SEO coverage
+  const YEARS = Array.from({ length: 2025 - 2016 + 1 }, (_, i) => 2016 + i);
+  const seasons = YEARS.map(year => ({
     url: `${baseUrl}/seasons/${year}`,
     lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: 0.7,
+    changeFrequency: year >= 2019 ? 'weekly' as const : 'yearly' as const,
+    priority: year >= 2019 ? 0.7 : 0.5,
   }));
   
-  // Generate team entries for each year
-  const teams = ['T', 'S', 'C', 'YS', 'D', 'G', 'H', 'L', 'E', 'M', 'F', 'B']; // All NPB teams
-  const teamPages = years.flatMap(year => 
-    teams.map(team => ({
+  // Generate team entries for each year - 10 years × 12 teams = 120 URLs
+  const TEAMS = ['T', 'S', 'C', 'YS', 'D', 'G', 'H', 'L', 'E', 'M', 'F', 'B']; // All NPB teams
+  const currentYear = new Date().getFullYear();
+  const teamPages = YEARS.flatMap(year => 
+    TEAMS.map(team => ({
       url: `${baseUrl}/teams/${year}/${team}`,
       lastModified: new Date(),
-      changeFrequency: year === new Date().getFullYear() ? 'daily' as const : 'monthly' as const,
-      priority: year === new Date().getFullYear() ? 0.6 : 0.4,
+      changeFrequency: year === currentYear ? 'daily' as const : 
+                       year >= 2019 ? 'monthly' as const : 'yearly' as const,
+      priority: year === currentYear ? 0.6 : 
+                year >= 2019 ? 0.4 : 0.3,
     }))
   );
   
