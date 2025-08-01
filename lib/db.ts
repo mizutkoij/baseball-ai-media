@@ -150,7 +150,7 @@ export function transaction<T>(
   const db = new Database(CURRENT_PATH);
   try {
     const txn = db.transaction(callback);
-    return txn();
+    return txn(db);
   } finally {
     db.close();
   }
