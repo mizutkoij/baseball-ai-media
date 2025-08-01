@@ -8,7 +8,8 @@ import GameOfTheDay from "@/components/GameOfTheDay";
 import LatestBrief, { LatestBriefStatic } from "@/components/LatestBrief";
 import Link from "next/link";
 import { Suspense } from "react";
-import { TrendingUp, Target, BarChart3, Zap, Calendar, Users, Trophy } from "lucide-react";
+import { TrendingUp, Target, BarChart3, Zap } from "lucide-react";
+import CTAButtons from "@/components/CTAButtons";
 
 // Force dynamic rendering to prevent build-time API calls
 export const dynamic = 'force-dynamic';
@@ -175,31 +176,7 @@ export default async function Home() {
             </p>
             
             {/* 3-Button Navigation */}
-            <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 animate-fade-in animation-delay-300">
-              <Link 
-                href="/today" 
-                className="group flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
-              >
-                <Calendar className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                <span className="font-semibold">今日の試合</span>
-              </Link>
-              
-              <Link 
-                href="/players" 
-                className="group flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
-              >
-                <Users className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                <span className="font-semibold">選手データベース</span>
-              </Link>
-              
-              <Link 
-                href="/records" 
-                className="group flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
-              >
-                <Trophy className="w-5 h-5 group-hover:bounce transition-transform" />
-                <span className="font-semibold">記録</span>
-              </Link>
-            </div>
+            <CTAButtons />
           </div>
           
           {/* Stats Overview */}

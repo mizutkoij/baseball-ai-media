@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev:*)",
+      "Bash(curl:*)",
+      "Bash(ls:*)",
+      "Bash(mkdir:*)",
+      "Bash(npm install:*)",
+      "Bash(npx tsx:*)",
+      "Bash(DB_PATH=./data/baseball_test.db npx tsx scripts/ingest_month.ts --year 2025 --month 7 --dry-run)",
+      "Bash(DB_PATH=./data/baseball_test.db npx tsx scripts/ingest_month.ts --year 2025 --month 7 --apply)",
+      "Bash(DB_PATH=./data/baseball_test.db npx tsx scripts/compute_constants.ts --year 2025 --dry-run)",
+      "Bash(NODE_ENV=test DB_PATH=./data/baseball_test.db npx tsx scripts/compute_constants.ts --year 2025 --dry-run)",
+      "Bash(node:*)",
+      "Bash(cp:*)",
+      "Bash(npx tsc:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": []
+  }
+}

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2025-07-31T14:13:42.552699",
+    "generated_at": "2025-07-31T14:22:53.525902",
     "version": "1.0",
     "description": "NPB league constants computed from official game data",
     "methodology": {
@@ -27,7 +27,7 @@
         "default": 1.0
       },
       "sample_games": 1,
-      "updated_at": "2025-07-31T14:13:42.552699"
+      "updated_at": "2025-07-31T14:22:53.525902"
     }
   }
 }
