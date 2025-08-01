@@ -128,6 +128,18 @@ export async function GET(request: NextRequest) {
     
     db.close();
     
+    // Convert games_by_date to days array format for consistency
+    const days = Object.entries(games_by_date).map(([date, games]) => ({
+      date,
+      games: games.map((game: any) => ({
+        ...game,
+        // Normalize status for consistent frontend handling
+        status: game.status === 'FINAL' ? 'completed' :
+                game.status === 'IN_PROGRESS' ? 'in_progress' :
+                game.status === 'POSTPONED' ? 'postponed' : 'scheduled'
+      }))
+    }));
+
     const response = {
       source: "npb_db",
       league: league,
@@ -136,7 +148,8 @@ export async function GET(request: NextRequest) {
         to: to
       },
       total_games: games.length,
-      games_by_date: games_by_date,
+      days: days,
+      games_by_date: games_by_date, // Keep for backward compatibility
       summary: summary
     };
 
@@ -146,27 +159,28 @@ export async function GET(request: NextRequest) {
     console.error('Error in schedule API:', error);
     
     // フォールバック: モックデータを返す
+    const mockGames = [{
+      game_id: `${from.replace(/-/g, '')}-mock-fallback`,
+      date: from,
+      start_time_jst: "18:00",
+      venue: "データベース接続エラー",
+      status: "scheduled",
+      inning: null,
+      away_team: "チームA",
+      home_team: "チームB", 
+      away_score: null,
+      home_score: null,
+      league: league,
+      links: {}
+    }];
+
     const mockData = {
       source: "mock_fallback",
       league: league,
       date_range: { from, to },
       total_games: 1,
-      games_by_date: {
-        [from]: [{
-          game_id: `${from.replace(/-/g, '')}-mock-fallback`,
-          date: from,
-          start_time_jst: "18:00",
-          venue: "データベース接続エラー",
-          status: "SCHEDULED",
-          inning: null,
-          away_team: "チームA",
-          home_team: "チームB", 
-          away_score: null,
-          home_score: null,
-          league: league,
-          links: {}
-        }]
-      },
+      days: [{ date: from, games: mockGames }],
+      games_by_date: { [from]: mockGames },
       summary: { scheduled: 1, in_progress: 0, final: 0, postponed: 0 },
       error: "Database connection failed, using mock data"
     };

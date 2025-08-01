@@ -8,6 +8,7 @@ import GameOfTheDay from "@/components/GameOfTheDay";
 import LatestBrief, { LatestBriefStatic } from "@/components/LatestBrief";
 import { SeasonDiscovery } from "@/components/SeasonDiscovery";
 import HomeScoreboard from "@/components/HomeScoreboard";
+import HomeGamesList from "@/components/HomeGamesList";
 import Link from "next/link";
 import { Suspense } from "react";
 import { TrendingUp, Target, BarChart3, Zap } from "lucide-react";
@@ -193,8 +194,13 @@ export default async function Home() {
           <HomeScoreboard />
         </div>
 
-        {/* Game of the Day - Featured Section */}
+        {/* Home Games List - Weekly Overview */}
         <div className="mb-8 animate-slide-up animation-delay-75">
+          <HomeGamesList />
+        </div>
+
+        {/* Game of the Day - Featured Section */}
+        <div className="mb-8 animate-slide-up animation-delay-150">
           <GameOfTheDay />
         </div>
 
