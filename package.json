@@ -6,15 +6,26 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
+    "ingest:month": "npx ts-node scripts/ingest_month.ts",
+    "compute:constants": "npx ts-node scripts/compute_constants_simple.ts",
+    "compute:constants:full": "npx ts-node scripts/compute_constants.ts",
+    "check:disk": "npx ts-node scripts/check_disk.ts",
+    "backfill:monthly": "npm run check:disk && npx ts-node scripts/backfill_history.ts"
   },
   "dependencies": {
+    "@types/cli-progress": "^3.11.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
     "better-sqlite3": "^12.2.0",
+    "cli-progress": "^3.12.0",
     "clsx": "^2.0.0",
+    "commander": "^14.0.0",
     "lucide-react": "^0.294.0",
     "next": "14.0.4",
     "postcss": "^8",
@@ -24,11 +35,14 @@
     "swr": "^2.3.4",
     "tailwind-merge": "^2.0.0",
     "tailwindcss": "^3.3.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.13",
+    "@vitest/ui": "^3.2.4",
     "eslint": "^8",
-    "eslint-config-next": "14.0.4"
+    "eslint-config-next": "14.0.4",
+    "vitest": "^3.2.4"
   }
 }

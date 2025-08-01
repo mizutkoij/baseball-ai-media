@@ -14,7 +14,15 @@
       "Bash(node:*)",
       "Bash(cp:*)",
       "Bash(npx tsc:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(pnpm ts-node:*)",
+      "Bash(npm:*)",
+      "Bash(npx ts-node:*)",
+      "Bash(sqlite3:*)",
+      "Bash(chmod:*)",
+      "Bash(bash:*)"
     ],
     "deny": []
   }

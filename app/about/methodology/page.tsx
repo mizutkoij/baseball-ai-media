@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowLeft, Calculator, BarChart3, Beaker, TrendingUp, Download, ExternalLink } from 'lucide-react';
+import { ArrowLeft, Calculator, BarChart3, Beaker, TrendingUp, Download, ExternalLink, Server } from 'lucide-react';
 import DataValidationStatus from '../../../components/DataValidationStatus';
+import SystemStatus from '../../../components/SystemStatus';
 
 export const metadata: Metadata = {
   title: '分析手法・係数表 | Baseball AI Media',
@@ -453,6 +454,9 @@ export default function MethodologyPage() {
               </div>
             </div>
           </section>
+
+          {/* System Status */}
+          <SystemStatus />
         </div>
 
         {/* Navigation */}

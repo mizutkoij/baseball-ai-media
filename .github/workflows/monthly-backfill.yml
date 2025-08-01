@@ -1,0 +1,187 @@
+name: Monthly NPB Data Backfill
+
+on:
+  schedule:
+    # 5:00 AM JST on the 3rd of every month (8:00 PM UTC on the 2nd)
+    - cron: '0 20 2 * *'
+  
+  # Allow manual trigger for testing
+  workflow_dispatch:
+    inputs:
+      year:
+        description: 'Year to backfill'
+        required: false
+        default: 'current'
+      month:
+        description: 'Month to backfill'
+        required: false
+        default: 'current'
+      dry_run:
+        description: 'Run in dry-run mode'
+        type: boolean
+        default: false
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+
+    - name: Cache SQLite binaries
+      uses: actions/cache@v4
+      with:
+        path: |
+          node_modules/better-sqlite3
+          ~/.cache/better-sqlite3
+        key: ${{ runner.os }}-sqlite-${{ hashFiles('package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-sqlite-
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Check disk space before backfill
+      run: |
+        df -h
+        du -sh data/ || echo "Data directory not found"
+        
+        # Simple disk check (will be replaced by proper check_disk.sh)
+        DISK_USAGE=$(du -sm data/ 2>/dev/null | cut -f1 || echo "0")
+        LIMIT_MB=1024  # 1GB limit
+        
+        if [ "$DISK_USAGE" -gt "$LIMIT_MB" ]; then
+          echo "❌ Data directory at ${DISK_USAGE}MB exceeds ${LIMIT_MB}MB limit"
+          exit 1
+        fi
+        
+        echo "✅ Disk usage: ${DISK_USAGE}MB (under ${LIMIT_MB}MB limit)"
+
+    - name: Set backfill parameters
+      id: params
+      run: |
+        if [ "${{ github.event.inputs.year }}" = "current" ] || [ -z "${{ github.event.inputs.year }}" ]; then
+          YEAR=$(date +'%Y')
+        else
+          YEAR="${{ github.event.inputs.year }}"
+        fi
+        
+        if [ "${{ github.event.inputs.month }}" = "current" ] || [ -z "${{ github.event.inputs.month }}" ]; then
+          MONTH=$(date +'%m')
+        else
+          MONTH="${{ github.event.inputs.month }}"
+        fi
+        
+        echo "year=$YEAR" >> $GITHUB_OUTPUT
+        echo "month=$MONTH" >> $GITHUB_OUTPUT
+        echo "dry_run=${{ github.event.inputs.dry_run || 'false' }}" >> $GITHUB_OUTPUT
+
+    - name: Run NPB data backfill
+      run: |
+        YEAR="${{ steps.params.outputs.year }}"
+        MONTH="${{ steps.params.outputs.month }}"
+        DRY_RUN="${{ steps.params.outputs.dry_run }}"
+        
+        echo "🚀 Starting backfill for $YEAR-$MONTH (dry-run: $DRY_RUN)"
+        
+        if [ "$DRY_RUN" = "true" ]; then
+          npx ts-node scripts/backfill_history.ts \
+            --start "$YEAR" --end "$YEAR" --months "$MONTH" \
+            --dry-run --profile \
+            --report "reports/monthly_${YEAR}_${MONTH}_dryrun.json"
+        else
+          npx ts-node scripts/backfill_history.ts \
+            --start "$YEAR" --end "$YEAR" --months "$MONTH" \
+            --profile \
+            --report "reports/monthly_${YEAR}_${MONTH}.json"
+        fi
+
+    - name: Compute league constants
+      if: steps.params.outputs.dry_run != 'true'
+      run: |
+        YEAR="${{ steps.params.outputs.year }}"
+        echo "🧮 Computing league constants for $YEAR"
+        npm run compute:constants -- --year="$YEAR" --output-dir="data"
+
+    - name: Check backfill results
+      run: |
+        YEAR="${{ steps.params.outputs.year }}"
+        MONTH="${{ steps.params.outputs.month }}"
+        DRY_RUN="${{ steps.params.outputs.dry_run }}"
+        
+        if [ "$DRY_RUN" = "true" ]; then
+          REPORT_FILE="reports/monthly_${YEAR}_${MONTH}_dryrun.json"
+        else
+          REPORT_FILE="reports/monthly_${YEAR}_${MONTH}.json"
+        fi
+        
+        if [ -f "$REPORT_FILE" ]; then
+          echo "✅ Backfill report generated:"
+          cat "$REPORT_FILE" | jq '.summary // .'
+        else
+          echo "⚠️ No backfill report found at $REPORT_FILE"
+        fi
+        
+        # Check if constants were updated
+        if [ -f "data/constants_${YEAR}.json" ]; then
+          echo "✅ Constants file updated:"
+          cat "data/constants_${YEAR}.json" | jq '.metadata // .'
+        fi
+
+    - name: Commit and push changes
+      if: steps.params.outputs.dry_run != 'true'
+      run: |
+        YEAR="${{ steps.params.outputs.year }}"
+        MONTH="${{ steps.params.outputs.month }}"
+        
+        git config user.name 'github-actions[bot]'
+        git config user.email 'github-actions@users.noreply.github.com'
+        
+        # Add generated files
+        git add data/constants_*.json || echo "No constants files to add"
+        git add reports/ || echo "No reports to add" 
+        git add data/ || echo "No data changes to add"
+        
+        # Check if there are changes to commit
+        if git diff --staged --quiet; then
+          echo "📝 No changes to commit"
+        else
+          git commit -m "🔄 Monthly NPB backfill: $YEAR-$MONTH
+
+          - Updated league constants for $YEAR
+          - Processed month $MONTH data  
+          - Generated backfill report
+          
+          🤖 Generated with [Claude Code](https://claude.ai/code)
+          
+          Co-Authored-By: Claude <noreply@anthropic.com>"
+          
+          git push
+          echo "✅ Changes committed and pushed"
+        fi
+
+    - name: Create summary
+      run: |
+        YEAR="${{ steps.params.outputs.year }}"
+        MONTH="${{ steps.params.outputs.month }}"
+        DRY_RUN="${{ steps.params.outputs.dry_run }}"
+        
+        echo "## 📊 Monthly Backfill Summary" >> $GITHUB_STEP_SUMMARY
+        echo "- **Year/Month**: $YEAR-$MONTH" >> $GITHUB_STEP_SUMMARY  
+        echo "- **Mode**: $([ "$DRY_RUN" = "true" ] && echo "Dry Run" || echo "Live")" >> $GITHUB_STEP_SUMMARY
+        echo "- **Status**: ✅ Completed" >> $GITHUB_STEP_SUMMARY
+        echo "- **Timestamp**: $(date -u)" >> $GITHUB_STEP_SUMMARY
+        
+        if [ -f "data/constants_${YEAR}.json" ]; then
+          COEFF=$(cat "data/constants_${YEAR}.json" | jq -r '.woba_coefficients."1B" // "N/A"')
+          echo "- **wOBA 1B Coefficient**: $COEFF" >> $GITHUB_STEP_SUMMARY
+        fi
