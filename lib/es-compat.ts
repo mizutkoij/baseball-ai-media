@@ -13,8 +13,8 @@ export const require = requireCompat;
 export function requireSafe<T = any>(moduleId: string): T {
   try {
     return requireCompat(moduleId);
-  } catch (error) {
-    throw new Error(`Failed to require module '${moduleId}': ${error.message}`);
+  } catch (error: any) {
+    throw new Error(`Failed to require module '${moduleId}': ${error?.message || 'Unknown error'}`);
   }
 }
 
@@ -22,7 +22,7 @@ export function requireSafe<T = any>(moduleId: string): T {
 export async function importSafe<T = any>(moduleId: string): Promise<T> {
   try {
     return await import(moduleId);
-  } catch (error) {
-    throw new Error(`Failed to import module '${moduleId}': ${error.message}`);
+  } catch (error: any) {
+    throw new Error(`Failed to import module '${moduleId}': ${error?.message || 'Unknown error'}`);
   }
 }
