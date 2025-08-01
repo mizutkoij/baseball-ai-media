@@ -37,50 +37,50 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ja" className="dark">
-      <body className={`${inter.className} ${notoSansJP.variable} min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white antialiased`}>
+    <html lang="ja">
+      <body className={`${inter.className} ${notoSansJP.variable} min-h-screen bg-white text-slate-900 antialiased`}>
         <div className="min-h-screen flex flex-col">
           {/* Navigation Header */}
-          <header className="sticky top-0 z-50 border-b border-white/10 bg-black/20 backdrop-blur-md">
+          <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur-md shadow-sm">
             <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex justify-between items-center h-14 sm:h-16">
                 <div className="flex items-center space-x-4 sm:space-x-8">
-                  <h1 className="text-lg sm:text-xl font-bold text-gradient">
+                  <h1 className="text-lg sm:text-xl font-bold text-slate-900">
                     ⚾ Baseball AI Media
                   </h1>
                   <div className="hidden lg:flex space-x-4 xl:space-x-6">
-                    <a href="/" className="text-xs xl:text-sm hover:text-blue-400 transition-colors">
+                    <a href="/" className="text-xs xl:text-sm text-slate-600 hover:text-blue-600 transition-colors">
                       ホーム
                     </a>
-                    <a href="/players" className="text-xs xl:text-sm hover:text-blue-400 transition-colors">
+                    <a href="/players" className="text-xs xl:text-sm text-slate-600 hover:text-blue-600 transition-colors">
                       選手データベース
                     </a>
-                    <a href="/teams" className="text-xs xl:text-sm hover:text-blue-400 transition-colors">
+                    <a href="/teams" className="text-xs xl:text-sm text-slate-600 hover:text-blue-600 transition-colors">
                       チーム
                     </a>
-                    <a href="/rankings" className="text-xs xl:text-sm hover:text-blue-400 transition-colors">
+                    <a href="/rankings" className="text-xs xl:text-sm text-slate-600 hover:text-blue-600 transition-colors">
                       ランキング
                     </a>
-                    <a href="/records" className="text-xs xl:text-sm hover:text-blue-400 transition-colors">
+                    <a href="/records" className="text-xs xl:text-sm text-slate-600 hover:text-blue-600 transition-colors">
                       記録
                     </a>
-                    <a href="/matchups" className="text-xs xl:text-sm hover:text-blue-400 transition-colors">
+                    <a href="/matchups" className="text-xs xl:text-sm text-slate-600 hover:text-blue-600 transition-colors">
                       対戦分析
                     </a>
-                    <a href="/columns" className="text-xs xl:text-sm hover:text-blue-400 transition-colors">
+                    <a href="/columns" className="text-xs xl:text-sm text-slate-600 hover:text-blue-600 transition-colors">
                       AIコラム
                     </a>
-                    <a href="/about" className="text-xs xl:text-sm hover:text-blue-400 transition-colors">
+                    <a href="/about" className="text-xs xl:text-sm text-slate-600 hover:text-blue-600 transition-colors">
                       About
                     </a>
                   </div>
                 </div>
                 <div className="flex items-center space-x-2 sm:space-x-4">
                   <div className="hidden md:flex items-center space-x-2 sm:space-x-4">
-                    <span className="text-xs text-slate-400">
+                    <span className="text-xs text-slate-600">
                       リアルタイム分析
                     </span>
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                   </div>
                   <MobileNav />
                 </div>

@@ -35,24 +35,24 @@ const MobileNav = () => {
       {/* Mobile menu overlay */}
       {isOpen && (
         <div 
-          className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden"
+          className="fixed inset-0 z-40 bg-black/40 md:hidden"
           onClick={toggleMenu}
         />
       )}
 
       {/* Mobile menu panel */}
       <div className={`
-        fixed top-0 right-0 z-50 h-full w-80 max-w-sm bg-slate-900 border-l border-white/10 backdrop-blur-md
+        fixed top-0 right-0 z-50 h-full w-80 max-w-sm bg-white text-slate-900 border-l border-slate-200 shadow-xl
         transform transition-transform duration-300 ease-in-out md:hidden
         ${isOpen ? 'translate-x-0' : 'translate-x-full'}
       `}>
         <div className="flex flex-col h-full">
           {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b border-white/10">
-            <h2 className="text-lg font-semibold text-white">メニュー</h2>
+          <div className="flex items-center justify-between p-4 border-b border-slate-200">
+            <h2 className="text-lg font-semibold text-slate-900">メニュー</h2>
             <button
               onClick={toggleMenu}
-              className="p-2 rounded-md text-white hover:text-blue-400 hover:bg-white/10 transition-colors"
+              className="p-2 rounded-md text-slate-600 hover:text-blue-600 hover:bg-slate-100 transition-colors"
               aria-label="メニューを閉じる"
             >
               <X className="w-5 h-5" />
@@ -67,7 +67,7 @@ const MobileNav = () => {
                   <a
                     href={link.href}
                     onClick={toggleMenu}
-                    className="block px-4 py-3 text-white hover:text-blue-400 hover:bg-white/10 rounded-lg transition-colors font-medium"
+                    className="block px-4 py-3 text-slate-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors font-medium"
                   >
                     {link.label}
                   </a>
@@ -77,10 +77,10 @@ const MobileNav = () => {
           </nav>
 
           {/* Footer info */}
-          <div className="p-4 border-t border-white/10">
-            <div className="flex items-center gap-2 text-xs text-slate-400">
+          <div className="p-4 border-t border-slate-200">
+            <div className="flex items-center gap-2 text-xs text-slate-600">
               <span>リアルタイム分析</span>
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
             </div>
           </div>
         </div>
