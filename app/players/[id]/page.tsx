@@ -8,6 +8,7 @@ import Head from "next/head";
 import PlayerSummary, { PlayerSummaryLoading, PlayerSummaryError } from "@/components/PlayerSummary";
 import SimilarPlayers from "@/components/SimilarPlayers";
 import { NextNav } from "@/components/NextNav";
+import { ExportButton } from "@/components/ExportButton";
 
 type YearRow = Record<string, any>;
 
@@ -296,19 +297,30 @@ export default function PlayerDetailPage({ params }: { params: { id: string } })
             </div>
 
             <div className="text-right">
-              <div className="text-lg font-medium text-white">
+              <div className="text-lg font-medium text-white mb-3">
                 {player.first_year && player.last_year
                   ? `${player.first_year} - ${player.last_year}`
                   : player.first_year
                   ? `${player.first_year} -`
                   : "期間不明"}
               </div>
+              
+              {/* CSV エクスポートボタン */}
+              <div className="mb-3">
+                <ExportButton 
+                  scope="player" 
+                  id={player.player_id}
+                  label="選手データをCSV出力"
+                  className="mb-2"
+                />
+              </div>
+
               {player.url && (
                 <a
                   href={player.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-sm text-blue-400 hover:text-blue-300 mt-2"
+                  className="inline-flex items-center gap-1 text-sm text-blue-400 hover:text-blue-300"
                 >
                   <ExternalLink className="w-4 h-4" />
                   NPB公式プロフィール

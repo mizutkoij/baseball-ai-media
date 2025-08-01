@@ -219,141 +219,39 @@ jobs:
         echo "delta=$DELTA_PCT" >> $GITHUB_OUTPUT
         echo "duration=$DURATION" >> $GITHUB_OUTPUT
 
-    - name: Notify Slack on Success
-      if: success()
-      env:
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-      run: |
-        YEAR="${{ steps.params.outputs.year }}"
-        MONTH="${{ steps.params.outputs.month }}"
-        DRY_RUN="${{ steps.params.outputs.dry_run }}"
-        INSERTED="${{ steps.metrics.outputs.inserted }}"
-        DUPLICATES="${{ steps.metrics.outputs.duplicates }}"
-        DELTA="${{ steps.metrics.outputs.delta }}"
-        DURATION="${{ steps.metrics.outputs.duration }}"
-        
-        MODE_TEXT=$([ "$DRY_RUN" = "true" ] && echo "DRY-RUN" || echo "LIVE")
-        DURATION_SEC=$(echo "$DURATION / 1000" | bc -l | cut -c1-6)
-        
-        PAYLOAD=$(cat <<EOF
-        {
-          "blocks": [
-            {
-              "type": "header",
-              "text": {
-                "type": "plain_text",
-                "text": "✅ NPB Backfill Success"
-              }
-            },
-            {
-              "type": "section",
-              "fields": [
-                {
-                  "type": "mrkdwn",
-                  "text": "*Period:* $YEAR-$MONTH"
-                },
-                {
-                  "type": "mrkdwn",
-                  "text": "*Mode:* $MODE_TEXT"
-                },
-                {
-                  "type": "mrkdwn",
-                  "text": "*Inserted:* $INSERTED records"
-                },
-                {
-                  "type": "mrkdwn",
-                  "text": "*Duplicates:* $DUPLICATES blocked"
-                },
-                {
-                  "type": "mrkdwn",
-                  "text": "*Coefficient Δ:* $DELTA%"
-                },
-                {
-                  "type": "mrkdwn",
-                  "text": "*Duration:* ${DURATION_SEC}s"
-                }
-              ]
-            },
-            {
-              "type": "context",
-              "elements": [
-                {
-                  "type": "mrkdwn",
-                  "text": "🤖 Automated backfill completed at $(date -u)"
-                }
-              ]
-            }
-          ]
-        }
-        EOF
-        )
-        
-        if [ -n "$SLACK_WEBHOOK" ]; then
-          curl -X POST -H 'Content-type: application/json' \
-            --data "$PAYLOAD" "$SLACK_WEBHOOK"
-        else
-          echo "⚠️ SLACK_WEBHOOK not configured, skipping notification"
-        fi
-
-    - name: Notify Slack on Failure
-      if: failure()
-      env:
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-      run: |
-        YEAR="${{ steps.params.outputs.year }}"
-        MONTH="${{ steps.params.outputs.month }}"
-        DRY_RUN="${{ steps.params.outputs.dry_run }}"
-        
-        MODE_TEXT=$([ "$DRY_RUN" = "true" ] && echo "DRY-RUN" || echo "LIVE")
-        
-        PAYLOAD=$(cat <<EOF
-        {
-          "blocks": [
-            {
-              "type": "header",
-              "text": {
-                "type": "plain_text",
-                "text": "❌ NPB Backfill Failed"
-              }
-            },
-            {
-              "type": "section",
-              "fields": [
-                {
-                  "type": "mrkdwn",
-                  "text": "*Period:* $YEAR-$MONTH"
-                },
-                {
-                  "type": "mrkdwn",
-                  "text": "*Mode:* $MODE_TEXT"
-                },
-                {
-                  "type": "mrkdwn",
-                  "text": "*Status:* Failed"
-                },
-                {
-                  "type": "mrkdwn",
-                  "text": "*Action:* <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Logs>"
-                }
-              ]
-            },
-            {
-              "type": "context",
-              "elements": [
-                {
-                  "type": "mrkdwn",
-                  "text": "🚨 Manual intervention may be required. Check coefficient deltas and disk usage."
-                }
-              ]
-            }
-          ]
-        }
-        EOF
-        )
-        
-        if [ -n "$SLACK_WEBHOOK" ]; then
-          curl -X POST -H 'Content-type: application/json' \
-            --data "$PAYLOAD" "$SLACK_WEBHOOK"
-        else
-          echo "⚠️ SLACK_WEBHOOK not configured, skipping failure notification"  
-        fi
+  notify:
+    needs: backfill
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: 
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+      
+      - name: Send status notification
+        env:
+          WEBHOOK_DISCORD_URL: ${{ secrets.WEBHOOK_DISCORD_URL }}
+          NOTIFY_TARGET: discord
+          ALERT_ENV: prod
+        run: |
+          STATUS="${{ needs.backfill.result }}"
+          YEAR="${{ needs.backfill.outputs.year || github.event.inputs.year || 'current' }}"
+          MONTH="${{ needs.backfill.outputs.month || github.event.inputs.month || 'current' }}"
+          DRY_RUN="${{ github.event.inputs.dry_run || 'false' }}"
+          
+          if [ "$STATUS" = "success" ]; then
+            LEVEL="info"
+            TITLE="Monthly Backfill Success"
+            BODY="$YEAR-$MONTH backfill completed successfully"
+          else
+            LEVEL="error"
+            TITLE="Monthly Backfill Failed"
+            BODY="$YEAR-$MONTH backfill failed - check logs"
+          fi
+          
+          META="{\"workflow\":\"$GITHUB_WORKFLOW\",\"run\":\"$GITHUB_RUN_NUMBER\",\"commit\":\"${GITHUB_SHA:0:7}\",\"year\":\"$YEAR\",\"month\":\"$MONTH\",\"dry_run\":\"$DRY_RUN\"}"
+          
+          npx ts-node scripts/notify.ts --level "$LEVEL" --title "$TITLE" --body "$BODY" --meta "$META"

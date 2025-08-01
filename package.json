@@ -16,11 +16,14 @@
     "check:disk": "npx ts-node scripts/check_disk.ts",
     "backfill:monthly": "npm run check:disk && npx ts-node scripts/backfill_history.ts",
     "gen:season": "npx ts-node scripts/generate_season_capsule.ts",
-    "gen:similarity-cache": "npx ts-node scripts/generate_similarity_cache.ts"
+    "gen:similarity-cache": "npx ts-node scripts/generate_similarity_cache.ts",
+    "notify": "npx ts-node scripts/notify.ts"
   },
   "dependencies": {
     "@types/cli-progress": "^3.11.6",
+    "@types/json2csv": "^5.0.7",
     "@types/node": "^20",
+    "@types/node-fetch": "^2.6.13",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
@@ -28,8 +31,10 @@
     "cli-progress": "^3.12.0",
     "clsx": "^2.0.0",
     "commander": "^14.0.0",
+    "json2csv": "^6.0.0-alpha.2",
     "lucide-react": "^0.294.0",
     "next": "14.0.4",
+    "node-fetch": "^3.3.2",
     "postcss": "^8",
     "react": "^18",
     "react-dom": "^18",

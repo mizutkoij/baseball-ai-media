@@ -25,6 +25,9 @@ const path = require("path");
 const { Command } = require("commander");
 const cliProgress = require("cli-progress");
 
+// Import notification system
+const { notify } = require("./notify");
+
 const DB_DIR = path.resolve("./data");
 const CURRENT_DB = path.join(DB_DIR, "db_current.db");
 const HISTORY_DB = path.join(DB_DIR, "db_history.db");
@@ -350,6 +353,22 @@ const reports: any[] = [];
       
       if (delta > maxDelta) {
         const errorMsg = `${league === 'farm' ? 'Farm' : 'First'} league coefficient jump > ${deltaDesc} detected at ${y}: Δ=${(delta * 100).toFixed(1)}%`;
+        
+        // Send notification for significant coefficient changes
+        try {
+          await notify("warn", `Coefficient delta ${(delta * 100).toFixed(1)}%`, 
+            `Δがしきい値を超過しました（公開は継続）`, {
+              year: y,
+              league,
+              delta_pct: `${(delta * 100).toFixed(1)}%`,
+              threshold: deltaDesc,
+              before: prev?.woba_coefficients["1B"] || 'N/A',
+              after: cur.woba_coefficients["1B"]
+            });
+        } catch (notifyError) {
+          console.error('Failed to send coefficient notification:', notifyError);
+        }
+        
         if (dryRun) {
           console.log(`  ⚠️  [DRY-RUN] ${errorMsg}`);
         } else {
@@ -371,6 +390,22 @@ const reports: any[] = [];
     reports.push(yearStats);
     bar.stop();
     
+    // Send notification for duplicates if detected
+    if (yearStats.totalDuplicates > 0) {
+      try {
+        await notify("warn", `Duplicates detected: ${yearStats.totalDuplicates}`, 
+          `UPSERTが重複を検出しました`, {
+            year: y,
+            league,
+            duplicates: yearStats.totalDuplicates,
+            inserted: yearStats.totalInserted,
+            total_months: yearStats.months.length
+          });
+      } catch (notifyError) {
+        console.error('Failed to send duplicate notification:', notifyError);
+      }
+    }
+
     const status = dryRun ? "analyzed" : "completed";
     console.log(`\n✅ Year ${y} ${status} (Inserted: ${yearStats.totalInserted}, Duplicates: ${yearStats.totalDuplicates}, Δ=${(delta * 100).toFixed(2)}%)`);
   }
@@ -412,4 +447,20 @@ const reports: any[] = [];
   }
   
   console.log(`\n🎉 ${dryRun ? 'Dry-run analysis' : 'Back-fill'} complete. Report saved to ${reportPath}`);
-})();
+})().catch(async (error) => {
+  console.error('\n❌ Backfill failed:', error);
+  
+  // Send error notification
+  try {
+    await notify("error", "Backfill failed", 
+      `バックフィル処理が失敗しました: ${error.message}`, {
+        error_type: error.constructor.name,
+        stack: error.stack?.substring(0, 500) + '...',
+        timestamp: new Date().toISOString()
+      });
+  } catch (notifyError) {
+    console.error('Failed to send error notification:', notifyError);
+  }
+  
+  process.exit(1);
+});

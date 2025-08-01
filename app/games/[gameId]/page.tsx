@@ -4,6 +4,7 @@ import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Users, TrendingUp, Target, Activity } from 'lucide-react';
+import { ExportButton } from '@/components/ExportButton';
 
 type GameData = {
   game: {
@@ -144,6 +145,16 @@ export default function GameDetailPage() {
                 </p>
               </div>
               <div className="text-right">
+                {/* CSV エクスポートボタン */}
+                <div className="mb-4">
+                  <ExportButton 
+                    scope="game" 
+                    id={gameId}
+                    label="試合データをCSV出力"
+                    className="text-sm"
+                  />
+                </div>
+                
                 <div className="flex items-center gap-4 text-3xl font-bold text-white mb-2">
                   <span>{game.away_score ?? "−"}</span>
                   <span className="text-slate-500">−</span>

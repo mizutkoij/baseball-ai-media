@@ -14,6 +14,7 @@ import TeamSchedule from "@/components/TeamSchedule";
 import TeamSplits from "@/components/TeamSplits";
 import { JsonLd } from "@/components/JsonLd";
 import { NextNav } from "@/components/NextNav";
+import { ExportButton } from "@/components/ExportButton";
 import type { TeamPageData } from "@/app/api/teams/[year]/[team]/route";
 
 interface TeamPageProps {
@@ -299,6 +300,15 @@ export default function TeamPage({ params }: TeamPageProps) {
             </Link>
             
             <div className="flex items-center gap-2">
+              {/* CSV エクスポートボタン */}
+              <ExportButton 
+                scope="team" 
+                id={team}
+                season={year}
+                label="チームCSV出力"
+                className="text-sm"
+              />
+              
               <button
                 onClick={() => shareTeamPage('copy')}
                 className="inline-flex items-center gap-2 bg-slate-600 hover:bg-slate-700 text-white px-3 py-2 rounded-lg transition-colors text-sm"

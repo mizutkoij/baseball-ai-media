@@ -1,12 +1,29 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
 const MobileNav = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
+  const toggleMenu = () => {
+    const newIsOpen = !isOpen;
+    setIsOpen(newIsOpen);
+    
+    // スクロールロック制御
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = newIsOpen ? 'hidden' : '';
+    }
+  };
+
+  // コンポーネントアンマウント時のクリーンアップ
+  useEffect(() => {
+    return () => {
+      if (typeof document !== 'undefined') {
+        document.body.style.overflow = '';
+      }
+    };
+  }, []);
 
   const navLinks = [
     { href: '/', label: 'ホーム' },
@@ -35,8 +52,9 @@ const MobileNav = () => {
       {/* Mobile menu overlay */}
       {isOpen && (
         <div 
-          className="fixed inset-0 z-40 bg-black/40 md:hidden"
+          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm md:hidden"
           onClick={toggleMenu}
+          aria-hidden="true"
         />
       )}
 
