@@ -164,25 +164,25 @@ const TeamSplits: React.FC<TeamSplitsProps> = ({
               <PFDeltaNote 
                 raw={split.batting.wRC_plus} 
                 neutral={split.batting.wRC_plus_neutral} 
-                pf={parseFloat(split.batting.avg_pf)} 
+                pf={Number(split.batting.avg_pf)} 
                 metric="wRC+" 
               />
               <PFDeltaNote 
                 raw={split.batting.OPS_plus} 
                 neutral={split.batting.OPS_plus_neutral} 
-                pf={parseFloat(split.batting.avg_pf)} 
+                pf={Number(split.batting.avg_pf)} 
                 metric="OPS+" 
               />
               <PFDeltaNote 
                 raw={split.pitching.ERA_minus} 
                 neutral={split.pitching.ERA_minus_neutral} 
-                pf={parseFloat(split.batting.avg_pf)} 
+                pf={Number(split.batting.avg_pf)} 
                 metric="ERA-" 
               />
               <PFDeltaNote 
                 raw={split.pitching.FIP_minus} 
                 neutral={split.pitching.FIP_minus_neutral} 
-                pf={parseFloat(split.batting.avg_pf)} 
+                pf={Number(split.batting.avg_pf)} 
                 metric="FIP-" 
               />
             </div>
