@@ -13,8 +13,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const year = parseInt(params.year);
   
-  // Validate year
-  if (isNaN(year) || year < 2019 || year > 2025) {
+  // Validate year - extended range for A-1 mass content
+  if (isNaN(year) || year < 2016 || year > 2025) {
     notFound();
   }
 
@@ -89,4 +89,13 @@ export default function SeasonLayout({ children, params }: SeasonLayoutProps) {
       {children}
     </>
   );
+}
+
+// Enable ISR with 24-hour revalidation
+export const revalidate = 60 * 60 * 24; // 24 hours
+
+// Generate static params for all years (2016-2025)
+export async function generateStaticParams() {
+  const YEARS = Array.from({ length: 2025 - 2016 + 1 }, (_, i) => 2016 + i);
+  return YEARS.map((year) => ({ year: year.toString() }));
 }

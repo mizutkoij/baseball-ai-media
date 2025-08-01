@@ -259,11 +259,4 @@ export default function SeasonPage({ params }: SeasonPageProps) {
   );
 }
 
-// Enable ISR with 24-hour revalidation
-export const revalidate = 60 * 60 * 24; // 24 hours
-
-// Generate static params for all years
-export async function generateStaticParams() {
-  const YEARS = Array.from({ length: 2025 - 2016 + 1 }, (_, i) => 2016 + i);
-  return YEARS.map((year) => ({ year: year.toString() }));
-}
+// Note: ISR config moved to layout.tsx due to "use client" directive
