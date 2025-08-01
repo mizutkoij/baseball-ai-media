@@ -2,7 +2,7 @@
 /**
  * test_backfill_dryrun.ts — Simple test to validate backfill logic without external dependencies
  */
-const Database = require("better-sqlite3");
+const DatabaseLib = require("better-sqlite3");
 const fs = require("fs");
 const path = require("path");
 
@@ -11,7 +11,7 @@ const HISTORY_DB = path.join(DB_DIR, "db_history.db");
 
 // Test the upsert logic in isolation
 function testUpsert() {
-  const db = new Database(HISTORY_DB);
+  const db = new DatabaseLib(HISTORY_DB);
   
   console.log("🧪 Testing upsert logic...");
   

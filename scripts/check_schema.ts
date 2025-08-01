@@ -1,10 +1,10 @@
-const Database = require("better-sqlite3");
+const DatabaseLib = require("better-sqlite3");
 const path = require("path");
 
 const DB_DIR = path.resolve("./data");
 const HISTORY_DB = path.join(DB_DIR, "db_history.db");
 
-const db = new Database(HISTORY_DB);
+const db = new DatabaseLib(HISTORY_DB);
 
 console.log("=== Database Schema ===");
 

@@ -3,7 +3,7 @@
  * compute_constants_simple.ts — Simplified constants computation for backfill pipeline
  * Compatible with CommonJS - no ES module dependencies
  */
-const Database = require('better-sqlite3');
+const DatabaseLib = require('better-sqlite3');
 const fs = require('fs');
 const path = require('path');
 const { Command } = require('commander');
@@ -78,10 +78,10 @@ async function main() {
   let db;
   try {
     if (fs.existsSync(historyDbPath)) {
-      db = new Database(historyDbPath);
+      db = new DatabaseLib(historyDbPath);
       console.log(`📊 Using history database: ${historyDbPath}`);
     } else {
-      db = new Database(dbPath);
+      db = new DatabaseLib(dbPath);
       console.log(`📊 Using current database: ${dbPath}`);
     }
   } catch (error: any) {

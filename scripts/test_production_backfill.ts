@@ -3,7 +3,7 @@
  * test_production_backfill.ts — Production simulation test with realistic NPB volumes
  * Tests the complete backfill pipeline with realistic data volumes and safety mechanisms
  */
-const Database = require("better-sqlite3");
+const DatabaseLib = require("better-sqlite3");
 const fs = require("fs");
 const path = require("path");
 
@@ -147,7 +147,7 @@ function generateRealisticNPBData(year: number, month: number): GameData {
 function testProductionVolumes() {
   console.log("🏟️  Testing production NPB data volumes...");
   
-  const db = new Database(HISTORY_DB);
+  const db = new DatabaseLib(HISTORY_DB);
   
   // Clear any existing test data
   db.exec("DELETE FROM games WHERE game_id LIKE '2019%_test'");

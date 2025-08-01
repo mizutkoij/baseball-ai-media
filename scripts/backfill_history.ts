@@ -17,7 +17,7 @@
  *   ⚠️: このスクリプトは "db_current.db" を一切上書きしません (READ‑ONLY)。
  */
 const { spawnSync } = require("child_process");
-const Database = require("better-sqlite3");
+const DatabaseLib = require("better-sqlite3");
 const fs = require("fs");
 const path = require("path");
 const { Command } = require("commander");
@@ -103,7 +103,7 @@ if (months === "all") {
   mList = months.split(/[,]/).map((m: string) => m.trim().padStart(2, "0"));
 }
 
-const dbHist = new Database(HISTORY_DB);
+const dbHist = new DatabaseLib(HISTORY_DB);
 
 dbHist.pragma("journal_mode = WAL");
 dbHist.exec("PRAGMA foreign_keys = ON;");
