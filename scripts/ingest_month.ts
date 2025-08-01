@@ -268,9 +268,9 @@ export class MonthlyIngest {
           errorGames: validationResults.filter(r => r.hasErrors).map(r => r.gameId)
         },
         ingestion: {
-          games: upsertResult?.results.find(r => r.table === 'games')?.inserted || 0,
-          batting: upsertResult?.results.find(r => r.table === 'box_batting')?.inserted || 0,
-          pitching: upsertResult?.results.find(r => r.table === 'box_pitching')?.inserted || 0
+          games: upsertResult?.results.find((r: any) => r.table === 'games')?.inserted || 0,
+          batting: upsertResult?.results.find((r: any) => r.table === 'box_batting')?.inserted || 0,
+          pitching: upsertResult?.results.find((r: any) => r.table === 'box_pitching')?.inserted || 0
         },
         success: (upsertResult?.success ?? true) && validGameIds.length > 0
       };
