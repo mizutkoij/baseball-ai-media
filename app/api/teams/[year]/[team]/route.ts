@@ -91,6 +91,32 @@ async function loadConstants(year: number, league: string): Promise<TeamConstant
   }
 }
 
+// Team abbreviation to database name mapping
+const teamMapping: Record<string, string> = {
+  // Central League
+  'T': '阪神',
+  'S': 'ヤクルト', 
+  'C': '広島',
+  'YS': '横浜DeNA', // or 'DeNA' depending on database
+  'D': '中日',
+  'G': '巨人',
+  // Pacific League  
+  'H': 'ソフトバンク',
+  'L': '西武',
+  'E': '楽天',
+  'M': 'ロッテ',
+  'F': '日本ハム',
+  'B': 'オリックス'
+};
+
+// Reverse mapping for database name to abbreviation
+const reverseTeamMapping: Record<string, string> = Object.entries(teamMapping)
+  .reduce((acc, [abbr, name]) => ({ ...acc, [name]: abbr }), {});
+
+function getTeamDbName(abbreviation: string): string {
+  return teamMapping[abbreviation] || abbreviation;
+}
+
 function determineLeague(team: string): 'central' | 'pacific' {
   const centralTeams = ['T', 'S', 'C', 'YS', 'D', 'G']; // Tigers, Swallows, Carp, DeNA, Dragons, Giants
   const pacificTeams = ['H', 'L', 'E', 'M', 'F', 'B']; // Hawks, Lions, Eagles, Marines, Fighters, Buffaloes
@@ -98,8 +124,9 @@ function determineLeague(team: string): 'central' | 'pacific' {
   if (centralTeams.includes(team)) return 'central';
   if (pacificTeams.includes(team)) return 'pacific';
   
-  // Fallback - try to determine from first letter or common patterns
-  if (['巨人', 'ヤクルト', '中日', '阪神', '広島', 'DeNA'].some(t => team.includes(t))) {
+  // Fallback - try to determine from database name or common patterns
+  const dbName = getTeamDbName(team);
+  if (['巨人', 'ヤクルト', '中日', '阪神', '広島', '横浜DeNA', 'DeNA'].some(t => dbName.includes(t))) {
     return 'central';
   }
   
@@ -122,6 +149,7 @@ export async function GET(
   }
   
   const league = determineLeague(team);
+  const teamDbName = getTeamDbName(team); // Convert abbreviation to DB name
   const cacheKey = `${year}_${team}_${league}`;
   const now = Date.now();
   
@@ -144,26 +172,26 @@ export async function GET(
     // Load constants
     const constants = await loadConstants(year, league);
     
-    // Get all team data in parallel where possible
+    // Get all team data in parallel where possible - use teamDbName for queries
     const [standings, battingLeaders, pitchingLeaders, vsOpponents, summary, distributions, promotions, splits] = await Promise.all([
-      Promise.resolve(getTeamStandings(db, year, league, team)),
-      Promise.resolve(getTeamBattingLeaders(db, year, team, constants, 5)),
-      Promise.resolve(getTeamPitchingLeaders(db, year, team, constants, 5)),
-      Promise.resolve(getTeamVsOpponents(db, year, team)),
-      Promise.resolve(getTeamSummary(db, year, team, constants)),
-      Promise.resolve(getTeamDistributions(db, year, team, constants)),
-      Promise.resolve(getTeamPromotions(db, year, team, constants)),
-      Promise.resolve(getTeamSplits(db, year, team, constants))
+      Promise.resolve(getTeamStandings(db, year, league, teamDbName)),
+      Promise.resolve(getTeamBattingLeaders(db, year, teamDbName, constants, 5)),
+      Promise.resolve(getTeamPitchingLeaders(db, year, teamDbName, constants, 5)),
+      Promise.resolve(getTeamVsOpponents(db, year, teamDbName)),
+      Promise.resolve(getTeamSummary(db, year, teamDbName, constants)),
+      Promise.resolve(getTeamDistributions(db, year, teamDbName, constants)),
+      Promise.resolve(getTeamPromotions(db, year, teamDbName, constants)),
+      Promise.resolve(getTeamSplits(db, year, teamDbName, constants))
     ]);
     
     db.close();
     
-    // Find this team's standings
-    const teamStanding = standings.find(s => s.team === team);
+    // Find this team's standings (check both abbreviation and DB name)
+    const teamStanding = standings.find(s => s.team === team || s.team === teamDbName);
     if (!teamStanding) {
       return NextResponse.json({ 
         error: "Team not found",
-        message: `No data found for team ${team} in ${year}`
+        message: `No data found for team ${team} (${teamDbName}) in ${year}. Available teams: ${standings.map(s => s.team).join(', ')}`
       }, { status: 404 });
     }
     
