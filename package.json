@@ -14,7 +14,9 @@
     "compute:constants": "npx ts-node scripts/compute_constants_simple.ts",
     "compute:constants:full": "npx ts-node scripts/compute_constants.ts",
     "check:disk": "npx ts-node scripts/check_disk.ts",
-    "backfill:monthly": "npm run check:disk && npx ts-node scripts/backfill_history.ts"
+    "backfill:monthly": "npm run check:disk && npx ts-node scripts/backfill_history.ts",
+    "gen:season": "npx ts-node scripts/generate_season_capsule.ts",
+    "gen:similarity-cache": "npx ts-node scripts/generate_similarity_cache.ts"
   },
   "dependencies": {
     "@types/cli-progress": "^3.11.6",

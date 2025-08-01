@@ -10,6 +10,7 @@ export async function GET(request: NextRequest) {
   const to = searchParams.get('to') || from;
   const league = searchParams.get('league') || 'first';
   const status = searchParams.get('status'); // Optional status filter
+  const team = searchParams.get('team'); // Team filter for team-specific schedules
   
   try {
     // Try to connect to DuckDB first, then fallback to SQLite
@@ -39,11 +40,15 @@ export async function GET(request: NextRequest) {
       FROM games 
       WHERE date BETWEEN ? AND ? 
         AND league = ?
+        ${team ? 'AND (away_team = ? OR home_team = ?)' : ''}
         ${status ? 'AND status = ?' : ''}
       ORDER BY date, start_time_jst
     `;
     
     const params = [from, to, league];
+    if (team) {
+      params.push(team, team);
+    }
     if (status) params.push(status);
     
     const games = db.prepare(query).all(...params);
@@ -85,7 +90,21 @@ export async function GET(request: NextRequest) {
         away_score: game.away_score,
         home_score: game.home_score,
         league: game.league,
-        links: links
+        links: links,
+        // Add team-specific info when filtering by team
+        ...(team && {
+          opponent: game.away_team === team ? game.home_team : game.away_team,
+          home_away: game.home_team === team ? 'H' : 'A',
+          result: game.status === 'FINAL' ? (
+            (game.home_team === team && game.home_score > game.away_score) ||
+            (game.away_team === team && game.away_score > game.home_score) ? 'W' :
+            game.home_score === game.away_score ? 'D' : 'L'
+          ) : null,
+          score_team: game.home_team === team ? game.home_score : game.away_score,
+          score_opponent: game.home_team === team ? game.away_score : game.home_score,
+          game_status: game.status === 'FINAL' ? 'completed' : 
+                      game.status === 'IN_PROGRESS' ? 'in_progress' : 'scheduled'
+        })
       };
       
       games_by_date[dateStr].push(gameData);

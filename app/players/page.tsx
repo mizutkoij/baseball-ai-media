@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import useSWR from "swr";
 import Link from "next/link";
 import { Search, Filter, Users, TrendingUp } from "lucide-react";
+import { SeasonDiscovery } from "@/components/SeasonDiscovery";
 
 type PlayerIndex = {
   player_id: string;
@@ -86,13 +87,25 @@ export default function PlayersPage() {
       <div className="max-w-6xl mx-auto">
         {/* ヘッダー */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2 flex items-center gap-2">
-            <Users className="w-8 h-8 text-blue-400" />
-            選手データベース
-          </h1>
-          <p className="text-slate-300">
-            NPB全選手 {players?.length.toLocaleString()}人の詳細データを検索・閲覧できます
-          </p>
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h1 className="text-3xl font-bold text-white mb-2 flex items-center gap-2">
+                <Users className="w-8 h-8 text-blue-400" />
+                選手データベース
+              </h1>
+              <p className="text-slate-300">
+                NPB全選手 {players?.length.toLocaleString()}人の詳細データを検索・閲覧できます
+              </p>
+            </div>
+            
+            <Link
+              href="/players/compare"
+              className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors flex items-center gap-2 font-medium"
+            >
+              <TrendingUp className="w-4 h-4" />
+              選手比較ツール
+            </Link>
+          </div>
         </div>
 
         {/* 検索・フィルター */}
@@ -235,6 +248,11 @@ export default function PlayersPage() {
             </button>
           </div>
         )}
+        
+        {/* Season Discovery Section */}
+        <div className="mt-8">
+          <SeasonDiscovery location="players" />
+        </div>
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import useSWR from "swr";
 import Link from "next/link";
 import { ArrowLeft, Trophy, Target, Activity, TrendingUp, Medal } from "lucide-react";
+import { SeasonDiscovery } from "@/components/SeasonDiscovery";
 
 type RecordData = {
   stat: string;
@@ -383,10 +384,28 @@ export default function RecordsPage() {
                     .slice(0, 5) // Show top 5 years
                     .map(([year, records]) => (
                       <div key={year}>
-                        <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
-                          <Medal className="w-5 h-5 text-yellow-500" />
-                          {year}年
-                        </h3>
+                        <div className="flex items-center justify-between mb-3">
+                          <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+                            <Medal className="w-5 h-5 text-yellow-500" />
+                            {year}年
+                          </h3>
+                          <Link
+                            href={`/seasons/${year}`}
+                            className="text-sm text-amber-400 hover:text-amber-300 underline font-medium flex items-center gap-1"
+                            onClick={() => {
+                              if (typeof window !== 'undefined' && (window as any).gtag) {
+                                (window as any).gtag('event', 'crosslink_click', {
+                                  source: 'records',
+                                  target: 'season',
+                                  year: year,
+                                  stat: currentStatKey
+                                });
+                              }
+                            }}
+                          >
+                            🏆 シーズン総括
+                          </Link>
+                        </div>
                         <RecordTable
                           records={(records as YearlyRecord[]).map(r => ({ ...r, year }))}
                           type="yearly"
@@ -410,6 +429,11 @@ export default function RecordsPage() {
               </div>
             )}
           </div>
+        </div>
+
+        {/* Season Discovery Section */}
+        <div className="mt-8">
+          <SeasonDiscovery location="records" />
         </div>
 
         {/* Footer */}

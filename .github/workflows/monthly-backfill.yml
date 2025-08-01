@@ -185,3 +185,175 @@ jobs:
           COEFF=$(cat "data/constants_${YEAR}.json" | jq -r '.woba_coefficients."1B" // "N/A"')
           echo "- **wOBA 1B Coefficient**: $COEFF" >> $GITHUB_STEP_SUMMARY
         fi
+
+    - name: Extract backfill metrics
+      id: metrics
+      run: |
+        YEAR="${{ steps.params.outputs.year }}"
+        MONTH="${{ steps.params.outputs.month }}"
+        DRY_RUN="${{ steps.params.outputs.dry_run }}"
+        
+        if [ "$DRY_RUN" = "true" ]; then
+          REPORT_FILE="reports/monthly_${YEAR}_${MONTH}_dryrun.json"
+        else
+          REPORT_FILE="reports/monthly_${YEAR}_${MONTH}.json"
+        fi
+        
+        if [ -f "$REPORT_FILE" ]; then
+          INSERTED=$(cat "$REPORT_FILE" | jq -r '.results[0].totalInserted // 0')
+          DUPLICATES=$(cat "$REPORT_FILE" | jq -r '.results[0].totalDuplicates // 0')
+          DELTA=$(cat "$REPORT_FILE" | jq -r '.results[0].delta // 0')
+          DURATION=$(cat "$REPORT_FILE" | jq -r '.metadata.totalDurationMs // 0')
+        else
+          INSERTED=0
+          DUPLICATES=0
+          DELTA=0
+          DURATION=0
+        fi
+        
+        # Calculate delta percentage
+        DELTA_PCT=$(echo "$DELTA * 100" | bc -l | cut -c1-5)
+        
+        echo "inserted=$INSERTED" >> $GITHUB_OUTPUT
+        echo "duplicates=$DUPLICATES" >> $GITHUB_OUTPUT
+        echo "delta=$DELTA_PCT" >> $GITHUB_OUTPUT
+        echo "duration=$DURATION" >> $GITHUB_OUTPUT
+
+    - name: Notify Slack on Success
+      if: success()
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      run: |
+        YEAR="${{ steps.params.outputs.year }}"
+        MONTH="${{ steps.params.outputs.month }}"
+        DRY_RUN="${{ steps.params.outputs.dry_run }}"
+        INSERTED="${{ steps.metrics.outputs.inserted }}"
+        DUPLICATES="${{ steps.metrics.outputs.duplicates }}"
+        DELTA="${{ steps.metrics.outputs.delta }}"
+        DURATION="${{ steps.metrics.outputs.duration }}"
+        
+        MODE_TEXT=$([ "$DRY_RUN" = "true" ] && echo "DRY-RUN" || echo "LIVE")
+        DURATION_SEC=$(echo "$DURATION / 1000" | bc -l | cut -c1-6)
+        
+        PAYLOAD=$(cat <<EOF
+        {
+          "blocks": [
+            {
+              "type": "header",
+              "text": {
+                "type": "plain_text",
+                "text": "✅ NPB Backfill Success"
+              }
+            },
+            {
+              "type": "section",
+              "fields": [
+                {
+                  "type": "mrkdwn",
+                  "text": "*Period:* $YEAR-$MONTH"
+                },
+                {
+                  "type": "mrkdwn",
+                  "text": "*Mode:* $MODE_TEXT"
+                },
+                {
+                  "type": "mrkdwn",
+                  "text": "*Inserted:* $INSERTED records"
+                },
+                {
+                  "type": "mrkdwn",
+                  "text": "*Duplicates:* $DUPLICATES blocked"
+                },
+                {
+                  "type": "mrkdwn",
+                  "text": "*Coefficient Δ:* $DELTA%"
+                },
+                {
+                  "type": "mrkdwn",
+                  "text": "*Duration:* ${DURATION_SEC}s"
+                }
+              ]
+            },
+            {
+              "type": "context",
+              "elements": [
+                {
+                  "type": "mrkdwn",
+                  "text": "🤖 Automated backfill completed at $(date -u)"
+                }
+              ]
+            }
+          ]
+        }
+        EOF
+        )
+        
+        if [ -n "$SLACK_WEBHOOK" ]; then
+          curl -X POST -H 'Content-type: application/json' \
+            --data "$PAYLOAD" "$SLACK_WEBHOOK"
+        else
+          echo "⚠️ SLACK_WEBHOOK not configured, skipping notification"
+        fi
+
+    - name: Notify Slack on Failure
+      if: failure()
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      run: |
+        YEAR="${{ steps.params.outputs.year }}"
+        MONTH="${{ steps.params.outputs.month }}"
+        DRY_RUN="${{ steps.params.outputs.dry_run }}"
+        
+        MODE_TEXT=$([ "$DRY_RUN" = "true" ] && echo "DRY-RUN" || echo "LIVE")
+        
+        PAYLOAD=$(cat <<EOF
+        {
+          "blocks": [
+            {
+              "type": "header",
+              "text": {
+                "type": "plain_text",
+                "text": "❌ NPB Backfill Failed"
+              }
+            },
+            {
+              "type": "section",
+              "fields": [
+                {
+                  "type": "mrkdwn",
+                  "text": "*Period:* $YEAR-$MONTH"
+                },
+                {
+                  "type": "mrkdwn",
+                  "text": "*Mode:* $MODE_TEXT"
+                },
+                {
+                  "type": "mrkdwn",
+                  "text": "*Status:* Failed"
+                },
+                {
+                  "type": "mrkdwn",
+                  "text": "*Action:* <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Logs>"
+                }
+              ]
+            },
+            {
+              "type": "context",
+              "elements": [
+                {
+                  "type": "mrkdwn",
+                  "text": "🚨 Manual intervention may be required. Check coefficient deltas and disk usage."
+                }
+              ]
+            }
+          ]
+        }
+        EOF
+        )
+        
+        if [ -n "$SLACK_WEBHOOK" ]; then
+          curl -X POST -H 'Content-type: application/json' \
+            --data "$PAYLOAD" "$SLACK_WEBHOOK"
+        else
+          echo "⚠️ SLACK_WEBHOOK not configured, skipping failure notification"  
+        fi

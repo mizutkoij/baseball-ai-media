@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowLeft, Activity, BarChart3, Target, TrendingUp, ExternalLink, Users } from "lucide-react";
 import Head from "next/head";
 import PlayerSummary, { PlayerSummaryLoading, PlayerSummaryError } from "@/components/PlayerSummary";
+import SimilarPlayers from "@/components/SimilarPlayers";
 
 type YearRow = Record<string, any>;
 
@@ -455,6 +456,24 @@ export default function PlayerDetailPage({ params }: { params: { id: string } })
               >
                 年度別ランキングを見る
               </Link>
+              {player.last_year && (
+                <Link
+                  href={`/seasons/${player.last_year}`}
+                  className="block text-sm text-amber-400 hover:text-amber-300 underline font-medium"
+                  onClick={() => {
+                    if (typeof window !== 'undefined' && (window as any).gtag) {
+                      (window as any).gtag('event', 'crosslink_click', {
+                        source: 'player_detail',
+                        target: 'season',
+                        year: player.last_year,
+                        player_id: player.player_id
+                      });
+                    }
+                  }}
+                >
+                  🏆 {player.last_year}年シーズンまとめ
+                </Link>
+              )}
             </div>
           </div>
 
@@ -490,38 +509,12 @@ export default function PlayerDetailPage({ params }: { params: { id: string } })
             </div>
           </div>
 
-          {/* 関連選手 */}
-          <div className="bg-black/20 backdrop-blur-md border border-white/10 rounded-lg p-4">
-            <div className="flex items-center gap-2 mb-3">
-              <Target className="w-5 h-5 text-green-500" />
-              <h3 className="font-semibold text-white">関連選手</h3>
-            </div>
-            <div className="space-y-2">
-              <Link
-                href={`/players?pos=${player.primary_pos}&active=${player.is_active ? 'ACTIVE' : 'OB'}`}
-                className="block text-sm text-blue-400 hover:text-blue-300 underline"
-              >
-                {player.primary_pos === "P" ? "同じ投手" : "同じ野手"}
-                {player.is_active ? "の現役選手" : "のOB選手"}
-              </Link>
-              <Link
-                href="/players"
-                className="block text-sm text-blue-400 hover:text-blue-300 underline"
-              >
-                全選手データベース
-              </Link>
-              {player.url && (
-                <a
-                  href={player.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block text-sm text-blue-400 hover:text-blue-300 underline"
-                >
-                  NPB公式プロフィール
-                </a>
-              )}
-            </div>
-          </div>
+          {/* 似ている選手 */}
+          <SimilarPlayers 
+            playerId={player.player_id}
+            playerName={player.name}
+            limit={3}
+          />
         </div>
 
         {/* フッター注記 */}

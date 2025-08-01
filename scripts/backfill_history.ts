@@ -4,10 +4,12 @@
  * -----------------------------------------------------------------------------------------
  * 使い方:
  *   pnpm ts-node scripts/backfill_history.ts --start 2019 --end 2023 --months 04-11
- *   (デフォルト: --months 04-11)
+ *   pnpm ts-node scripts/backfill_history.ts --league farm --start 2024 --end 2024 --months all
+ *   (デフォルト: --months 04-11, --league first)
  *
  * 処理フロー:
- *   1. 年度 × 月ごとに `ingest_month.ts` を呼び出して一時テーブル `new_*` にロード。
+ *   1. First League: 年度 × 月ごとに `ingest_month.ts` を呼び出して一時テーブル `new_*` にロード。
+ *      Farm League: adapters/farm/* を使用してファーム球団データを生成。
  *   2. `db_history` へ重複ガード付き INSERT (ANTI‑JOIN)。
  *   3. 年度完了ごとに league constants を再計算 → 係数の前回比を検証。
  *   4. すべて正常なら次年度へ。異常時はロールバックしてプロセス停止。
@@ -72,18 +74,103 @@ function computeConstants(year: number) {
   run("npm", ["run", "compute:constants", "--", `--year=${year}`]);
 }
 
+/** Process farm league data for a specific year/month */
+function processFarmLeagueData(db: any, year: number, month: string, dryRun: boolean = false) {
+  const { FarmLeagueParser } = require("../adapters/farm/parser");
+  
+  console.log(`    🚜 Processing farm league data for ${year}-${month}...`);
+  
+  if (dryRun) {
+    console.log(`    [DRY-RUN] Would generate farm league data for ${year}-${month}`);
+    // Still create empty temp tables for dry-run to prevent SQL errors
+    db.exec(`
+      CREATE TEMPORARY TABLE IF NOT EXISTS new_games AS SELECT * FROM games WHERE 0;
+      CREATE TEMPORARY TABLE IF NOT EXISTS new_box_batting AS SELECT * FROM box_batting WHERE 0;
+      CREATE TEMPORARY TABLE IF NOT EXISTS new_box_pitching AS SELECT * FROM box_pitching WHERE 0;
+    `);
+    return { games: 0, batting: 0, pitching: 0 };
+  }
+  
+  try {
+    // Generate farm league data (in production, this would fetch from actual farm league sources)
+    const gameData = FarmLeagueParser.parseGameData("", year, parseInt(month));
+    const battingData = FarmLeagueParser.parseBattingData("", gameData);
+    const pitchingData = FarmLeagueParser.parsePitchingData("", gameData);
+    
+    // Create temp tables for farm data
+    db.exec(`
+      CREATE TEMPORARY TABLE IF NOT EXISTS new_games AS SELECT * FROM games WHERE 0;
+      CREATE TEMPORARY TABLE IF NOT EXISTS new_box_batting AS SELECT * FROM box_batting WHERE 0;
+      CREATE TEMPORARY TABLE IF NOT EXISTS new_box_pitching AS SELECT * FROM box_pitching WHERE 0;
+    `);
+    
+    // Insert farm game data
+    const gameStmt = db.prepare(`
+      INSERT INTO new_games (game_id, date, league, away_team, home_team, away_score, 
+      home_score, status, inning, venue, start_time_jst, updated_at) 
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `);
+    
+    for (const game of gameData) {
+      gameStmt.run(
+        game.game_id, game.date, game.league, game.away_team, game.home_team,
+        game.away_score, game.home_score, game.status, 9, game.venue,
+        game.start_time_jst, new Date().toISOString()
+      );
+    }
+    
+    // Insert farm batting data
+    const battingStmt = db.prepare(`
+      INSERT INTO new_box_batting (game_id, team, league, player_id, name, batting_order,
+      position, AB, R, H, singles_2B, singles_3B, HR, RBI, BB, SO, SB, CS, AVG, OPS, HBP, SF)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `);
+    
+    for (const bat of battingData) {
+      battingStmt.run(
+        bat.game_id, bat.team, bat.league, bat.player_id, bat.name, bat.batting_order,
+        bat.position, bat.AB, bat.R, bat.H, bat.singles_2B, bat.singles_3B, bat.HR,
+        bat.RBI, bat.BB, bat.SO, bat.SB, bat.CS, bat.AVG, bat.OPS, bat.HBP, bat.SF
+      );
+    }
+    
+    // Insert farm pitching data
+    const pitchingStmt = db.prepare(`
+      INSERT INTO new_box_pitching (game_id, team, league, opponent, player_id, name,
+      IP, H, R, ER, BB, SO, HR_allowed, ERA, WHIP)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `);
+    
+    for (const pitch of pitchingData) {
+      pitchingStmt.run(
+        pitch.game_id, pitch.team, pitch.league, pitch.opponent, pitch.player_id,
+        pitch.name, pitch.IP, pitch.H, pitch.R, pitch.ER, pitch.BB, pitch.SO,
+        pitch.HR_allowed, pitch.ERA, pitch.WHIP
+      );
+    }
+    
+    console.log(`    ✅ Generated: ${gameData.length} games, ${battingData.length} batting, ${pitchingData.length} pitching`);
+    return { games: gameData.length, batting: battingData.length, pitching: pitchingData.length };
+    
+  } catch (error: any) {
+    console.error(`    ❌ Farm league processing failed: ${error.message}`);
+    throw error;
+  }
+}
+
 const program = new Command();
 program
   .requiredOption("-s, --start <year>")
   .requiredOption("-e, --end <year>")
   .option("-m, --months <list>", "CSV of months", "04-10")
+  .option("--league <type>", "League type: 'first' or 'farm'", "first")
   .option("--dry-run", "Show what would be inserted without actually committing")
   .option("--report <path>", "Save report to specific path")
   .option("--profile", "Enable performance profiling")
   .option("--game-id <id>", "Process only a specific game ID (for testing)")
   .parse(process.argv);
 
-const { start, end, months, dryRun, report, profile, gameId } = program.opts();
+const { start, end, months, league, dryRun, report, profile, gameId } = program.opts();
 
 // Handle different month formats: "04-10", "04,05,06", "all"
 let mList: string[];
@@ -136,9 +223,12 @@ const reports: any[] = [];
     
     const transactionFunc = () => {
       for (const month of mList) {
-        console.log(`\n  📊 Processing ${y}-${month}...`);
-        // 1. ingest_month — ローカル tmp テーブル new_* へロード
-        if (dryRun) {
+        console.log(`\n  📊 Processing ${y}-${month} (${league} league)...`);
+        // 1. ingest_month or farm league processing — ローカル tmp テーブル new_* へロード
+        if (league === 'farm') {
+          // Process farm league data using adapter
+          processFarmLeagueData(dbHist, y, month, dryRun);
+        } else if (dryRun) {
           console.log(`  [DRY-RUN] Would run: npm run ingest:month --year=${y} --month=${month} --db=${HISTORY_DB}`);
           // Create mock temp tables for dry-run testing with correct schema
           dbHist.exec(`
@@ -253,12 +343,26 @@ const reports: any[] = [];
       cur = JSON.parse(fs.readFileSync(curPath, "utf8"));
       // 4. Δ check (wOBA 係数の 1B を代表値に使用)
       delta = prev ? Math.abs(cur.woba_coefficients["1B"] - prev.woba_coefficients["1B"]) / prev.woba_coefficients["1B"] : 0;
-      if (delta > 0.07) {
-        const errorMsg = `Coefficient jump > 7% detected at ${y}: Δ=${(delta * 100).toFixed(1)}%`;
+      
+      // Farm league has more lenient coefficient thresholds (expect 0-2% vs first team, alert if >5%)
+      const maxDelta = league === 'farm' ? 0.05 : 0.07;
+      const deltaDesc = league === 'farm' ? '5%' : '7%';
+      
+      if (delta > maxDelta) {
+        const errorMsg = `${league === 'farm' ? 'Farm' : 'First'} league coefficient jump > ${deltaDesc} detected at ${y}: Δ=${(delta * 100).toFixed(1)}%`;
         if (dryRun) {
           console.log(`  ⚠️  [DRY-RUN] ${errorMsg}`);
         } else {
           throw new Error(errorMsg);
+        }
+      }
+      
+      // Additional validation for farm league
+      if (league === 'farm' && prev) {
+        const { FarmLeagueParser } = require("../adapters/farm/parser");
+        const validation = FarmLeagueParser.validateCoefficientsΔ(cur, prev);
+        if (!validation.valid) {
+          console.log(`  ⚠️  Farm league coefficient validation warning: Δ=${(validation.delta * 100).toFixed(2)}%`);
         }
       }
     }

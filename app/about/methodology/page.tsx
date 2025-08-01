@@ -326,9 +326,9 @@ export default function MethodologyPage() {
             </div>
           </section>
 
-          {/* パークファクター */}
+          {/* パークファクター・PF補正 */}
           <section className="bg-black/20 backdrop-blur-md border border-white/10 rounded-lg p-8">
-            <h2 className="text-xl font-semibold text-white mb-6">パークファクター</h2>
+            <h2 className="text-xl font-semibold text-white mb-6">パークファクター・PF補正</h2>
             
             <div className="mb-6">
               <h3 className="text-lg font-medium text-white mb-4">2024年推定値</h3>
@@ -351,13 +351,50 @@ export default function MethodologyPage() {
               </div>
             </div>
             
-            <div className="bg-orange-900/20 border border-orange-500/30 rounded-lg p-4">
-              <h4 className="font-medium text-orange-300 mb-2">計算方法</h4>
+            <div className="bg-orange-900/20 border border-orange-500/30 rounded-lg p-4 mb-6">
+              <h4 className="font-medium text-orange-300 mb-2">基本計算方法</h4>
               <p className="text-sm text-slate-300">
                 <strong>現実装:</strong> 球場別平均得点 ÷ リーグ平均得点<br/>
                 <strong>改善予定:</strong> 3年移動平均、ホーム/アウェイ分離、気温・湿度調整<br/>
                 <strong>最小条件:</strong> シーズン10試合以上でファクター算出
               </p>
+            </div>
+
+            {/* PF補正システム */}
+            <div>
+              <h3 className="text-lg font-medium text-white mb-4">PF補正システム（ホーム/ビジター分析）</h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
+                  <h4 className="font-medium text-blue-300 mb-2">打撃指標補正</h4>
+                  <div className="text-sm text-slate-300 space-y-1">
+                    <div>• <strong>wRC+_neutral</strong> = wRC+ ÷ runPF^1.0</div>
+                    <div>• <strong>OPS+_neutral</strong> = OPS+ ÷ runPF^1.0</div>
+                    <div>• <strong>理由:</strong> 打撃成績は球場環境に線形比例</div>
+                    <div>• <strong>適用:</strong> ホーム/ビジター各スプリット</div>
+                  </div>
+                </div>
+                
+                <div className="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+                  <h4 className="font-medium text-red-300 mb-2">投手指標補正</h4>
+                  <div className="text-sm text-slate-300 space-y-1">
+                    <div>• <strong>ERA-_neutral</strong> = ERA- ÷ runPF^1.0</div>
+                    <div>• <strong>FIP-_neutral</strong> = FIP- ÷ runPF^0.5</div>
+                    <div>• <strong>理由:</strong> FIPは守備無関係で球場影響が半減</div>
+                    <div>• <strong>適用:</strong> 各投手の登板球場PF加重平均</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-4">
+                <h4 className="font-medium text-purple-300 mb-2">実装詳細・品質管理</h4>
+                <div className="text-sm text-slate-300 space-y-2">
+                  <p><strong>加重平均PF:</strong> 各試合のPFをPA（打撃）/IP（投手）で加重平均してスプリット別に算出</p>
+                  <p><strong>信頼性判定:</strong> 50PA/10IP未満は「参考値」、50-200PA/10-50IPは「中」、200PA/50IP以上は「高」</p>
+                  <p><strong>欠損処理:</strong> PF未計測球場はrunPF=1.00として中立扱い</p>
+                  <p><strong>UI連動:</strong> PFトグルON/OFFで生値⇔補正値を即座切替、分析の透明性を担保</p>
+                </div>
+              </div>
             </div>
           </section>
 
@@ -408,6 +445,131 @@ export default function MethodologyPage() {
                     <span>手動確認用の管理画面</span>
                   </li>
                 </ul>
+              </div>
+            </div>
+          </section>
+
+          {/* チーム分析手法 */}
+          <section className="bg-black/20 backdrop-blur-md border border-white/10 rounded-lg p-8">
+            <h2 className="text-xl font-semibold text-white mb-6 flex items-center gap-2">
+              <TrendingUp className="w-6 h-6 text-purple-400" />
+              チーム分析手法
+            </h2>
+            
+            <div className="space-y-6">
+              {/* Team Standings */}
+              <div>
+                <h3 className="text-lg font-medium text-white mb-4">チーム順位表計算</h3>
+                <div className="bg-slate-800/50 rounded-lg p-4 mb-4">
+                  <h4 className="font-medium text-slate-300 mb-2">勝率・順位の算出</h4>
+                  <div className="font-mono text-xs text-green-300 mb-2">
+                    勝率 = 勝数 ÷ (勝数 + 敗数 + 引分数 × 0.5)
+                  </div>
+                  <div className="font-mono text-xs text-green-300">
+                    順位 = RANK() OVER (ORDER BY 勝数 DESC, 得失点差 DESC)
+                  </div>
+                </div>
+                <ul className="text-sm text-slate-300 space-y-1">
+                  <li>• 引分は0.5勝0.5敗として勝率計算</li>
+                  <li>• 同勝数の場合は得失点差で順位決定</li>
+                  <li>• ホーム・アウェイ別の戦績も集計</li>
+                  <li>• 対戦相手別の勝敗マトリックス生成</li>
+                </ul>
+              </div>
+
+              {/* Team Distribution Charts */}
+              <div>
+                <h3 className="text-lg font-medium text-white mb-4">選手能力分布チャート</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
+                    <h4 className="font-medium text-blue-300 mb-2">wRC+ 分布（打者）</h4>
+                    <ul className="text-xs text-slate-300 space-y-1">
+                      <li>• 最小出場: 50打席以上</li>
+                      <li>• ビン幅: 10刻み（~69, 70-79, ...140+）</li>
+                      <li>• エリート層: 120以上</li>
+                      <li>• 課題層: 80以下</li>
+                    </ul>
+                  </div>
+                  <div className="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+                    <h4 className="font-medium text-red-300 mb-2">FIP- 分布（投手）</h4>
+                    <ul className="text-xs text-slate-300 space-y-1">
+                      <li>• 最小登板: 10投球回以上</li>
+                      <li>• ビン幅: 10刻み（~69, 70-79, ...140+）</li>
+                      <li>• エリート層: 80以下</li>
+                      <li>• 課題層: 120以上</li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-4">
+                  <h4 className="font-medium text-purple-300 mb-2">分析指標</h4>
+                  <p className="text-sm text-slate-300">
+                    <strong>チーム特色:</strong> 平均値・標準偏差からバランス型/特化型を判定<br/>
+                    <strong>深度評価:</strong> エリート層の人数と課題層の比率<br/>
+                    <strong>リーグ比較:</strong> 各ビンの分布率をリーグ平均と比較
+                  </p>
+                </div>
+              </div>
+
+              {/* Promotion Badges */}
+              <div>
+                <h3 className="text-lg font-medium text-white mb-4">昇格バッジシステム</h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                  <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-lg p-4">
+                    <h4 className="font-medium text-yellow-300 mb-2">🌟 新人王候補</h4>
+                    <ul className="text-xs text-slate-300 space-y-1">
+                      <li>• 4月末までデビュー</li>
+                      <li>• 20試合以上出場</li>
+                      <li>• wRC+ 95以上 or FIP- 105以下</li>
+                    </ul>
+                  </div>
+                  <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
+                    <h4 className="font-medium text-blue-300 mb-2">📈 昇格注目</h4>
+                    <ul className="text-xs text-slate-300 space-y-1">
+                      <li>• 途中昇格選手</li>
+                      <li>• 50試合以下・150打席以下</li>
+                      <li>• 経験積み段階</li>
+                    </ul>
+                  </div>
+                  <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
+                    <h4 className="font-medium text-green-300 mb-2">⚡ ブレイク</h4>
+                    <ul className="text-xs text-slate-300 space-y-1">
+                      <li>• 途中昇格で好成績</li>
+                      <li>• wRC+ 120以上 or FIP- 80以下</li>
+                      <li>• 打率.300 + 出塁率.350以上</li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="bg-orange-900/20 border border-orange-500/30 rounded-lg p-4">
+                  <h4 className="font-medium text-orange-300 mb-2">判定ロジック</h4>
+                  <p className="text-sm text-slate-300">
+                    <strong>データソース:</strong> 一軍出場記録から逆算（ファーム記録は非公開のため）<br/>
+                    <strong>インパクト評価:</strong> HIGH（即戦力級）・MEDIUM（期待株）・LOW（育成段階）<br/>
+                    <strong>更新頻度:</strong> 日次（試合結果反映後に再判定）
+                  </p>
+                </div>
+              </div>
+
+              {/* Team Summary KPIs */}
+              <div>
+                <h3 className="text-lg font-medium text-white mb-4">チームKPI算出</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-slate-800/50 rounded-lg p-4">
+                    <h4 className="font-medium text-slate-300 mb-2">打撃指標</h4>
+                    <ul className="text-sm text-slate-300 space-y-1">
+                      <li>• <strong>チームwRC+:</strong> 全選手の合計wRCから算出</li>
+                      <li>• <strong>チームOPS:</strong> 出塁率 + 長打率</li>
+                      <li>• <strong>得点・本塁打・盗塁:</strong> 累計値</li>
+                    </ul>
+                  </div>
+                  <div className="bg-slate-800/50 rounded-lg p-4">
+                    <h4 className="font-medium text-slate-300 mb-2">投手指標</h4>
+                    <ul className="text-sm text-slate-300 space-y-1">
+                      <li>• <strong>チームFIP:</strong> 全投手の投球回加重平均</li>
+                      <li>• <strong>ERA-:</strong> チーム防御率のリーグ調整値</li>
+                      <li>• <strong>WHIP・奪三振率・与四球率:</strong> 合計から算出</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </section>

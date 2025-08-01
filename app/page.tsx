@@ -6,6 +6,7 @@ import TodayGamesBar from "@/components/TodayGamesBar";
 import StatsGlossary from "@/components/StatsGlossary";
 import GameOfTheDay from "@/components/GameOfTheDay";
 import LatestBrief, { LatestBriefStatic } from "@/components/LatestBrief";
+import { SeasonDiscovery } from "@/components/SeasonDiscovery";
 import Link from "next/link";
 import { Suspense } from "react";
 import { TrendingUp, Target, BarChart3, Zap } from "lucide-react";
@@ -216,6 +217,11 @@ export default async function Home() {
         {/* Stats Glossary Section */}
         <div className="mt-12 mb-8">
           <StatsGlossary compact={true} />
+        </div>
+
+        {/* Season Discovery Section */}
+        <div className="mt-8 animate-slide-up animation-delay-600">
+          <SeasonDiscovery location="home" />
         </div>
 
         {/* 추가 섹션 */}
