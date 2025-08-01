@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowLeft, Calendar, Trophy, Users, TrendingUp } from "lucide-react";
+import { JsonLd } from "@/components/JsonLd";
 
 interface SeasonPageProps {
   params: {
@@ -24,9 +25,62 @@ const seasonData: Record<string, { title: string; description: string; highlight
   "2016": { title: "2016年シーズン", description: "広島25年ぶりリーグ優勝", highlight: "広島優勝" },
 };
 
+function buildSeasonJsonLd({
+  year, site, updatedAt,
+  standings, // [{teamSlug, teamName, wins, losses, pct, url}]
+}: {
+  year: number; site: string; updatedAt: string;
+  standings: { teamSlug: string; teamName: string; wins: number; losses: number; pct: number; url: string }[];
+}) {
+  const itemList = standings.map((t, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    item: { "@type": "WebPage", name: `${t.teamName}（${t.pct.toFixed(3)}）`, url: t.url },
+  }));
+
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "シーズン", item: `${site}/seasons` },
+        { "@type": "ListItem", position: 2, name: `${year}年`, item: `${site}/seasons/${year}` },
+      ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      name: `NPB ${year}年 シーズン概要`,
+      inLanguage: "ja-JP",
+      url: `${site}/seasons/${year}`,
+      dateModified: updatedAt,
+      about: { "@type": "SportsOrganization", name: "NPB", sport: "Baseball" },
+      hasPart: {
+        "@type": "ItemList",
+        name: "チーム順位",
+        itemListOrder: "http://schema.org/ItemListOrderDescending",
+        itemListElement: itemList,
+      },
+    },
+  ];
+}
+
 export default function SeasonPage({ params }: SeasonPageProps) {
   const year = parseInt(params.year);
   const season = seasonData[params.year];
+
+  // Mock standings data for JSON-LD
+  const standings = [
+    { teamSlug: 'G', teamName: '読売ジャイアンツ', wins: 80, losses: 60, pct: 0.571, url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://baseball-ai-media.vercel.app'}/teams/${year}/G` },
+    { teamSlug: 'T', teamName: '阪神タイガース', wins: 78, losses: 62, pct: 0.557, url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://baseball-ai-media.vercel.app'}/teams/${year}/T` },
+    { teamSlug: 'YS', teamName: '横浜DeNAベイスターズ', wins: 75, losses: 65, pct: 0.536, url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://baseball-ai-media.vercel.app'}/teams/${year}/YS` },
+    { teamSlug: 'C', teamName: '広島東洋カープ', wins: 72, losses: 68, pct: 0.514, url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://baseball-ai-media.vercel.app'}/teams/${year}/C` },
+    { teamSlug: 'S', teamName: '東京ヤクルトスワローズ', wins: 70, losses: 70, pct: 0.500, url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://baseball-ai-media.vercel.app'}/teams/${year}/S` },
+    { teamSlug: 'D', teamName: '中日ドラゴンズ', wins: 65, losses: 75, pct: 0.464, url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://baseball-ai-media.vercel.app'}/teams/${year}/D` },
+  ];
+  
+  const site = process.env.NEXT_PUBLIC_SITE_URL || 'https://baseball-ai-media.vercel.app';
+  const updatedAt = new Date().toISOString();
 
   useEffect(() => {
     // Track page view
@@ -191,6 +245,9 @@ export default function SeasonPage({ params }: SeasonPageProps) {
             </div>
           </div>
         </div>
+
+        {/* JSON-LD Structured Data */}
+        <JsonLd data={buildSeasonJsonLd({ year, site, updatedAt, standings })} />
 
         {/* Footer */}
         <div className="text-xs text-slate-400 text-center space-y-1">

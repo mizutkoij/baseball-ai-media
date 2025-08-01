@@ -12,6 +12,7 @@ import TeamDistribution from "@/components/TeamDistribution";
 import { PromotionList } from "@/components/PromotionBadge";
 import TeamSchedule from "@/components/TeamSchedule";
 import TeamSplits from "@/components/TeamSplits";
+import { JsonLd } from "@/components/JsonLd";
 import type { TeamPageData } from "@/app/api/teams/[year]/[team]/route";
 
 interface TeamPageProps {
@@ -37,6 +38,59 @@ const teamNames: Record<string, string> = {
   'F': '北海道日本ハムファイターズ',
   'B': 'オリックス・バファローズ'
 };
+
+const TEAM_META: Record<string, { name: string; league: "セ・リーグ" | "パ・リーグ"; logo?: string }> = {
+  G: { name: "読売ジャイアンツ", league: "セ・リーグ" },
+  T: { name: "阪神タイガース", league: "セ・リーグ" },
+  C: { name: "広島東洋カープ", league: "セ・リーグ" },
+  D: { name: "中日ドラゴンズ", league: "セ・リーグ" },
+  YS: { name: "横浜DeNAベイスターズ", league: "セ・リーグ" },
+  S: { name: "東京ヤクルトスワローズ", league: "セ・リーグ" },
+  L: { name: "埼玉西武ライオンズ", league: "パ・リーグ" },
+  H: { name: "福岡ソフトバンクホークス", league: "パ・リーグ" },
+  M: { name: "千葉ロッテマリーンズ", league: "パ・リーグ" },
+  F: { name: "北海道日本ハムファイターズ", league: "パ・リーグ" },
+  E: { name: "東北楽天ゴールデンイーグルス", league: "パ・リーグ" },
+  B: { name: "オリックス・バファローズ", league: "パ・リーグ" },
+};
+
+function buildTeamJsonLd({
+  site, year, teamCode, updatedAt,
+  scheduleUrl, analysisUrl,
+}: {
+  site: string; year: number; teamCode: string; updatedAt: string;
+  scheduleUrl: string; analysisUrl: string;
+}) {
+  const meta = TEAM_META[teamCode];
+  const teamUrl = `${site}/teams/${year}/${teamCode}`;
+
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "チーム", item: `${site}/seasons/${year}` },
+        { "@type": "ListItem", position: 2, name: `${meta.name}（${year}年）`, item: teamUrl },
+      ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "SportsTeam",
+      name: `${meta.name}（${year}年）`,
+      sport: "Baseball",
+      memberOf: { "@type": "SportsOrganization", name: `NPB ${meta.league}` },
+      url: teamUrl,
+      image: meta.logo,
+      inLanguage: "ja-JP",
+      knowsAbout: ["wRC+", "OPS+", "ERA-", "FIP-", "Park Factor"],
+      hasPart: [
+        { "@type": "CollectionPage", name: "スケジュール・結果", url: scheduleUrl },
+        { "@type": "CollectionPage", name: "詳細分析", url: analysisUrl },
+      ],
+      dateModified: updatedAt,
+    },
+  ];
+}
 
 export default function TeamPage({ params }: TeamPageProps) {
   const [teamData, setTeamData] = useState<TeamPageData | null>(null);
@@ -409,6 +463,18 @@ export default function TeamPage({ params }: TeamPageProps) {
               </div>
             </Link>
           </div>
+
+          {/* JSON-LD Structured Data */}
+          <JsonLd
+            data={buildTeamJsonLd({
+              site: process.env.NEXT_PUBLIC_SITE_URL || 'https://baseball-ai-media.vercel.app',
+              year,
+              teamCode: team,
+              updatedAt: teamData.meta.updated_at,
+              scheduleUrl: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://baseball-ai-media.vercel.app'}/teams/${year}/${team}?tab=schedule`,
+              analysisUrl: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://baseball-ai-media.vercel.app'}/teams/${year}/${team}?tab=analysis`,
+            })}
+          />
 
           {/* Footer */}
           <div className="mt-8 text-xs text-slate-400 text-center space-y-1">
