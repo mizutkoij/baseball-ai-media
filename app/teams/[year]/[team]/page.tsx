@@ -13,6 +13,7 @@ import { PromotionList } from "@/components/PromotionBadge";
 import TeamSchedule from "@/components/TeamSchedule";
 import TeamSplits from "@/components/TeamSplits";
 import { JsonLd } from "@/components/JsonLd";
+import { NextNav } from "@/components/NextNav";
 import type { TeamPageData } from "@/app/api/teams/[year]/[team]/route";
 
 interface TeamPageProps {
@@ -463,6 +464,9 @@ export default function TeamPage({ params }: TeamPageProps) {
               </div>
             </Link>
           </div>
+
+          {/* Next Navigation */}
+          <NextNav from={`teams-${year}-${team}`} />
 
           {/* JSON-LD Structured Data */}
           <JsonLd

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowLeft, Calendar, Trophy, Users, TrendingUp } from "lucide-react";
 import { JsonLd } from "@/components/JsonLd";
+import { NextNav } from "@/components/NextNav";
 
 interface SeasonPageProps {
   params: {
@@ -245,6 +246,9 @@ export default function SeasonPage({ params }: SeasonPageProps) {
             </div>
           </div>
         </div>
+
+        {/* Next Navigation */}
+        <NextNav from={`seasons-${year}`} />
 
         {/* JSON-LD Structured Data */}
         <JsonLd data={buildSeasonJsonLd({ year, site, updatedAt, standings })} />

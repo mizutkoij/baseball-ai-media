@@ -1,7 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Home, Plane, ToggleLeft, ToggleRight, Info, AlertTriangle } from 'lucide-react';
+import { Home, Plane, ToggleLeft, ToggleRight, AlertTriangle } from 'lucide-react';
+import { PFDeltaNote } from '@/components/PFDeltaNote';
+import { PFHelpTooltip } from '@/components/PFHelpTooltip';
 import type { TeamSplitStats } from '@/lib/db/teamQueries';
 
 interface TeamSplitsProps {
@@ -149,12 +151,42 @@ const TeamSplits: React.FC<TeamSplitsProps> = ({
           </div>
         </div>
 
-        {/* Park Factor Info */}
-        <div className="pt-3 border-t border-white/10">
+        {/* Park Factor Info & Difference Comments */}
+        <div className="pt-3 border-t border-white/10 space-y-2">
           <div className="flex justify-between items-center text-xs text-slate-400">
             <span>平均PF: {split.batting.avg_pf}</span>
             <span>{pfCorrectionEnabled ? 'PF補正済み' : 'PF補正なし'}</span>
           </div>
+          
+          {/* PF Difference Comments - only show when toggle is enabled */}
+          {pfCorrectionEnabled && (
+            <div className="space-y-1">
+              <PFDeltaNote 
+                raw={split.batting.wRC_plus} 
+                neutral={split.batting.wRC_plus_neutral} 
+                pf={parseFloat(split.batting.avg_pf)} 
+                metric="wRC+" 
+              />
+              <PFDeltaNote 
+                raw={split.batting.OPS_plus} 
+                neutral={split.batting.OPS_plus_neutral} 
+                pf={parseFloat(split.batting.avg_pf)} 
+                metric="OPS+" 
+              />
+              <PFDeltaNote 
+                raw={split.pitching.ERA_minus} 
+                neutral={split.pitching.ERA_minus_neutral} 
+                pf={parseFloat(split.batting.avg_pf)} 
+                metric="ERA-" 
+              />
+              <PFDeltaNote 
+                raw={split.pitching.FIP_minus} 
+                neutral={split.pitching.FIP_minus_neutral} 
+                pf={parseFloat(split.batting.avg_pf)} 
+                metric="FIP-" 
+              />
+            </div>
+          )}
         </div>
       </div>
     );
@@ -171,7 +203,7 @@ const TeamSplits: React.FC<TeamSplitsProps> = ({
         {/* PF Correction Toggle */}
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2 text-sm">
-            <Info className="w-4 h-4 text-slate-400" />
+            <PFHelpTooltip />
             <span className="text-slate-300">PF補正</span>
           </div>
           <button

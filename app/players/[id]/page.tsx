@@ -7,6 +7,7 @@ import { ArrowLeft, Activity, BarChart3, Target, TrendingUp, ExternalLink, Users
 import Head from "next/head";
 import PlayerSummary, { PlayerSummaryLoading, PlayerSummaryError } from "@/components/PlayerSummary";
 import SimilarPlayers from "@/components/SimilarPlayers";
+import { NextNav } from "@/components/NextNav";
 
 type YearRow = Record<string, any>;
 
@@ -515,6 +516,9 @@ export default function PlayerDetailPage({ params }: { params: { id: string } })
             playerName={player.name}
             limit={3}
           />
+
+          {/* Next Navigation */}
+          <NextNav from={`player-${player.player_id}`} />
         </div>
 
         {/* フッター注記 */}
