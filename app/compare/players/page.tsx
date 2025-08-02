@@ -112,7 +112,7 @@ function PlayerCard({
 
   // Type guard functions
   const isBatterSummary = (s: any): s is { career_wRC_plus: number; career_wRC_plus_neutral?: number; best_year: { year: number; wRC_plus: number; }; } => {
-    return s && 'career_wRC_plus' in s;
+    return s != null && 'career_wRC_plus' in s;
   };
 
   const getMainMetric = () => {
@@ -121,7 +121,7 @@ function PlayerCard({
         ? summary.career_wRC_plus_neutral 
         : summary.career_wRC_plus;
       return { label: 'wRC+', value: Math.round(value) };
-    } else if (!isBatter && !isBatterSummary(summary)) {
+    } else if (!isBatter && !isBatterSummary(summary) && summary) {
       const value = pfCorrection && summary.career_ERA_minus_neutral != null
         ? summary.career_ERA_minus_neutral 
         : summary.career_ERA_minus;
@@ -170,7 +170,7 @@ function PlayerCard({
       <div className="text-center">
         <div className="text-sm text-slate-600">最高年</div>
         <div className="font-semibold">
-          {summary?.best_year.year}年 ({isBatter && isBatterSummary(summary) ? summary.best_year.wRC_plus : !isBatter && !isBatterSummary(summary) ? (summary as any).best_year.ERA_minus : 'N/A'})
+          {summary?.best_year?.year}年 ({isBatter && isBatterSummary(summary) ? summary.best_year.wRC_plus : !isBatter && !isBatterSummary(summary) && summary ? (summary as any).best_year?.ERA_minus : 'N/A'})
         </div>
       </div>
     </div>
