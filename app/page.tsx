@@ -9,6 +9,7 @@ import LatestBrief, { LatestBriefStatic } from "@/components/LatestBrief";
 import { SeasonDiscovery } from "@/components/SeasonDiscovery";
 import HomeScoreboard from "@/components/HomeScoreboard";
 import HomeGamesList from "@/components/HomeGamesList";
+import TeamComparisonPresets from "@/components/TeamComparisonPresets";
 import Link from "next/link";
 import { Suspense } from "react";
 import { TrendingUp, Target, BarChart3, Zap } from "lucide-react";
@@ -231,8 +232,13 @@ export default async function Home() {
           <StatsGlossary compact={true} />
         </div>
 
+        {/* Team Comparison Presets */}
+        <div className="mt-12 animate-slide-up animation-delay-600">
+          <TeamComparisonPresets location="home" />
+        </div>
+
         {/* Season Discovery Section */}
-        <div className="mt-8 animate-slide-up animation-delay-600">
+        <div className="mt-8 animate-slide-up animation-delay-750">
           <SeasonDiscovery location="home" />
         </div>
 

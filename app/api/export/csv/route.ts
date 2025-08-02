@@ -5,12 +5,12 @@ import { query, unionQuery } from "@/lib/db";
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
-    const scope = searchParams.get("scope"); // "player" | "team" | "game"
+    const scope = searchParams.get("scope"); // "player" | "team" | "game" | "player_comparison" | "team_comparison"
     const season = searchParams.get("season");
     const id = searchParams.get("id"); // playerId | teamCode | gameId
     const pfCorrection = searchParams.get("pf") === "true"; // PF補正ON/OFF
 
-    if (!scope || !["player", "team", "game"].includes(scope)) {
+    if (!scope || !["player", "team", "game", "player_comparison", "team_comparison"].includes(scope)) {
       return new Response("Invalid scope parameter", { status: 400 });
     }
 
@@ -165,6 +165,127 @@ export async function GET(req: NextRequest) {
       
       rows = await unionQuery(sql, [id, id]);
       filename = `game_${id}_${Date.now()}.csv`;
+
+    } else if (scope === "team_comparison") {
+      const teams = searchParams.get("teams");
+      const year = searchParams.get("year") || new Date().getFullYear().toString();
+      
+      if (!teams) {
+        return new Response("Teams parameter is required", { status: 400 });
+      }
+
+      // Mock data for team comparison export (would be replaced with actual API call)
+      const teamCodes = teams.split(',').map(code => code.trim().toUpperCase());
+      
+      // Generate mock comparison data
+      rows = teamCodes.map((teamCode, index) => {
+        const teamNames: Record<string, string> = {
+          'G': '読売ジャイアンツ', 'T': '阪神タイガース', 'C': '広島東洋カープ',
+          'YS': '横浜DeNAベイスターズ', 'D': '中日ドラゴンズ', 'S': '東京ヤクルトスワローズ',
+          'H': 'ソフトバンクホークス', 'L': '埼玉西武ライオンズ', 'E': '東北楽天ゴールデンイーグルス',
+          'M': '千葉ロッテマリーンズ', 'F': '北海道日本ハムファイターズ', 'B': 'オリックス・バファローズ'
+        };
+
+        const wRC_plus = 85 + Math.floor(Math.random() * 30);
+        const ERA_minus = 90 + Math.floor(Math.random() * 20);
+
+        const wRC_plus_neutral = pfCorrection ? wRC_plus + Math.floor(Math.random() * 20) - 10 : null;
+        const ERA_minus_neutral = pfCorrection ? ERA_minus + Math.floor(Math.random() * 15) - 7 : null;
+        const batting_ERA = parseFloat((3.50 + Math.random() * 1.20).toFixed(2));
+        const batting_ERA_neutral = pfCorrection ? parseFloat((batting_ERA + (Math.random() - 0.5) * 0.4).toFixed(2)) : null;
+
+        return {
+          team_code: teamCode,
+          team_name: teamNames[teamCode] || teamCode,
+          year: parseInt(year),
+          wins: 60 + Math.floor(Math.random() * 25),
+          losses: 60 + Math.floor(Math.random() * 25),
+          win_pct: (0.400 + Math.random() * 0.200).toFixed(3),
+          rank: index + 1,
+          // 打撃指標（並記+Δ）
+          wRC_plus_original: wRC_plus,
+          wRC_plus_neutral: wRC_plus_neutral,
+          wRC_plus_delta: wRC_plus_neutral ? (wRC_plus_neutral - wRC_plus).toFixed(1) : null,
+          // 投手指標（並記+Δ）
+          ERA_minus_original: ERA_minus,
+          ERA_minus_neutral: ERA_minus_neutral,
+          ERA_minus_delta: ERA_minus_neutral ? (ERA_minus_neutral - ERA_minus).toFixed(1) : null,
+          ERA_original: batting_ERA.toFixed(2),
+          ERA_neutral: batting_ERA_neutral ? batting_ERA_neutral.toFixed(2) : null,
+          ERA_delta: batting_ERA_neutral ? (batting_ERA_neutral - batting_ERA).toFixed(2) : null,
+          // その他統計
+          team_batting_AVG: (0.245 + Math.random() * 0.040).toFixed(3),
+          team_batting_OPS: (0.705 + Math.random() * 0.120).toFixed(3),
+          team_batting_HR: 120 + Math.floor(Math.random() * 80),
+          team_batting_ISO: (0.140 + Math.random() * 0.060).toFixed(3),
+          team_pitching_WHIP: (1.25 + Math.random() * 0.25).toFixed(2),
+          team_pitching_FIP: (3.80 + Math.random() * 1.00).toFixed(2),
+          home_wins: Math.floor((60 + Math.floor(Math.random() * 25)) * 0.55),
+          away_wins: Math.floor((60 + Math.floor(Math.random() * 25)) * 0.45),
+          park_factor: (0.95 + Math.random() * 0.1).toFixed(3),
+          pf_correction_applied: pfCorrection ? '適用' : '未適用'
+        };
+      });
+      
+      filename = `team_comparison_${teamCodes.join('_')}_${year}_${Date.now()}.csv`;
+
+    } else if (scope === "player_comparison") {
+      const players = searchParams.get("players");
+      const yearFrom = searchParams.get("from") || "2022";
+      const yearTo = searchParams.get("to") || "2024";
+      
+      if (!players) {
+        return new Response("Players parameter is required", { status: 400 });
+      }
+
+      // Mock data for player comparison export
+      const playerIds = players.split(',').map(id => id.trim());
+      
+      rows = [];
+      playerIds.forEach((playerId, playerIndex) => {
+        const playerName = `選手${String.fromCharCode(65 + playerIndex)}`;
+        const isBatter = playerIndex < 2;
+        
+        for (let year = parseInt(yearFrom); year <= parseInt(yearTo); year++) {
+          if (isBatter) {
+            const wRC_plus = 90 + Math.floor(Math.random() * 60);
+            rows.push({
+              player_id: playerId,
+              player_name: playerName,
+              year: year,
+              primary_pos: 'B',
+              games: 120 + Math.floor(Math.random() * 20),
+              PA: 450 + Math.floor(Math.random() * 100),
+              wRC_plus: wRC_plus,
+              wRC_plus_neutral: pfCorrection ? wRC_plus + Math.floor(Math.random() * 20) - 10 : null,
+              AVG: (0.250 + Math.random() * 0.100).toFixed(3),
+              OPS: (0.720 + Math.random() * 0.200).toFixed(3),
+              HR: 15 + Math.floor(Math.random() * 25),
+              ISO: (0.150 + Math.random() * 0.100).toFixed(3),
+              pf_correction_applied: pfCorrection
+            });
+          } else {
+            const ERA_minus = 80 + Math.floor(Math.random() * 40);
+            rows.push({
+              player_id: playerId,
+              player_name: playerName,
+              year: year,
+              primary_pos: 'P',
+              games: 25 + Math.floor(Math.random() * 10),
+              IP: (150 + Math.floor(Math.random() * 50)).toFixed(1),
+              ERA: (3.00 + Math.random() * 2.00).toFixed(2),
+              ERA_minus: ERA_minus,
+              ERA_minus_neutral: pfCorrection ? ERA_minus + Math.floor(Math.random() * 20) - 10 : null,
+              FIP: (3.50 + Math.random() * 1.50).toFixed(2),
+              WHIP: (1.20 + Math.random() * 0.40).toFixed(2),
+              K_9: (7.0 + Math.random() * 4.0).toFixed(1),
+              pf_correction_applied: pfCorrection
+            });
+          }
+        }
+      });
+      
+      filename = `player_comparison_${playerIds.join('_')}_${yearFrom}-${yearTo}_${Date.now()}.csv`;
     }
 
     if (rows.length === 0) {
