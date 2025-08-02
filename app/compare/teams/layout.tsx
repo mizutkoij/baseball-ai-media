@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import { absUrl } from '@/lib/absUrl';
-import { TEAM_COLORS } from '@/lib/teamColors';
 import { currentSeasonYear } from '@/lib/time';
+import { TEAM_COLORS } from '@/lib/teamColors';
+import { absUrl } from '@/lib/absUrl';
 
 function sortedUniqueTeams(raw: string | string[] | undefined) {
   const arr = (typeof raw === 'string' ? raw.split(',') : raw ?? [])
@@ -13,11 +13,12 @@ function sortedUniqueTeams(raw: string | string[] | undefined) {
 export async function generateMetadata({
   searchParams,
 }: {
-  searchParams: Record<string, string | string[] | undefined>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }): Promise<Metadata> {
-  const year = String(searchParams.year ?? currentSeasonYear());
-  const pf = String(searchParams.pf ?? 'true') === 'true';
-  const teams = sortedUniqueTeams(searchParams.teams).slice(0, 4);
+  const params = await searchParams;
+  const year = String(params.year ?? currentSeasonYear());
+  const pf = String(params.pf ?? 'true') === 'true';
+  const teams = sortedUniqueTeams(params.teams).slice(0, 4);
   
   const teamNames = teams.map(code => TEAM_COLORS[code]?.name || code);
   const title = teams.length > 0 
