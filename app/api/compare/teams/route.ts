@@ -314,7 +314,7 @@ export async function GET(req: NextRequest) {
     let teamCodes = teamsParam.split(',').map(code => code.trim().toUpperCase()).filter(Boolean);
     
     // Remove duplicates
-    teamCodes = [...new Set(teamCodes)];
+    teamCodes = Array.from(new Set(teamCodes));
     
     // Filter out invalid team codes
     const validTeamCodes = teamCodes.filter(code => TEAM_NAMES[code]);
