@@ -39,7 +39,13 @@
       "Bash(npx madge:*)",
       "Bash(BASE_URL=https://baseball-ai-media.vercel.app npx tsx smoke_runtime.ts)",
       "Bash(BASE_URL=https://baseball-ai-media.vercel.app npx tsx check_pf_sync.ts)",
-      "Bash(git merge:*)"
+      "Bash(git merge:*)",
+      "Bash(BASE_URL=https://baseball-ai-media.vercel.app npx tsx scripts/check_pf_sync.ts)",
+      "WebFetch(domain:baseball-ai-media.vercel.app)",
+      "Bash(BASE_URL=https://baseball-ai-media.vercel.app npx tsx scripts/smoke_runtime.ts)",
+      "Bash(powershell:*)",
+      "Bash(npx rg:*)",
+      "Bash(python:*)"
     ],
     "deny": []
   }

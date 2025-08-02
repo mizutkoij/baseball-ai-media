@@ -11,6 +11,10 @@ HIT_PATTERNS = [
     re.compile(r'(?<!scale-\[)(?<!pf > )1\.02(?![\d\]])', re.I),
 ]
 IGNORE_DIRS = re.compile(r'(archive|\.git|node_modules|__pycache__|logs)(/|\\)')
+IGNORE_FILES = [
+    'tools/quarantine_1point02.py',
+    'tools/scan_forbidden.py'
+]
 ALSO_QUARANTINE = [
     r'.*cookies\.txt$', 
     r'.*\.db$', 
@@ -36,6 +40,8 @@ for base, _, files in os.walk(ROOT):
         path = os.path.join(base, f)
         rel = os.path.relpath(path, ROOT).replace('\\', '/')
         if IGNORE_DIRS.search(rel): 
+            continue
+        if rel in IGNORE_FILES:
             continue
         
         # 明示隔離パターン
