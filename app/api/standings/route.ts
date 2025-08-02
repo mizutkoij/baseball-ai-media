@@ -68,7 +68,7 @@ function generateMockStandings(year: number): StandingsResponse {
       const draws = Math.floor(Math.random() * 8);
       const games_played = wins + losses + draws;
       const win_pct = wins / (wins + losses);
-      const games_back = index === 0 ? 0 : (wins - (85 - Math.floor(Math.random() * 5))) * -0.5;
+      const games_back = index === 0 ? 0 : index * 3.5 + Math.random() * 2;
       
       // Generate realistic additional stats
       const home_wins = Math.floor(wins * (0.52 + Math.random() * 0.08));
