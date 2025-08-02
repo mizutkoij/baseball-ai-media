@@ -16,6 +16,8 @@ async function fetchMatchupData() {
         home_team: 'G',
         away_team_name: '阪神タイガース',
         home_team_name: '読売ジャイアンツ',
+        home_pitcher: '戸郷',
+        away_pitcher: '岡田',
         game_time: '18:00',
         venue: '東京ドーム',
         matchup_preview: {
@@ -35,6 +37,8 @@ async function fetchMatchupData() {
         home_team: 'L',
         away_team_name: 'ソフトバンクホークス',
         home_team_name: '埼玉西武ライオンズ',
+        home_pitcher: '今井',
+        away_pitcher: '有原',
         game_time: '18:00',
         venue: 'ベルーナドーム',
         matchup_preview: {
