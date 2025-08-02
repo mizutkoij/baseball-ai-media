@@ -1,91 +1,169 @@
+import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
 
 export const runtime = 'edge';
+export const alt = 'NPB Player Comparison';
+export const size = { width: 1200, height: 630 };
+export const contentType = 'image/png';
 
-// Edge runtime doesn't support better-sqlite3, so we'll fetch from API instead
-async function getPlayersData(ids: string[]) {
-  // In production, this would fetch from your API
-  // For now, return mock data for OG generation
-  return [
-    { 
-      player_id: ids[0] || 'player1', 
-      name: '選手A', 
-      primary_pos: 'B' as const,
-      batting: { avg: 0.285, HR: 25, OPS_plus_simple: 120 }
-    },
-    { 
-      player_id: ids[1] || 'player2', 
-      name: '選手B', 
-      primary_pos: 'B' as const,
-      batting: { avg: 0.310, HR: 18, OPS_plus_simple: 115 }
-    }
-  ];
-}
+const validatePlayerIds = (value: string | null) => {
+  if (!value) return [];
+  return Array.from(
+    new Set(
+      value
+        .split(',')
+        .map((s) => s.trim())
+        .filter(Boolean)
+    )
+  ).slice(0, 4); // 4選手まで
+};
 
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
-    const idsParam = searchParams.get('ids');
-    
-    if (!idsParam) {
-      return new Response('Missing ids parameter', { status: 400 });
-    }
-    
-    const ids = idsParam.split(',').map(id => id.trim()).filter(id => id);
-    if (ids.length !== 2) {
-      return new Response('Exactly 2 player IDs required', { status: 400 });
-    }
-    
-    // Get player data (using mock data for edge runtime)
-    const players = await getPlayersData(ids);
-    
-    if (players.length !== 2) {
-      return new Response('Players not found', { status: 404 });
-    }
-    
-    const [player1, player2] = players;
-    
-    // Get key stats to display
-    const getKeyStats = (player: any) => {
-      if (player.primary_pos === 'P') {
-        return [
-          { label: '防御率', value: player.防御率?.toFixed(2) || '-' },
-          { label: 'WHIP', value: player.WHIP?.toFixed(3) || '-' },
-          { label: 'ERA-', value: player.ERA_minus || '-' },
-          { label: '勝利', value: player.勝利 || '-' },
-        ];
-      } else {
-        return [
-          { label: '打率', value: player.打率?.toFixed(3) || '-' },
-          { label: '本塁打', value: player.本塁打 || '-' },
-          { label: 'OPS+', value: player.OPS_plus_simple || '-' },
-          { label: 'wRC+', value: player.wRC_plus_simple || '-' },
-        ];
-      }
-    };
-    
-    const player1Stats = getKeyStats(player1);
-    const player2Stats = getKeyStats(player2);
-    
-    return new Response(
-      JSON.stringify({
-        message: "OG image generation temporarily disabled for build compatibility",
-        players: [player1.name, player2.name],
-        stats: {
-          player1: player1Stats,
-          player2: player2Stats
-        }
-      }),
+    const yearFrom = searchParams.get('year_from') || new Date().getFullYear().toString();
+    const yearTo = searchParams.get('year_to') || yearFrom;
+    const pf = (searchParams.get('pf') ?? 'false') === 'true';
+    const playerIds = validatePlayerIds(searchParams.get('ids'));
+
+    const title = yearFrom === yearTo 
+      ? `NPB Player Compare ${yearFrom}`
+      : `NPB Player Compare ${yearFrom}-${yearTo}`;
+    const subtitle = `PF補正: ${pf ? 'ON（中立化）' : 'OFF（生データ）'}`;
+
+    // Mock player names for display
+    const playerNames = playerIds.map((id, index) => 
+      `選手${String.fromCharCode(65 + index)}`
+    );
+
+    return new ImageResponse(
+      (
+        <div
+          style={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%)',
+            fontFamily: 'system-ui, -apple-system, sans-serif',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              padding: '60px',
+              width: '100%',
+              height: '100%',
+              justifyContent: 'space-between',
+            }}
+          >
+            {/* Header */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div 
+                style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  fontSize: '36px', 
+                  color: '#1e293b',
+                  fontWeight: '600'
+                }}
+              >
+                <span style={{ marginRight: '12px' }}>⚾</span>
+                Baseball AI Media
+              </div>
+              <div 
+                style={{ 
+                  fontSize: '24px', 
+                  color: '#64748b',
+                  backgroundColor: '#f1f5f9',
+                  padding: '8px 16px',
+                  borderRadius: '8px'
+                }}
+              >
+                {subtitle}
+              </div>
+            </div>
+
+            {/* Main Content */}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <div 
+                style={{ 
+                  fontSize: '64px', 
+                  fontWeight: '800', 
+                  color: '#0f172a',
+                  marginBottom: '32px',
+                  textAlign: 'center'
+                }}
+              >
+                {title}
+              </div>
+              
+              {playerNames.length > 0 && (
+                <div style={{ display: 'flex', gap: '24px', alignItems: 'center', justifyContent: 'center' }}>
+                  {playerNames.map((name, index) => (
+                    <div key={index} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                      <div 
+                        style={{
+                          width: '120px',
+                          height: '120px',
+                          borderRadius: '50%',
+                          backgroundColor: index % 2 === 0 ? '#3b82f6' : '#ef4444',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontSize: '36px',
+                          fontWeight: '700',
+                          color: 'white',
+                          marginBottom: '16px'
+                        }}
+                      >
+                        {name.charAt(name.length - 1)}
+                      </div>
+                      <div style={{ fontSize: '24px', color: '#374151', fontWeight: '600' }}>
+                        {name}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+              
+              {playerNames.length > 1 && (
+                <div 
+                  style={{ 
+                    fontSize: '20px', 
+                    color: '#475569',
+                    marginTop: '32px',
+                    textAlign: 'center'
+                  }}
+                >
+                  {playerNames.join(' vs ')}の詳細比較
+                </div>
+              )}
+            </div>
+
+            {/* Footer */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', color: '#64748b', fontSize: '16px' }}>
+              <div>NPB選手分析 • セイバーメトリクス</div>
+              <div>© {yearTo} Baseball AI Media</div>
+            </div>
+          </div>
+        </div>
+      ),
       {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
+        ...size,
+        headers: { 
+          'Cache-Control': 'public, max-age=3600, immutable',
+          'Content-Type': 'image/png'
         }
       }
     );
-    
-  } catch (error: any) {
+  } catch (error) {
     console.error('OG image generation error:', error);
-    return new Response('Failed to generate image', { status: 500 });
+    
+    // Fallback response
+    return new Response('Failed to generate OG image', { 
+      status: 500,
+      headers: { 'Content-Type': 'text/plain' }
+    });
   }
 }

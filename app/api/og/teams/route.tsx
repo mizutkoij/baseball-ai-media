@@ -1,68 +1,159 @@
-import { ImageResponse } from 'next/server';
+import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
+import { TEAM_COLORS } from '@/lib/teamColors';
 
 export const runtime = 'edge';
+export const alt = 'NPB Team Comparison';
+export const size = { width: 1200, height: 630 };
+export const contentType = 'image/png';
 
-const TEAM_COLORS: Record<string, { primary: string; secondary: string; name: string }> = {
-  'G': { primary: '#FF6600', secondary: '#000000', name: '読売ジャイアンツ' },
-  'T': { primary: '#FFE100', secondary: '#000000', name: '阪神タイガース' },
-  'C': { primary: '#FF0000', secondary: '#FFFFFF', name: '広島東洋カープ' },
-  'YS': { primary: '#003DA5', secondary: '#FFFFFF', name: '横浜DeNAベイスターズ' },
-  'D': { primary: '#002E8B', secondary: '#FFFFFF', name: '中日ドラゴンズ' },
-  'S': { primary: '#006837', secondary: '#FFFFFF', name: '東京ヤクルトスワローズ' },
-  'H': { primary: '#F8B500', secondary: '#000000', name: 'ソフトバンクホークス' },
-  'L': { primary: '#1E22AA', secondary: '#FFFFFF', name: '埼玉西武ライオンズ' },
-  'E': { primary: '#8B0000', secondary: '#FFFFFF', name: '東北楽天ゴールデンイーグルス' },
-  'M': { primary: '#000000', secondary: '#FFFFFF', name: '千葉ロッテマリーンズ' },
-  'F': { primary: '#003366', secondary: '#FFFFFF', name: '北海道日本ハムファイターズ' },
-  'B': { primary: '#333366', secondary: '#FFFFFF', name: 'オリックス・バファローズ' }
+const validateTeams = (value: string | null) => {
+  if (!value) return [];
+  return Array.from(
+    new Set(
+      value
+        .split(',')
+        .map((s) => s.trim().toUpperCase())
+        .filter(Boolean)
+    )
+  ).slice(0, 4); // 4チームまで
 };
 
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
-    const teams = searchParams.get('teams')?.split(',') || [];
-    const year = searchParams.get('year') || '2024';
-    const pfCorrection = searchParams.get('pf') === 'true';
+    const year = (searchParams.get('year') ?? '').replace(/[^\d]/g, '') || new Date().getFullYear().toString();
+    const pf = (searchParams.get('pf') ?? 'false') === 'true';
+    const teams = validateTeams(searchParams.get('teams'));
 
-    if (teams.length === 0) {
-      return new Response('Teams parameter required', { status: 400 });
-    }
+    const title = `NPB Team Compare ${year}`;
+    const subtitle = `PF補正: ${pf ? 'ON（中立化）' : 'OFF（生データ）'}`;
 
-    const teamData = teams.slice(0, 4).map((teamCode, index) => {
-      const team = TEAM_COLORS[teamCode.toUpperCase()];
-      if (!team) return null;
-      
-      // Mock data for OG image
-      const wRC_plus = 85 + Math.floor(Math.random() * 30);
-      const ERA_minus = 90 + Math.floor(Math.random() * 20);
-      
-      return {
-        code: teamCode.toUpperCase(),
-        name: team.name,
-        colors: team,
-        rank: index + 1,
-        wRC_plus: pfCorrection ? wRC_plus + Math.floor(Math.random() * 20) - 10 : wRC_plus,
-        ERA_minus: pfCorrection ? ERA_minus + Math.floor(Math.random() * 15) - 7 : ERA_minus
-      };
-    }).filter(Boolean);
+    const chips = teams.map((t, index) => {
+      const color = TEAM_COLORS[t] ?? { primary: '#e5e7eb', text: '#111827', name: t };
+      return (
+        <div
+          key={t}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '12px 20px',
+            borderRadius: '999px',
+            backgroundColor: color.primary,
+            color: color.text,
+            fontSize: '32px',
+            fontWeight: '700',
+            marginRight: index < teams.length - 1 ? '16px' : '0',
+            minWidth: '80px',
+          }}
+        >
+          {t}
+        </div>
+      );
+    });
 
-    return new Response(
-      JSON.stringify({
-        message: "OG image generation temporarily disabled for build compatibility",
-        teams: teamData.map(t => t?.name).filter(Boolean).join(", "),
-        year,
-        pfCorrection
-      }),
+    return new ImageResponse(
+      (
+        <div
+          style={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #e2e8f0 100%)',
+            fontFamily: 'system-ui, -apple-system, sans-serif',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              padding: '60px',
+              width: '100%',
+              height: '100%',
+              justifyContent: 'space-between',
+            }}
+          >
+            {/* Header */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div 
+                style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  fontSize: '36px', 
+                  color: '#1e293b',
+                  fontWeight: '600'
+                }}
+              >
+                <span style={{ marginRight: '12px' }}>⚾</span>
+                Baseball AI Media
+              </div>
+              <div 
+                style={{ 
+                  fontSize: '24px', 
+                  color: '#64748b',
+                  backgroundColor: '#f1f5f9',
+                  padding: '8px 16px',
+                  borderRadius: '8px'
+                }}
+              >
+                {subtitle}
+              </div>
+            </div>
+
+            {/* Main Content */}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <div 
+                style={{ 
+                  fontSize: '64px', 
+                  fontWeight: '800', 
+                  color: '#0f172a',
+                  marginBottom: '32px',
+                  textAlign: 'center'
+                }}
+              >
+                {title}
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                {chips}
+              </div>
+              {teams.length > 0 && (
+                <div 
+                  style={{ 
+                    fontSize: '20px', 
+                    color: '#475569',
+                    marginTop: '24px',
+                    textAlign: 'center'
+                  }}
+                >
+                  {teams.map(t => TEAM_COLORS[t]?.name || t).join(' vs ')}
+                </div>
+              )}
+            </div>
+
+            {/* Footer */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', color: '#64748b', fontSize: '16px' }}>
+              <div>NPB高度分析 • セイバーメトリクス</div>
+              <div>© {year} Baseball AI Media</div>
+            </div>
+          </div>
+        </div>
+      ),
       {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
+        ...size,
+        headers: { 
+          'Cache-Control': 'public, max-age=3600, immutable',
+          'Content-Type': 'image/png'
         }
       }
     );
   } catch (error) {
     console.error('OG image generation error:', error);
-    return new Response('Failed to generate image', { status: 500 });
+    
+    // Fallback response
+    return new Response('Failed to generate OG image', { 
+      status: 500,
+      headers: { 'Content-Type': 'text/plain' }
+    });
   }
 }

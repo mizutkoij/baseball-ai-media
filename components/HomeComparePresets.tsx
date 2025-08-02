@@ -5,6 +5,7 @@ import { buildCompareTeamsUrl } from '@/lib/urls';
 import { TEAM_META, TeamSlug } from '@/lib/teams';
 import { currentSeasonYear } from '@/lib/time';
 import { track } from '@/lib/analytics';
+import { QuickShareButton } from './ShareButton';
 
 type Preset = {
   title: string;
@@ -127,13 +128,17 @@ export default function HomeComparePresets() {
                     </div>
                   )}
                 </div>
-                {preset.highlight && (
-                  <div className="ml-2 flex-shrink-0">
+                <div className="ml-2 flex flex-col items-end gap-2">
+                  {preset.highlight && (
                     <span className="inline-flex items-center rounded-full bg-amber-100 px-2 py-1 text-xs font-medium text-amber-800">
                       人気
                     </span>
-                  </div>
-                )}
+                  )}
+                  <QuickShareButton 
+                    url={href}
+                    text={`${preset.title} - ${YEAR}年比較`}
+                  />
+                </div>
               </div>
               
               <TeamChips teams={preset.teams} />
