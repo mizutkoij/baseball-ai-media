@@ -1,4 +1,3 @@
-import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
 
 export const runtime = 'edge';
@@ -68,186 +67,20 @@ export async function GET(req: NextRequest) {
     const player1Stats = getKeyStats(player1);
     const player2Stats = getKeyStats(player2);
     
-    return new ImageResponse(
-      (
-        <div
-          style={{
-            height: '100%',
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: '#0f172a',
-            backgroundImage: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)',
-            color: 'white',
-            fontFamily: 'system-ui, -apple-system, sans-serif',
-          }}
-        >
-          {/* Header */}
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '16px',
-            marginBottom: '40px',
-          }}>
-            <div style={{
-              width: '48px',
-              height: '48px',
-              borderRadius: '50%',
-              backgroundColor: '#8b5cf6',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '24px',
-            }}>
-              ⚾
-            </div>
-            <h1 style={{
-              fontSize: '32px',
-              fontWeight: 'bold',
-              margin: 0,
-            }}>
-              選手比較
-            </h1>
-          </div>
-          
-          {/* Players Comparison */}
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            width: '100%',
-            maxWidth: '1000px',
-            padding: '0 60px',
-          }}>
-            {/* Player 1 */}
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              flex: 1,
-              backgroundColor: 'rgba(59, 130, 246, 0.1)',
-              border: '2px solid rgba(59, 130, 246, 0.3)',
-              borderRadius: '16px',
-              padding: '32px',
-              margin: '0 20px',
-            }}>
-              <h2 style={{
-                fontSize: '28px',
-                fontWeight: 'bold',
-                margin: '0 0 8px 0',
-                color: '#60a5fa',
-                textAlign: 'center',
-              }}>
-                {player1.name}
-              </h2>
-              <p style={{
-                fontSize: '16px',
-                color: '#cbd5e1',
-                margin: '0 0 24px 0',
-              }}>
-                {(player1.primary_pos as string) === 'P' ? '投手' : '野手'} | 現役
-              </p>
-              
-              <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '8px',
-                width: '100%',
-              }}>
-                {player1Stats.map((stat, i) => (
-                  <div key={i} style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    fontSize: '16px',
-                  }}>
-                    <span style={{ color: '#94a3b8' }}>{stat.label}:</span>
-                    <span style={{ fontWeight: 'bold', color: '#60a5fa' }}>{stat.value}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            {/* VS */}
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '80px',
-              height: '80px',
-              borderRadius: '50%',
-              backgroundColor: '#fbbf24',
-              fontSize: '24px',
-              fontWeight: 'bold',
-              color: '#0f172a',
-            }}>
-              VS
-            </div>
-            
-            {/* Player 2 */}
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              flex: 1,
-              backgroundColor: 'rgba(239, 68, 68, 0.1)',
-              border: '2px solid rgba(239, 68, 68, 0.3)',
-              borderRadius: '16px',
-              padding: '32px',
-              margin: '0 20px',
-            }}>
-              <h2 style={{
-                fontSize: '28px',
-                fontWeight: 'bold',
-                margin: '0 0 8px 0',
-                color: '#f87171',
-                textAlign: 'center',
-              }}>
-                {player2.name}
-              </h2>
-              <p style={{
-                fontSize: '16px',
-                color: '#cbd5e1',
-                margin: '0 0 24px 0',
-              }}>
-                {(player2.primary_pos as string) === 'P' ? '投手' : '野手'} | 現役
-              </p>
-              
-              <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '8px',
-                width: '100%',
-              }}>
-                {player2Stats.map((stat, i) => (
-                  <div key={i} style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    fontSize: '16px',
-                  }}>
-                    <span style={{ color: '#94a3b8' }}>{stat.label}:</span>
-                    <span style={{ fontWeight: 'bold', color: '#f87171' }}>{stat.value}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          
-          {/* Footer */}
-          <div style={{
-            marginTop: '40px',
-            textAlign: 'center',
-            color: '#64748b',
-            fontSize: '14px',
-          }}>
-            Baseball AI Media - 詳細比較をウェブサイトで確認
-          </div>
-        </div>
-      ),
+    return new Response(
+      JSON.stringify({
+        message: "OG image generation temporarily disabled for build compatibility",
+        players: [player1.name, player2.name],
+        stats: {
+          player1: player1Stats,
+          player2: player2Stats
+        }
+      }),
       {
-        width: 1200,
-        height: 630,
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        }
       }
     );
     

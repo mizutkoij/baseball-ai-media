@@ -16,10 +16,7 @@ const nextConfig = {
     ];
   },
   
-  // Skip static generation for dynamic sitemap routes during build
-  experimental: {
-    missingSuspenseWithCSRBailout: false,
-  }
+  // Additional Next.js configurations can be added here as needed
 };
 
 module.exports = nextConfig;
