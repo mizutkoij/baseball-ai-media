@@ -1,5 +1,17 @@
-import { BookOpen, Shield, Database, Code, Users, ExternalLink } from 'lucide-react';
+import { Metadata } from 'next';
+import { BookOpen, Shield, Database, Code, Users, ExternalLink, Globe, Cpu, BarChart3, TrendingUp, Zap } from 'lucide-react';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'このサイトについて | NPB Analytics',
+  description: 'Baseball AI Mediaの技術仕様、データソース、セイバーメトリクス指標の詳細説明。NPB公式データの独自分析・実装方針。',
+  openGraph: {
+    title: 'Baseball AI Media について',
+    description: 'NPB公式データを活用した独自セイバーメトリクス分析サイト。完全自前実装・透明性重視',
+    type: 'website',
+  },
+  robots: 'index, follow',
+};
 
 export default function AboutPage() {
   return (
@@ -103,6 +115,78 @@ export default function AboutPage() {
                   <li>• Database: DuckDB + SQLite</li>
                   <li>• Data Pipeline: Python + Beautiful Soup</li>
                 </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* データパイプライン */}
+        <section className="bg-black/20 backdrop-blur-md border border-white/10 rounded-lg p-8 mb-8">
+          <div className="flex items-center gap-3 mb-6">
+            <TrendingUp className="w-6 h-6 text-purple-400" />
+            <h2 className="text-2xl font-bold text-white">自動データパイプライン</h2>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Globe className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">1. 収集</h3>
+              <p className="text-sm text-slate-300">NPB公式サイトから試合結果・選手成績を自動取得（robots.txt遵守）</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Cpu className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">2. 処理</h3>
+              <p className="text-sm text-slate-300">自動パース・正規化・異常値検出・重複排除プロセス</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                <BarChart3 className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">3. 算出</h3>
+              <p className="text-sm text-slate-300">wRC+, ERA-, FIP, WAR等セイバーメトリクス指標を独自実装で計算</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-amber-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Zap className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">4. 配信</h3>
+              <p className="text-sm text-slate-300">リアルタイム更新・比較分析・可視化をWeb配信</p>
+            </div>
+          </div>
+
+          <div className="bg-slate-800/50 rounded-lg p-6">
+            <h3 className="text-lg font-semibold text-white mb-3">技術仕様詳細</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+              <div>
+                <strong className="text-blue-400">フロントエンド:</strong>
+                <span className="text-slate-300 ml-2">Next.js 14, TypeScript, Tailwind CSS, SWR</span>
+              </div>
+              <div>
+                <strong className="text-blue-400">データベース:</strong>
+                <span className="text-slate-300 ml-2">SQLite3 (現行・履歴データ分離)</span>
+              </div>
+              <div>
+                <strong className="text-blue-400">データ処理:</strong>
+                <span className="text-slate-300 ml-2">Node.js + Beautiful Soup (Python)</span>
+              </div>
+              <div>
+                <strong className="text-blue-400">デプロイ:</strong>
+                <span className="text-slate-300 ml-2">Vercel (CDN配信・自動ビルド)</span>
+              </div>
+              <div>
+                <strong className="text-blue-400">更新頻度:</strong>
+                <span className="text-slate-300 ml-2">試合終了後30分以内に自動反映</span>
+              </div>
+              <div>
+                <strong className="text-blue-400">品質管理:</strong>
+                <span className="text-slate-300 ml-2">監査スクリプト・整合性チェック</span>
               </div>
             </div>
           </div>
