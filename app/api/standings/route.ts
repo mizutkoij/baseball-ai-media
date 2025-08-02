@@ -111,7 +111,7 @@ function generateMockStandings(year: number): StandingsResponse {
     }).sort((a, b) => {
       if (a.win_pct !== b.win_pct) return b.win_pct - a.win_pct;
       return b.run_diff - a.run_diff; // Tiebreaker by run differential
-    }).map((team, index) => ({ ...team, rank: index + 1, games_back: index === 0 ? 0 : Number(((teams[0] ? 85 : team.wins) - team.wins) * 0.5).toFixed(1) }));
+    }).map((team, index) => ({ ...team, rank: index + 1, games_back: index === 0 ? 0 : Math.round(((teams[0] ? 85 : team.wins) - team.wins) * 0.5 * 10) / 10 }));
   };
 
   return {
