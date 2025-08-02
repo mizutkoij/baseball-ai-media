@@ -110,17 +110,28 @@ function PlayerCard({
   const isBatter = player.primary_pos === 'B';
   const summary = isBatter ? player.career_summary.batting : player.career_summary.pitching;
 
+  // Type guard functions
+  const isBatterSummary = (s: any): s is { career_wRC_plus: number; career_wRC_plus_neutral?: number; best_year: { year: number; wRC_plus: number; }; } => {
+    return s && 'career_wRC_plus' in s;
+  };
+
   const getMainMetric = () => {
-    if (isBatter) {
-      const value = pfCorrection && summary?.career_wRC_plus_neutral 
+    if (isBatter && isBatterSummary(summary)) {
+      const value = pfCorrection && summary.career_wRC_plus_neutral != null
         ? summary.career_wRC_plus_neutral 
-        : summary?.career_wRC_plus || 0;
+        : summary.career_wRC_plus;
       return { label: 'wRC+', value: Math.round(value) };
-    } else {
-      const value = pfCorrection && summary?.career_ERA_minus_neutral 
+    } else if (!isBatter && !isBatterSummary(summary)) {
+      const value = pfCorrection && summary.career_ERA_minus_neutral != null
         ? summary.career_ERA_minus_neutral 
-        : summary?.career_ERA_minus || 0;
+        : summary.career_ERA_minus;
       return { label: 'ERA-', value: Math.round(value) };
+    } else {
+      // Fallback
+      if (isBatterSummary(summary)) {
+        return { label: 'wRC+', value: Math.round(summary.career_wRC_plus) };
+      }
+      return { label: 'ERA-', value: Math.round((summary as any).career_ERA_minus || 0) };
     }
   };
 
@@ -159,7 +170,7 @@ function PlayerCard({
       <div className="text-center">
         <div className="text-sm text-slate-600">最高年</div>
         <div className="font-semibold">
-          {summary?.best_year.year}年 ({isBatter ? summary?.best_year.wRC_plus : summary?.best_year.ERA_minus})
+          {summary?.best_year.year}年 ({isBatter && isBatterSummary(summary) ? summary.best_year.wRC_plus : !isBatter && !isBatterSummary(summary) ? (summary as any).best_year.ERA_minus : 'N/A'})
         </div>
       </div>
     </div>
