@@ -34,7 +34,9 @@
       "Bash(git checkout:*)",
       "Bash(taskkill:*)",
       "Bash(pkill:*)",
-      "Bash(timeout 60 npm run build)"
+      "Bash(timeout 60 npm run build)",
+      "Bash(git grep:*)",
+      "Bash(npx madge:*)"
     ],
     "deny": []
   }

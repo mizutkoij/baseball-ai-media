@@ -98,12 +98,13 @@ export function addCalculatedProvenance<T>(
  * 第三者データソースの検出・ブロック
  */
 export function isThirdPartySource(provenance: ProvenanceMetadata): boolean {
+  // データ来歴検証用：独自実装確保のためのブロックリスト
   const blockedSources = [
     "1point02",
     "delta_graph", 
     "baseball_lab",
     "baseball_savant_copy",
-    // 他の第三者データベース識別子を追加
+    // 他の第三者データベース由来を検出・除外
   ];
   
   return blockedSources.some(blocked => 

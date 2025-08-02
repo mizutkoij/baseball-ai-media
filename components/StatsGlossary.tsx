@@ -5,7 +5,7 @@ import { ChevronDown, ChevronUp, BookOpen, TrendingUp, Target, BarChart3 } from 
 
 /**
  * オリジナル統計用語解説コンポーネント
- * 1point02等からの転用なし - 完全独自執筆
+ * 学術文献・概念理論に基づく独自執筆
  */
 
 interface StatDefinition {

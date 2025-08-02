@@ -1,0 +1,147 @@
+\vitest.config.ts:3 - default
+\app\layout.tsx:35 - default
+\app\layout.tsx:13 - metadata
+\app\page.tsx:152 - default
+\app\page.tsx:23 - dynamic
+\app\sitemap.ts:3 - default
+\components\AdvancedStats.tsx:45 - default
+\components\BriefCTALinks.tsx:22 - default
+\components\GameOfTheDay.tsx:256 - GameOfTheDayClient
+\components\PlayerLink.tsx:13 - default
+\components\PlayerLink.tsx:64 - PlayerLinkSimple
+\components\PromotionBadge.tsx:6 - PromotionData (used in module)
+\components\PromotionBadge.tsx:287 - default
+\components\SkeletonCard.tsx:2 - SkeletonCard
+\components\TeamComparisonPresets.tsx:189 - CustomTeamComparison
+\lib\analytics.ts:26 - trackOnce (used in module)
+\lib\analytics.ts:38 - trackPageView
+\lib\analytics.ts:47 - trackComparison
+\lib\api.ts:40 - PBPEvent (used in module)
+\lib\api.ts:60 - HighlightEvent (used in module)
+\lib\api.ts:75 - WPPoint (used in module)
+\lib\api.ts:91 - PBPResponse
+\lib\api.ts:99 - HighlightsResponse
+\lib\api.ts:107 - WPSeriesResponse
+\lib\db.ts:21 - openConnections (used in module)
+\lib\db.ts:39 - closeConnections (used in module)
+\lib\db.ts:112 - get (used in module)
+\lib\db.ts:124 - write
+\lib\db.ts:143 - transaction (used in module)
+\lib\db.ts:162 - selectDbByYear
+\lib\db.ts:169 - getDbStats
+\lib\db.ts:13 - DatabaseConnections (used in module)
+\lib\es-compat.ts:13 - requireSafe
+\lib\es-compat.ts:22 - importSafe
+\lib\es-compat.ts:7 - requireCompat (used in module)
+\lib\es-compat.ts:10 - require
+\lib\playerComparison.ts:312 - findSimilarPlayers
+\lib\playerIndex.ts:6 - loadPlayerIndex (used in module)
+\lib\playerIndex.ts:33 - clearPlayerIndexCache
+\lib\provenance.ts:44 - addProvenance (used in module)
+\lib\provenance.ts:84 - addCalculatedProvenance
+\lib\provenance.ts:100 - isThirdPartySource (used in module)
+\lib\provenance.ts:117 - validateDataSource (used in module)
+\lib\provenance.ts:139 - getProvenanceSummary
+\lib\provenance.ts:156 - auditProvenance
+\lib\provenance.ts:6 - ProvenanceMetadata (used in module)
+\lib\provenance.ts:16 - ProvenanceData (used in module)
+\lib\provenance.ts:24 - NPB_OFFICIAL_PROVENANCE (used in module)
+\lib\provenance.ts:34 - CALCULATED_STATS_PROVENANCE (used in module)
+\lib\sabermetrics.ts:285 - calculateWithConstants
+\lib\sabermetrics.ts:7 - LeagueConstants (used in module)
+\lib\sabermetrics.ts:23 - BattingStats (used in module)
+\lib\sabermetrics.ts:42 - PitchingStats (used in module)
+\lib\sabermetrics.ts:57 - SabermetricsCalculator (used in module)
+\lib\sabermetrics.ts:266 - DEFAULT_CONSTANTS
+\lib\similarityCache.ts:308 - CachedPlayerVector (used in module)
+\lib\sse-hook.ts:25 - useSSE
+\lib\sse-hook.ts:4 - SSEConfig (used in module)
+\lib\sse-hook.ts:15 - SSEStatus (used in module)
+\lib\sse-hook.ts:17 - SSEState (used in module)
+\lib\teams.ts:31 - getCentralTeams
+\lib\teams.ts:34 - getPacificTeams
+\lib\time.ts:6 - nowJst (used in module)
+\lib\time.ts:11 - todayJstYmd
+\lib\time.ts:19 - currentMonthJst
+\lib\time.ts:26 - formatJstDate
+\lib\urls.ts:26 - buildComparePlayersUrl
+\lib\urls.ts:45 - buildTeamUrl
+\app\about\page.tsx:16 - default
+\app\about\page.tsx:5 - metadata
+\app\columns\page.tsx:222 - default
+\app\columns\page.tsx:6 - dynamic
+\app\matchups\page.tsx:169 - default
+\app\matchups\page.tsx:7 - dynamic
+\app\players\page.tsx:23 - default
+\app\players-sitemap-[chunk].xml\route.ts:8 - GET
+\app\players-sitemap-[chunk].xml\route.ts:6 - dynamic
+\app\players-sitemap.xml\route.ts:5 - GET
+\app\privacy\page.tsx:15 - default
+\app\privacy\page.tsx:5 - metadata
+\app\rankings\page.tsx:48 - default
+\app\records\page.tsx:213 - default
+\app\robots.txt\route.ts:1 - GET
+\app\schedule\page.tsx:100 - default
+\app\seasons\page.tsx:19 - default
+\app\standings\page.tsx:98 - default
+\app\standings\page.tsx:5 - metadata
+\app\teams\page.tsx:6 - default
+\app\terms\page.tsx:15 - default
+\app\terms\page.tsx:5 - metadata
+\lib\constants\shrink.ts:34 - shrink (used in module)
+\lib\constants\shrink.ts:49 - shrinkWithGuard (used in module)
+\lib\constants\shrink.ts:91 - shrinkWobaWeights (used in module)
+\lib\constants\shrink.ts:115 - shrinkFipConstants
+\lib\constants\shrink.ts:136 - shrinkParkFactors
+\lib\constants\shrink.ts:158 - checkAlertConditions (used in module)
+\lib\constants\shrink.ts:210 - generateUpdateLog
+\lib\constants\shrink.ts:248 - testShrinkFunctions (used in module)
+\lib\constants\shrink.ts:6 - ShrinkResult (used in module)
+\lib\constants\shrink.ts:18 - ShrinkMetadata (used in module)
+\lib\db\teamQueries.ts:77 - DistributionBin (used in module)
+\lib\og\brief.ts:35 - buildBriefOgImage
+\lib\og\brief.ts:4 - BriefOGData (used in module)
+\lib\players\summary.ts:33 - buildPlayerSummary (used in module)
+\lib\players\summary.ts:145 - buildFallbackSummary (used in module)
+\lib\players\summary.ts:164 - validateSummaryLength (used in module)
+\lib\players\summary.ts:2 - PlayerSeason (used in module)
+\app\about\methodology\page.tsx:17 - default
+\app\about\methodology\page.tsx:7 - metadata
+\app\api\backfill-status\route.ts:105 - GET
+\app\api\constants\route.ts:9 - GET
+\app\api\constants\route.ts:58 - dynamic
+\app\api\game-of-the-day\route.ts:111 - GET
+\app\api\schedule\route.ts:5 - GET
+\app\api\standings\route.ts:136 - GET
+\app\api\today-games\route.ts:5 - GET
+\app\compare\players\page.tsx:530 - default
+\app\compare\teams\page.tsx:678 - default
+\app\games\[gameId]\page.tsx:34 - default
+\app\players\[id]\page.tsx:134 - default
+\app\players\compare\page.tsx:171 - default
+\app\seasons\[year]\layout.tsx:9 - generateMetadata
+\app\seasons\[year]\layout.tsx:44 - default
+\app\seasons\[year]\layout.tsx:98 - generateStaticParams
+\app\seasons\[year]\layout.tsx:95 - revalidate
+\app\seasons\[year]\opengraph-image.tsx:52 - default
+\app\seasons\[year]\opengraph-image.tsx:5 - size (used in module)
+\app\seasons\[year]\opengraph-image.tsx:10 - contentType
+\app\seasons\[year]\page.tsx:69 - default
+\app\teams\[year]\page.tsx:53 - default
+\app\api\compare\players\route.ts:287 - GET
+\app\api\compare\teams\route.ts:298 - GET
+\app\api\export\csv\route.ts:5 - GET
+\app\api\export\player\route.ts:12 - GET
+\app\api\games\[gameId]\route.ts:17 - GET
+\app\api\games\[gameId]\route.ts:7 - dynamic
+\app\api\og\compare\route.tsx:25 - GET
+\app\api\og\teams\route.tsx:21 - GET
+\app\column\brief\[date]\page.tsx:59 - generateStaticParams
+\app\column\brief\[date]\page.tsx:88 - generateMetadata
+\app\column\brief\[date]\page.tsx:152 - default
+\app\teams\[year]\[team]\page.tsx:97 - default
+\app\api\players\[id]\similar\route.ts:8 - GET
+\app\api\teams\[year]\[team]\route.ts:136 - GET
+\app\api\teams\[year]\[team]\route.ts:274 - POST
+\app\api\og\teams\[year]\[team]\route.tsx:37 - GET
+\app\api\og\teams\[year]\[team]\route.tsx:4 - runtime
