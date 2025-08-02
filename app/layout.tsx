@@ -75,6 +75,9 @@ export default function RootLayout({
                     <a href="/teams" className="text-xs xl:text-sm text-slate-600 hover:text-blue-600 transition-colors">
                       チーム
                     </a>
+                    <a href="/standings" className="text-xs xl:text-sm text-slate-600 hover:text-blue-600 transition-colors">
+                      順位表
+                    </a>
                     <a href="/rankings" className="text-xs xl:text-sm text-slate-600 hover:text-blue-600 transition-colors">
                       ランキング
                     </a>

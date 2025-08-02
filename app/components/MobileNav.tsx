@@ -29,6 +29,7 @@ const MobileNav = () => {
     { href: '/', label: 'ホーム' },
     { href: '/players', label: '選手データベース' },
     { href: '/teams', label: 'チーム' },
+    { href: '/standings', label: '順位表' },
     { href: '/rankings', label: 'ランキング' },
     { href: '/records', label: '記録' },
     { href: '/matchups', label: '対戦分析' },
