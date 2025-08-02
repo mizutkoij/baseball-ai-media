@@ -1,0 +1,23 @@
+name: Forbidden Scan
+on: 
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: 
+          python-version: '3.11'
+      - name: Run forbidden token scan
+        run: python tools/scan_forbidden.py
+      - name: Check for archive integrity
+        run: |
+          if [ -d "archive" ]; then
+            echo "Archive directory exists - quarantine system active"
+            find archive -name "manifest.json" -exec echo "Found manifest: {}" \;
+          fi
