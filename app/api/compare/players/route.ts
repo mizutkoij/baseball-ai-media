@@ -67,7 +67,7 @@ interface PlayerComparisonData {
       career_AVG: number;
       career_OPS: number;
       career_wRC_plus: number;
-      career_wRC_plus_neutral: number;
+      career_wRC_plus_neutral?: number;
       best_year: { year: number; wRC_plus: number };
       peak_period: string;
     };
@@ -78,7 +78,7 @@ interface PlayerComparisonData {
       career_ERA: number;
       career_FIP: number;
       career_ERA_minus: number;
-      career_ERA_minus_neutral: number;
+      career_ERA_minus_neutral?: number;
       best_year: { year: number; ERA_minus: number };
       peak_period: string;
     };
