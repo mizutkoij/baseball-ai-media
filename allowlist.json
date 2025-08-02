@@ -1,0 +1,21 @@
+{
+  "files": {
+    "lib/provenance.ts": {
+      "patterns": ["\"1point02\"", "blockedSources"],
+      "reason": "Intentional blocklist for third-party source detection"
+    },
+    "scripts/guard_forbidden.ts": {
+      "patterns": ["/1point02\\.jp/i", "1point02"],
+      "reason": "Forbidden token scanner implementation"
+    },
+    "tools/scan_forbidden.py": {
+      "patterns": ["1point02", "PATTERNS"],
+      "reason": "Python forbidden scanner implementation"
+    }
+  },
+  "globalExclusions": [
+    "scale-\\[1\\.02\\]",
+    "pf > 1\\.02",
+    "pf < 0\\.98"
+  ]
+}
