@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter, Noto_Sans_JP } from 'next/font/google'
 import './globals.css'
 import MobileNav from './components/MobileNav'
+import { currentSeasonYear } from '@/lib/time'
 
 const inter = Inter({ subsets: ['latin'] })
 const notoSansJP = Noto_Sans_JP({ 
@@ -144,7 +145,7 @@ export default function RootLayout({
               </div>
               <div className="border-t border-white/10 mt-8 pt-8 text-center">
                 <p className="text-xs text-slate-500">
-                  © 2024 Baseball AI Media. All rights reserved.
+                  © {currentSeasonYear()} Baseball AI Media. All rights reserved.
                 </p>
                 <div className="mt-2 flex flex-wrap justify-center gap-3 text-xs">
                   <a href="/privacy" className="hover:text-white transition-colors">プライバシーポリシー</a>

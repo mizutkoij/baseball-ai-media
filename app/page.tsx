@@ -11,10 +11,12 @@ import HomeScoreboard from "@/components/HomeScoreboard";
 import HomeGamesList from "@/components/HomeGamesList";
 import TeamComparisonPresets from "@/components/TeamComparisonPresets";
 import LeagueStandings from "@/components/LeagueStandings";
+import HomeComparePresets from "@/components/HomeComparePresets";
 import Link from "next/link";
 import { Suspense } from "react";
 import { TrendingUp, Target, BarChart3, Zap } from "lucide-react";
 import CTAButtons from "@/components/CTAButtons";
+import { currentSeasonYear } from "@/lib/time";
 
 // Force dynamic rendering to prevent build-time API calls
 export const dynamic = 'force-dynamic';
@@ -201,6 +203,11 @@ export default async function Home() {
           <HomeGamesList />
         </div>
 
+        {/* Home Compare Presets - New Feature */}
+        <div className="mb-8 animate-slide-up animation-delay-100">
+          <HomeComparePresets />
+        </div>
+
         {/* Game of the Day - Featured Section */}
         <div className="mb-8 animate-slide-up animation-delay-150">
           <GameOfTheDay />
@@ -235,7 +242,7 @@ export default async function Home() {
 
         {/* League Standings */}
         <div className="mt-12 animate-slide-up animation-delay-600">
-          <LeagueStandings year={2024} compact={true} />
+          <LeagueStandings year={currentSeasonYear()} compact={true} />
         </div>
 
         {/* Team Comparison Presets */}
