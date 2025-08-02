@@ -36,7 +36,10 @@
       "Bash(pkill:*)",
       "Bash(timeout 60 npm run build)",
       "Bash(git grep:*)",
-      "Bash(npx madge:*)"
+      "Bash(npx madge:*)",
+      "Bash(BASE_URL=https://baseball-ai-media.vercel.app npx tsx smoke_runtime.ts)",
+      "Bash(BASE_URL=https://baseball-ai-media.vercel.app npx tsx check_pf_sync.ts)",
+      "Bash(git merge:*)"
     ],
     "deny": []
   }
