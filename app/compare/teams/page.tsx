@@ -458,7 +458,7 @@ function CompareTeamsContent() {
 
   // URL正規化: ソート・重複除去・大文字化
   const rawTeamCodes = searchParams.get('teams')?.split(',') || [];
-  const teamCodes = [...new Set(rawTeamCodes.map(code => code.trim().toUpperCase()))].sort();
+  const teamCodes = Array.from(new Set(rawTeamCodes.map(code => code.trim().toUpperCase()))).sort();
   
   const apiUrl = `/api/compare/teams?teams=${teamCodes.join(',')}&year=${year}&pf=${pfCorrection}`;
   
