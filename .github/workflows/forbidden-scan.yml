@@ -1,0 +1,104 @@
+name: Forbidden Token Scan
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  forbidden-scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Run forbidden token scan
+        id: scan_tokens
+        run: |
+          echo "Starting forbidden token scan..."
+          
+          if npm run lint:forbidden; then
+            echo "✅ No forbidden tokens found"
+            echo "scan_result=clean" >> $GITHUB_OUTPUT
+            echo "violation_count=0" >> $GITHUB_OUTPUT
+          else
+            echo "❌ Forbidden tokens detected"
+            echo "scan_result=violations" >> $GITHUB_OUTPUT
+            
+            # Count violations for reporting
+            VIOLATIONS=$(npm run lint:forbidden 2>&1 | grep -c "FORBIDDEN" || echo "0")
+            echo "violation_count=${VIOLATIONS}" >> $GITHUB_OUTPUT
+            
+            exit 1
+          fi
+          
+      - name: Archive integrity check
+        run: |
+          if [ -d "archive" ]; then
+            echo "✅ Archive directory exists - quarantine system active"
+            find archive -name "manifest.json" -exec echo "Found manifest: {}" \;
+            
+            # Verify no forbidden tokens in current codebase
+            ARCHIVE_COUNT=$(find archive -type f | wc -l)
+            echo "📦 ${ARCHIVE_COUNT} files in quarantine"
+          else
+            echo "ℹ️  No archive directory - clean repository"
+          fi
+          
+      - name: Comment PR with scan results
+        uses: actions/github-script@v7
+        if: github.event_name == 'pull_request'
+        with:
+          script: |
+            const scanResult = '${{ steps.scan_tokens.outputs.scan_result }}';
+            const violationCount = '${{ steps.scan_tokens.outputs.violation_count }}';
+            
+            let comment = `## 🔍 Forbidden Token Scan Results\n\n`;
+            
+            if (scanResult === 'clean') {
+              comment += `✅ **CLEAN**: No forbidden tokens detected\n\n`;
+              comment += `**Scanned Patterns:**\n`;
+              comment += `- \`1point02.jp\` references\n`;
+              comment += `- \`1point02\` standalone mentions\n`;
+              comment += `- Numeric pattern \`1.02\` (excluding CSS scale and PF comparisons)\n\n`;
+              comment += `**Protection Status:**\n`;
+              comment += `- ✅ Source code clean\n`;
+              comment += `- ✅ No third-party references\n`;
+              comment += `- ✅ Quarantine system active\n`;
+            } else {
+              comment += `❌ **VIOLATIONS DETECTED**: ${violationCount} forbidden tokens found\n\n`;
+              comment += `**Action Required:**\n`;
+              comment += `1. Remove all forbidden token references\n`;
+              comment += `2. Use academic sources for data validation\n`;
+              comment += `3. Run \`npm run lint:forbidden\` locally to identify issues\n\n`;
+              comment += `**Blocking Merge**: This PR cannot be merged until violations are resolved.\n`;
+            }
+            
+            comment += `\n*Automated scan by Golden Sample Quality Gate*`;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+            
+      - name: Fail on violations
+        if: steps.scan_tokens.outputs.scan_result == 'violations'
+        run: |
+          echo "❌ Forbidden token scan failed"
+          echo "Found ${{ steps.scan_tokens.outputs.violation_count }} violations"
+          echo "This PR is blocked from merging until violations are resolved"
+          exit 1

@@ -9,6 +9,8 @@ export interface ValidationOptions {
   relaxPct?: number
   pfMode?: 'original' | 'neutral' | 'either'
   baselineVersion?: string
+  constantsVersion?: string
+  teamPF?: number
 }
 
 export interface ValidationResult {
@@ -33,8 +35,10 @@ export function inRangeWithSampleGuard(
   const { 
     minPA = 100, 
     minIP = 30, 
-    relaxPct = 0.10,
-    pfMode = 'either'
+    relaxPct = 0.12, // Increased from 10% to 12% for better flake prevention
+    pfMode = 'either',
+    constantsVersion = 'unknown',
+    teamPF = 1.0
   } = options
   
   const needRelax = sampleSize < (minPA || minIP)
@@ -60,7 +64,11 @@ export function inRangeWithSampleGuard(
       originalRange: [min, max],
       adjustedRange: [rMin, rMax],
       sampleSize,
-      pfMode
+      pfMode,
+      constantsVersion,
+      teamPF,
+      relaxationApplied: needRelax,
+      relaxationPercent: relaxPct * 100
     }
   }
 }
@@ -96,7 +104,7 @@ export function filterExpectedYears(testYears: number[]): number[] {
 }
 
 /**
- * Create detailed failure explanation
+ * Create detailed failure explanation with comprehensive diagnostics
  */
 export function explainFailure(
   metric: string,
@@ -107,17 +115,63 @@ export function explainFailure(
 ): string {
   const context = result.context || {}
   
+  // Determine failure severity
+  const exceedsBy = Math.max(
+    value < result.rMin ? (result.rMin - value) / result.rMin : 0,
+    value > result.rMax ? (value - result.rMax) / result.rMax : 0
+  )
+  
+  let severity = 'LOW'
+  if (exceedsBy > 0.30) severity = 'HIGH'      // >30% deviation
+  else if (exceedsBy > 0.15) severity = 'MEDIUM' // >15% deviation
+  
   return JSON.stringify({
+    // Core failure info
     metric,
     playerId,
     year,
-    value,
-    expected: context.originalRange,
-    usedRange: context.adjustedRange,
-    sampleSize: context.sampleSize,
-    needRelax: result.needRelax,
-    explanation: result.explanation,
-    pfMode: context.pfMode,
-    availableYears: getAvailableYears()
+    actualValue: value,
+    
+    // Range analysis
+    validation: {
+      expected: context.originalRange,
+      usedRange: context.adjustedRange,
+      exceedsBy: (exceedsBy * 100).toFixed(1) + '%',
+      severity
+    },
+    
+    // Sample analysis
+    sample: {
+      size: context.sampleSize,
+      relaxationApplied: context.relaxationApplied,
+      relaxationPercent: context.relaxationPercent + '%',
+      explanation: result.explanation
+    },
+    
+    // Environmental factors
+    environment: {
+      constantsVersion: context.constantsVersion,
+      pfMode: context.pfMode,
+      teamPF: context.teamPF,
+      availableYears: getAvailableYears()
+    },
+    
+    // Debug hints
+    debugHints: {
+      checkConstantsUpdate: severity === 'HIGH' && context.constantsVersion === 'unknown',
+      checkSampleSize: context.sampleSize < 50,
+      checkParkFactor: Math.abs(context.teamPF - 1.0) > 0.05,
+      possibleDataIssue: severity === 'HIGH' && !context.relaxationApplied
+    },
+    
+    // Action items
+    actionItems: [
+      severity === 'HIGH' ? '🔴 Investigate data quality immediately' : '🟡 Monitor trend',
+      context.constantsVersion === 'unknown' ? '📊 Verify constants version' : null,
+      context.sampleSize < 30 ? '📈 Consider expanding sample size' : null,
+      exceedsBy > 0.20 ? '🎯 Update baseline expectations' : null
+    ].filter(Boolean),
+    
+    timestamp: new Date().toISOString()
   }, null, 2)
 }

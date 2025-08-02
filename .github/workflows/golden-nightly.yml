@@ -1,0 +1,203 @@
+name: Golden Sample Nightly Monitoring
+on:
+  schedule:
+    - cron: "15 15 * * *" # JST 00:15 daily
+  workflow_dispatch:
+
+jobs:
+  golden-nightly:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Create reports directory
+        run: mkdir -p .reports
+        
+      - name: Run golden sample validation
+        id: golden_test
+        run: |
+          npm run test:golden -- --reporter=junit --outputFile=.reports/junit-golden-nightly.xml
+          echo "test_status=success" >> $GITHUB_OUTPUT
+        continue-on-error: true
+        
+      - name: Parse test results
+        id: parse_results
+        run: |
+          if [ -f ".reports/junit-golden-nightly.xml" ]; then
+            TOTAL_TESTS=$(grep -o 'tests="[0-9]*"' .reports/junit-golden-nightly.xml | grep -o '[0-9]*' | head -1)
+            FAILURES=$(grep -o 'failures="[0-9]*"' .reports/junit-golden-nightly.xml | grep -o '[0-9]*' | head -1)
+            ERRORS=$(grep -o 'errors="[0-9]*"' .reports/junit-golden-nightly.xml | grep -o '[0-9]*' | head -1)
+            
+            echo "total_tests=${TOTAL_TESTS:-0}" >> $GITHUB_OUTPUT
+            echo "failures=${FAILURES:-0}" >> $GITHUB_OUTPUT
+            echo "errors=${ERRORS:-0}" >> $GITHUB_OUTPUT
+            
+            if [ "${FAILURES:-0}" -gt 0 ] || [ "${ERRORS:-0}" -gt 0 ]; then
+              echo "test_status=failed" >> $GITHUB_OUTPUT
+            else
+              echo "test_status=passed" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "test_status=no_report" >> $GITHUB_OUTPUT
+            echo "total_tests=0" >> $GITHUB_OUTPUT
+            echo "failures=0" >> $GITHUB_OUTPUT
+            echo "errors=0" >> $GITHUB_OUTPUT
+          fi
+          
+      - name: Upload nightly reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: golden-nightly-${{ github.run_number }}
+          path: .reports/**
+          retention-days: 7
+          
+      - name: Generate trend summary
+        id: trend_summary
+        run: |
+          STATUS="${{ steps.parse_results.outputs.test_status }}"
+          TOTAL="${{ steps.parse_results.outputs.total_tests }}"
+          FAILURES="${{ steps.parse_results.outputs.failures }}"
+          ERRORS="${{ steps.parse_results.outputs.errors }}"
+          
+          if [ "$STATUS" = "passed" ]; then
+            SUMMARY="✅ All ${TOTAL} golden sample validations passed"
+            EMOJI="✅"
+          elif [ "$STATUS" = "failed" ]; then
+            SUMMARY="❌ ${FAILURES} failures, ${ERRORS} errors out of ${TOTAL} tests"
+            EMOJI="❌"
+          else
+            SUMMARY="⚠️  No test report generated - check workflow logs"
+            EMOJI="⚠️"
+          fi
+          
+          echo "summary=${SUMMARY}" >> $GITHUB_OUTPUT
+          echo "emoji=${EMOJI}" >> $GITHUB_OUTPUT
+          echo "status=${STATUS}" >> $GITHUB_OUTPUT
+          
+      - name: Discord/Slack notification
+        if: always()
+        run: |
+          # Create notification payload
+          cat > notification.json << EOF
+          {
+            "type": "golden_nightly",
+            "status": "${{ steps.trend_summary.outputs.status }}",
+            "summary": "${{ steps.trend_summary.outputs.summary }}",
+            "details": {
+              "total_tests": "${{ steps.parse_results.outputs.total_tests }}",
+              "failures": "${{ steps.parse_results.outputs.failures }}",
+              "errors": "${{ steps.parse_results.outputs.errors }}",
+              "run_id": "${{ github.run_id }}",
+              "run_number": "${{ github.run_number }}",
+              "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            }
+          }
+          EOF
+          
+          # Send notification if notify.js exists
+          if [ -f "scripts/notify.js" ]; then
+            node scripts/notify.js "${{ steps.trend_summary.outputs.status }}" \
+              "Golden Nightly: ${{ steps.trend_summary.outputs.summary }}" \
+              --meta run=${{ github.run_id }} \
+              --file notification.json || echo "Notification failed, continuing..."
+          else
+            echo "No notification script found - would send: ${{ steps.trend_summary.outputs.summary }}"
+          fi
+          
+      - name: Create issue on persistent failure
+        if: steps.trend_summary.outputs.status == 'failed'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Check if there's already an open issue for golden sample failures
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'golden-sample-failure'
+            });
+            
+            if (issues.length === 0) {
+              // Create new issue
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: '🚨 Golden Sample Nightly Validation Failure',
+                body: `
+            ## Golden Sample Quality Gate Failure
+            
+            **Status**: ${{ steps.trend_summary.outputs.summary }}
+            
+            **Details:**
+            - Total Tests: ${{ steps.parse_results.outputs.total_tests }}
+            - Failures: ${{ steps.parse_results.outputs.failures }}
+            - Errors: ${{ steps.parse_results.outputs.errors }}
+            - Run ID: ${{ github.run_id }}
+            - Date: $(date -u +%Y-%m-%d)
+            
+            **Action Required:**
+            1. Check workflow logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            2. Download artifacts for detailed analysis
+            3. Verify if constants/baseline need updates
+            4. Re-run manually if transient issue
+            
+            **Investigation Priority:**
+            - 🔴 High: >5 failures (data corruption risk)
+            - 🟡 Medium: 1-5 failures (isolated issues)
+            - 🟢 Low: Infrastructure/timeout issues
+            
+            This issue will auto-close when nightly validation passes.
+                `,
+                labels: ['golden-sample-failure', 'quality-gate', 'urgent']
+              });
+            } else {
+              // Update existing issue
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issues[0].number,
+                body: `**Additional Failure**: ${{ steps.trend_summary.outputs.summary }} (Run: ${{ github.run_id }})`
+              });
+            }
+            
+      - name: Close resolved issues
+        if: steps.trend_summary.outputs.status == 'passed'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Close any open golden sample failure issues
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'golden-sample-failure'
+            });
+            
+            for (const issue of issues) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                state: 'closed'
+              });
+              
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: '✅ **Resolved**: Golden sample validation is now passing. Auto-closing this issue.'
+              });
+            }
