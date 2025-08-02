@@ -30,7 +30,8 @@
       "Bash(set WEBHOOK_DISCORD_URL=https://discord.com/api/webhooks/1400884270846972085/ysQh2gYRelm3U5cw9QoyKw6rw02rzlqEY8corHm0SdMLFQnuu_7WD43wwhvqF33fgcR_)",
       "Bash(set NOTIFY_TARGET=discord)",
       "Bash(set ALERT_ENV=test)",
-      "Bash(del scriptstest_notify.ts)"
+      "Bash(del scriptstest_notify.ts)",
+      "Bash(git checkout:*)"
     ],
     "deny": []
   }

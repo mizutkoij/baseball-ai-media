@@ -19,6 +19,7 @@ import {
   Trophy,
   Target
 } from 'lucide-react';
+import ShareButton from '@/components/ShareButton';
 
 interface TeamComparisonData {
   team_code: string;
@@ -634,6 +635,13 @@ function CompareTeamsContent() {
             <Download className="w-4 h-4" />
             CSV出力
           </button>
+
+          {/* Share */}
+          <ShareButton
+            url={`https://npb-ai.com/compare/teams?teams=${teamCodes.join(',')}&year=${year}&pf=${pfCorrection}`}
+            title={pageTitle}
+            text={pageDescription}
+          />
         </div>
       </div>
 
