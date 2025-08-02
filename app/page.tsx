@@ -12,6 +12,7 @@ import HomeGamesList from "@/components/HomeGamesList";
 import TeamComparisonPresets from "@/components/TeamComparisonPresets";
 import LeagueStandings from "@/components/LeagueStandings";
 import HomeComparePresets from "@/components/HomeComparePresets";
+import DailyHighlights from "@/components/DailyHighlights";
 import Link from "next/link";
 import { Suspense } from "react";
 import { TrendingUp, Target, BarChart3, Zap } from "lucide-react";
@@ -189,6 +190,11 @@ export default async function Home() {
           {/* Stats Overview */}
           <StatsOverview />
         </div>
+      </section>
+
+      {/* Daily Highlights - Fixed Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <DailyHighlights />
       </section>
 
       {/* Main Content */}

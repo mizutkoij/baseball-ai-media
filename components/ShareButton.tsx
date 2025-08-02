@@ -1,49 +1,61 @@
 "use client";
 
+import { useState } from 'react';
 import { Share2, Copy } from 'lucide-react';
 import { track } from '@/lib/analytics';
 
 interface ShareButtonProps {
   url: string;
-  text: string;
+  title?: string;
+  text?: string;
   size?: 'sm' | 'md';
   className?: string;
 }
 
-export function ShareButton({ url, text, size = 'sm', className = '' }: ShareButtonProps) {
+export function ShareButton({ url, title, text, size = 'sm', className = '' }: ShareButtonProps) {
+  const [copied, setCopied] = useState(false);
+
   const share = async () => {
     const fullUrl = url.startsWith('http') ? url : `${window.location.origin}${url}`;
+    const shareTitle = title || text || 'Baseball AI Media';
     
     try {
+      // Try native Web Share API first
       if (navigator.share) {
-        await navigator.share({ 
-          title: text, 
-          url: fullUrl, 
-          text: `${text} - Baseball AI Media` 
-        });
-        track('share_native', { url: fullUrl, text });
-      } else {
-        await navigator.clipboard.writeText(fullUrl);
-        // Simple feedback - could be replaced with toast
-        const button = document.activeElement as HTMLButtonElement;
-        if (button) {
-          const originalText = button.textContent;
-          button.textContent = 'コピー済み!';
-          setTimeout(() => {
-            button.textContent = originalText;
-          }, 2000);
+        const shareData = {
+          title: shareTitle,
+          text: text || shareTitle,
+          url: fullUrl,
+        };
+
+        if (navigator.canShare && navigator.canShare(shareData)) {
+          await navigator.share(shareData);
+          track('share_native', { url: fullUrl, title: shareTitle });
+          return;
         }
-        track('share_copy', { url: fullUrl, text });
       }
+      
+      // Fallback: copy to clipboard
+      await navigator.clipboard.writeText(fullUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+      track('share_copy', { url: fullUrl, title: shareTitle });
     } catch (err) {
       console.warn('Share failed:', err);
       
-      // Fallback: try clipboard
+      // Ultimate fallback: manual selection
       try {
-        await navigator.clipboard.writeText(fullUrl);
-        track('share_copy_fallback', { url: fullUrl, text });
+        const textArea = document.createElement('textarea');
+        textArea.value = fullUrl;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+        track('share_fallback', { url: fullUrl, title: shareTitle });
       } catch (clipboardErr) {
-        console.error('Clipboard also failed:', clipboardErr);
+        console.error('All share methods failed:', clipboardErr);
       }
     }
   };
@@ -62,7 +74,7 @@ export function ShareButton({ url, text, size = 'sm', className = '' }: ShareBut
       title="共有・URLコピー"
     >
       <Share2 className={size === 'sm' ? 'w-3 h-3' : 'w-4 h-4'} />
-      共有
+      {copied ? 'コピー済み!' : '共有'}
     </button>
   );
 }
@@ -89,3 +101,5 @@ export function QuickShareButton({ url, text }: { url: string; text: string }) {
     </button>
   );
 }
+
+export default ShareButton;

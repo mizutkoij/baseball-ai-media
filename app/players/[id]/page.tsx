@@ -193,14 +193,20 @@ export default function PlayerDetailPage({ params }: { params: { id: string } })
 
   // Generate JSON-LD structured data
   const generatePlayerJsonLd = () => {
+    const stats2024 = player.batting?.find(row => row.年度 === 2024) || player.pitching?.find(row => row.年度 === 2024);
+    const isPitcher = player.primary_pos === "P";
+    const battingStats = isPitcher ? null : player.batting?.find(row => row.年度 === 2024);
+    const pitchingStats = isPitcher ? player.pitching?.find(row => row.年度 === 2024) : null;
+    
     const jsonLd = {
       "@context": "https://schema.org",
       "@type": "Person",
       "name": player.name,
       "alternateName": player.name_kana,
-      "url": `https://baseball-ai-media.vercel.app/players/${player.player_id}`,
+      "url": `https://npb-ai.com/players/${player.player_id}`,
       "sameAs": player.url ? [player.url] : [],
       "jobTitle": player.primary_pos === "P" ? "プロ野球投手" : "プロ野球選手",
+      "sport": "野球",
       "memberOf": {
         "@type": "SportsTeam",
         "name": "NPB (日本プロ野球)",
@@ -210,7 +216,9 @@ export default function PlayerDetailPage({ params }: { params: { id: string } })
         "野球",
         "NPB",
         "日本プロ野球",
-        player.primary_pos === "P" ? "投手" : "打撃"
+        "セイバーメトリクス",
+        player.primary_pos === "P" ? "投手" : "打撃",
+        "プロ野球統計"
       ],
       "additionalProperty": [
         {
@@ -233,7 +241,18 @@ export default function PlayerDetailPage({ params }: { params: { id: string } })
             : player.first_year
             ? `${player.first_year}年-`
             : "期間不明"
-        }
+        },
+        ...(stats2024 ? [
+          {
+            "@type": "PropertyValue",
+            "name": "2024年シーズン成績",
+            "value": battingStats 
+              ? `打率${formatNumber(battingStats.打率, 3)} 本塁打${formatNumber(battingStats.本塁打)}本 OPS${formatNumber(battingStats.OPS, 3)}`
+              : pitchingStats
+              ? `防御率${formatNumber(pitchingStats.防御率, 2)} ${formatNumber(pitchingStats.勝利)}勝 WHIP${formatNumber(pitchingStats.WHIP, 3)}`
+              : "2024年成績データ"
+          }
+        ] : [])
       ]
     };
 
@@ -329,6 +348,70 @@ export default function PlayerDetailPage({ params }: { params: { id: string } })
             </div>
           </div>
         </div>
+
+        {/* 2024年統計ハイライト */}
+        {(() => {
+          const stats2024 = player.batting?.find(row => row.年度 === 2024) || player.pitching?.find(row => row.年度 === 2024);
+          if (!stats2024) return null;
+
+          const isPitcher = player.primary_pos === "P";
+          const battingStats = isPitcher ? null : player.batting?.find(row => row.年度 === 2024);
+          const pitchingStats = isPitcher ? player.pitching?.find(row => row.年度 === 2024) : null;
+
+          return (
+            <div className="bg-black/20 backdrop-blur-md border border-white/10 rounded-lg p-6 mb-6">
+              <div className="flex items-center gap-2 mb-4">
+                <BarChart3 className="w-5 h-5 text-blue-400" />
+                <h2 className="text-xl font-bold text-white">2024年シーズン成績</h2>
+                <span className="px-2 py-1 text-xs rounded bg-blue-100 text-blue-800 font-medium">最新</span>
+              </div>
+              
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {battingStats && (
+                  <>
+                    <div className="text-center bg-blue-50/10 rounded p-3">
+                      <div className="text-2xl font-bold text-blue-400">{formatNumber(battingStats.打率, 3)}</div>
+                      <div className="text-sm text-slate-300">打率</div>
+                    </div>
+                    <div className="text-center bg-green-50/10 rounded p-3">
+                      <div className="text-2xl font-bold text-green-400">{formatNumber(battingStats.本塁打)}</div>
+                      <div className="text-sm text-slate-300">本塁打</div>
+                    </div>
+                    <div className="text-center bg-purple-50/10 rounded p-3">
+                      <div className="text-2xl font-bold text-purple-400">{formatNumber(battingStats.OPS, 3)}</div>
+                      <div className="text-sm text-slate-300">OPS</div>
+                    </div>
+                    <div className="text-center bg-amber-50/10 rounded p-3">
+                      <div className="text-2xl font-bold text-amber-400">{formatNumber(battingStats.wRC_plus_simple)}</div>
+                      <div className="text-sm text-slate-300">wRC+</div>
+                    </div>
+                  </>
+                )}
+                
+                {pitchingStats && (
+                  <>
+                    <div className="text-center bg-red-50/10 rounded p-3">
+                      <div className="text-2xl font-bold text-red-400">{formatNumber(pitchingStats.防御率, 2)}</div>
+                      <div className="text-sm text-slate-300">防御率</div>
+                    </div>
+                    <div className="text-center bg-blue-50/10 rounded p-3">
+                      <div className="text-2xl font-bold text-blue-400">{formatNumber(pitchingStats.勝利)}</div>
+                      <div className="text-sm text-slate-300">勝利</div>
+                    </div>
+                    <div className="text-center bg-green-50/10 rounded p-3">
+                      <div className="text-2xl font-bold text-green-400">{formatNumber(pitchingStats.WHIP, 3)}</div>
+                      <div className="text-sm text-slate-300">WHIP</div>
+                    </div>
+                    <div className="text-center bg-amber-50/10 rounded p-3">
+                      <div className="text-2xl font-bold text-amber-400">{formatNumber(pitchingStats.ERA_minus)}</div>
+                      <div className="text-sm text-slate-300">ERA-</div>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+          );
+        })()}
 
         {/* 選手サマリ */}
         <PlayerSummary player={player} />
