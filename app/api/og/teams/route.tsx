@@ -50,7 +50,7 @@ export async function GET(req: NextRequest) {
     return new Response(
       JSON.stringify({
         message: "OG image generation temporarily disabled for build compatibility",
-        teams: teamData.map(t => t.name).join(", "),
+        teams: teamData.map(t => t?.name).filter(Boolean).join(", "),
         year,
         pfCorrection
       }),
