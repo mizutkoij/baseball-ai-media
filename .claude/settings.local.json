@@ -31,7 +31,10 @@
       "Bash(set NOTIFY_TARGET=discord)",
       "Bash(set ALERT_ENV=test)",
       "Bash(del scriptstest_notify.ts)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(taskkill:*)",
+      "Bash(pkill:*)",
+      "Bash(timeout 60 npm run build)"
     ],
     "deny": []
   }

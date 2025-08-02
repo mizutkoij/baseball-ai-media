@@ -574,11 +574,8 @@ function CompareTeamsContent() {
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDescription} />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content={`https://npb-ai.com/api/og/teams?teams=${teamCodes.join(',')}&year=${year}&pf=${pfCorrection}`} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content={`https://npb-ai.com/api/og/teams?teams=${teamCodes.join(',')}&year=${year}&pf=${pfCorrection}`} />
+        {/* OG images temporarily disabled for build compatibility */}
+        <meta name="twitter:card" content="summary" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href={`https://npb-ai.com/compare/teams?teams=${teamCodes.join(',')}&year=${year}&pf=${pfCorrection}`} />
       </Head>

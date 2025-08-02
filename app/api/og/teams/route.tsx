@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/server';
 import { NextRequest } from 'next/server';
 
-export const runtime = 'edge';
+// export const runtime = 'edge'; // Temporarily disabled for testing
 
 const TEAM_COLORS: Record<string, { primary: string; secondary: string; name: string }> = {
   'G': { primary: '#FF6600', secondary: '#000000', name: '読売ジャイアンツ' },

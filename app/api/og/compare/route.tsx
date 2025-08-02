@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server';
 
-export const runtime = 'edge';
+// export const runtime = 'edge'; // Temporarily disabled for testing
 
 // Edge runtime doesn't support better-sqlite3, so we'll fetch from API instead
 async function getPlayersData(ids: string[]) {
