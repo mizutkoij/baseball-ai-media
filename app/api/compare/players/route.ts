@@ -198,24 +198,24 @@ function generateMockComparison(playerIds: string[], pfCorrection: boolean, year
         batting: {
           total_years: years.length,
           total_games: years.reduce((sum, y) => sum + (y.games || 0), 0),
-          total_PA: years.reduce((sum, y) => sum + (y.PA || 0), 0),
-          career_AVG: years.reduce((sum, y) => sum + (y.AVG || 0), 0) / years.length,
-          career_OPS: years.reduce((sum, y) => sum + ((y.OBP || 0) + (y.SLG || 0)), 0) / years.length,
-          career_wRC_plus: years.reduce((sum, y) => sum + (y.wRC_plus || 0), 0) / years.length,
-          career_wRC_plus_neutral: pfCorrection ? years.reduce((sum, y) => sum + (y.wRC_plus_neutral || 0), 0) / years.length : undefined,
-          best_year: years.reduce((best, y) => ((y.wRC_plus || 0) > best.wRC_plus ? { year: y.year, wRC_plus: y.wRC_plus || 0 } : best), { year: yearFrom, wRC_plus: 0 }),
+          total_PA: years.filter(y => 'PA' in y).reduce((sum, y) => sum + ((y as any).PA || 0), 0),
+          career_AVG: years.filter(y => 'AVG' in y).reduce((sum, y) => sum + ((y as any).AVG || 0), 0) / years.length,
+          career_OPS: years.filter(y => 'OBP' in y && 'SLG' in y).reduce((sum, y) => sum + (((y as any).OBP || 0) + ((y as any).SLG || 0)), 0) / years.length,
+          career_wRC_plus: years.filter(y => 'wRC_plus' in y).reduce((sum, y) => sum + ((y as any).wRC_plus || 0), 0) / years.length,
+          career_wRC_plus_neutral: pfCorrection ? years.filter(y => 'wRC_plus_neutral' in y).reduce((sum, y) => sum + ((y as any).wRC_plus_neutral || 0), 0) / years.length : undefined,
+          best_year: years.filter(y => 'wRC_plus' in y).reduce((best, y) => (((y as any).wRC_plus || 0) > best.wRC_plus ? { year: y.year, wRC_plus: (y as any).wRC_plus || 0 } : best), { year: yearFrom, wRC_plus: 0 }),
           peak_period: `${yearFrom}-${yearTo}`
         }
       } : {
         pitching: {
           total_years: years.length,
           total_games: years.reduce((sum, y) => sum + (y.games || 0), 0),
-          total_IP: years.reduce((sum, y) => sum + (y.IP || 0), 0),
-          career_ERA: years.reduce((sum, y) => sum + (y.ERA || 0), 0) / years.length,
-          career_FIP: years.reduce((sum, y) => sum + (y.FIP || 0), 0) / years.length,
-          career_ERA_minus: years.reduce((sum, y) => sum + (y.ERA_minus || 0), 0) / years.length,
-          career_ERA_minus_neutral: pfCorrection ? years.reduce((sum, y) => sum + (y.ERA_minus_neutral || 0), 0) / years.length : undefined,
-          best_year: years.reduce((best, y) => ((y.ERA_minus || 200) < best.ERA_minus ? { year: y.year, ERA_minus: y.ERA_minus || 200 } : best), { year: yearFrom, ERA_minus: 200 }),
+          total_IP: years.filter(y => 'IP' in y).reduce((sum, y) => sum + ((y as any).IP || 0), 0),
+          career_ERA: years.filter(y => 'ERA' in y).reduce((sum, y) => sum + ((y as any).ERA || 0), 0) / years.length,
+          career_FIP: years.filter(y => 'FIP' in y).reduce((sum, y) => sum + ((y as any).FIP || 0), 0) / years.length,
+          career_ERA_minus: years.filter(y => 'ERA_minus' in y).reduce((sum, y) => sum + ((y as any).ERA_minus || 0), 0) / years.length,
+          career_ERA_minus_neutral: pfCorrection ? years.filter(y => 'ERA_minus_neutral' in y).reduce((sum, y) => sum + ((y as any).ERA_minus_neutral || 0), 0) / years.length : undefined,
+          best_year: years.filter(y => 'ERA_minus' in y).reduce((best, y) => (((y as any).ERA_minus || 200) < best.ERA_minus ? { year: y.year, ERA_minus: (y as any).ERA_minus || 200 } : best), { year: yearFrom, ERA_minus: 200 }),
           peak_period: `${yearFrom}-${yearTo}`
         }
       }
