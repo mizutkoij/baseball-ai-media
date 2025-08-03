@@ -136,8 +136,12 @@ export interface TeamSplitStats {
     ERA_minus_neutral: number; // PF corrected
     FIP_minus: number;
     FIP_minus_neutral: number; // PF corrected
+    WHIP: number;
+    WHIP_neutral?: number;
     HR_per9: number;
     avg_pf: number; // Weighted average park factor
+    runs_allowed?: number;
+    runs_allowed_per_game?: number;
   };
 }
 
@@ -975,8 +979,12 @@ function calculateSplitStats(
     ERA_minus_neutral: 100 / Math.pow(avgPF, 1.0), // Full PF adjustment for ERA-
     FIP_minus: 100,
     FIP_minus_neutral: 100 / Math.pow(avgPF, 0.5), // Half PF adjustment for FIP-
+    WHIP: 1.25, // Mock WHIP value
+    WHIP_neutral: 1.25 / Math.pow(avgPF, 0.3), // Slight PF adjustment for WHIP
     HR_per9: (HR * 9) / Math.max(PA / 4, 1),
-    avg_pf: avgPF
+    avg_pf: avgPF,
+    runs_allowed: Math.round(PA / 10), // Mock runs allowed
+    runs_allowed_per_game: Math.round(PA / 10 / Math.max(games.length, 1))
   };
   
   return {

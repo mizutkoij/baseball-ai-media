@@ -164,25 +164,25 @@ const TeamSplits: React.FC<TeamSplitsProps> = ({
             <div className="space-y-1">
               <PFDeltaNote 
                 raw={split.batting.wRC_plus} 
-                neutral={split.batting.wRC_plus_neutral} 
+                neutral={split.batting.wRC_plus_neutral || split.batting.wRC_plus} 
                 pf={Number(split.batting.avg_pf)} 
                 metric="wRC+" 
               />
               <PFDeltaNote 
                 raw={split.batting.OPS_plus} 
-                neutral={split.batting.OPS_plus_neutral} 
+                neutral={split.batting.OPS_plus_neutral || split.batting.OPS_plus} 
                 pf={Number(split.batting.avg_pf)} 
                 metric="OPS+" 
               />
               <PFDeltaNote 
                 raw={split.pitching.ERA_minus} 
-                neutral={split.pitching.ERA_minus_neutral} 
+                neutral={split.pitching.ERA_minus_neutral || split.pitching.ERA_minus} 
                 pf={Number(split.batting.avg_pf)} 
                 metric="ERA-" 
               />
               <PFDeltaNote 
                 raw={split.pitching.FIP_minus} 
-                neutral={split.pitching.FIP_minus_neutral} 
+                neutral={split.pitching.FIP_minus_neutral || split.pitching.FIP_minus} 
                 pf={Number(split.batting.avg_pf)} 
                 metric="FIP-" 
               />
@@ -250,13 +250,13 @@ const TeamSplits: React.FC<TeamSplitsProps> = ({
           <div>
             <div className="text-slate-400">wRC+ 差</div>
             <div className={`font-bold ${
-              (pfCorrectionEnabled ? homeSplit.batting.wRC_plus_neutral : homeSplit.batting.wRC_plus) >
-              (pfCorrectionEnabled ? awaySplit.batting.wRC_plus_neutral : awaySplit.batting.wRC_plus)
+              (pfCorrectionEnabled ? (homeSplit.batting.wRC_plus_neutral || homeSplit.batting.wRC_plus) : homeSplit.batting.wRC_plus) >
+              (pfCorrectionEnabled ? (awaySplit.batting.wRC_plus_neutral || awaySplit.batting.wRC_plus) : awaySplit.batting.wRC_plus)
                 ? 'text-green-400' : 'text-red-400'
             }`}>
               {Math.abs(
-                (pfCorrectionEnabled ? homeSplit.batting.wRC_plus_neutral : homeSplit.batting.wRC_plus) -
-                (pfCorrectionEnabled ? awaySplit.batting.wRC_plus_neutral : awaySplit.batting.wRC_plus)
+                (pfCorrectionEnabled ? (homeSplit.batting.wRC_plus_neutral || homeSplit.batting.wRC_plus) : homeSplit.batting.wRC_plus) -
+                (pfCorrectionEnabled ? (awaySplit.batting.wRC_plus_neutral || awaySplit.batting.wRC_plus) : awaySplit.batting.wRC_plus)
               )}
             </div>
           </div>
@@ -264,13 +264,13 @@ const TeamSplits: React.FC<TeamSplitsProps> = ({
           <div>
             <div className="text-slate-400">ERA- 差</div>
             <div className={`font-bold ${
-              (pfCorrectionEnabled ? homeSplit.pitching.ERA_minus_neutral : homeSplit.pitching.ERA_minus) <
-              (pfCorrectionEnabled ? awaySplit.pitching.ERA_minus_neutral : awaySplit.pitching.ERA_minus)
+              (pfCorrectionEnabled ? (homeSplit.pitching.ERA_minus_neutral || homeSplit.pitching.ERA_minus) : homeSplit.pitching.ERA_minus) <
+              (pfCorrectionEnabled ? (awaySplit.pitching.ERA_minus_neutral || awaySplit.pitching.ERA_minus) : awaySplit.pitching.ERA_minus)
                 ? 'text-green-400' : 'text-red-400'
             }`}>
               {Math.abs(
-                (pfCorrectionEnabled ? homeSplit.pitching.ERA_minus_neutral : homeSplit.pitching.ERA_minus) -
-                (pfCorrectionEnabled ? awaySplit.pitching.ERA_minus_neutral : awaySplit.pitching.ERA_minus)
+                (pfCorrectionEnabled ? (homeSplit.pitching.ERA_minus_neutral || homeSplit.pitching.ERA_minus) : homeSplit.pitching.ERA_minus) -
+                (pfCorrectionEnabled ? (awaySplit.pitching.ERA_minus_neutral || awaySplit.pitching.ERA_minus) : awaySplit.pitching.ERA_minus)
               )}
             </div>
           </div>
