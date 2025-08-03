@@ -211,10 +211,12 @@ export default function TodayGamesBar({ refreshInterval = 30000, defaultLeague =
                 className={`px-2 py-1 rounded-full text-xs font-medium ${
                   isRealMode
                     ? "bg-red-100 text-red-800"
+                    : data?.source === "snapshot"
+                    ? "bg-blue-100 text-blue-800"
                     : "bg-gray-100 text-gray-600"
                 }`}
               >
-                {isRealMode ? "🔴 REAL" : "📊 BASIC"}
+                {isRealMode ? "🔴 REAL" : data?.source === "snapshot" ? "📊 SNAPSHOT" : "📊 BASIC"}
               </span>
               
               {/* Week Schedule Link */}
