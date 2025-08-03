@@ -2,9 +2,6 @@ import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
 
 export const runtime = 'edge';
-export const alt = 'NPB Player Comparison';
-export const size = { width: 1200, height: 630 };
-export const contentType = 'image/png';
 
 const validatePlayerIds = (value: string | null) => {
   if (!value) return [];
@@ -150,7 +147,8 @@ export async function GET(req: NextRequest) {
         </div>
       ),
       {
-        ...size,
+        width: 1200,
+        height: 630,
         headers: { 
           'Cache-Control': 'public, max-age=3600, immutable',
           'Content-Type': 'image/png'

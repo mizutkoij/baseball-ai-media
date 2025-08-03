@@ -29,9 +29,14 @@ jobs:
           mkdir -p .reports
           mkdir -p public/status
         
-      - name: Run golden sample validation
+      - name: Run Golden Sample tests (always produce JUnit)
         run: |
-          npm run test:golden -- --reporter=junit --outputFile=.reports/junit-golden.xml
+          mkdir -p .reports
+          # 直接の非ゼロ終了を抑止し、評価は次ステップに委ねる
+          npm run test:golden -- --reporter=junit --outputFile=.reports/junit-golden.xml || true
+
+      - name: Evaluate JUnit result
+        run: node scripts/ci/parse-junit.mjs .reports/junit-golden.xml
           
       - name: Run game invariant validation
         run: |
