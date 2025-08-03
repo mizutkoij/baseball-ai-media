@@ -40,3 +40,12 @@ next-env.d.ts
 /logs
 *.duckdb
 *.db
+*.db-shm
+*.db-wal
+
+# Debug and temporary files
+debug_*.html
+dev*.log
+*test*.json
+*report*.json
+snapshots/
