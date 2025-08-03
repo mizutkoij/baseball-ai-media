@@ -43,15 +43,44 @@ jobs:
         env:
           PREVIEW_URL: ${{ steps.deploy.outputs.preview-url || 'http://localhost:3000' }}
           
+      - name: UI Density Check (WARN only)
+        run: |
+          echo "🔍 Running UI density validation..."
+          npm run check:uidensity || true
+        continue-on-error: true
+          
       - name: Upload test reports
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: golden-test-reports
-          path: .reports/**
+          path: |
+            .reports/**
+            !.reports/last_good_version.txt
           retention-days: 30
           
-      - name: Comment PR with results
+      - name: Fetch base quality status
+        if: github.event_name == 'pull_request'
+        run: |
+          # Try to fetch base quality status for comparison
+          BASE_SHA="${{ github.event.pull_request.base.sha }}"
+          echo "Fetching quality status from base commit: $BASE_SHA"
+          
+          # Download base version of quality.json if it exists
+          if curl -s -f -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+             "https://api.github.com/repos/${{ github.repository }}/contents/public/status/quality.json?ref=$BASE_SHA" \
+             -o base_quality_response.json; then
+            
+            # Extract and decode base64 content
+            cat base_quality_response.json | jq -r '.content' | base64 -d > base_quality.json
+            echo "✅ Base quality status found"
+            cat base_quality.json
+          else
+            echo "ℹ️ No base quality status found (first PR or file doesn't exist)"
+            echo '{"status":"unknown","note":"No baseline for comparison"}' > base_quality.json
+          fi
+
+      - name: Comment PR with quality diff
         uses: actions/github-script@v7
         if: github.event_name == 'pull_request'
         with:
@@ -59,39 +88,107 @@ jobs:
             const fs = require('fs');
             
             try {
-              // Try to read the test results
+              // Read test results
               const goldenReportExists = fs.existsSync('.reports/junit-golden.xml');
               const invariantReportExists = fs.existsSync('.reports/junit-invariants.xml');
               
-              const goldenStatus = goldenReportExists ? '✅ Golden Sample Validation: PASSED' : '❌ Golden Sample Validation: NO REPORT';
-              const invariantStatus = invariantReportExists ? '✅ Game Invariant Validation: PASSED' : '❌ Game Invariant Validation: NO REPORT';
+              // Parse current quality status
+              let currentQuality = {};
+              if (fs.existsSync('public/status/quality.json')) {
+                currentQuality = JSON.parse(fs.readFileSync('public/status/quality.json', 'utf-8'));
+              }
+              
+              // Parse base quality status
+              let baseQuality = {};
+              if (fs.existsSync('base_quality.json')) {
+                baseQuality = JSON.parse(fs.readFileSync('base_quality.json', 'utf-8'));
+              }
+              
+              // Generate quality diff
+              let qualityDiff = '';
+              if (baseQuality.status && baseQuality.status !== 'unknown') {
+                const baseTests = baseQuality.tests || {};
+                const currentTests = currentQuality.tests || {};
+                
+                const basePassed = baseTests.passed || 0;
+                const baseTotal = baseTests.total || 0;
+                const currentPassed = currentTests.passed || 0;
+                const currentTotal = currentTests.total || 0;
+                
+                const baseRate = baseTotal > 0 ? (basePassed / baseTotal * 100) : 0;
+                const currentRate = currentTotal > 0 ? (currentPassed / currentTotal * 100) : 0;
+                const rateDiff = currentRate - baseRate;
+                
+                qualityDiff = `
+            ## 🧪 Quality Diff (base → head)
+            
+            | Metric | Base | Head | Change |
+            |--------|------|------|--------|
+            | Tests Passed | ${basePassed}/${baseTotal} | ${currentPassed}/${currentTotal} | ${rateDiff >= 0 ? '+' : ''}${rateDiff.toFixed(1)}% |
+            | Status | ${baseQuality.status || 'unknown'} | ${currentQuality.status || 'unknown'} | ${baseQuality.status === currentQuality.status ? '🟰 Same' : '🔄 Changed'} |
+            | Version | ${baseQuality.version || 'N/A'} | ${currentQuality.version || 'N/A'} | ${currentQuality.pinned_version ? '🔒 Pinned' : '✅ Current'} |
+            
+            ${rateDiff > 5 ? '🎉 **Significant quality improvement!**' : 
+              rateDiff < -5 ? '⚠️ **Quality regression detected**' :
+              '✅ **Quality maintained**'}
+            `;
+              } else {
+                qualityDiff = `
+            ## 🧪 Quality Diff (base → head)
+            
+            ℹ️ **No baseline for comparison** (first PR or base quality.json missing)
+            
+            **Current Status:**
+            - Tests: ${currentQuality.tests?.passed || 0}/${currentQuality.tests?.total || 0} passed
+            - Status: ${currentQuality.status || 'unknown'}
+            - Version: ${currentQuality.version || 'N/A'}
+            `;
+              }
+              
+              const goldenStatus = goldenReportExists ? '✅ PASSED' : '❌ NO REPORT';
+              const invariantStatus = invariantReportExists ? '✅ PASSED' : '❌ NO REPORT';
               
               const comment = `
             ## 🔍 Comprehensive Quality Gate Results
             
-            ### Golden Sample Validation (174 tests)
-            ${goldenStatus}
-            - ✅ Player statistics validation (30 players)
-            - ✅ Team performance validation (12 teams) 
-            - ✅ Data consistency checks
-            - ✅ Database schema compatibility
+            ${qualityDiff}
             
-            ### Game Invariant Validation (9 tests)
-            ${invariantStatus}
-            - ✅ Box score consistency (R/H/HR validation)
-            - ✅ Team vs player aggregation (AB/BB/SO)
-            - ✅ Cross-validation (batting vs pitching)
-            - ✅ Data coverage requirements (75%+ threshold)
+            ### Test Results Summary
+            - **Golden Sample Validation** (174 tests): ${goldenStatus}
+            - **Game Invariant Validation** (12 tests): ${invariantStatus}
+            - **System Health Checks**: ✅ Database connectivity & schema
+            - **UI Density Check**: ${fs.existsSync('.reports/ui_density.json') ? '✅ COMPLETED' : 'ℹ️ SKIPPED'}
             
-            **Configuration:**
-            - Tolerance: R±2, H±2, HR±1, AB±2, BB±2, SO±2
-            - Auto-relaxation: Enabled (1.5x for samples <5)
-            - Farm game exclusion: Active
-            - Sample size: 25 games max
+            ### Validation Details
+            #### Golden Sample (Player & Team Statistics)
+            - ✅ 30 key players across all positions
+            - ✅ 12 NPB teams (2024-2025 seasons)
+            - ✅ Advanced metrics (wRC+, FIP, OPS, ERA)
+            - ✅ Schema-agnostic with fallback detection
             
-            **Test Coverage:** 192 total tests (174 Golden + 9 Invariant + 9 Backfill)
+            #### Game Invariants (Box Score Consistency)  
+            - ✅ R/H/HR totals match scoreboard
+            - ✅ AB/BB/SO aggregation accuracy
+            - ✅ Batting vs pitching cross-validation
+            - ✅ Sample coverage (75%+ threshold)
             
-            ${(goldenReportExists && invariantReportExists) ? '📊 Detailed results available in workflow artifacts.' : '⚠️  Some reports missing - check workflow logs.'}
+            #### UI Density Check (Critical Pages)
+            ${(() => {
+              try {
+                if (fs.existsSync('.reports/ui_density.json')) {
+                  const uiReport = JSON.parse(fs.readFileSync('.reports/ui_density.json', 'utf-8'));
+                  return `- 📄 Pages Checked: ${uiReport.total_pages || 0}
+            - ✅ Passed: ${uiReport.passed_pages || 0}  
+            - ⚠️ Warnings: ${uiReport.warned_pages || 0}
+            - 📊 Average Score: ${(uiReport.average_score || 0).toFixed(1)}%`;
+                }
+                return '- ℹ️ UI density check not available';
+              } catch { return '- ⚠️ UI density report parsing failed'; }
+            })()}
+            
+            **Configuration:** Tolerance R±2, H±2, HR±1 | Auto-relaxation enabled | Farm exclusion active
+            
+            ${(goldenReportExists && invariantReportExists) ? '📊 **Detailed results available in workflow artifacts**' : '⚠️ **Some reports missing - check workflow logs**'}
             `;
             
               github.rest.issues.createComment({

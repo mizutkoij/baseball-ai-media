@@ -1,0 +1,57 @@
+{
+  "timestamp": "2025-08-03T06:49:04.667Z",
+  "total_pages": 4,
+  "passed_pages": 4,
+  "warned_pages": 0,
+  "average_score": 100,
+  "results": [
+    {
+      "path": "/teams/2025/T",
+      "passed": true,
+      "found": [
+        "/順位|勝/",
+        "/WAR|得点/",
+        "/投手|打者/",
+        "/成績/"
+      ],
+      "missing": [],
+      "score": 100
+    },
+    {
+      "path": "/players/000011194507273",
+      "passed": true,
+      "found": [
+        "/WAR|OPS/",
+        "/本塁打|打率/",
+        "/年度|シーズン/",
+        "/チーム/"
+      ],
+      "missing": [],
+      "score": 100
+    },
+    {
+      "path": "/records",
+      "passed": true,
+      "found": [
+        "/本塁打|打率/",
+        "/WAR/",
+        "/順位/",
+        "/記録/"
+      ],
+      "missing": [],
+      "score": 100
+    },
+    {
+      "path": "/players",
+      "passed": true,
+      "found": [
+        "/検索|フィルター/",
+        "/WAR|OPS/",
+        "/選手|プレイヤー/",
+        "/チーム/"
+      ],
+      "missing": [],
+      "score": 100
+    }
+  ]
+}
