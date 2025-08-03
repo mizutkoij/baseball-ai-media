@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import Link from "next/link";
 import Head from "next/head";
 import { Calendar, Users, TrendingUp } from "lucide-react";
@@ -14,7 +15,7 @@ export default function TeamsPage() {
   const description = "NPB12球団の年度別所属選手データベース。2020-2025年の全6年度対応。各チームの成績・順位・球場補正係数・主力選手を完全網羅。セイバーメトリクス指標による詳細分析。";
 
   return (
-    <>
+    <React.Fragment>
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
@@ -138,6 +139,6 @@ export default function TeamsPage() {
         </div>
       </div>
       </div>
-    </>
+    </React.Fragment>
   );
 }

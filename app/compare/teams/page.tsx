@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import useSWR from 'swr';
 import Link from 'next/link';
@@ -569,7 +569,7 @@ function CompareTeamsContent() {
   const pageDescription = `${teamNames}の${year}年チーム成績を詳細比較。打撃（wRC+）・投手（ERA-）・Park Factor補正対応。${pfCorrection ? 'PF補正適用中' : '生データ表示'}`;
 
   return (
-    <>
+    <React.Fragment>
       <Head>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
@@ -675,7 +675,7 @@ function CompareTeamsContent() {
         <PFCorrectionEffects effects={data.comparison_summary.pf_correction_effects} />
       )}
       </div>
-    </>
+    </React.Fragment>
   );
 }
 

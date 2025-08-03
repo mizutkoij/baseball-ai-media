@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import useSWR from "swr";
 import Link from "next/link";
 import Head from "next/head";
@@ -94,7 +94,7 @@ export default function PlayersPage() {
   const seoData = generateSEOMetadata();
 
   return (
-    <>
+    <React.Fragment>
       <Head>
         <title>{seoData.title}</title>
         <meta name="description" content={seoData.description} />
@@ -305,5 +305,6 @@ export default function PlayersPage() {
         </div>
       </div>
     </div>
+    </React.Fragment>
   );
 }
