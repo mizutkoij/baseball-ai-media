@@ -38,9 +38,13 @@ jobs:
       - name: Evaluate JUnit result
         run: node scripts/ci/parse-junit.mjs .reports/junit-golden.xml
           
-      - name: Run game invariant validation
+      - name: Run game invariant tests (always produce JUnit)
         run: |
-          npm test -- __tests__/game-invariants.test.ts --reporter=junit --outputFile=.reports/junit-invariants.xml
+          # 直接の非ゼロ終了を抑止し、評価は次ステップに委ねる
+          npm test -- __tests__/game-invariants.test.ts --reporter=junit --outputFile=.reports/junit-invariants.xml || true
+
+      - name: Evaluate Invariant JUnit result
+        run: node scripts/ci/parse-junit.mjs .reports/junit-invariants.xml
           
       - name: Snapshot OG images
         run: |
