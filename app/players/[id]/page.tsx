@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import * as React from "react";
 import useSWR from "swr";
 import Link from "next/link";
 import { ArrowLeft, Activity, BarChart3, Target, TrendingUp, ExternalLink, Users } from "lucide-react";
@@ -9,6 +10,7 @@ import PlayerSummary, { PlayerSummaryLoading, PlayerSummaryError } from "@/compo
 import SimilarPlayers from "@/components/SimilarPlayers";
 import { NextNav } from "@/components/NextNav";
 import { ExportButton } from "@/components/ExportButton";
+import { getPlayerDensityData, type PlayerDensityData } from "@/lib/playerDensityGuard";
 
 type YearRow = Record<string, any>;
 
@@ -133,6 +135,7 @@ const PitchingTable = ({ data }: { data: YearRow[] }) => {
 
 export default function PlayerDetailPage({ params }: { params: { id: string } }) {
   const [activeTab, setActiveTab] = useState<"batting" | "pitching">("batting");
+  const [densityData, setDensityData] = useState<PlayerDensityData | null>(null);
 
   const { data: player, isLoading, error } = useSWR<Player>(
     `/data/players/players/${params.id}.json`,
@@ -142,6 +145,13 @@ export default function PlayerDetailPage({ params }: { params: { id: string } })
       dedupingInterval: 600000, // 10分間キャッシュ
     }
   );
+
+  // 密度データの取得 (P0: 密度保証)
+  useEffect(() => {
+    if (player) {
+      getPlayerDensityData(player).then(setDensityData).catch(console.error);
+    }
+  }, [player]);
 
   if (isLoading) {
     return (
@@ -349,66 +359,125 @@ export default function PlayerDetailPage({ params }: { params: { id: string } })
           </div>
         </div>
 
-        {/* 2024年統計ハイライト */}
+        {/* 2024年統計ハイライト - P0密度保証対応 */}
         {(() => {
-          const stats2024 = player.batting?.find(row => row.年度 === 2024) || player.pitching?.find(row => row.年度 === 2024);
-          if (!stats2024) return null;
+          if (!densityData) return null;
 
           const isPitcher = player.primary_pos === "P";
-          const battingStats = isPitcher ? null : player.batting?.find(row => row.年度 === 2024);
-          const pitchingStats = isPitcher ? player.pitching?.find(row => row.年度 === 2024) : null;
-
+          
           return (
             <div className="bg-black/20 backdrop-blur-md border border-white/10 rounded-lg p-6 mb-6">
               <div className="flex items-center gap-2 mb-4">
                 <BarChart3 className="w-5 h-5 text-blue-400" />
-                <h2 className="text-xl font-bold text-white">2024年シーズン成績</h2>
-                <span className="px-2 py-1 text-xs rounded bg-blue-100 text-blue-800 font-medium">最新</span>
+                <h2 className="text-xl font-bold text-white">
+                  {densityData.has2024Data ? "2024年シーズン成績" : "統計分析サマリー"}
+                </h2>
+                <span className={`px-2 py-1 text-xs rounded font-medium ${
+                  densityData.has2024Data 
+                    ? "bg-blue-100 text-blue-800" 
+                    : "bg-amber-100 text-amber-800"
+                }`}>
+                  {densityData.has2024Data ? "最新" : "分析中"}
+                </span>
               </div>
               
+              {/* 要約文 (必須) */}
+              <div className="mb-4 p-3 bg-slate-800/50 rounded border-l-4 border-blue-400">
+                <p className="text-slate-300 leading-relaxed">{densityData.summary2024}</p>
+              </div>
+              
+              {/* 基本4指標 (必須) */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {battingStats && (
+                {densityData.has2024Data ? (
+                  // 2024年データがある場合
                   <>
-                    <div className="text-center bg-blue-50/10 rounded p-3">
-                      <div className="text-2xl font-bold text-blue-400">{formatNumber(battingStats.打率, 3)}</div>
-                      <div className="text-sm text-slate-300">打率</div>
-                    </div>
-                    <div className="text-center bg-green-50/10 rounded p-3">
-                      <div className="text-2xl font-bold text-green-400">{formatNumber(battingStats.本塁打)}</div>
-                      <div className="text-sm text-slate-300">本塁打</div>
-                    </div>
-                    <div className="text-center bg-purple-50/10 rounded p-3">
-                      <div className="text-2xl font-bold text-purple-400">{formatNumber(battingStats.OPS, 3)}</div>
-                      <div className="text-sm text-slate-300">OPS</div>
-                    </div>
-                    <div className="text-center bg-amber-50/10 rounded p-3">
-                      <div className="text-2xl font-bold text-amber-400">{formatNumber(battingStats.wRC_plus_simple)}</div>
-                      <div className="text-sm text-slate-300">wRC+</div>
-                    </div>
+                    {densityData.coreMetrics.batting && (
+                      <>
+                        <div className="text-center bg-blue-50/10 rounded p-3">
+                          <div className="text-2xl font-bold text-blue-400">
+                            {densityData.coreMetrics.batting.avg ? formatNumber(densityData.coreMetrics.batting.avg, 3) : "-.---"}
+                          </div>
+                          <div className="text-sm text-slate-300">打率</div>
+                        </div>
+                        <div className="text-center bg-green-50/10 rounded p-3">
+                          <div className="text-2xl font-bold text-green-400">
+                            {formatNumber(densityData.coreMetrics.batting.hr)}
+                          </div>
+                          <div className="text-sm text-slate-300">本塁打</div>
+                        </div>
+                        <div className="text-center bg-purple-50/10 rounded p-3">
+                          <div className="text-2xl font-bold text-purple-400">
+                            {densityData.coreMetrics.batting.ops ? formatNumber(densityData.coreMetrics.batting.ops, 3) : "-.---"}
+                          </div>
+                          <div className="text-sm text-slate-300">OPS</div>
+                        </div>
+                        <div className="text-center bg-amber-50/10 rounded p-3">
+                          <div className="text-2xl font-bold text-amber-400">
+                            {formatNumber(densityData.coreMetrics.batting.wrc_plus)}
+                          </div>
+                          <div className="text-sm text-slate-300">wRC+</div>
+                        </div>
+                      </>
+                    )}
+                    
+                    {densityData.coreMetrics.pitching && (
+                      <>
+                        <div className="text-center bg-red-50/10 rounded p-3">
+                          <div className="text-2xl font-bold text-red-400">
+                            {densityData.coreMetrics.pitching.era ? formatNumber(densityData.coreMetrics.pitching.era, 2) : "-.--"}
+                          </div>
+                          <div className="text-sm text-slate-300">防御率</div>
+                        </div>
+                        <div className="text-center bg-blue-50/10 rounded p-3">
+                          <div className="text-2xl font-bold text-blue-400">
+                            {formatNumber(densityData.coreMetrics.pitching.wins)}
+                          </div>
+                          <div className="text-sm text-slate-300">勝利</div>
+                        </div>
+                        <div className="text-center bg-green-50/10 rounded p-3">
+                          <div className="text-2xl font-bold text-green-400">
+                            {densityData.coreMetrics.pitching.whip ? formatNumber(densityData.coreMetrics.pitching.whip, 3) : "-.---"}
+                          </div>
+                          <div className="text-sm text-slate-300">WHIP</div>
+                        </div>
+                        <div className="text-center bg-amber-50/10 rounded p-3">
+                          <div className="text-2xl font-bold text-amber-400">
+                            {formatNumber(densityData.coreMetrics.pitching.era_minus)}
+                          </div>
+                          <div className="text-sm text-slate-300">ERA-</div>
+                        </div>
+                      </>
+                    )}
                   </>
-                )}
-                
-                {pitchingStats && (
-                  <>
-                    <div className="text-center bg-red-50/10 rounded p-3">
-                      <div className="text-2xl font-bold text-red-400">{formatNumber(pitchingStats.防御率, 2)}</div>
-                      <div className="text-sm text-slate-300">防御率</div>
-                    </div>
-                    <div className="text-center bg-blue-50/10 rounded p-3">
-                      <div className="text-2xl font-bold text-blue-400">{formatNumber(pitchingStats.勝利)}</div>
-                      <div className="text-sm text-slate-300">勝利</div>
-                    </div>
-                    <div className="text-center bg-green-50/10 rounded p-3">
-                      <div className="text-2xl font-bold text-green-400">{formatNumber(pitchingStats.WHIP, 3)}</div>
-                      <div className="text-sm text-slate-300">WHIP</div>
-                    </div>
-                    <div className="text-center bg-amber-50/10 rounded p-3">
-                      <div className="text-2xl font-bold text-amber-400">{formatNumber(pitchingStats.ERA_minus)}</div>
-                      <div className="text-sm text-slate-300">ERA-</div>
-                    </div>
-                  </>
+                ) : (
+                  // フォールバック: 直近3試合+簡易指標
+                  densityData.fallbackData && (
+                    <>
+                      {Object.entries(densityData.fallbackData.fallbackMetrics).map(([key, value], index) => (
+                        <div key={key} className="text-center bg-slate-700/30 rounded p-3 border border-slate-600/50">
+                          <div className="text-lg font-bold text-slate-300">{value}</div>
+                          <div className="text-xs text-slate-400">{key}</div>
+                        </div>
+                      ))}
+                    </>
+                  )
                 )}
               </div>
+              
+              {/* フォールバック: 直近試合情報 */}
+              {!densityData.has2024Data && densityData.fallbackData?.recentGames && densityData.fallbackData.recentGames.length > 0 && (
+                <div className="mt-4 p-3 bg-slate-700/30 rounded">
+                  <h4 className="text-sm font-medium text-slate-300 mb-2">直近の出場記録</h4>
+                  <div className="space-y-1">
+                    {densityData.fallbackData.recentGames.slice(0, 3).map((game, index) => (
+                      <div key={game.game_id} className="text-xs text-slate-400 flex justify-between">
+                        <span>vs {game.opponent}</span>
+                        <span>{game.stat_line}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           );
         })()}
