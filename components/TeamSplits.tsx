@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Home, Plane, ToggleLeft, ToggleRight, AlertTriangle } from 'lucide-react';
 import { PFDeltaNote } from '@/components/PFDeltaNote';
 import { PFHelpTooltip } from '@/components/PFHelpTooltip';
-import type { TeamSplitStats } from '@/lib/db/teamQueries';
+import type { TeamSplitStats } from '@/lib/types/team';
 
 interface TeamSplitsProps {
   year: number;
