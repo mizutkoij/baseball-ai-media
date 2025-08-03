@@ -10,7 +10,35 @@ import PlayerSummary, { PlayerSummaryLoading, PlayerSummaryError } from "@/compo
 import SimilarPlayers from "@/components/SimilarPlayers";
 import { NextNav } from "@/components/NextNav";
 import { ExportButton } from "@/components/ExportButton";
-import { getPlayerDensityData, type PlayerDensityData } from "@/lib/playerDensityGuard";
+// Remove direct DB import - will use API route instead
+export type PlayerDensityData = {
+  has2024Data: boolean
+  summary2024: string
+  coreMetrics: {
+    batting?: {
+      avg: number | null
+      hr: number | null
+      ops: number | null
+      wrc_plus: number | null
+    }
+    pitching?: {
+      era: number | null
+      wins: number | null
+      whip: number | null
+      era_minus: number | null
+    }
+  }
+  fallbackData?: {
+    recentGames: Array<{
+      game_id: string
+      date: string
+      opponent: string
+      stat_line: string
+    }>
+    simpleBio: string
+    fallbackMetrics: Record<string, number | string>
+  }
+}
 import RelatedNavigation from "@/components/RelatedNavigation";
 
 type YearRow = Record<string, any>;
@@ -147,10 +175,13 @@ export default function PlayerDetailPage({ params }: { params: { id: string } })
     }
   );
 
-  // 密度データの取得 (P0: 密度保証)
+  // 密度データの取得 (P0: 密度保証) - API経由
   useEffect(() => {
     if (player) {
-      getPlayerDensityData(player).then(setDensityData).catch(console.error);
+      fetch(`/api/player-density/${player.player_id}`)
+        .then(res => res.json())
+        .then(setDensityData)
+        .catch(console.error);
     }
   }, [player]);
 

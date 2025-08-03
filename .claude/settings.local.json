@@ -45,7 +45,10 @@
       "Bash(BASE_URL=https://baseball-ai-media.vercel.app npx tsx scripts/smoke_runtime.ts)",
       "Bash(powershell:*)",
       "Bash(npx rg:*)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(grep:*)",
+      "Bash(npx next build:*)",
+      "Bash(timeout 30 npm run build:*)"
     ],
     "deny": []
   }
