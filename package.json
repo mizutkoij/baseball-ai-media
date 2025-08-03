@@ -19,7 +19,9 @@
     "gen:similarity-cache": "npx ts-node scripts/generate_similarity_cache.ts",
     "notify": "npx ts-node scripts/notify.ts",
     "lint:forbidden": "npx ts-node scripts/guard_forbidden.ts",
-    "test:golden": "vitest run golden-sample.test.ts"
+    "test:golden": "vitest run golden-sample.test.ts",
+    "debug:game": "npx ts-node scripts/debug_game.ts",
+    "snapshot:og": "npx ts-node scripts/snapshot_og.ts"
   },
   "dependencies": {
     "@types/cli-progress": "^3.11.6",

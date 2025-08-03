@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ArrowLeft, Calculator, BarChart3, Beaker, TrendingUp, Download, ExternalLink, Server } from 'lucide-react';
 import DataValidationStatus from '../../../components/DataValidationStatus';
 import SystemStatus from '../../../components/SystemStatus';
+import QualityStatus from '../../../components/QualityStatus';
 
 export const metadata: Metadata = {
   title: '分析手法・係数表 | Baseball AI Media',
@@ -52,6 +53,9 @@ export default function MethodologyPage() {
 
         {/* データ検証・更新状況 */}
         <DataValidationStatus />
+
+        {/* 品質ゲート状況 */}
+        <QualityStatus />
 
         {/* 更新履歴・データアクセス */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
