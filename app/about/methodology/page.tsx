@@ -35,6 +35,18 @@ export default function MethodologyPage() {
             Baseball AI Mediaで使用するセイバーメトリクス計算式・係数の完全透明化
           </p>
           
+          <div className="mt-4 bg-blue-950/30 border border-blue-800/50 rounded-lg p-4">
+            <div className="flex items-center gap-2 text-blue-300 font-semibold mb-2">
+              <ExternalLink className="w-4 h-4" />
+              独立性・透明性の保証
+            </div>
+            <div className="text-sm text-slate-300 space-y-1">
+              <div>🔹 <strong>自動更新</strong>: 毎日CI実行・品質ゲート195テスト・リアルタイム監視</div>
+              <div>🔹 <strong>出典明記</strong>: NPB公式スコア・学術論文ベース・計算式全公開</div>
+              <div>🔹 <strong>非提携</strong>: 第三者データベース・商用サービスと完全独立</div>
+            </div>
+          </div>
+          
           <div className="mt-4 flex flex-wrap gap-4 text-sm">
             <div className="flex items-center gap-2 text-green-400">
               <Beaker className="w-4 h-4" />
