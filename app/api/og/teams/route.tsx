@@ -3,9 +3,6 @@ import { NextRequest } from 'next/server';
 import { TEAM_COLORS } from '@/lib/teamColors';
 
 export const runtime = 'edge';
-export const alt = 'NPB Team Comparison';
-export const size = { width: 1200, height: 630 };
-export const contentType = 'image/png';
 
 const validateTeams = (value: string | null) => {
   if (!value) return [];
@@ -140,7 +137,8 @@ export async function GET(req: NextRequest) {
         </div>
       ),
       {
-        ...size,
+        width: 1200,
+        height: 630,
         headers: { 
           'Cache-Control': 'public, max-age=3600, immutable',
           'Content-Type': 'image/png'
