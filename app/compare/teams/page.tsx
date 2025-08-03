@@ -20,6 +20,7 @@ import {
   Target
 } from 'lucide-react';
 import ShareButton from '@/components/ShareButton';
+import { useToast } from '@/components/Toast';
 
 interface TeamComparisonData {
   team_code: string;
@@ -456,6 +457,7 @@ function CompareTeamsContent() {
   const [pfCorrection, setPfCorrection] = useState(false);
   const [year, setYear] = useState(2024);
   const [analyticsTracked, setAnalyticsTracked] = useState(false);
+  const { showToast } = useToast();
 
   // URL正規化: ソート・重複除去・大文字化
   const rawTeamCodes = searchParams.get('teams')?.split(',') || [];
@@ -638,6 +640,8 @@ function CompareTeamsContent() {
             url={`https://npb-ai.com/compare/teams?teams=${teamCodes.join(',')}&year=${year}&pf=${pfCorrection}`}
             title={pageTitle}
             text={pageDescription}
+            enableShortUrl={true}
+            onToast={showToast}
           />
         </div>
       </div>

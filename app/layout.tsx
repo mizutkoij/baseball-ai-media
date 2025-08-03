@@ -3,6 +3,7 @@ import { Inter, Noto_Sans_JP } from 'next/font/google'
 import './globals.css'
 import MobileNav from './components/MobileNav'
 import QualityBadge from '@/components/QualityBadge'
+import { ToastProvider } from '@/components/Toast'
 import { currentSeasonYear } from '@/lib/time'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -58,7 +59,8 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.className} ${notoSansJP.variable} min-h-screen bg-white text-slate-900 antialiased`}>
-        <div className="min-h-screen flex flex-col">
+        <ToastProvider>
+          <div className="min-h-screen flex flex-col">
           {/* Navigation Header */}
           <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur-md shadow-sm">
             <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -164,7 +166,8 @@ export default function RootLayout({
               </div>
             </div>
           </footer>
-        </div>
+          </div>
+        </ToastProvider>
       </body>
     </html>
   )

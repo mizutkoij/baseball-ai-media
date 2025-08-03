@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Head from "next/head";
 import { Calendar, Users, TrendingUp } from "lucide-react";
 
 export default function TeamsPage() {
@@ -8,8 +9,61 @@ export default function TeamsPage() {
   const availableYears = [2025, 2024, 2023, 2022, 2021, 2020];
   const currentYear = new Date().getFullYear();
 
+  // SEO最適化メタデータ (20-24語目安)
+  const title = "NPBチーム一覧｜2020-2025年全6年度12球団の所属選手・成績・Park Factors分析【Baseball AI Media】";
+  const description = "NPB12球団の年度別所属選手データベース。2020-2025年の全6年度対応。各チームの成績・順位・球場補正係数・主力選手を完全網羅。セイバーメトリクス指標による詳細分析。";
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 p-6">
+    <>
+      <Head>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta name="keywords" content="NPB,チーム,所属選手,年度別,成績,順位,球場補正,Park Factors,セイバーメトリクス,12球団" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`${typeof window !== 'undefined' ? window.location.origin : ''}/teams`} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        
+        {/* JSON-LD構造化データ */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "CollectionPage",
+              "name": "NPBチーム一覧",
+              "description": description,
+              "url": `${typeof window !== 'undefined' ? window.location.origin : ''}/teams`,
+              "creator": {
+                "@type": "Organization",
+                "name": "Baseball AI Media"
+              },
+              "about": {
+                "@type": "SportsOrganization",
+                "name": "NPB (日本プロ野球機構)"
+              },
+              "mainEntity": {
+                "@type": "ItemList",
+                "name": "NPB年度別チームデータ",
+                "numberOfItems": availableYears.length,
+                "itemListElement": availableYears.map((year, index) => ({
+                  "@type": "ListItem",
+                  "position": index + 1,
+                  "name": `${year}年NPBチーム`,
+                  "url": `${typeof window !== 'undefined' ? window.location.origin : ''}/teams/${year}`
+                }))
+              },
+              "keywords": ["NPB", "チーム", "年度別", "所属選手", "成績", "セイバーメトリクス"],
+              "dateModified": new Date().toISOString().split('T')[0]
+            })
+          }}
+        />
+      </Head>
+      
+      <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 p-6">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -83,6 +137,7 @@ export default function TeamsPage() {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }
