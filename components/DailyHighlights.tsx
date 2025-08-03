@@ -28,14 +28,14 @@ export default function DailyHighlights({ date }: DailyHighlightsProps) {
 
   useEffect(() => {
     const generateHighlights = () => {
-      // Mock data generation for daily highlights
+      // Daily highlights with direct game/player links (CTR bottom-up)
       const mockHighlights: DailyHighlight[] = [
         {
           type: 'gotd',
           title: 'Game of the Day',
           subtitle: '阪神 vs 巨人',
           description: '伝統の一戦。今シーズン対戦成績3勝3敗の注目カード',
-          link: '/matchups',
+          link: '/games/2024080301', // Direct game link
           icon: 'target',
           color: 'bg-blue-600'
         },
@@ -44,7 +44,7 @@ export default function DailyHighlights({ date }: DailyHighlightsProps) {
           title: '注目打者',
           subtitle: '村上宗隆 (ヤクルト)',
           description: 'WPA最大 +0.45。勝利への貢献度が最も高い一打',
-          link: '/players/search?name=村上宗隆',
+          link: '/players/000011194507273', // Direct player link
           icon: 'trending',
           color: 'bg-green-600'
         },
@@ -53,7 +53,7 @@ export default function DailyHighlights({ date }: DailyHighlightsProps) {
           title: '注目投手',
           subtitle: '山本由伸 (オリックス)',
           description: 'RE24最大 -2.8。失点阻止で試合の流れを決定',
-          link: '/players/search?name=山本由伸',
+          link: '/players/000021184507289', // Direct player link
           icon: 'zap',
           color: 'bg-purple-600'
         },
@@ -61,8 +61,8 @@ export default function DailyHighlights({ date }: DailyHighlightsProps) {
           type: 'brief',
           title: 'Daily Brief',
           subtitle: `${today} 分析レポート`,
-          description: '今日の試合結果とセイバーメトリクス分析',
-          link: `/column/brief/${today}`,
+          description: '今日の試合結果とセイバーメトリクス分析。詳細データへの導線も含む',
+          link: `/games/2024080302`, // Brief -> specific game
           icon: 'calendar',
           color: 'bg-amber-600'
         }

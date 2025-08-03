@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import useSWR from "swr";
 import Link from "next/link";
+import Head from "next/head";
 import { Search, Filter, Users, TrendingUp } from "lucide-react";
 import { SeasonDiscovery } from "@/components/SeasonDiscovery";
 
@@ -82,9 +83,58 @@ export default function PlayersPage() {
     );
   }
 
+  // SEO最適化メタデータ (20-24語目安)
+  const generateSEOMetadata = () => {
+    const activeCount = players?.filter(p => p.is_active).length || 0;
+    const title = `NPB選手データベース｜現役${activeCount}人含む全${players?.length || '4000+'}人のWAR・OPS+・FIP分析【Baseball AI Media】`;
+    const description = `日本プロ野球(NPB)全選手の詳細データベース。現役${activeCount}人とOB選手の成績・WAR・wRC+・ERA-を完全網羅。セイバーメトリクス指標で選手比較・検索が可能。`;
+    return { title, description };
+  };
+
+  const seoData = generateSEOMetadata();
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 p-6">
-      <div className="max-w-6xl mx-auto">
+    <>
+      <Head>
+        <title>{seoData.title}</title>
+        <meta name="description" content={seoData.description} />
+        <meta name="keywords" content="NPB,選手,データベース,WAR,OPS,セイバーメトリクス,野球,統計,検索,比較,現役,成績" />
+        <meta property="og:title" content={seoData.title} />
+        <meta property="og:description" content={seoData.description} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`${typeof window !== 'undefined' ? window.location.origin : ''}/players`} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={seoData.title} />
+        <meta name="twitter:description" content={seoData.description} />
+        
+        {/* JSON-LD構造化データ */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Dataset",
+              "name": "NPB選手データベース",
+              "description": seoData.description,
+              "url": `${typeof window !== 'undefined' ? window.location.origin : ''}/players`,
+              "creator": {
+                "@type": "Organization",
+                "name": "Baseball AI Media"
+              },
+              "about": {
+                "@type": "SportsOrganization",
+                "name": "NPB (日本プロ野球機構)"
+              },
+              "keywords": ["NPB", "選手", "データベース", "セイバーメトリクス", "WAR", "OPS+"],
+              "license": "https://creativecommons.org/licenses/by/4.0/",
+              "dateModified": new Date().toISOString().split('T')[0]
+            })
+          }}
+        />
+      </Head>
+      
+      <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 p-6">
+        <div className="max-w-6xl mx-auto">
         {/* ヘッダー */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">

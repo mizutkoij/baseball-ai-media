@@ -11,6 +11,7 @@ import SimilarPlayers from "@/components/SimilarPlayers";
 import { NextNav } from "@/components/NextNav";
 import { ExportButton } from "@/components/ExportButton";
 import { getPlayerDensityData, type PlayerDensityData } from "@/lib/playerDensityGuard";
+import RelatedNavigation from "@/components/RelatedNavigation";
 
 type YearRow = Record<string, any>;
 
@@ -681,8 +682,38 @@ export default function PlayerDetailPage({ params }: { params: { id: string } })
             limit={3}
           />
 
-          {/* Next Navigation */}
-          <NextNav from={`player-${player.player_id}`} />
+          {/* Next Navigation - Enhanced */}
+          <NextNav 
+            from={`player-${player.player_id}`}
+            entityType="player"
+            entityId={player.player_id}
+            contextualSuggestions={[
+              {
+                href: `/teams/${player.last_year}`,
+                label: `${player.last_year}年チーム`,
+                description: `${player.last_year}年の所属チーム`,
+                icon: Users,
+                priority: 10
+              },
+              {
+                href: "/rankings",
+                label: "ランキング",
+                description: "年度別選手ランキング",
+                icon: Trophy,
+                priority: 8
+              }
+            ]}
+          />
+        </div>
+
+        {/* 関連ナビゲーション - 深掘り導線固定 */}
+        <div className="mt-8">
+          <RelatedNavigation
+            type="player"
+            entityId={player.player_id}
+            entityName={player.name}
+            entityTeam={player.batting?.[0]?.所属球団 || player.pitching?.[0]?.所属球団}
+          />
         </div>
 
         {/* フッター注記 */}

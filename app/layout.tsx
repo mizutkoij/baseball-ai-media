@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter, Noto_Sans_JP } from 'next/font/google'
 import './globals.css'
 import MobileNav from './components/MobileNav'
+import QualityBadge from '@/components/QualityBadge'
 import { currentSeasonYear } from '@/lib/time'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -97,6 +98,10 @@ export default function RootLayout({
                   </div>
                 </div>
                 <div className="flex items-center space-x-2 sm:space-x-4">
+                  {/* Quality Badge - P1 Monitoring */}
+                  <div className="hidden sm:block">
+                    <QualityBadge />
+                  </div>
                   <div className="hidden md:flex items-center space-x-2 sm:space-x-4">
                     <span className="text-xs text-slate-600">
                       リアルタイム分析

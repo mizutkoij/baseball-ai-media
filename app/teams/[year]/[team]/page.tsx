@@ -15,6 +15,7 @@ import TeamSplits from "@/components/TeamSplits";
 import { JsonLd } from "@/components/JsonLd";
 import { NextNav } from "@/components/NextNav";
 import { ExportButton } from "@/components/ExportButton";
+import RelatedNavigation from "@/components/RelatedNavigation";
 import type { TeamPageData } from "@/app/api/teams/[year]/[team]/route";
 
 interface TeamPageProps {
@@ -475,8 +476,38 @@ export default function TeamPage({ params }: TeamPageProps) {
             </Link>
           </div>
 
-          {/* Next Navigation */}
-          <NextNav from={`teams-${year}-${team}`} />
+          {/* 関連ナビゲーション - 深掘り導線固定 */}
+          <div className="mt-8">
+            <RelatedNavigation
+              type="team"
+              entityId={team}
+              entityName={teamName}
+              entityDivision={teamData.meta.league}
+            />
+          </div>
+
+          {/* Next Navigation - Enhanced */}
+          <NextNav 
+            from={`teams-${year}-${team}`}
+            entityType="team"
+            entityId={team}
+            contextualSuggestions={[
+              {
+                href: `/seasons/${year}`,
+                label: `${year}年シーズン`,
+                description: `${year}年全体の成績・記録`,
+                icon: Trophy,
+                priority: 10
+              },
+              {
+                href: "/standings",
+                label: "順位表",
+                description: "リーグ順位・勝敗",
+                icon: BarChart3,
+                priority: 9
+              }
+            ]}
+          />
 
           {/* JSON-LD Structured Data */}
           <JsonLd
