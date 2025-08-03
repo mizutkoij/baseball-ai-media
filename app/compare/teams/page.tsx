@@ -641,7 +641,9 @@ function CompareTeamsContent() {
             title={pageTitle}
             text={pageDescription}
             enableShortUrl={true}
-            onToast={showToast}
+            onToast={(message: string, type?: "success" | "error" | "info") => 
+              showToast({ message, type: type || "success" })
+            }
           />
         </div>
       </div>

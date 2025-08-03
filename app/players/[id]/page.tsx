@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import * as React from "react";
 import useSWR from "swr";
 import Link from "next/link";
-import { ArrowLeft, Activity, BarChart3, Target, TrendingUp, ExternalLink, Users } from "lucide-react";
+import { ArrowLeft, Activity, BarChart3, Target, TrendingUp, ExternalLink, Users, Trophy } from "lucide-react";
 import Head from "next/head";
 import PlayerSummary, { PlayerSummaryLoading, PlayerSummaryError } from "@/components/PlayerSummary";
 import SimilarPlayers from "@/components/SimilarPlayers";

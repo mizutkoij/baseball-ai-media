@@ -8,21 +8,34 @@ export interface TeamSplitStats {
   games: number;
   reliability: 'high' | 'medium' | 'low';
   
-  // Batting stats
-  runs: number;
-  runs_per_game: number;
-  wRC_plus: number;
-  wRC_plus_neutral?: number;
-  OPS: number;
-  OPS_neutral?: number;
+  // Nested batting stats structure
+  batting: {
+    PA: number;
+    wRC_plus: number;
+    wRC_plus_neutral?: number;
+    OPS_plus: number;
+    OPS_plus_neutral?: number;
+    wOBA: number;
+    avg_pf: number;
+    runs?: number;
+    runs_per_game?: number;
+    OPS?: number;
+    OPS_neutral?: number;
+  };
   
-  // Pitching stats
-  runs_allowed: number;
-  runs_allowed_per_game: number;
-  ERA_minus: number;
-  ERA_minus_neutral?: number;
-  FIP_minus: number;
-  FIP_minus_neutral?: number;
+  // Nested pitching stats structure  
+  pitching: {
+    IP: number;
+    ERA_minus: number;
+    ERA_minus_neutral?: number;
+    FIP_minus: number;
+    FIP_minus_neutral?: number;
+    WHIP: number;
+    WHIP_neutral?: number;
+    HR_per9?: number;
+    runs_allowed?: number;
+    runs_allowed_per_game?: number;
+  };
   
   // Park factor adjustments
   venue_pf?: number;

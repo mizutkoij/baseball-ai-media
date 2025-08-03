@@ -32,33 +32,33 @@ export function NextNav({
     switch (entityType) {
       case "player":
         return [
-          { href: "/players", label: "他の選手", icon: Users, description: "選手データベース" },
-          { href: "/records", label: "記録比較", icon: TrendingUp, description: "歴代記録ランキング" },
-          { href: "/teams", label: "チーム", icon: Trophy, description: "所属チーム情報" }
+          { href: "/players", label: "他の選手", icon: Users, description: "選手データベース", priority: 5 },
+          { href: "/records", label: "記録比較", icon: TrendingUp, description: "歴代記録ランキング", priority: 4 },
+          { href: "/teams", label: "チーム", icon: Trophy, description: "所属チーム情報", priority: 3 }
         ];
       case "team":
         return [
-          { href: "/teams", label: "他のチーム", icon: Users, description: "全12球団" },
-          { href: "/standings", label: "順位表", icon: BarChart3, description: "リーグ順位" },
-          { href: "/matchups", label: "対戦分析", icon: Target, description: "チーム対戦相性" }
+          { href: "/teams", label: "他のチーム", icon: Users, description: "全12球団", priority: 5 },
+          { href: "/standings", label: "順位表", icon: BarChart3, description: "リーグ順位", priority: 4 },
+          { href: "/matchups", label: "対戦分析", icon: Target, description: "チーム対戦相性", priority: 3 }
         ];
       case "game":
         return [
-          { href: "/games", label: "試合一覧", icon: Calendar, description: "今日の全試合" },
-          { href: "/players", label: "注目選手", icon: Target, description: "今日の活躍選手" },
-          { href: "/standings", label: "順位への影響", icon: TrendingUp, description: "順位表更新" }
+          { href: "/games", label: "試合一覧", icon: Calendar, description: "今日の全試合", priority: 5 },
+          { href: "/players", label: "注目選手", icon: Target, description: "今日の活躍選手", priority: 4 },
+          { href: "/standings", label: "順位への影響", icon: TrendingUp, description: "順位表更新", priority: 3 }
         ];
       case "season":
         return [
-          { href: "/seasons", label: "他のシーズン", icon: Trophy, description: "2016-2025年" },
-          { href: "/records", label: "記録", icon: TrendingUp, description: "年度別記録" },
-          { href: "/players", label: "選手", icon: Users, description: "活躍選手" }
+          { href: "/seasons", label: "他のシーズン", icon: Trophy, description: "2016-2025年", priority: 5 },
+          { href: "/records", label: "記録", icon: TrendingUp, description: "年度別記録", priority: 4 },
+          { href: "/players", label: "選手", icon: Users, description: "活躍選手", priority: 3 }
         ];
       default:
         return [
-          { href: "/games", label: "今日の試合", icon: Calendar, description: "本日の対戦・結果" },
-          { href: "/records", label: "記録", icon: TrendingUp, description: "年度別・通算記録" },
-          { href: "/players", label: "選手", icon: Users, description: "選手データベース" }
+          { href: "/games", label: "今日の試合", icon: Calendar, description: "本日の対戦・結果", priority: 5 },
+          { href: "/records", label: "記録", icon: TrendingUp, description: "年度別・通算記録", priority: 4 },
+          { href: "/players", label: "選手", icon: Users, description: "選手データベース", priority: 3 }
         ];
     }
   };

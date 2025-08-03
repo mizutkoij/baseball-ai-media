@@ -70,7 +70,8 @@ const TeamSplits: React.FC<TeamSplitsProps> = ({
     );
   };
 
-  const formatStat = (value: number, precision: number = 0) => {
+  const formatStat = (value: number | undefined, precision: number = 0) => {
+    if (value === undefined || value === null) return '-';
     if (precision === 3) return value.toFixed(3);
     if (precision === 1) return value.toFixed(1);
     return Math.round(value);
