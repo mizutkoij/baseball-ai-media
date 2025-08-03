@@ -49,7 +49,8 @@
       "Bash(grep:*)",
       "Bash(npx next build:*)",
       "Bash(timeout 30 npm run build:*)",
-      "Bash(timeout 30 npx tsc --noEmit)"
+      "Bash(timeout 30 npx tsc --noEmit)",
+      "Bash(timeout 30 npm run test:golden)"
     ],
     "deny": []
   }
