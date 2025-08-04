@@ -1,5 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Optimize build performance
+  experimental: {
+    // Faster builds
+    turbotrace: {
+      logLevel: 'error'
+    }
+  },
+  
+  // Build optimization  
+  swcMinify: true,
+  
   async rewrites() {
     // Only apply rewrites if API base URL is configured
     const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
