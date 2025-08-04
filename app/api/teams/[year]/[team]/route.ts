@@ -18,9 +18,9 @@ import {
   type TeamSplitStats
 } from "@/lib/db/teamQueries";
 
-const DatabaseLib = require('better-sqlite3');
-
 function getDb() {
+  // Conditional import to prevent build-time issues
+  const DatabaseLib = require('better-sqlite3');
   const dbPath = process.env.DB_HISTORY || './data/db_history.db';
   return new DatabaseLib(dbPath);
 }

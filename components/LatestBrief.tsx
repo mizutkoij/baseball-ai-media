@@ -23,8 +23,21 @@ interface BriefData {
   };
 }
 
+// ビルド時チェック用ユーティリティ
+function isBuildTime(): boolean {
+  return process.env.NODE_ENV === 'production' && 
+         (process.env.NEXT_PHASE === 'phase-production-build' || 
+          (typeof window === 'undefined' && !process.env.VERCEL && !process.env.RUNTIME));
+}
+
 // 最新のブリーフデータを取得
 async function getLatestBrief(): Promise<{ briefData: BriefData; dateStr: string; } | null> {
+  // ビルド時はスキップ
+  if (isBuildTime()) {
+    console.log('Skipping LatestBrief data loading during build time');
+    return null;
+  }
+
   try {
     const fs = await import('fs/promises');
     const path = await import('path');

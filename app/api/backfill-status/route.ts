@@ -1,6 +1,4 @@
 import { NextResponse } from 'next/server';
-import { promises as fs } from 'fs';
-import path from 'path';
 
 interface BackfillReport {
   summary: {
@@ -33,6 +31,10 @@ interface BackfillStatus {
 
 async function getLatestBackfillReport(): Promise<BackfillReport | null> {
   try {
+    // Dynamic imports to prevent build-time issues
+    const { promises: fs } = await import('fs');
+    const path = await import('path');
+    
     const reportsDir = path.join(process.cwd(), 'data', 'reports');
     
     // Check if reports directory exists
@@ -71,6 +73,10 @@ async function getLatestBackfillReport(): Promise<BackfillReport | null> {
 
 async function getDiskUsage() {
   try {
+    // Dynamic imports to prevent build-time issues
+    const { promises: fs } = await import('fs');
+    const path = await import('path');
+    
     const dataDir = path.join(process.cwd(), 'data');
     const historyDbPath = path.join(dataDir, 'db_history.db');
     

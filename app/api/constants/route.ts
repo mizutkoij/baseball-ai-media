@@ -1,6 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
 
 /**
  * リーグ定数API
@@ -12,6 +10,10 @@ export async function GET(request: NextRequest) {
   const league = searchParams.get('league') || 'first';
   
   try {
+    // Dynamic imports to prevent build-time issues
+    const fs = await import('fs');
+    const path = await import('path');
+    
     // constants ファイル読み込み
     const constantsPath = path.join(process.cwd(), 'public', 'data', 'constants', 'league_constants.json');
     

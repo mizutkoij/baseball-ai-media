@@ -1,5 +1,9 @@
-import Database from 'better-sqlite3';
-import { existsSync } from 'fs';
+// ビルド時チェック用ユーティリティ
+function isBuildTime(): boolean {
+  return process.env.NODE_ENV === 'production' && 
+         (process.env.NEXT_PHASE === 'phase-production-build' || 
+          (typeof window === 'undefined' && !process.env.VERCEL && !process.env.RUNTIME));
+}
 
 const CURRENT_PATH = process.env.DB_CURRENT || './data/db_current.db';
 const HISTORY_PATH = process.env.DB_HISTORY || './data/db_history.db';
@@ -11,14 +15,23 @@ const HISTORY_PATH = process.env.DB_HISTORY || './data/db_history.db';
  */
 
 export interface DatabaseConnections {
-  current: Database.Database;
-  history: Database.Database;
+  current: any; // Database.Database型をanyに変更してビルド時の型エラーを回避
+  history: any;
 }
 
 /**
  * データベース接続を開く
  */
 export function openConnections(): DatabaseConnections {
+  // ビルド時はエラーをスロー
+  if (isBuildTime()) {
+    throw new Error('Database operations not available during build time');
+  }
+
+  // 実行時に動的インポート
+  const Database = require('better-sqlite3');
+  const { existsSync } = require('fs');
+  
   if (!existsSync(CURRENT_PATH)) {
     throw new Error(`Current database not found: ${CURRENT_PATH}`);
   }
@@ -124,7 +137,16 @@ export async function get<T = any>(
 export function write(
   sql: string,
   params: any[] = []
-): Database.RunResult {
+): any {
+  // ビルド時はエラーをスロー
+  if (isBuildTime()) {
+    throw new Error('Database write operations not available during build time');
+  }
+
+  // 実行時に動的インポート
+  const Database = require('better-sqlite3');
+  const { existsSync } = require('fs');
+
   if (!existsSync(CURRENT_PATH)) {
     throw new Error(`Current database not found: ${CURRENT_PATH}`);
   }
@@ -141,8 +163,17 @@ export function write(
  * トランザクション実行（db_current のみ）
  */
 export function transaction<T>(
-  callback: (db: Database.Database) => T
+  callback: (db: any) => T
 ): T {
+  // ビルド時はエラーをスロー
+  if (isBuildTime()) {
+    throw new Error('Database transactions not available during build time');
+  }
+
+  // 実行時に動的インポート
+  const Database = require('better-sqlite3');
+  const { existsSync } = require('fs');
+
   if (!existsSync(CURRENT_PATH)) {
     throw new Error(`Current database not found: ${CURRENT_PATH}`);
   }

@@ -1,6 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
 
 // Game of the Day selection logic
 function selectGameOfTheDay(games: any[]): any | null {
@@ -114,6 +112,10 @@ export async function GET(request: NextRequest) {
   const date = searchParams.get('date') || new Date().toISOString().split('T')[0];
 
   try {
+    // Dynamic imports to prevent build-time issues
+    const fs = await import('fs');
+    const path = await import('path');
+    
     // Load today's games data
     const snapshotPath = path.join(process.cwd(), 'snapshots', 
       league === 'farm' ? 'today_games_farm.json' : 'today_games.json');

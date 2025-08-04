@@ -69,8 +69,21 @@ export async function generateStaticParams() {
   return params;
 }
 
+// ビルド時チェック用ユーティリティ
+function isBuildTime(): boolean {
+  return process.env.NODE_ENV === 'production' && 
+         (process.env.NEXT_PHASE === 'phase-production-build' || 
+          (typeof window === 'undefined' && !process.env.VERCEL && !process.env.RUNTIME));
+}
+
 // ブリーフデータを読み込み
 async function loadBriefData(date: string): Promise<BriefData | null> {
+  // ビルド時はスキップ
+  if (isBuildTime()) {
+    console.log('Skipping brief data loading during build time for date:', date);
+    return null;
+  }
+
   try {
     const fs = await import('fs/promises');
     const path = await import('path');
