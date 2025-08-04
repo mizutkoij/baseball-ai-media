@@ -157,7 +157,6 @@ export async function GET(req: Request) {
   } catch (error) {
     console.error('OG image generation error:', error);
     
-    // Fallback response
     return new Response('Failed to generate OG image', { 
       status: 500,
       headers: { 'Content-Type': 'text/plain' }
