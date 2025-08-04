@@ -21,7 +21,7 @@
     "lint:forbidden": "npx ts-node scripts/guard_forbidden.ts",
     "test:golden": "vitest run golden-sample.test.ts",
     "debug:game": "npx ts-node scripts/debug_game.ts",
-    "snapshot:og": "npx ts-node scripts/snapshot_og.ts",
+    "snapshot:og": "node scripts/snapshot_og_simple.js",
     "check:uidensity": "node scripts/ui_density_check.js"
   },
   "dependencies": {
