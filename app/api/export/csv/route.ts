@@ -1,9 +1,16 @@
 import { NextRequest } from "next/server";
 import { Parser as Json2csv } from "json2csv";
-import { query, unionQuery } from "@/lib/db";
 
 export async function GET(req: NextRequest) {
   try {
+    // Build-time safety guard
+    if (process.env.NODE_ENV === 'production' && (!process.env.VERCEL_URL && !process.env.RUNTIME)) {
+      return new Response('API not available during build', { status: 503 });
+    }
+
+    // Dynamic import to prevent build-time database connection
+    const { query, unionQuery } = await import('@/lib/db');
+    
     const { searchParams } = new URL(req.url);
     const scope = searchParams.get("scope"); // "player" | "team" | "game" | "player_comparison" | "team_comparison"
     const season = searchParams.get("season");

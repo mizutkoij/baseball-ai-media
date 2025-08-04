@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { query, unionQuery } from "@/lib/db";
+// Database import moved to dynamic import in function
 
 interface TeamStanding {
   team_code: string;
@@ -135,6 +135,15 @@ function generateMockStandings(year: number): StandingsResponse {
 
 export async function GET(req: NextRequest) {
   try {
+    // Build-time safety guard
+    if (process.env.NODE_ENV === 'production' && (!process.env.VERCEL_URL && !process.env.RUNTIME)) {
+      return new Response('API not available during build', { status: 503 });
+    }
+
+    // Dynamic import to prevent build-time database connection
+    const { query, unionQuery } = await import('@/lib/db');
+    
+    // Original code continues
     const { searchParams } = new URL(req.url);
     const year = parseInt(searchParams.get("year") || new Date().getFullYear().toString());
     const league = searchParams.get("league"); // 'central', 'pacific', or null for both
