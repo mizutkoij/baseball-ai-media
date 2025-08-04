@@ -8,6 +8,11 @@ export default function DataStatus() {
   const [lastUpdate, setLastUpdate] = useState<string>("");
   
   useEffect(() => {
+    // Skip API calls during build time
+    if (typeof window === 'undefined') {
+      return;
+    }
+    
     const fetchHealth = async () => {
       try {
         const base = process.env.NEXT_PUBLIC_API_BASE_URL;

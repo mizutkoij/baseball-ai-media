@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import Database from 'better-sqlite3';
 import path from 'path';
 import { addNPBProvenance } from '@/lib/provenance';
 
@@ -46,6 +45,8 @@ export async function GET(request: NextRequest, context: RouteContext) {
       throw new Error('No NPB database found');
     }
 
+    // Conditional import to prevent build-time issues
+    const Database = require('better-sqlite3');
     const db = new Database(dbPath);
     
     // Get game info

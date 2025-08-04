@@ -243,11 +243,17 @@ export default function HomeGamesList({ className = "" }: HomeGamesListProps) {
   const dateRange = getWeekRange();
   const apiUrl = `/api/schedule?from=${dateRange.from}&to=${dateRange.to}&league=${activeTab}`;
   
-  const { data, error, isLoading } = useSWR<ScheduleResponse>(apiUrl, fetcher, {
-    refreshInterval: 60000, // 60秒ごとに更新
-    revalidateOnFocus: true,
-    dedupingInterval: 30000,
-  });
+  // Skip SWR during build time
+  const shouldFetch = typeof window !== 'undefined';
+  const { data, error, isLoading } = useSWR<ScheduleResponse>(
+    shouldFetch ? apiUrl : null, 
+    fetcher, 
+    {
+      refreshInterval: 60000, // 60秒ごとに更新
+      revalidateOnFocus: true,
+      dedupingInterval: 30000,
+    }
+  );
 
   // Track analytics
   useEffect(() => {

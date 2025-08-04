@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
 // Simple database connection (reusing existing pattern)
-const DatabaseLib = require('better-sqlite3');
-const path = require('path');
-
 function getDb() {
+  // Conditional import to prevent build-time issues
+  const DatabaseLib = require('better-sqlite3');
   const dbPath = process.env.DB_HISTORY || './data/db_history.db';
   return new DatabaseLib(dbPath);
 }

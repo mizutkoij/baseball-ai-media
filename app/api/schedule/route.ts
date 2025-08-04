@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import Database from 'better-sqlite3';
+// Database import moved to function to prevent build-time issues
 import path from 'path';
 
 export async function GET(request: NextRequest) {
@@ -30,6 +30,8 @@ export async function GET(request: NextRequest) {
     }
 
     // Use better-sqlite3 as a fallback since DuckDB integration is complex in Next.js
+    // Conditional import to prevent build-time issues
+    const Database = require('better-sqlite3');
     const db = new Database(dbPath);
     
     // Query games in the date range
