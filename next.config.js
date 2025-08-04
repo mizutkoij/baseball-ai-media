@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Enable standalone output for containerization
+  output: 'standalone',
+  
   // Optimize build performance
   experimental: {
     // Faster builds
