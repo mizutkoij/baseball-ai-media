@@ -86,6 +86,12 @@ export default function QualityBadge() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    // Skip fetching during build time
+    if (typeof window === 'undefined') {
+      setIsLoading(false);
+      return;
+    }
+    
     fetchQualityStatus()
       .then(setQualityStatus)
       .catch(console.error)
