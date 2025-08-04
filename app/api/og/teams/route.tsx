@@ -1,5 +1,4 @@
 import { ImageResponse } from 'next/og';
-import { NextRequest } from 'next/server';
 import { TEAM_COLORS } from '@/lib/teamColors';
 
 export const runtime = 'edge';
@@ -16,7 +15,7 @@ const validateTeams = (value: string | null) => {
   ).slice(0, 4); // 4チームまで
 };
 
-export async function GET(req: NextRequest) {
+export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
     const year = (searchParams.get('year') ?? '').replace(/[^\d]/g, '') || new Date().getFullYear().toString();

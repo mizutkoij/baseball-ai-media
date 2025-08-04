@@ -1,5 +1,4 @@
 import { ImageResponse } from 'next/og';
-import { NextRequest } from 'next/server';
 
 export const runtime = 'edge';
 
@@ -15,7 +14,7 @@ const validatePlayerIds = (value: string | null) => {
   ).slice(0, 4); // 4選手まで
 };
 
-export async function GET(req: NextRequest) {
+export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
     const yearFrom = searchParams.get('year_from') || new Date().getFullYear().toString();
