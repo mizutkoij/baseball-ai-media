@@ -52,7 +52,15 @@
       "Bash(timeout 30 npx tsc --noEmit)",
       "Bash(timeout 30 npm run test:golden)",
       "Bash(mv:*)",
-      "Bash(tree:*)"
+      "Bash(tree:*)",
+      "Bash(git switch:*)",
+      "Bash(timeout 30 npx tsc scripts/snapshot_og.ts --noEmit)",
+      "Bash(timeout 10 npx next build --debug)",
+      "Bash(timeout 15 npm run build)",
+      "Bash(set NODE_ENV=production)",
+      "Bash(timeout 20 npm run build)",
+      "Bash(timeout 15 npx tsc --noEmit)",
+      "Bash(git stash:*)"
     ],
     "deny": []
   }

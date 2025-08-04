@@ -10,8 +10,10 @@
  */
 
 import * as fs from 'fs'
-import fetch from 'node-fetch'
 import * as path from 'path'
+
+// Dynamic import for node-fetch (ES module)
+const fetch = (...args: any[]) => import('node-fetch').then(({default: fetch}) => fetch(...args))
 
 const ORIGIN = process.env.PREVIEW_URL || process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000'
 
