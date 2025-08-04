@@ -9,9 +9,9 @@
  * - Version control of shared content
  */
 
-import fs from 'fs'
+import * as fs from 'fs'
 import fetch from 'node-fetch'
-import path from 'path'
+import * as path from 'path'
 
 const ORIGIN = process.env.PREVIEW_URL || process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000'
 
@@ -77,8 +77,7 @@ async function snapshotImage(url: string): Promise<SnapshotResult> {
     const response = await fetch(fullUrl, {
       headers: {
         'User-Agent': 'OG-Snapshot-Bot/1.0'
-      },
-      timeout: 15000 // 15 second timeout
+      }
     })
     
     if (!response.ok) {
@@ -114,14 +113,15 @@ async function snapshotImage(url: string): Promise<SnapshotResult> {
     
   } catch (error) {
     const duration = Date.now() - startTime
-    console.error(`❌ Failed: ${url} - ${error.message}`)
+    const errorMessage = error instanceof Error ? error.message : String(error)
+    console.error(`❌ Failed: ${url} - ${errorMessage}`)
     
     return {
       url,
       filename: '',
       size: 0,
       success: false,
-      error: error.message,
+      error: errorMessage,
       duration
     }
   }
@@ -259,7 +259,8 @@ async function main() {
 
 if (require.main === module) {
   main().catch(error => {
-    console.error('❌ Snapshot system failed:', error)
+    const errorMessage = error instanceof Error ? error.message : String(error)
+    console.error('❌ Snapshot system failed:', errorMessage)
     process.exit(1)
   })
 }
