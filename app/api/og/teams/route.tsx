@@ -1,11 +1,7 @@
 import { ImageResponse } from 'next/og';
-import { NextRequest } from 'next/server';
 import { TEAM_COLORS } from '@/lib/teamColors';
 
 export const runtime = 'edge';
-export const alt = 'NPB Team Comparison';
-export const size = { width: 1200, height: 630 };
-export const contentType = 'image/png';
 
 const validateTeams = (value: string | null) => {
   if (!value) return [];
@@ -19,7 +15,7 @@ const validateTeams = (value: string | null) => {
   ).slice(0, 4); // 4チームまで
 };
 
-export async function GET(req: NextRequest) {
+export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
     const year = (searchParams.get('year') ?? '').replace(/[^\d]/g, '') || new Date().getFullYear().toString();
@@ -140,7 +136,8 @@ export async function GET(req: NextRequest) {
         </div>
       ),
       {
-        ...size,
+        width: 1200,
+        height: 630,
         headers: { 
           'Cache-Control': 'public, max-age=3600, immutable',
           'Content-Type': 'image/png'
@@ -150,7 +147,6 @@ export async function GET(req: NextRequest) {
   } catch (error) {
     console.error('OG image generation error:', error);
     
-    // Fallback response
     return new Response('Failed to generate OG image', { 
       status: 500,
       headers: { 'Content-Type': 'text/plain' }

@@ -1,5 +1,4 @@
 import { ImageResponse } from 'next/og';
-import { NextRequest } from 'next/server';
 
 export const runtime = 'edge';
 
@@ -35,7 +34,7 @@ async function getTeamData(year: string, team: string) {
 }
 
 export async function GET(
-  req: NextRequest,
+  req: Request,
   { params }: { params: { year: string; team: string } }
 ) {
   try {
