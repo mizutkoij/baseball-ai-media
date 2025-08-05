@@ -1,6 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
 
 export async function GET(request: NextRequest) {
   const searchParams = new URLSearchParams(request.url.split('?')[1] || '');
@@ -8,66 +6,93 @@ export async function GET(request: NextRequest) {
   const provider = searchParams.get('provider') || 'auto';
 
   try {
-    // Return mock data for Vercel compatibility
+    // Return mock today's games data for Vercel compatibility
     console.warn('Today games snapshot loading disabled for Vercel compatibility');
     
-    if (false) { // Disabled filesystem access
-      const data = JSON.parse(fs.readFileSync(snapshotPath, 'utf8'));
-      
-      // Transform NPB data to match existing API format
-      const transformedData = {
-        source: data.source || "snapshot",
-        provider: data.provider || "npb",
-        league: league,
-        games: data.games || data.data?.length || 0,
-        ts: data.updated_at || new Date().toISOString(),
-        wpa_threshold: 0.08, // Default threshold
-        data: (data.data || []).map((game: any) => ({
-          game_id: game.game_id,
-          date: game.date,
-          start_time_jst: game.start_time_jst,
-          status: game.status,
-          inning: game.inning,
-          away_team: game.away_team,
-          home_team: game.home_team,
-          away_score: game.away_score,
-          home_score: game.home_score,
-          venue: game.venue,
-          tv: null, // NPB data doesn't include TV info yet
-          league: game.league,
-          highlights_count: 0, // No highlights in basic NPB data
-          last_highlight_ts: null,
-        }))
-      };
-
-      return NextResponse.json(transformedData);
-    }
-
-    // Fallback to mock data if no snapshot exists
-    const mockData = {
-      source: "mock",
-      provider: "system",
+    const mockTodayGames = {
+      source: "mock_data",
+      provider: "npb_mock",
       league: league,
-      games: 0,
+      games: 6,
       ts: new Date().toISOString(),
       wpa_threshold: 0.08,
-      data: []
+      data: [
+        {
+          game_id: "mock_game_1",
+          date: new Date().toISOString().split('T')[0],
+          start_time_jst: "18:00",
+          status: league === 'farm' ? 'scheduled' : 'live',
+          inning: league === 'farm' ? null : '7回表',
+          venue: "東京ドーム",
+          away_team: "阪神タイガース",
+          home_team: "読売ジャイアンツ",
+          away_score: league === 'farm' ? null : 3,
+          home_score: league === 'farm' ? null : 2,
+          attendance: 45000,
+          weather: "晴れ",
+          temperature: "28°C",
+          links: {
+            index: "/games/mock_game_1",
+            box: "/games/mock_game_1/box",
+            pbp: "/games/mock_game_1/pbp"
+          }
+        },
+        {
+          game_id: "mock_game_2", 
+          date: new Date().toISOString().split('T')[0],
+          start_time_jst: "18:00",
+          status: "scheduled",
+          inning: null,
+          venue: "甲子園球場",
+          away_team: "横浜DeNAベイスターズ",
+          home_team: "阪神タイガース",
+          away_score: null,
+          home_score: null,
+          attendance: null,
+          weather: "曇り",
+          temperature: "26°C",
+          links: {
+            index: "/games/mock_game_2",
+            box: "/games/mock_game_2/box", 
+            pbp: "/games/mock_game_2/pbp"
+          }
+        },
+        {
+          game_id: "mock_game_3",
+          date: new Date().toISOString().split('T')[0],
+          start_time_jst: "14:00",
+          status: "final",
+          inning: "試合終了",
+          venue: "ナゴヤドーム",
+          away_team: "広島東洋カープ",
+          home_team: "中日ドラゴンズ",
+          away_score: 4,
+          home_score: 7,
+          attendance: 28000,
+          weather: "ドーム",
+          temperature: "25°C",
+          links: {
+            index: "/games/mock_game_3",
+            box: "/games/mock_game_3/box",
+            pbp: "/games/mock_game_3/pbp"
+          }
+        }
+      ]
     };
 
-    return NextResponse.json(mockData);
+    return NextResponse.json(mockTodayGames);
 
   } catch (error) {
     console.error('Error in today-games API:', error);
     
     return NextResponse.json({
       source: "error",
-      provider: "system", 
+      provider: provider,
       league: league,
       games: 0,
-      ts: new Date().toISOString(),
-      wpa_threshold: 0.08,
       data: [],
-      error: "Failed to load game data"
+      error: error instanceof Error ? error.message : 'Unknown error',
+      ts: new Date().toISOString()
     }, { status: 500 });
   }
 }
