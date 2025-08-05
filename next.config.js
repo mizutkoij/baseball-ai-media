@@ -22,17 +22,10 @@ const nextConfig = {
   
   // Webpack configuration to prevent build-time issues
   webpack: (config, { isServer, buildId, dev }) => {
-    // Better SQLite3 configuration for Vercel
-    if (isServer) {
-      config.externals = config.externals || [];
-      config.externals.push('better-sqlite3');
-    }
-    
     // Exclude problematic server-only modules from client bundle
     if (!isServer && !dev) {
       config.externals = config.externals || [];
       config.externals.push({
-        'better-sqlite3': 'better-sqlite3',
         'fs/promises': 'fs/promises',
         'fs': 'fs',
         'path': 'path'
@@ -44,7 +37,6 @@ const nextConfig = {
       ...config.resolve.fallback,
       fs: false,
       path: false,
-      'better-sqlite3': false,
     };
     
     // Ignore warnings about critical dependencies

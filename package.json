@@ -22,9 +22,15 @@
     "test:golden": "vitest run golden-sample.test.ts",
     "debug:game": "npx ts-node scripts/debug_game.ts",
     "snapshot:og": "node scripts/snapshot_og_simple.js",
-    "check:uidensity": "node scripts/ui_density_check.js"
+    "check:uidensity": "node scripts/ui_density_check.js",
+    "fetch:schedule": "npx tsx scripts/fetch_npb_schedule.ts",
+    "fetch:today": "npx tsx scripts/fetch_npb_schedule.ts --today",
+    "auto:update": "npx tsx scripts/auto_update_schedule.ts --mode continuous",
+    "auto:once": "npx tsx scripts/auto_update_schedule.ts --mode once",
+    "auto:monthly": "npx tsx scripts/auto_update_schedule.ts --mode monthly"
   },
   "dependencies": {
+    "@types/cheerio": "^0.22.35",
     "@types/cli-progress": "^3.11.6",
     "@types/json2csv": "^5.0.7",
     "@types/node": "^20",
@@ -32,7 +38,8 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
-    "better-sqlite3": "^12.2.0",
+    "axios": "^1.11.0",
+    "cheerio": "^1.1.0",
     "cli-progress": "^3.12.0",
     "clsx": "^2.0.0",
     "commander": "^14.0.0",
@@ -51,10 +58,11 @@
     "typescript": "^5"
   },
   "devDependencies": {
-    "@types/better-sqlite3": "^7.6.13",
+    "@types/jsdom": "^21.1.7",
     "@vitest/ui": "^3.2.4",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
+    "jsdom": "^25.0.1",
     "madge": "^8.0.0",
     "ts-prune": "^0.10.3",
     "vitest": "^3.2.4"
