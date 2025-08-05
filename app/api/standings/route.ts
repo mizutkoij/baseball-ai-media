@@ -143,7 +143,7 @@ export async function GET(req: NextRequest) {
       return new Response('API not available during build', { status: 503 });
     }
 
-    const { searchParams } = new URL(req.url);
+    const searchParams = new URLSearchParams(req.url.split('?')[1] || '');
     const year = parseInt(searchParams.get("year") || new Date().getFullYear().toString());
     const league = searchParams.get("league"); // 'central', 'pacific', or null for both
 

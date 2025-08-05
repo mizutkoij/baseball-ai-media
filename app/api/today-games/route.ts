@@ -3,16 +3,15 @@ import fs from 'fs';
 import path from 'path';
 
 export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url);
+  const searchParams = new URLSearchParams(request.url.split('?')[1] || '');
   const league = searchParams.get('league') || 'first';
   const provider = searchParams.get('provider') || 'auto';
 
   try {
-    // Try to load NPB snapshot data first
-    const snapshotPath = path.join(process.cwd(), 'snapshots', 
-      league === 'farm' ? 'today_games_farm.json' : 'today_games.json');
+    // Return mock data for Vercel compatibility
+    console.warn('Today games snapshot loading disabled for Vercel compatibility');
     
-    if (fs.existsSync(snapshotPath)) {
+    if (false) { // Disabled filesystem access
       const data = JSON.parse(fs.readFileSync(snapshotPath, 'utf8'));
       
       // Transform NPB data to match existing API format

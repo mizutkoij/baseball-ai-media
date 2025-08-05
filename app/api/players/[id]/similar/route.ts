@@ -10,7 +10,7 @@ export async function GET(
   { params }: { params: { id: string } }
 ): Promise<NextResponse> {
   const playerId = params.id;
-  const { searchParams } = new URL(req.url);
+  const searchParams = new URLSearchParams(req.url.split('?')[1] || '');
   const limit = parseInt(searchParams.get("limit") || "3");
   const activeOnly = searchParams.get("activeOnly") === "true";
   const sameEra = searchParams.get("sameEra") === "true";

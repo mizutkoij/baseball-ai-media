@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 export const dynamic = 'force-dynamic';
 
 export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url);
+  const searchParams = new URLSearchParams(request.url.split('?')[1] || '');
   
   // Parse parameters
   const from = searchParams.get('from') || new Date().toISOString().split('T')[0];

@@ -107,7 +107,7 @@ function generateGameDescription(game: any): string {
 }
 
 export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url);
+  const searchParams = new URLSearchParams(request.url.split('?')[1] || '');
   const league = searchParams.get('league') || 'first';
   const date = searchParams.get('date') || new Date().toISOString().split('T')[0];
 
@@ -116,6 +116,10 @@ export async function GET(request: NextRequest) {
     const fs = await import('fs');
     const path = await import('path');
     
+    // Return mock game data for Vercel compatibility
+    console.warn('Game of the day data loading disabled for Vercel compatibility');
+    
+    if (false) { // Disabled filesystem access
     // Load today's games data
     const snapshotPath = path.join(process.cwd(), 'snapshots', 
       league === 'farm' ? 'today_games_farm.json' : 'today_games.json');

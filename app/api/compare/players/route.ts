@@ -295,7 +295,7 @@ export async function GET(req: NextRequest) {
 
     // Use mock data instead of database queries
     
-    const { searchParams } = new URL(req.url);
+    const searchParams = new URLSearchParams(req.url.split('?')[1] || '');
     const playerIds = searchParams.get("players");
     const pfCorrection = searchParams.get("pf") === "true";
     const yearFrom = parseInt(searchParams.get("from") || "2022");

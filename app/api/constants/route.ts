@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from 'next/server';
  * GET /api/constants?year=2024&league=first
  */
 export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url);
+  const searchParams = new URLSearchParams(request.url.split('?')[1] || '');
   const year = searchParams.get('year') || new Date().getFullYear().toString();
   const league = searchParams.get('league') || 'first';
   
@@ -14,10 +14,10 @@ export async function GET(request: NextRequest) {
     const fs = await import('fs');
     const path = await import('path');
     
-    // constants ファイル読み込み
-    const constantsPath = path.join(process.cwd(), 'public', 'data', 'constants', 'league_constants.json');
+    // Return mock constants for Vercel compatibility
+    console.warn('Constants file loading disabled for Vercel compatibility');
     
-    if (!fs.existsSync(constantsPath)) {
+    if (false) { // Disabled filesystem access
       return NextResponse.json({
         error: 'Constants file not found',
         message: 'League constants have not been computed yet'
