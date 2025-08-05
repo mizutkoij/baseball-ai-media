@@ -10,51 +10,47 @@ export async function GET(request: NextRequest) {
   const league = searchParams.get('league') || 'first';
   
   try {
-    // Dynamic imports to prevent build-time issues
-    const fs = await import('fs');
-    const path = await import('path');
-    
     // Return mock constants for Vercel compatibility
     console.warn('Constants file loading disabled for Vercel compatibility');
     
-    if (false) { // Disabled filesystem access
-      return NextResponse.json({
-        error: 'Constants file not found',
-        message: 'League constants have not been computed yet'
-      }, { status: 404 });
-    }
-    
-    const constantsData = JSON.parse(fs.readFileSync(constantsPath, 'utf8'));
-    const key = `${year}_${league}`;
-    
-    if (!constantsData.constants[key]) {
-      return NextResponse.json({
-        error: 'Constants not found',
-        message: `No constants available for ${year} ${league}`,
-        available_keys: Object.keys(constantsData.constants)
-      }, { status: 404 });
-    }
-    
-    const constants = constantsData.constants[key];
-    
-    return NextResponse.json({
+    const mockConstants = {
       year: parseInt(year),
-      league,
-      constants,
-      meta: constantsData.meta,
-      cache_info: {
-        last_updated: constants.updated_at,
-        sample_games: constants.sample_games
-      }
-    });
+      league: league,
+      constants: {
+        batting: {
+          lg_avg_ops: 0.720,
+          lg_avg_avg: 0.265,
+          lg_avg_obp: 0.335,
+          lg_avg_slg: 0.385,
+          park_factor_adjustment: 1.000
+        },
+        pitching: {
+          lg_avg_era: 3.50,
+          lg_avg_whip: 1.25,
+          lg_avg_k9: 8.5,
+          lg_avg_bb9: 3.2,
+          park_factor_adjustment: 1.000
+        },
+        park_factors: {
+          default: 1.000
+        },
+        wrc_plus_constants: {
+          lg_avg_woba: 0.320,
+          woba_scale: 1.200,
+          lg_runs_per_pa: 0.115
+        }
+      },
+      computed_at: new Date().toISOString(),
+      source: 'mock_data'
+    };
+    
+    return NextResponse.json(mockConstants);
     
   } catch (error) {
-    console.error('Error loading constants:', error);
+    console.error('Error in constants API:', error);
     return NextResponse.json({
       error: 'Failed to load constants',
       message: error instanceof Error ? error.message : 'Unknown error'
     }, { status: 500 });
   }
 }
-
-export const dynamic = 'force-dynamic';
