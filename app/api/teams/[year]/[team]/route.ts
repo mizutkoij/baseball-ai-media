@@ -3,6 +3,27 @@ import { NextRequest, NextResponse } from "next/server";
 // Add runtime config to prevent static generation
 export const dynamic = 'force-dynamic';
 
+// Export interface for components that import it
+export interface TeamPageData {
+  meta: {
+    year: number;
+    team: string;
+    teamDisplayName: string;
+    league: string;
+    season_type: string;
+  };
+  standings: any;
+  batting_leaders: any[];
+  pitching_leaders: any[];
+  vs_opponents: any[];
+  summary: any;
+  constants: any;
+  distributions: any;
+  promotions: any;
+  splits: any;
+  message?: string;
+}
+
 export async function GET(
   req: NextRequest,
   { params }: { params: { year: string; team: string } }
