@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
+// Build fix 2025-08-05
 const nextConfig = {
-  // Enable standalone output for containerization
-  output: 'standalone',
+  // Enable standalone output for containerization (disabled for initial build test)
+  // output: 'standalone',
   
   // Optimize build performance
   experimental: {
