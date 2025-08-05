@@ -232,6 +232,99 @@ export default async function Home() {
           </Suspense>
         </div>
 
+        {/* NPB Stats & Data Section */}
+        <div className="mb-12 animate-slide-up animation-delay-200">
+          <div className="bg-gradient-to-r from-slate-50 to-blue-50 rounded-xl p-6">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-bold text-slate-900 mb-2">NPB詳細データ & 統計</h2>
+              <p className="text-slate-600">最新の順位表、選手成績、試合データをリアルタイムで確認</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <Link 
+                href="/standings" 
+                className="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border-l-4 border-yellow-500"
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <TrendingUp className="w-8 h-8 text-yellow-600" />
+                  <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full font-medium">
+                    NEW
+                  </span>
+                </div>
+                <h3 className="font-bold text-slate-900 mb-2 group-hover:text-yellow-600 transition-colors">
+                  順位表
+                </h3>
+                <p className="text-sm text-slate-600 mb-3">
+                  セ・パ両リーグの最新順位、勝率、ゲーム差を確認
+                </p>
+                <div className="text-xs text-slate-500">
+                  リアルタイム更新 • プレーオフ進出圏表示
+                </div>
+              </Link>
+
+              <Link 
+                href="/stats" 
+                className="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border-l-4 border-blue-500"
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <BarChart3 className="w-8 h-8 text-blue-600" />
+                  <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full font-medium">
+                    NEW
+                  </span>
+                </div>
+                <h3 className="font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
+                  選手成績
+                </h3>
+                <p className="text-sm text-slate-600 mb-3">
+                  打者・投手の詳細成績ランキング
+                </p>
+                <div className="text-xs text-slate-500">
+                  打率・本塁打・防御率 • 詳細統計
+                </div>
+              </Link>
+
+              <Link 
+                href="/schedule" 
+                className="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all p-6 border-l-4 border-green-500"
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <Target className="w-8 h-8 text-green-600" />
+                  <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full font-medium">
+                    更新
+                  </span>
+                </div>
+                <h3 className="font-bold text-slate-900 mb-2 group-hover:text-green-600 transition-colors">
+                  試合日程
+                </h3>
+                <p className="text-sm text-slate-600 mb-3">
+                  今後の試合予定と結果を詳細表示
+                </p>
+                <div className="text-xs text-slate-500">
+                  詳細スコア • 会場情報 • 開始時間
+                </div>
+              </Link>
+
+              <div className="group bg-white rounded-lg shadow-md p-6 border-l-4 border-purple-500 opacity-75">
+                <div className="flex items-center justify-between mb-3">
+                  <Zap className="w-8 h-8 text-purple-600" />
+                  <span className="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full font-medium">
+                    準備中
+                  </span>
+                </div>
+                <h3 className="font-bold text-slate-900 mb-2">
+                  試合詳細
+                </h3>
+                <p className="text-sm text-slate-600 mb-3">
+                  イニング別スコア、ボックススコア
+                </p>
+                <div className="text-xs text-slate-500">
+                  詳細統計 • プレイバイプレイ
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           
           {/* WAR Leaders Card */}

@@ -3,11 +3,11 @@ import LeagueStandings from '@/components/LeagueStandings';
 import { Trophy, Calendar, TrendingUp } from 'lucide-react';
 
 export const metadata = {
-  title: 'NPB順位表 2024年 | リアルタイム順位・勝率・ゲーム差',
+  title: 'NPB順位表 2025年 | リアルタイム順位・勝率・ゲーム差',
   description: 'NPB（セ・パ両リーグ）の最新順位表。勝率、ゲーム差、直近成績、プレーオフ進出圏を一覧表示。リアルタイム更新で常に最新情報を提供。',
   keywords: 'NPB, 順位表, セントラルリーグ, パシフィックリーグ, 勝率, ゲーム差, プレーオフ, クライマックスシリーズ',
   openGraph: {
-    title: 'NPB順位表 2024年 | NPB AI Analytics',
+    title: 'NPB順位表 2025年 | NPB AI Analytics',
     description: 'セ・パ両リーグの最新順位表とプレーオフ進出状況',
     type: 'website',
   },
@@ -120,7 +120,7 @@ export default function StandingsPage() {
             ))}
           </div>
         }>
-          <LeagueStandings year={2024} showBoth={true} />
+          <LeagueStandings year={2025} showBoth={true} />
         </Suspense>
       </section>
     </div>

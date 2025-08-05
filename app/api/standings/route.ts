@@ -140,15 +140,129 @@ export async function GET(req: NextRequest) {
       return new Response('API not available during build', { status: 503 });
     }
 
-    // Dynamic import to prevent build-time database connection
-    const { query, unionQuery } = await import('@/lib/db');
-    
-    // Original code continues
     const { searchParams } = new URL(req.url);
     const year = parseInt(searchParams.get("year") || new Date().getFullYear().toString());
     const league = searchParams.get("league"); // 'central', 'pacific', or null for both
 
-    // Generate mock standings
+    // Try to get real data from database
+    try {
+      const path = await import('path');
+      const currentDbPath = path.join(process.cwd(), 'data', 'db_current.db');
+      const fs = await import('fs');
+      
+      if (fs.existsSync(currentDbPath)) {
+        const Database = require('better-sqlite3');
+        const db = new Database(currentDbPath);
+        
+        // Build query based on league filter
+        let leagueCondition = '';
+        const params = [year];
+        
+        if (league === 'central') {
+          leagueCondition = "AND league = 'central'";
+        } else if (league === 'pacific') {
+          leagueCondition = "AND league = 'pacific'";
+        }
+        
+        const query = `
+          SELECT 
+            ts.team, ts.league, ts.rank, ts.wins, ts.losses, ts.draws, 
+            ts.win_percentage, ts.games_behind, ts.streak, ts.last_10, 
+            ts.home_record, ts.away_record, ts.updated_at,
+            t.name as team_name, t.city, t.stadium
+          FROM team_standings ts
+          LEFT JOIN teams t ON ts.team = t.team_code
+          WHERE ts.year = ? ${leagueCondition}
+          ORDER BY ts.league, ts.rank
+        `;
+        
+        const standings = db.prepare(query).all(...params);
+        
+        if (standings.length > 0) {
+          // Format the data to match the expected structure
+          const central = standings.filter((s: any) => s.league === 'central').map((s: any) => ({
+            team_code: s.team,
+            team_name: s.team_name || TEAM_NAMES[s.team] || s.team,
+            league: s.league,
+            wins: s.wins,
+            losses: s.losses,
+            draws: s.draws || 0,
+            games_played: s.wins + s.losses + (s.draws || 0),
+            win_pct: s.win_percentage,
+            games_back: s.games_behind,
+            rank: s.rank,
+            last_10: s.last_10 || '0-0',
+            streak: s.streak || '-',
+            home_record: s.home_record || '0-0',
+            away_record: s.away_record || '0-0',
+            vs_central: '0-0', // Would need to calculate from game data
+            vs_pacific: '0-0', // Would need to calculate from game data
+            runs_scored: 0, // Would need to calculate from game data
+            runs_allowed: 0, // Would need to calculate from game data
+            run_diff: 0 // Would need to calculate from game data
+          }));
+          
+          const pacific = standings.filter((s: any) => s.league === 'pacific').map((s: any) => ({
+            team_code: s.team,
+            team_name: s.team_name || TEAM_NAMES[s.team] || s.team,
+            league: s.league,
+            wins: s.wins,
+            losses: s.losses,
+            draws: s.draws || 0,
+            games_played: s.wins + s.losses + (s.draws || 0),
+            win_pct: s.win_percentage,
+            games_back: s.games_behind,
+            rank: s.rank,
+            last_10: s.last_10 || '0-0',
+            streak: s.streak || '-',
+            home_record: s.home_record || '0-0',
+            away_record: s.away_record || '0-0',
+            vs_central: '0-0',
+            vs_pacific: '0-0',
+            runs_scored: 0,
+            runs_allowed: 0,
+            run_diff: 0
+          }));
+          
+          db.close();
+          
+          const response = {
+            central,
+            pacific,
+            last_updated: standings[0]?.updated_at || new Date().toISOString(),
+            season: year,
+            games_remaining: 143 - Math.floor((central[0]?.games_played || 0)),
+            playoff_format: {
+              central: { cs_teams: 3, wildcard_teams: 2 },
+              pacific: { cs_teams: 3, wildcard_teams: 2 }
+            }
+          };
+
+          // Filter by league if specified
+          const filteredResponse = league 
+            ? { 
+                [league]: response[league as keyof typeof response],
+                last_updated: response.last_updated,
+                season: response.season,
+                games_remaining: response.games_remaining,
+                playoff_format: response.playoff_format
+              }
+            : response;
+
+          return Response.json(filteredResponse, {
+            headers: {
+              'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600',
+            },
+          });
+        }
+        
+        db.close();
+      }
+    } catch (dbError) {
+      console.error("Database error, falling back to mock data:", dbError);
+    }
+
+    // Fallback to mock data
     const standings = generateMockStandings(year);
 
     // Filter by league if specified
@@ -158,9 +272,10 @@ export async function GET(req: NextRequest) {
           last_updated: standings.last_updated,
           season: standings.season,
           games_remaining: standings.games_remaining,
-          playoff_format: standings.playoff_format
+          playoff_format: standings.playoff_format,
+          source: 'mock_fallback'
         }
-      : standings;
+      : { ...standings, source: 'mock_fallback' };
 
     return Response.json(response, {
       headers: {

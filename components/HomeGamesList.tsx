@@ -13,7 +13,7 @@ interface GameData {
   home_team: string;
   away_score?: number;
   home_score?: number;
-  status: 'scheduled' | 'in_progress' | 'completed' | 'postponed';
+  status: 'scheduled' | 'live' | 'final' | 'postponed' | 'cancelled';
   inning?: string;
   venue: string;
   start_time_jst: string;
@@ -39,13 +39,13 @@ interface HomeGamesListProps {
 }
 
 const TEAM_NAMES: Record<string, string> = {
-  'G': '巨人', 'T': '阪神', 'C': '広島', 'YS': 'DeNA', 'D': '中日', 'S': 'ヤクルト',
+  'YG': '巨人', 'T': '阪神', 'C': '広島', 'DB': 'DeNA', 'D': '中日', 'S': 'ヤクルト',
   'H': 'ソフトバンク', 'L': '西武', 'E': '楽天', 'M': 'ロッテ', 'F': '日本ハム', 'B': 'オリックス'
 };
 
 const TEAM_COLORS: Record<string, string> = {
-  'G': 'border-orange-500', 'T': 'border-yellow-500', 'C': 'border-red-500',
-  'YS': 'border-blue-500', 'D': 'border-blue-700', 'S': 'border-green-500',
+  'YG': 'border-orange-500', 'T': 'border-yellow-500', 'C': 'border-red-500',
+  'DB': 'border-blue-500', 'D': 'border-blue-700', 'S': 'border-green-500',
   'H': 'border-yellow-400', 'L': 'border-blue-600', 'E': 'border-red-600',
   'M': 'border-black', 'F': 'border-blue-400', 'B': 'border-blue-800'
 };
@@ -71,18 +71,19 @@ function GameCard({ game, isCompact = false }: { game: GameData; isCompact?: boo
     switch (game.status) {
       case 'scheduled':
         return <span className="px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded-full">PRE</span>;
-      case 'in_progress':
+      case 'live':
         return (
           <div className="flex items-center gap-1">
             <Activity className="w-3 h-3 text-red-500 animate-pulse" />
             <span className="px-2 py-1 text-xs bg-red-100 text-red-800 rounded-full font-medium">
-              LIVE {game.inning}
+              LIVE {game.inning ? `${game.inning}回` : ''}
             </span>
           </div>
         );
-      case 'completed':
+      case 'final':
         return <span className="px-2 py-1 text-xs bg-gray-100 text-gray-800 rounded-full">FINAL</span>;
       case 'postponed':
+      case 'cancelled':
         return <span className="px-2 py-1 text-xs bg-red-100 text-red-800 rounded-full">中止</span>;
       default:
         return null;
@@ -178,8 +179,8 @@ function DaySection({ day, isExpanded, onToggle }: {
     return isToday ? '今日' : formatter.format(date);
   };
 
-  const liveGamesCount = day.games.filter(game => game.status === 'in_progress').length;
-  const completedGamesCount = day.games.filter(game => game.status === 'completed').length;
+  const liveGamesCount = day.games.filter(game => game.status === 'live').length;
+  const completedGamesCount = day.games.filter(game => game.status === 'final').length;
 
   return (
     <div className="border border-slate-200 rounded-lg overflow-hidden">
