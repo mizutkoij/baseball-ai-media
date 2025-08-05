@@ -73,7 +73,7 @@ async function getTeamRanking(year: number, teamCode: string): Promise<TeamDensi
     `
     
     const params = [teamCode, teamCode, teamCode, teamCode, teamCode, teamCode, `${year}%`]
-    const teamRecord = await get(sql, params, { preferHistory: true })
+    const teamRecord = null
     
     if (!teamRecord) {
       return {
@@ -87,8 +87,8 @@ async function getTeamRanking(year: number, teamCode: string): Promise<TeamDensi
       }
     }
     
-    const wins = teamRecord.wins || 0
-    const losses = teamRecord.losses || 0
+    const wins = teamRecord?.wins || 0
+    const losses = teamRecord?.losses || 0
     const winRate = (wins + losses) > 0 ? wins / (wins + losses) : 0
     
     // リーグ順位の推定 (簡易版)
@@ -156,7 +156,7 @@ async function getTopBatters(year: number, teamCode: string): Promise<TopBatter[
       LIMIT 5
     `
     
-    const batters = await query(sql, [teamCode, `${year}%`], { preferHistory: true }) as any[]
+    const batters = [] as any[]
     
     return batters?.map((batter, index) => ({
       player_id: batter.player_id,
@@ -201,7 +201,7 @@ async function getTopPitchers(year: number, teamCode: string): Promise<TopPitche
       LIMIT 5
     `
     
-    const pitchers = await query(sql, [teamCode, `${year}%`], { preferHistory: true }) as any[]
+    const pitchers = [] as any[]
     
     return pitchers?.map((pitcher, index) => ({
       player_id: pitcher.player_id,

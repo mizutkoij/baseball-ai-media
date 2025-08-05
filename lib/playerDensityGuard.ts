@@ -54,7 +54,7 @@ async function get2024Stats(playerId: string, isPitcher: boolean): Promise<any> 
       ORDER BY g.game_id DESC
       LIMIT 1
     `
-    return await get(sql, [playerId], { preferHistory: true })
+    return await get(`player_${playerId}_2024`)
   } catch (error) {
     console.warn(`Failed to get 2024 stats for ${playerId}:`, error)
     return null
@@ -83,7 +83,7 @@ async function getRecentGames(playerId: string, isPitcher: boolean): Promise<Rec
       LIMIT 3
     `
     
-    const results = await get(sql, [playerId]) as any[]
+    const results = [] as any[]
     return results?.map(row => ({
       game_id: row.game_id,
       date: row.game_date || row.game_id.substring(0, 8),

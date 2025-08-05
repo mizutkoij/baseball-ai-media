@@ -45,7 +45,7 @@ export async function generateStratifiedSample(): Promise<StratifiedSampleResult
   
   if (!config.enabled) {
     // Fallback to simple recent sampling
-    const games = await query<GameSample>(`
+    const games = await query(`
       SELECT game_id, home_team, away_team, home_score, away_score,
              'recent' as category, 1.0 as weight
       FROM games 
@@ -54,7 +54,7 @@ export async function generateStratifiedSample(): Promise<StratifiedSampleResult
       AND ${exclusionClause}
       ORDER BY game_id DESC 
       LIMIT 20
-    `, [], { preferHistory: true })
+    `, [])
 
     return {
       samples: games,
@@ -76,7 +76,7 @@ export async function generateStratifiedSample(): Promise<StratifiedSampleResult
   recentCutoff.setDate(recentCutoff.getDate() - config.categories.recent.days)
   const recentDateStr = recentCutoff.toISOString().slice(0, 10).replace(/-/g, '')
   
-  const recentGames = await query<GameSample>(`
+  const recentGames = await query(`
     SELECT game_id, home_team, away_team, home_score, away_score,
            'recent' as category, ${config.categories.recent.weight} as weight
     FROM games 
@@ -85,12 +85,12 @@ export async function generateStratifiedSample(): Promise<StratifiedSampleResult
     AND game_id >= '${recentDateStr}%'
     AND ${exclusionClause}
     ORDER BY game_id DESC
-  `, [], { preferHistory: true })
+  `, [])
 
   samples.push(...recentGames)
 
   // 2. Historic games (random sampling)
-  const historicGames = await query<GameSample>(`
+  const historicGames = await query(`
     SELECT game_id, home_team, away_team, home_score, away_score,
            'historic' as category, ${config.categories.historic.weight} as weight
     FROM games 
@@ -100,12 +100,12 @@ export async function generateStratifiedSample(): Promise<StratifiedSampleResult
     AND ${exclusionClause}
     ORDER BY RANDOM()
     LIMIT ${config.categories.historic.randomCount}
-  `, [], { preferHistory: true })
+  `, [])
 
   samples.push(...historicGames)
 
   // 3. Edge cases - High scoring games
-  const highScoringGames = await query<GameSample>(`
+  const highScoringGames = await query(`
     SELECT game_id, home_team, away_team, home_score, away_score,
            'high_scoring' as category, ${config.categories.edgeCases.weight} as weight
     FROM games 
@@ -115,13 +115,13 @@ export async function generateStratifiedSample(): Promise<StratifiedSampleResult
     AND ${exclusionClause}
     ORDER BY (home_score + away_score) DESC
     LIMIT ${config.categories.edgeCases.highScoring.count}
-  `, [], { preferHistory: true })
+  `, [])
 
   samples.push(...highScoringGames)
 
   // 4. Edge cases - Extra innings games (approximate detection using high scores as proxy)
   // Note: Without explicit inning column, use very high combined scores as extra innings indicator
-  const extraInningsGames = await query<GameSample>(`
+  const extraInningsGames = await query(`
     SELECT g.game_id, g.home_team, g.away_team, g.home_score, g.away_score,
            'extra_innings' as category, ${config.categories.edgeCases.weight} as weight
     FROM games g
@@ -132,7 +132,7 @@ export async function generateStratifiedSample(): Promise<StratifiedSampleResult
     AND (g.home_score + g.away_score) < ${config.categories.edgeCases.highScoring.minTotalRuns}
     ORDER BY (g.home_score + g.away_score) DESC
     LIMIT ${config.categories.edgeCases.extraInnings.count}
-  `, [], { preferHistory: true })
+  `, [])
 
   samples.push(...extraInningsGames)
 
