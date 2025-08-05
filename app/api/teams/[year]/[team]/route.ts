@@ -15,6 +15,10 @@ export interface TeamPageData {
   standings: any;
   batting_leaders: any[];
   pitching_leaders: any[];
+  leaders: {
+    hitters: any[];
+    pitchers: any[];
+  };
   vs_opponents: any[];
   summary: any;
   constants: any;
@@ -55,6 +59,10 @@ export async function GET(
     standings: null,
     batting_leaders: [],
     pitching_leaders: [],
+    leaders: {
+      hitters: [],
+      pitchers: []
+    },
     vs_opponents: [],
     summary: null,
     constants: null,
