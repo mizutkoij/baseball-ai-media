@@ -39,13 +39,13 @@ export async function GET(request: NextRequest) {
               {
                 game_id: 'mock_game_001',
                 date: new Date().toISOString().split('T')[0],
-                away_team: 'Giants',
-                home_team: 'Tigers',
+                away_team: '巨人',
+                home_team: '阪神',
                 away_score: null,
                 home_score: null,
                 status: 'scheduled',
                 inning: null,
-                ballpark: 'Koshien Stadium'
+                ballpark: '甲子園球場'
               }
             ]
           }

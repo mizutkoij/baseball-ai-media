@@ -42,18 +42,18 @@ interface StandingsResponse {
 }
 
 const TEAM_NAMES: Record<string, string> = {
-  'G': 'Yomiuri Giants',
-  'T': 'Hanshin Tigers', 
-  'C': 'Hiroshima Carp',
-  'YS': 'Yokohama DeNA BayStars',
-  'D': 'Chunichi Dragons',
-  'S': 'Tokyo Yakult Swallows',
-  'H': 'Softbank Hawks',
-  'L': 'Saitama Seibu Lions',
-  'E': 'Tohoku Rakuten Eagles',
-  'M': 'Chiba Lotte Marines',
-  'F': 'Hokkaido Nippon-Ham Fighters',
-  'B': 'Orix Buffaloes'
+  'G': '読売ジャイアンツ',
+  'T': '阪神タイガース', 
+  'C': '広島東洋カープ',
+  'YS': '横浜DeNAベイスターズ',
+  'D': '中日ドラゴンズ',
+  'S': '東京ヤクルトスワローズ',
+  'H': 'ソフトバンクホークス',
+  'L': '埼玉西武ライオンズ',
+  'E': '東北楽天ゴールデンイーグルス',
+  'M': '千葉ロッテマリーンズ',
+  'F': '北海道日本ハムファイターズ',
+  'B': 'オリックス・バファローズ'
 };
 
 // Mock data generator for development
@@ -147,22 +147,26 @@ export async function GET(req: NextRequest) {
     const year = parseInt(searchParams.get("year") || new Date().getFullYear().toString());
     const league = searchParams.get("league"); // 'central', 'pacific', or null for both
 
-    // Try to get real data from database
-    try {
-      const path = await import('path');
-      const currentDbPath = path.join(process.cwd(), 'data', 'db_current.db');
-      const fs = await import('fs');
-      
-      if (fs.existsSync(currentDbPath)) {
-        // Dynamic import for better-sqlite3 to avoid build issues
-        let Database;
-        try {
-          Database = require('better-sqlite3');
-        } catch (e) {
-          console.warn('better-sqlite3 not available, falling back to mock data');
-          throw e;
-        }
-        const db = new Database(currentDbPath);
+    // Skip database on Vercel production - use mock data
+    if (process.env.VERCEL || process.env.NODE_ENV === 'production') {
+      console.log('Production environment detected, using mock standings data');
+    } else {
+      // Try to get real data from database (local development only)
+      try {
+        const path = await import('path');
+        const currentDbPath = path.join(process.cwd(), 'data', 'db_current.db');
+        const fs = await import('fs');
+        
+        if (fs.existsSync(currentDbPath)) {
+          // Dynamic import for better-sqlite3 to avoid build issues
+          let Database;
+          try {
+            Database = require('better-sqlite3');
+          } catch (e) {
+            console.warn('better-sqlite3 not available, falling back to mock data');
+            throw e;
+          }
+          const db = new Database(currentDbPath);
         
         // Build query based on league filter
         let leagueCondition = '';
@@ -266,10 +270,11 @@ export async function GET(req: NextRequest) {
           });
         }
         
-        db.close();
+          db.close();
+        }
+      } catch (dbError) {
+        console.error("Database error, falling back to mock data:", dbError);
       }
-    } catch (dbError) {
-      console.error("Database error, falling back to mock data:", dbError);
     }
 
     // Fallback to mock data
