@@ -9,7 +9,7 @@ export interface TeamPageData {
     year: number;
     team: string;
     teamDisplayName: string;
-    league: string;
+    league: "central" | "pacific";
     season_type: string;
   };
   standings: any;
@@ -39,13 +39,17 @@ export async function GET(
     return NextResponse.json({ error: "Team required" }, { status: 400 });
   }
   
+  // Determine league based on team
+  const centralTeams = ['G', 'T', 'C', 'YS', 'D', 'S'];
+  const league: "central" | "pacific" = centralTeams.includes(team) ? 'central' : 'pacific';
+  
   // Return mock data to avoid better-sqlite3 dependency
   return NextResponse.json({
     meta: {
       year,
       team,
       teamDisplayName: team,
-      league: 'central',
+      league,
       season_type: 'regular'
     },
     standings: null,
