@@ -1,19 +1,19 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'NPB Team Comparison | Baseball AI Media',
-  description: 'NPB team performance comparison tool with park factor (PF) adjustments for fair analysis. Compare teams using advanced metrics like wRC+, ERA-, FIP.',
-  keywords: 'NPB, baseball, team comparison, sabermetrics, wRC+, ERA-, FIP-, park factors',
+  title: 'NPBチーム比較 | Baseball AI Media',
+  description: 'NPBチーム成績比較ツール。球場補正（PF）対応で公正な分析が可能。wRC+、ERA-、FIP等の高度指標でチーム力を比較。',
+  keywords: 'NPB, プロ野球, チーム比較, セイバーメトリクス, wRC+, ERA-, FIP-, 球場補正',
   openGraph: {
-    title: 'NPB Team Comparison',
-    description: 'Detailed team performance comparison',
+    title: 'NPBチーム比較',
+    description: 'チーム成績を詳細比較',
     type: 'website',
-    locale: 'en_US',
+    locale: 'ja_JP',
   },
   twitter: {
     card: 'summary',
-    title: 'NPB Team Comparison',
-    description: 'Detailed team performance comparison',
+    title: 'NPBチーム比較',
+    description: 'チーム成績を詳細比較',
   },
   robots: {
     index: true,

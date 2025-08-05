@@ -1,6 +1,11 @@
 /** @type {import('next').NextConfig} */
-// Build fix 2025-08-05
+// Build fix 2025-08-05 - Japanese language support
 const nextConfig = {
+  // Internationalization support for Japanese
+  i18n: {
+    locales: ['ja', 'en'],
+    defaultLocale: 'ja',
+  },
   // Enable standalone output for containerization (disabled for initial build test)
   // output: 'standalone',
   
