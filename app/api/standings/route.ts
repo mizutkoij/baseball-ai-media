@@ -133,6 +133,9 @@ function generateMockStandings(year: number): StandingsResponse {
   };
 }
 
+// Add runtime config to prevent static generation
+export const dynamic = 'force-dynamic';
+
 export async function GET(req: NextRequest) {
   try {
     // Build-time safety guard
@@ -151,7 +154,14 @@ export async function GET(req: NextRequest) {
       const fs = await import('fs');
       
       if (fs.existsSync(currentDbPath)) {
-        const Database = require('better-sqlite3');
+        // Dynamic import for better-sqlite3 to avoid build issues
+        let Database;
+        try {
+          Database = require('better-sqlite3');
+        } catch (e) {
+          console.warn('better-sqlite3 not available, falling back to mock data');
+          throw e;
+        }
         const db = new Database(currentDbPath);
         
         // Build query based on league filter

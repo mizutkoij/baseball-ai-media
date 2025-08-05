@@ -22,6 +22,12 @@ const nextConfig = {
   
   // Webpack configuration to prevent build-time issues
   webpack: (config, { isServer, buildId, dev }) => {
+    // Better SQLite3 configuration for Vercel
+    if (isServer) {
+      config.externals = config.externals || [];
+      config.externals.push('better-sqlite3');
+    }
+    
     // Exclude problematic server-only modules from client bundle
     if (!isServer && !dev) {
       config.externals = config.externals || [];
