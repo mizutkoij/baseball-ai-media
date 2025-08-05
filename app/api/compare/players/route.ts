@@ -1,5 +1,7 @@
 import { NextRequest } from "next/server";
-// Database import moved to dynamic import in function
+
+// Prevent static generation during build
+export const dynamic = 'force-dynamic';
 
 interface PlayerComparisonData {
   player_id: string;
@@ -291,8 +293,7 @@ export async function GET(req: NextRequest) {
       return new Response('API not available during build', { status: 503 });
     }
 
-    // Dynamic import to prevent build-time database connection
-    const { query, unionQuery } = await import('@/lib/db');
+    // Use mock data instead of database queries
     
     const { searchParams } = new URL(req.url);
     const playerIds = searchParams.get("players");

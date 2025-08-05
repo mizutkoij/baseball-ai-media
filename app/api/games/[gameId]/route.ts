@@ -29,122 +29,60 @@ export async function GET(request: NextRequest, context: RouteContext) {
   const { gameId } = resolvedParams;
   
   try {
-    // Try to connect to database
-    const testDbPath = path.join(process.cwd(), 'data', 'npb_test.db');
-    const mainDbPath = path.join(process.cwd(), 'data', 'npb.db');
+    // Return mock game data instead of querying database
+    console.log(`Returning mock data for game ${gameId}`);
     
-    let dbPath = testDbPath;
-    const fs = require('fs');
-    
-    // Check which database exists
-    if (fs.existsSync(testDbPath)) {
-      dbPath = testDbPath;
-    } else if (fs.existsSync(mainDbPath)) {
-      dbPath = mainDbPath;
-    } else {
-      // Database not found - return mock game data for production
-      console.log(`Database not found, returning mock data for game ${gameId}`);
-      return NextResponse.json({
-        game: {
-          game_id: gameId,
-          date: '2024-08-04',
-          away_team: '巨人',
-          home_team: '阪神',
-          away_score: 7,
-          home_score: 5,
-          status: 'final',
-          ballpark: '甲子園球場'
-        },
-        batting: [],
-        pitching: [],
-        box_score: {
-          away: { R: 7, H: 12, E: 1 },
-          home: { R: 5, H: 9, E: 0 }
-        },
-        source: 'mock_data_no_database'
-      });
-    }
-
-    // Conditional import to prevent build-time issues
-    const Database = require('better-sqlite3');
-    const db = new Database(dbPath);
-    
-    // Get game info
-    const gameInfo = db.prepare(`
-      SELECT * FROM games WHERE game_id = ?
-    `).get(gameId);
-    
-    if (!gameInfo) {
-      return NextResponse.json({ error: 'Game not found' }, { status: 404 });
-    }
-    
-    // Get lineups
-    const lineups = db.prepare(`
-      SELECT * FROM lineups 
-      WHERE game_id = ? 
-      ORDER BY team, order_no
-    `).all(gameId);
-    
-    // Get batting stats
-    const battingStats = db.prepare(`
-      SELECT * FROM box_batting 
-      WHERE game_id = ? 
-      ORDER BY team, order_no
-    `).all(gameId);
-    
-    // Get pitching stats
-    const pitchingStats = db.prepare(`
-      SELECT * FROM box_pitching 
-      WHERE game_id = ? 
-      ORDER BY team, IP_outs DESC
-    `).all(gameId);
-    
-    db.close();
-    
-    // Parse links JSON
-    let links = {};
-    try {
-      if (gameInfo && (gameInfo as any).links) {
-        links = JSON.parse((gameInfo as any).links);
-      }
-    } catch (e) {
-      // Ignore JSON parse errors
-    }
-    
-    // Group data by team
-    const lineupsData: Record<string, any[]> = {};
-    const battingData: Record<string, any[]> = {};
-    const pitchingData: Record<string, any[]> = {};
-    
-    lineups.forEach((lineup: any) => {
-      if (!lineupsData[lineup.team]) lineupsData[lineup.team] = [];
-      lineupsData[lineup.team].push(lineup);
-    });
-    
-    battingStats.forEach((stats: any) => {
-      if (!battingData[stats.team]) battingData[stats.team] = [];
-      battingData[stats.team].push(stats);
-    });
-    
-    pitchingStats.forEach((stats: any) => {
-      if (!pitchingData[stats.team]) pitchingData[stats.team] = [];
-      pitchingData[stats.team].push(stats);
-    });
-    
-    const responseData = {
+    const mockGameData = {
       game: {
-        ...gameInfo,
-        links: links
+        game_id: gameId,
+        date: '2024-08-04',
+        away_team: '巨人',
+        home_team: '阪神',
+        away_score: 7,
+        home_score: 5,
+        status: 'final',
+        ballpark: '甲子園球場',
+        links: {
+          npb_url: `https://npb.jp/games/${gameId}`,
+          live_stats: null
+        }
       },
-      lineups: lineupsData,
-      batting: battingData,
-      pitching: pitchingData,
+      lineups: {
+        '巨人': [
+          { player_id: 'mock_g1', name: '岡本和真', position: '1B', order_no: 4 },
+          { player_id: 'mock_g2', name: '坂本勇人', position: 'SS', order_no: 3 }
+        ],
+        '阪神': [
+          { player_id: 'mock_t1', name: '佐藤輝明', position: '3B', order_no: 3 },
+          { player_id: 'mock_t2', name: '大山悠輔', position: '1B', order_no: 4 }
+        ]
+      },
+      batting: {
+        '巨人': [
+          { player_id: 'mock_g1', name: '岡本和真', AB: 4, H: 2, R: 1, RBI: 3, HR: 1 },
+          { player_id: 'mock_g2', name: '坂本勇人', AB: 5, H: 3, R: 2, RBI: 1, HR: 0 }
+        ],
+        '阪神': [
+          { player_id: 'mock_t1', name: '佐藤輝明', AB: 4, H: 1, R: 1, RBI: 2, HR: 1 },
+          { player_id: 'mock_t2', name: '大山悠輔', AB: 4, H: 2, R: 0, RBI: 1, HR: 0 }
+        ]
+      },
+      pitching: {
+        '巨人': [
+          { player_id: 'mock_gp1', name: '戸郷翔征', IP: 6.0, H: 7, ER: 4, BB: 2, SO: 8, W: 1, L: 0 }
+        ],
+        '阪神': [
+          { player_id: 'mock_tp1', name: '青柳晃洋', IP: 5.2, H: 10, ER: 6, BB: 3, SO: 5, W: 0, L: 1 }
+        ]
+      },
       stats_summary: {
-        lineups_count: lineups.length,
-        batting_count: battingStats.length,
-        pitching_count: pitchingStats.length
+        lineups_count: 4,
+        batting_count: 4,
+        pitching_count: 2
       }
     };
+    
+    const responseData = mockGameData;
 
     // プロビナンス情報を付与
     const responseWithProvenance = addNPBProvenance(

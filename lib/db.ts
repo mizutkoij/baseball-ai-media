@@ -31,6 +31,22 @@ export function unionQuery(sql: string, params: any[] = []) {
 }
 
 /**
+ * Mock query function to maintain API compatibility
+ */
+export function query(sql: string, params: any[] = []) {
+  console.warn('Database queries disabled for Vercel compatibility');
+  return Promise.resolve([]);
+}
+
+/**
+ * Mock get function to maintain API compatibility
+ */
+export function get(key: string) {
+  console.warn('Database get disabled for Vercel compatibility');
+  return null;
+}
+
+/**
  * Close mock connections
  */
 export function closeConnections(connections: DatabaseConnections) {
