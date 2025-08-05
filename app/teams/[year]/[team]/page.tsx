@@ -515,7 +515,7 @@ export default function TeamPage({ params }: TeamPageProps) {
               site: process.env.NEXT_PUBLIC_SITE_URL || 'https://baseball-ai-media.vercel.app',
               year,
               teamCode: team,
-              updatedAt: teamData.meta.updated_at,
+              updatedAt: teamData.meta.updated_at || new Date().toISOString(),
               scheduleUrl: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://baseball-ai-media.vercel.app'}/teams/${year}/${team}?tab=schedule`,
               analysisUrl: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://baseball-ai-media.vercel.app'}/teams/${year}/${team}?tab=analysis`,
             })}
@@ -524,8 +524,8 @@ export default function TeamPage({ params }: TeamPageProps) {
           {/* Footer */}
           <div className="mt-8 text-xs text-slate-400 text-center space-y-1">
             <p>wRC+, FIP- 等の指標は年別リーグ平均を基準とした相対評価です。</p>
-            <p>データ最終更新: {new Date(teamData.meta.updated_at).toLocaleDateString('ja-JP')}</p>
-            <p>出典: {teamData.provenance.source === 'live_database' ? 'リアルタイム集計' : '静的データ'}</p>
+            <p>データ最終更新: {new Date(teamData.meta.updated_at || new Date()).toLocaleDateString('ja-JP')}</p>
+            <p>出典: 静的データ（Vercel互換）</p>
           </div>
         </div>
       </div>

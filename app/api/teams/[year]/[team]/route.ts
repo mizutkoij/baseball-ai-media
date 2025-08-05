@@ -11,6 +11,7 @@ export interface TeamPageData {
     teamDisplayName: string;
     league: "central" | "pacific";
     season_type: string;
+    updated_at?: string;
   };
   standings: any;
   batting_leaders: any[];
@@ -60,7 +61,8 @@ export async function GET(
       team,
       teamDisplayName: team,
       league,
-      season_type: 'regular'
+      season_type: 'regular',
+      updated_at: new Date().toISOString()
     },
     standings: null,
     batting_leaders: [],
