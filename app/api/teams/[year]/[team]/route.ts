@@ -26,6 +26,11 @@ export interface TeamPageData {
   distributions: any;
   promotions: any;
   splits: any;
+  links: {
+    season: string;
+    players: string;
+    records: string;
+  };
   message?: string;
 }
 
@@ -71,6 +76,11 @@ export async function GET(
     distributions: null,
     promotions: null,
     splits: null,
+    links: {
+      season: `/seasons/${year}`,
+      players: `/players?team=${team}&year=${year}`,
+      records: `/teams/${year}`
+    },
     message: 'Mock data - Database functionality disabled for Vercel compatibility'
   }, {
     headers: {
