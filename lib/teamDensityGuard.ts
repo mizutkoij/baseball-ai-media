@@ -75,46 +75,15 @@ async function getTeamRanking(year: number, teamCode: string): Promise<TeamDensi
     const params = [teamCode, teamCode, teamCode, teamCode, teamCode, teamCode, `${year}%`]
     const teamRecord = null
     
-    if (!teamRecord) {
-      return {
-        position: null,
-        league: teamCode.match(/^[TSCYDG]$/) ? "セ・リーグ" : "パ・リーグ",
-        wins: 0,
-        losses: 0,
-        winRate: 0.000,
-        gamesBack: null,
-        trend: "安定"
-      }
-    }
-    
-    const wins = teamRecord?.wins || 0
-    const losses = teamRecord?.losses || 0
-    const winRate = (wins + losses) > 0 ? wins / (wins + losses) : 0
-    
-    // リーグ順位の推定 (簡易版)
-    const league = teamCode.match(/^[TSCYDG]$/) ? "セ・リーグ" : "パ・リーグ"
-    let position = 3 // デフォルト3位
-    
-    if (winRate >= 0.600) position = 1
-    else if (winRate >= 0.550) position = 2
-    else if (winRate >= 0.500) position = 3
-    else if (winRate >= 0.450) position = 4
-    else if (winRate >= 0.400) position = 5
-    else position = 6
-    
-    const gamesBack = position > 1 ? Math.round((0.600 - winRate) * (wins + losses)) : 0
-    
-    // トレンド分析 (最近10試合)
-    const trend = winRate >= 0.520 ? "上昇" : winRate <= 0.480 ? "下降" : "安定"
-    
+    // Mock data for Vercel compatibility
     return {
-      position,
-      league,
-      wins,
-      losses,
-      winRate,
-      gamesBack,
-      trend
+      position: null,
+      league: teamCode.match(/^[TSCYDG]$/) ? "セ・リーグ" : "パ・リーグ",
+      wins: 0,
+      losses: 0,
+      winRate: 0.000,
+      gamesBack: null,
+      trend: "安定"
     }
     
   } catch (error) {
