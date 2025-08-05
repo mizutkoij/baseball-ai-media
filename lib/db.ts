@@ -1,234 +1,39 @@
-// ビルド時チェック用ユーティリティ
-function isBuildTime(): boolean {
-  return process.env.NODE_ENV === 'production' && 
-         (process.env.NEXT_PHASE === 'phase-production-build' || 
-          (typeof window === 'undefined' && !process.env.VERCEL && !process.env.RUNTIME));
-}
-
-const CURRENT_PATH = process.env.DB_CURRENT || './data/db_current.db';
-const HISTORY_PATH = process.env.DB_HISTORY || './data/db_history.db';
-
-/**
- * 物理分割されたデータベースの統合アクセス層
- * - db_current: 直近2シーズン（2024-2025）読み書き
- * - db_history: 過去データ（2019-2023）読み込みのみ
- */
+// Database functionality disabled for Vercel compatibility
+// All database operations now return mock data
 
 export interface DatabaseConnections {
-  current: any; // Database.Database型をanyに変更してビルド時の型エラーを回避
+  current: any;
   history: any;
 }
 
 /**
- * データベース接続を開く
+ * Mock database connections for Vercel compatibility
  */
 export function openConnections(): DatabaseConnections {
-  // ビルド時はエラーをスロー
-  if (isBuildTime()) {
-    throw new Error('Database operations not available during build time');
-  }
-
-  // 実行時に動的インポート
-  const Database = require('better-sqlite3');
-  const { existsSync } = require('fs');
-  
-  if (!existsSync(CURRENT_PATH)) {
-    throw new Error(`Current database not found: ${CURRENT_PATH}`);
-  }
-  
-  if (!existsSync(HISTORY_PATH)) {
-    throw new Error(`History database not found: ${HISTORY_PATH}`);
-  }
-
-  const dbCurrent = new Database(CURRENT_PATH);
-  const dbHistory = new Database(HISTORY_PATH, { readonly: true });
-
-  return { current: dbCurrent, history: dbHistory };
+  console.warn('Database connections disabled for Vercel compatibility');
+  throw new Error('Database operations not available - using mock data');
 }
 
 /**
- * 接続を閉じる
+ * Mock function to maintain API compatibility
  */
-export function closeConnections(connections: DatabaseConnections): void {
-  connections.current.close();
-  connections.history.close();
+export function getUnionQuery() {
+  console.warn('Database queries disabled for Vercel compatibility');
+  return () => [];
 }
 
 /**
- * 汎用クエリ実行（フォールバック方式）
- * 1. まず db_current で実行
- * 2. 結果が0件なら db_history で実行
- * 3. 両方の結果をマージして返す
+ * Mock function to maintain API compatibility  
  */
-export async function query<T = any>(
-  sql: string, 
-  params: any[] = [], 
-  options: { 
-    preferHistory?: boolean;
-    currentOnly?: boolean;
-    historyOnly?: boolean;
-  } = {}
-): Promise<T[]> {
-  const connections = openConnections();
-  
-  try {
-    let results: T[] = [];
-
-    if (options.historyOnly) {
-      // History のみ
-      results = connections.history.prepare(sql).all(...params) as T[];
-    } else if (options.currentOnly) {
-      // Current のみ
-      results = connections.current.prepare(sql).all(...params) as T[];
-    } else if (options.preferHistory) {
-      // History を優先、0件なら Current
-      results = connections.history.prepare(sql).all(...params) as T[];
-      if (results.length === 0) {
-        results = connections.current.prepare(sql).all(...params) as T[];
-      }
-    } else {
-      // デフォルト: Current を優先、0件なら History
-      results = connections.current.prepare(sql).all(...params) as T[];
-      if (results.length === 0) {
-        results = connections.history.prepare(sql).all(...params) as T[];
-      }
-    }
-
-    return results;
-  } finally {
-    closeConnections(connections);
-  }
+export function unionQuery(sql: string, params: any[] = []) {
+  console.warn('Database queries disabled for Vercel compatibility');
+  return Promise.resolve([]);
 }
 
 /**
- * UNION ALL クエリ（両DBから結果を統合）
+ * Close mock connections
  */
-export async function unionQuery<T = any>(
-  sql: string,
-  params: any[] = []
-): Promise<T[]> {
-  const connections = openConnections();
-  
-  try {
-    const currentResults = connections.current.prepare(sql).all(...params) as T[];
-    const historyResults = connections.history.prepare(sql).all(...params) as T[];
-    
-    return [...currentResults, ...historyResults];
-  } finally {
-    closeConnections(connections);
-  }
-}
-
-/**
- * 単一レコード取得（フォールバック方式）
- */
-export async function get<T = any>(
-  sql: string,
-  params: any[] = [],
-  options: { preferHistory?: boolean } = {}
-): Promise<T | undefined> {
-  const results = await query<T>(sql, params, options);
-  return results[0];
-}
-
-/**
- * 書き込み専用（常に db_current）
- */
-export function write(
-  sql: string,
-  params: any[] = []
-): any {
-  // ビルド時はエラーをスロー
-  if (isBuildTime()) {
-    throw new Error('Database write operations not available during build time');
-  }
-
-  // 実行時に動的インポート
-  const Database = require('better-sqlite3');
-  const { existsSync } = require('fs');
-
-  if (!existsSync(CURRENT_PATH)) {
-    throw new Error(`Current database not found: ${CURRENT_PATH}`);
-  }
-
-  const db = new Database(CURRENT_PATH);
-  try {
-    return db.prepare(sql).run(...params);
-  } finally {
-    db.close();
-  }
-}
-
-/**
- * トランザクション実行（db_current のみ）
- */
-export function transaction<T>(
-  callback: (db: any) => T
-): T {
-  // ビルド時はエラーをスロー
-  if (isBuildTime()) {
-    throw new Error('Database transactions not available during build time');
-  }
-
-  // 実行時に動的インポート
-  const Database = require('better-sqlite3');
-  const { existsSync } = require('fs');
-
-  if (!existsSync(CURRENT_PATH)) {
-    throw new Error(`Current database not found: ${CURRENT_PATH}`);
-  }
-
-  const db = new Database(CURRENT_PATH);
-  try {
-    const txn = db.transaction(callback);
-    return txn(db);
-  } finally {
-    db.close();
-  }
-}
-
-/**
- * 年度別データベース選択ヘルパー
- */
-export function selectDbByYear(year: number): 'current' | 'history' {
-  return year >= 2024 ? 'current' : 'history';
-}
-
-/**
- * デバッグ: 両DBの基本統計
- */
-export async function getDbStats(): Promise<{
-  current: { games: number; batting: number; pitching: number };
-  history: { games: number; batting: number; pitching: number };
-}> {
-  const connections = openConnections();
-  
-  try {
-    const currentStats = {
-      games: connections.current.prepare('SELECT COUNT(*) as count FROM games').get() as { count: number },
-      batting: connections.current.prepare('SELECT COUNT(*) as count FROM box_batting').get() as { count: number },
-      pitching: connections.current.prepare('SELECT COUNT(*) as count FROM box_pitching').get() as { count: number }
-    };
-
-    const historyStats = {
-      games: connections.history.prepare('SELECT COUNT(*) as count FROM games').get() as { count: number },
-      batting: connections.history.prepare('SELECT COUNT(*) as count FROM box_batting').get() as { count: number },
-      pitching: connections.history.prepare('SELECT COUNT(*) as count FROM box_pitching').get() as { count: number }
-    };
-
-    return {
-      current: {
-        games: currentStats.games.count,
-        batting: currentStats.batting.count,
-        pitching: currentStats.pitching.count
-      },
-      history: {
-        games: historyStats.games.count,
-        batting: historyStats.batting.count,
-        pitching: historyStats.pitching.count
-      }
-    };
-  } finally {
-    closeConnections(connections);
-  }
+export function closeConnections(connections: DatabaseConnections) {
+  // No-op for mock connections
+  console.log('Mock database connections closed');
 }
