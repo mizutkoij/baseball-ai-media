@@ -13,16 +13,19 @@ export async function GET(request: NextRequest) {
   const team = searchParams.get('team'); // Team filter for team-specific schedules
   
   try {
-    // Try to connect to DuckDB first, then fallback to SQLite
-    const testDbPath = path.join(process.cwd(), 'data', 'npb_test.db');
+    // Database priority: db_current.db -> db_history.db -> npb.db -> mock data
+    const currentDbPath = path.join(process.cwd(), 'data', 'db_current.db');
+    const historyDbPath = path.join(process.cwd(), 'data', 'db_history.db');
     const mainDbPath = path.join(process.cwd(), 'data', 'npb.db');
     
-    let dbPath = testDbPath;
+    let dbPath = currentDbPath;
     const fs = require('fs');
     
-    // Check which database exists
-    if (fs.existsSync(testDbPath)) {
-      dbPath = testDbPath;
+    // Check which database exists (priority order)
+    if (fs.existsSync(currentDbPath)) {
+      dbPath = currentDbPath;
+    } else if (fs.existsSync(historyDbPath)) {
+      dbPath = historyDbPath;
     } else if (fs.existsSync(mainDbPath)) {
       dbPath = mainDbPath;
     } else {
@@ -36,19 +39,19 @@ export async function GET(request: NextRequest) {
               {
                 game_id: 'mock_game_001',
                 date: new Date().toISOString().split('T')[0],
-                away_team: '巨人',
-                home_team: '阪神',
+                away_team: 'Giants',
+                home_team: 'Tigers',
                 away_score: null,
                 home_score: null,
                 status: 'scheduled',
                 inning: null,
-                ballpark: '甲子園球場'
+                ballpark: 'Koshien Stadium'
               }
             ]
           }
         ],
         total_games: 1,
-        date_range: { from: dateFrom, to: dateTo },
+        date_range: { from: from, to: to },
         source: 'mock_data_no_database'
       });
     }
@@ -59,19 +62,28 @@ export async function GET(request: NextRequest) {
     const db = new Database(dbPath);
     
     // Query games in the date range
+    // Map league parameter: 'first' -> both central and pacific, 'farm' -> farm league
+    let leagueCondition = '';
+    const params = [from, to];
+    
+    if (league === 'first') {
+      leagueCondition = "AND (league = 'central' OR league = 'pacific' OR league = 'interleague')";
+    } else if (league === 'farm') {
+      leagueCondition = "AND league = 'farm'";
+    }
+    
     const query = `
       SELECT 
         game_id, date, start_time_jst, venue, status, inning,
-        away_team, home_team, away_score, home_score, league, links
+        away_team, home_team, away_score, home_score, league
       FROM games 
       WHERE date BETWEEN ? AND ? 
-        AND league = ?
+        ${leagueCondition}
         ${team ? 'AND (away_team = ? OR home_team = ?)' : ''}
         ${status ? 'AND status = ?' : ''}
       ORDER BY date, start_time_jst
     `;
     
-    const params = [from, to, league];
     if (team) {
       params.push(team, team);
     }
@@ -94,20 +106,27 @@ export async function GET(request: NextRequest) {
         games_by_date[dateStr] = [];
       }
       
-      // Parse links JSON if it exists
-      let links = {};
-      try {
-        if (game.links) {
-          links = JSON.parse(game.links);
-        }
-      } catch (e) {
-        // Ignore JSON parse errors
+      // Update summary counts based on status
+      switch (game.status) {
+        case 'scheduled':
+          summary.scheduled++;
+          break;
+        case 'live':
+          summary.in_progress++;
+          break;
+        case 'final':
+          summary.final++;
+          break;
+        case 'postponed':
+        case 'cancelled':
+          summary.postponed++;
+          break;
       }
       
       const gameData = {
         game_id: game.game_id,
         date: game.date,
-        start_time_jst: game.start_time_jst,
+        start_time_jst: game.start_time_jst || '時間未定',
         venue: game.venue,
         status: game.status,
         inning: game.inning,
@@ -116,40 +135,14 @@ export async function GET(request: NextRequest) {
         away_score: game.away_score,
         home_score: game.home_score,
         league: game.league,
-        links: links,
-        // Add team-specific info when filtering by team
-        ...(team && {
-          opponent: game.away_team === team ? game.home_team : game.away_team,
-          home_away: game.home_team === team ? 'H' : 'A',
-          result: game.status === 'FINAL' ? (
-            (game.home_team === team && game.home_score > game.away_score) ||
-            (game.away_team === team && game.away_score > game.home_score) ? 'W' :
-            game.home_score === game.away_score ? 'D' : 'L'
-          ) : null,
-          score_team: game.home_team === team ? game.home_score : game.away_score,
-          score_opponent: game.home_team === team ? game.away_score : game.home_score,
-          game_status: game.status === 'FINAL' ? 'completed' : 
-                      game.status === 'IN_PROGRESS' ? 'in_progress' : 'scheduled'
-        })
+        links: {
+          index: `/games/${game.game_id}`,
+          box: `/games/${game.game_id}/box`,
+          pbp: `/games/${game.game_id}/pbp`
+        }
       };
       
       games_by_date[dateStr].push(gameData);
-      
-      // Update summary counts
-      switch (game.status) {
-        case 'SCHEDULED':
-          summary.scheduled++;
-          break;
-        case 'IN_PROGRESS':
-          summary.in_progress++;
-          break;
-        case 'FINAL':
-          summary.final++;
-          break;
-        case 'POSTPONED':
-          summary.postponed++;
-          break;
-      }
     });
     
     db.close();
@@ -160,9 +153,10 @@ export async function GET(request: NextRequest) {
       games: games.map((game: any) => ({
         ...game,
         // Normalize status for consistent frontend handling
-        status: game.status === 'FINAL' ? 'completed' :
-                game.status === 'IN_PROGRESS' ? 'in_progress' :
-                game.status === 'POSTPONED' ? 'postponed' : 'scheduled'
+        status: game.status === 'FINAL' || game.status === 'final' ? 'final' :
+                game.status === 'IN_PROGRESS' || game.status === 'live' ? 'live' :
+                game.status === 'POSTPONED' || game.status === 'postponed' ? 'postponed' :
+                game.status === 'CANCELLED' || game.status === 'cancelled' ? 'cancelled' : 'scheduled'
       }))
     }));
 
