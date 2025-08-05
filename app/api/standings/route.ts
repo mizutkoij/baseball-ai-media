@@ -42,18 +42,18 @@ interface StandingsResponse {
 }
 
 const TEAM_NAMES: Record<string, string> = {
-  'G': '読売ジャイアンツ',
-  'T': '阪神タイガース', 
-  'C': '広島東洋カープ',
-  'YS': '横浜DeNAベイスターズ',
-  'D': '中日ドラゴンズ',
-  'S': '東京ヤクルトスワローズ',
-  'H': 'ソフトバンクホークス',
-  'L': '埼玉西武ライオンズ',
-  'E': '東北楽天ゴールデンイーグルス',
-  'M': '千葉ロッテマリーンズ',
-  'F': '北海道日本ハムファイターズ',
-  'B': 'オリックス・バファローズ'
+  'G': 'Yomiuri Giants',
+  'T': 'Hanshin Tigers', 
+  'C': 'Hiroshima Carp',
+  'YS': 'Yokohama DeNA BayStars',
+  'D': 'Chunichi Dragons',
+  'S': 'Tokyo Yakult Swallows',
+  'H': 'Softbank Hawks',
+  'L': 'Saitama Seibu Lions',
+  'E': 'Tohoku Rakuten Eagles',
+  'M': 'Chiba Lotte Marines',
+  'F': 'Hokkaido Nippon-Ham Fighters',
+  'B': 'Orix Buffaloes'
 };
 
 // Mock data generator for development
