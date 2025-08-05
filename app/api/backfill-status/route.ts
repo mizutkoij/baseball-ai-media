@@ -30,82 +30,19 @@ interface BackfillStatus {
 }
 
 async function getLatestBackfillReport(): Promise<BackfillReport | null> {
-  try {
-    // Dynamic imports to prevent build-time issues
-    const { promises: fs } = await import('fs');
-    const path = await import('path');
-    
-    const reportsDir = path.join(process.cwd(), 'data', 'reports');
-    
-    // Check if reports directory exists
-    try {
-      await fs.access(reportsDir);
-    } catch {
-      // Try root data directory for reports
-      const dataDir = path.join(process.cwd(), 'data');
-      const files = await fs.readdir(dataDir);
-      const reportFiles = files.filter(f => f.startsWith('backfill_report_') && f.endsWith('.json'));
-      
-      if (reportFiles.length === 0) return null;
-      
-      // Get most recent report
-      const latestReport = reportFiles.sort().pop()!;
-      const reportPath = path.join(dataDir, latestReport);
-      const content = await fs.readFile(reportPath, 'utf-8');
-      return JSON.parse(content);
-    }
-    
-    const files = await fs.readdir(reportsDir);
-    const reportFiles = files.filter(f => f.startsWith('monthly_') && f.endsWith('.json'));
-    
-    if (reportFiles.length === 0) return null;
-    
-    // Get most recent report
-    const latestReport = reportFiles.sort().pop()!;
-    const reportPath = path.join(reportsDir, latestReport);
-    const content = await fs.readFile(reportPath, 'utf-8');
-    return JSON.parse(content);
-  } catch (error) {
-    console.error('Error reading backfill report:', error);
-    return null;
-  }
+  // Return mock data for Vercel compatibility - no filesystem access
+  console.warn('Backfill reports disabled for Vercel compatibility');
+  return null;
 }
 
 async function getDiskUsage() {
-  try {
-    // Dynamic imports to prevent build-time issues
-    const { promises: fs } = await import('fs');
-    const path = await import('path');
-    
-    const dataDir = path.join(process.cwd(), 'data');
-    const historyDbPath = path.join(dataDir, 'db_history.db');
-    
-    let usedBytes = 0;
-    try {
-      const stats = await fs.stat(historyDbPath);
-      usedBytes = stats.size;
-    } catch {
-      // DB doesn't exist yet
-    }
-    
-    // Simplified disk usage calculation
-    const usedGB = usedBytes / (1024 * 1024 * 1024);
-    const totalGB = 10; // 10GB assumed limit
-    const availableGB = totalGB - usedGB;
-    
-    return {
-      usedGB: Math.round(usedGB * 100) / 100,
-      totalGB,
-      availableGB: Math.round(availableGB * 100) / 100
-    };
-  } catch (error) {
-    console.error('Error getting disk usage:', error);
-    return {
-      usedGB: 0,
-      totalGB: 10,
-      availableGB: 10
-    };
-  }
+  // Return mock disk usage for Vercel compatibility
+  console.warn('Disk usage calculation disabled for Vercel compatibility');
+  return {
+    usedGB: 0,
+    totalGB: 10,
+    availableGB: 10
+  };
 }
 
 export async function GET() {

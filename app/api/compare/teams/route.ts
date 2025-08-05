@@ -305,8 +305,8 @@ export async function GET(req: NextRequest) {
     // Dynamic import to prevent build-time database connection
     const { query, unionQuery } = await import('@/lib/db');
     
-    // Original code continues
-    const { searchParams } = new URL(req.url);
+    // Original code continues  
+    const searchParams = new URLSearchParams(req.url.split('?')[1] || '');
     const teamsParam = searchParams.get("teams");
     const year = parseInt(searchParams.get("year") || new Date().getFullYear().toString());
     const pfCorrection = searchParams.get("pf") === "true";
