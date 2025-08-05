@@ -20,6 +20,7 @@ export interface TeamPageData {
     pitchers: any[];
   };
   vs_opponents: any[];
+  vs_opponent: any[]; // Backward compatibility
   summary: any;
   constants: any;
   distributions: any;
@@ -64,6 +65,7 @@ export async function GET(
       pitchers: []
     },
     vs_opponents: [],
+    vs_opponent: [], // Backward compatibility
     summary: null,
     constants: null,
     distributions: null,
