@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
     // Dynamic import to prevent build-time database connection
     const { query, unionQuery } = await import('@/lib/db');
     
-    const searchParams = new URLSearchParams(req.url.split('?')[1] || '');
+    const { searchParams } = new URL(req.nextUrl);
     const scope = searchParams.get("scope"); // "player" | "team" | "game" | "player_comparison" | "team_comparison"
     const season = searchParams.get("season");
     const id = searchParams.get("id"); // playerId | teamCode | gameId
