@@ -1,16 +1,21 @@
 import type { Metadata } from 'next'
 import { Inter, Noto_Sans_JP } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 import MobileNav from './components/MobileNav'
 import QualityBadge from '@/components/QualityBadge'
 import { ToastProvider } from '@/components/Toast'
 import { currentSeasonYear } from '@/lib/time'
+import AnalyticsRouter from '@/components/AnalyticsRouter'
 
 const inter = Inter({ subsets: ['latin'] })
 const notoSansJP = Noto_Sans_JP({ 
   subsets: ['latin'],
   variable: '--font-noto-sans-jp'
 })
+
+const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+const PLAUSIBLE_DOMAIN = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
 
 export const metadata: Metadata = {
   title: 'Baseball AI Media - NPB Analytics & Predictions',
@@ -42,23 +47,54 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <head>
-        {/* Google Analytics */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-XXXXXXXXXX', {
-                page_title: document.title,
-                page_location: window.location.href,
-              });
-            `,
-          }}
-        />
+        {GA_ID && (
+          <>
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GA_ID}', { send_page_view: true });
+              `}
+            </Script>
+          </>
+        )}
+        {PLAUSIBLE_DOMAIN && (
+          <Script
+            src="https://plausible.io/js/script.js"
+            data-domain={PLAUSIBLE_DOMAIN}
+            strategy="afterInteractive"
+          />
+        )}
       </head>
       <body className={`${inter.className} ${notoSansJP.variable} min-h-screen bg-white text-slate-900 antialiased`}>
+        <JsonLd
+          type="WebSite"
+          data={{
+            "@context":"https://schema.org",
+            "@type":"WebSite",
+            "name":"Baseball AI Media",
+            "url":"https://baseball-ai-media.vercel.app",
+            "inLanguage":"ja",
+            "potentialAction":{
+              "@type":"SearchAction",
+              "target":"https://baseball-ai-media.vercel.app/search?q={search_term_string}",
+              "query-input":"required name=search_term_string"
+            }
+          }}
+        />
+        <JsonLd
+          type="Organization"
+          data={{
+            "@context":"https://schema.org",
+            "@type":"Organization",
+            "name":"Baseball AI Media",
+            "url":"https://baseball-ai-media.vercel.app",
+            "logo":"https://baseball-ai-media.vercel.app/icon.png"
+          }}
+        />
+        <AnalyticsRouter />
         <ToastProvider>
           <div className="min-h-screen flex flex-col">
           {/* Navigation Header */}
@@ -79,6 +115,9 @@ export default function RootLayout({
                     <a href="/teams" className="text-xs xl:text-sm text-slate-600 hover:text-blue-600 transition-colors">
                       チーム
                     </a>
+                    <a href="/games" className="text-xs xl:text-sm text-slate-600 hover:text-blue-600 transition-colors">
+                      試合情報
+                    </a>
                     <a href="/standings" className="text-xs xl:text-sm text-slate-600 hover:text-blue-600 transition-colors">
                       順位表
                     </a>
@@ -91,8 +130,11 @@ export default function RootLayout({
                     <a href="/matchups" className="text-xs xl:text-sm text-slate-600 hover:text-blue-600 transition-colors">
                       対戦分析
                     </a>
-                    <a href="/columns" className="text-xs xl:text-sm text-slate-600 hover:text-blue-600 transition-colors">
-                      AIコラム
+                    <a href="/analytics" className="text-xs xl:text-sm text-slate-600 hover:text-blue-600 transition-colors font-medium bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                      📊 高度分析
+                    </a>
+                    <a href="/column" className="text-xs xl:text-sm text-slate-600 hover:text-blue-600 transition-colors">
+                      コラム
                     </a>
                     <a href="/about" className="text-xs xl:text-sm text-slate-600 hover:text-blue-600 transition-colors">
                       About

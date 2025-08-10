@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { TrendingUp, Target, BarChart3, Zap } from "lucide-react";
+import TodaysGames from "../components/TodaysGames";
 
 // Force dynamic rendering to prevent build-time API calls
 export const dynamic = 'force-dynamic';
@@ -27,18 +28,18 @@ export default function HomePage() {
               順位表を見る
             </Link>
             <Link
-              href="/schedule"
+              href="/games"
               className="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors"
             >
               <Target className="w-5 h-5" />
-              試合日程
+              試合情報
             </Link>
             <Link
-              href="/stats"
+              href="/rankings"
               className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors"
             >
               <TrendingUp className="w-5 h-5" />
-              選手成績
+              ランキング
             </Link>
           </div>
         </div>
@@ -61,12 +62,12 @@ export default function HomePage() {
           <div className="bg-black/20 backdrop-blur-md border border-white/10 rounded-lg p-6">
             <div className="flex items-center gap-3 mb-4">
               <Target className="w-6 h-6 text-purple-500" />
-              <h3 className="text-lg font-semibold text-white">試合スケジュール</h3>
+              <h3 className="text-lg font-semibold text-white">試合情報</h3>
             </div>
             <p className="text-slate-400 mb-4">
-              今日の試合予定と結果、球場情報
+              スクレイピングデータによる正確な試合結果・スケジュール
             </p>
-            <Link href="/schedule" className="text-purple-400 hover:text-purple-300 font-medium">
+            <Link href="/games" className="text-purple-400 hover:text-purple-300 font-medium">
               詳細を見る →
             </Link>
           </div>
@@ -74,12 +75,12 @@ export default function HomePage() {
           <div className="bg-black/20 backdrop-blur-md border border-white/10 rounded-lg p-6">
             <div className="flex items-center gap-3 mb-4">
               <TrendingUp className="w-6 h-6 text-green-500" />
-              <h3 className="text-lg font-semibold text-white">選手統計</h3>
+              <h3 className="text-lg font-semibold text-white">ランキング</h3>
             </div>
             <p className="text-slate-400 mb-4">
-              打撃・投手成績とセイバーメトリクス
+              wRC+・ERA-等主要指標のTOP20
             </p>
-            <Link href="/stats" className="text-green-400 hover:text-green-300 font-medium">
+            <Link href="/rankings" className="text-green-400 hover:text-green-300 font-medium">
               詳細を見る →
             </Link>
           </div>
@@ -113,56 +114,29 @@ export default function HomePage() {
           <div className="bg-black/20 backdrop-blur-md border border-white/10 rounded-lg p-6">
             <div className="flex items-center gap-3 mb-4">
               <BarChart3 className="w-6 h-6 text-cyan-500" />
-              <h3 className="text-lg font-semibold text-white">チーム詳細</h3>
+              <h3 className="text-lg font-semibold text-white">対戦分析</h3>
             </div>
             <p className="text-slate-400 mb-4">
-              各チームの詳細分析と選手一覧
+              チーム間H2H成績・直近10試合分析
             </p>
-            <Link href="/teams" className="text-cyan-400 hover:text-cyan-300 font-medium">
+            <Link href="/matchups" className="text-cyan-400 hover:text-cyan-300 font-medium">
               詳細を見る →
             </Link>
           </div>
         </div>
 
-        {/* Mock Today's Games Section */}
-        <div className="bg-black/20 backdrop-blur-md border border-white/10 rounded-lg p-6 mb-8">
-          <h2 className="text-2xl font-bold text-white mb-6">今日の試合</h2>
-          <div className="space-y-4">
-            <div className="flex items-center justify-between p-4 bg-black/20 rounded-lg">
-              <div className="text-white">
-                <span className="font-medium">阪神タイガース</span> vs <span className="font-medium">読売ジャイアンツ</span>
-              </div>
-              <div className="text-slate-400">18:00 東京ドーム</div>
-            </div>
-            <div className="flex items-center justify-between p-4 bg-black/20 rounded-lg">
-              <div className="text-white">
-                <span className="font-medium">横浜DeNAベイスターズ</span> vs <span className="font-medium">広島東洋カープ</span>
-              </div>
-              <div className="text-slate-400">18:00 横浜スタジアム</div>
-            </div>
-            <div className="flex items-center justify-between p-4 bg-black/20 rounded-lg">
-              <div className="text-white">
-                <span className="font-medium">福岡ソフトバンクホークス</span> vs <span className="font-medium">千葉ロッテマリーンズ</span>
-              </div>
-              <div className="text-slate-400">18:00 PayPayドーム</div>
-            </div>
-          </div>
-          <div className="text-center mt-6">
-            <Link href="/schedule" className="text-blue-400 hover:text-blue-300 font-medium">
-              すべての試合を見る →
-            </Link>
-          </div>
-        </div>
+        {/* Today's Games Section - Dynamic from scraped data */}
+        <TodaysGames />
 
         {/* Status Message */}
         <div className="text-center text-slate-400 text-sm">
-          <p>🤖 Vercel環境で動作中 - モックデータを使用しています</p>
+          <p>🚀 NPBスクレイピングデータで動作中</p>
           <p className="mt-2">
             データ更新: {new Date().toLocaleDateString('ja-JP', { 
               year: 'numeric', 
               month: 'long', 
               day: 'numeric' 
-            })}
+            })} • リアルタイム自動更新
           </p>
         </div>
       </div>

@@ -47,6 +47,16 @@ const nextConfig = {
     return config;
   },
   
+  async redirects() {
+    return [
+      {
+        source: '/columns',
+        destination: '/column',
+        permanent: true,
+      },
+    ];
+  },
+
   async rewrites() {
     // Only apply rewrites if API base URL is configured
     const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
