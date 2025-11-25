@@ -23,15 +23,19 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
+          cache-dependency-path: 'archive/package-lock.json'
 
       - name: "📦 Install dependencies"
+        working-directory: ./archive
         run: npm ci
 
       - name: "🔍 Run ESLint"
+        working-directory: ./archive
         run: npm run lint
         continue-on-error: true
 
       - name: "🔧 TypeScript check"
+        working-directory: ./archive
         run: npx tsc --noEmit --skipLibCheck
 
   unit-tests:
@@ -46,11 +50,14 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
+          cache-dependency-path: 'archive/package-lock.json'
 
       - name: "📦 Install dependencies"
+        working-directory: ./archive
         run: npm ci
 
       - name: "🧪 Run unit tests"
+        working-directory: ./archive
         run: npm run test
         env:
           NODE_ENV: test
@@ -60,7 +67,7 @@ jobs:
         uses: codecov/codecov-action@v3
         if: success()
         with:
-          file: ./coverage/lcov.info
+          file: ./archive/coverage/lcov.info
           flags: unittests
           name: codecov-umbrella
 
@@ -76,16 +83,20 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
+          cache-dependency-path: 'archive/package-lock.json'
 
       - name: "📦 Install dependencies"
+        working-directory: ./archive
         run: npm ci
 
       - name: "🔨 Build application"
+        working-directory: ./archive
         run: timeout 60 npm run build
         env:
           NODE_ENV: production
 
       - name: "📏 Check bundle size"
+        working-directory: ./archive
         run: |
           if [ -d ".next" ]; then
             echo "Build size analysis:"
@@ -107,17 +118,21 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
+          cache-dependency-path: 'archive/package-lock.json'
 
       - name: "📦 Install dependencies"
+        working-directory: ./archive
         run: npm ci
 
       - name: "🗄️ Setup test database"
+        working-directory: ./archive
         run: |
           mkdir -p data/test
           export DB_PATH="./data/test/baseball_test.db"
           echo "Test database path: $DB_PATH"
 
       - name: "🧪 Run integration tests"
+        working-directory: ./archive
         run: npm run test:integration || true
         env:
           NODE_ENV: test
@@ -126,6 +141,7 @@ jobs:
           NOCK_RECORD: false
 
       - name: "📊 Test metrics server"
+        working-directory: ./archive
         run: |
           timeout 30 npm run metrics &
           METRICS_PID=$!
@@ -156,11 +172,14 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
+          cache-dependency-path: 'archive/package-lock.json'
 
       - name: "📦 Install dependencies"
+        working-directory: ./archive
         run: npm ci
 
       - name: "💨 Run smoke tests"
+        working-directory: ./archive
         run: |
           if [ "${{ matrix.environment }}" = "production" ]; then
             BASE_URL="https://baseball-ai-media.vercel.app" npx tsx scripts/smoke_runtime.ts || echo "Smoke test warning"
@@ -182,8 +201,10 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
+          cache-dependency-path: 'archive/package-lock.json'
 
       - name: "🔒 npm audit"
+        working-directory: ./archive
         run: |
           npm audit --audit-level=high --production
         continue-on-error: true
@@ -194,6 +215,7 @@ jobs:
           languages: javascript
 
       - name: "📦 Install for analysis"
+        working-directory: ./archive
         run: npm ci
 
       - name: "🔍 Perform CodeQL Analysis"
@@ -212,11 +234,14 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
+          cache-dependency-path: 'archive/package-lock.json'
 
       - name: "📦 Install dependencies"
+        working-directory: ./archive
         run: npm ci
 
       - name: "⚡ Bundle analyzer"
+        working-directory: ./archive
         run: |
           npm run build
           if command -v npx &> /dev/null; then
@@ -242,7 +267,7 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          working-directory: ./
+          working-directory: ./archive
 
       - name: "💬 Comment Preview URL"
         uses: actions/github-script@v6
