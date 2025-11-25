@@ -112,6 +112,9 @@ export default function RootLayout({
                     <a href="/players" className="text-xs xl:text-sm text-slate-600 hover:text-blue-600 transition-colors">
                       選手データベース
                     </a>
+                    <a href="/players/2025" className="text-xs xl:text-sm text-slate-600 hover:text-blue-600 transition-colors">
+                      2025年選手一覧
+                    </a>
                     <a href="/teams" className="text-xs xl:text-sm text-slate-600 hover:text-blue-600 transition-colors">
                       チーム
                     </a>

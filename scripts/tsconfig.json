@@ -1,13 +1,17 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "CommonJS",
     "moduleResolution": "node",
     "target": "es2020",
+    "lib": ["es2020"],
+    "types": ["node"],
+    "allowSyntheticDefaultImports": true, 
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true
+    "jsx": "react" 
   },
-  "include": ["**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "**/*.ts"
+  ],
+  "exclude": []
 }
