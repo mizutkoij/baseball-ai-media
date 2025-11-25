@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/81785136.html",
+  "team": "東京ヤクルトスワローズ",
+  "team_code": "s",
+  "current_status": "active",
+  "name": "阪口　皓亮",
+  "name_kana": "さかぐち・こうすけ",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "右投左打",
+    "身長／体重": "188cm／90kg",
+    "生年月日": "1999年8月15日",
+    "経歴": "北海高",
+    "ドラフト": "2017年ドラフト3位"
+  },
+  "birth_date": "1999-08-15 00:00:00",
+  "entry_year": 2017,
+  "nationality_code": "1",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "101711199908152"
+}

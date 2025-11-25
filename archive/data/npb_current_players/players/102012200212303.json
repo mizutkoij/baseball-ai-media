@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/51455153.html",
+  "team": "中日ドラゴンズ",
+  "team_code": "d",
+  "current_status": "active",
+  "name": "土田　龍空",
+  "name_kana": "つちだ・りゅうく",
+  "profile": {
+    "ポジション": "内野手",
+    "投打": "右投左打",
+    "身長／体重": "180cm／80kg",
+    "生年月日": "2002年12月30日",
+    "経歴": "近江高",
+    "ドラフト": "2020年ドラフト3位"
+  },
+  "birth_date": "2002-12-30 00:00:00",
+  "entry_year": 2020,
+  "nationality_code": "1",
+  "position_code": "2",
+  "position": "野手",
+  "player_id": "102012200212303"
+}

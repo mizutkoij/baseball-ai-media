@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/81285112.html",
+  "team": "オリックス・バファローズ",
+  "team_code": "b",
+  "current_status": "active",
+  "name": "平野　佳寿",
+  "name_kana": "ひらの・よしひさ",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "右投右打",
+    "身長／体重": "186cm／88kg",
+    "生年月日": "1984年3月8日",
+    "経歴": "鳥羽高 - 京都産業大",
+    "ドラフト": "2005年大学生・社会人ドラフト希望枠"
+  },
+  "birth_date": "1984-03-08 00:00:00",
+  "entry_year": 2005,
+  "nationality_code": "1",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "100511198403085"
+}

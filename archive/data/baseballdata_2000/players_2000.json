@@ -1,0 +1,1452 @@
+[
+  {
+    "player_id": "2000001",
+    "name": "2022年度版 Ｊ．Ｔ．シャギワ【楽天】打撃成績詳細",
+    "team": "楽天",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 1,
+    "updated_at": "2025-08-09T02:08:11.593Z"
+  },
+  {
+    "player_id": "2000002",
+    "name": "2022年度版 サントス【ロッテ】打撃成績詳細",
+    "team": "ロッテ",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 2,
+    "updated_at": "2025-08-09T02:08:12.681Z"
+  },
+  {
+    "player_id": "2000003",
+    "name": "2023年度 ロドリゲス【中日】打撃成績詳細",
+    "team": "中日",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 3,
+    "updated_at": "2025-08-09T02:08:13.799Z"
+  },
+  {
+    "player_id": "2000005",
+    "name": "2025年度 平内 龍太【巨人】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 5,
+    "updated_at": "2025-08-09T02:08:16.055Z"
+  },
+  {
+    "player_id": "2000006",
+    "name": "2025年度 山﨑 伊織【巨人】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 6,
+    "updated_at": "2025-08-09T02:08:17.202Z"
+  },
+  {
+    "player_id": "2000007",
+    "name": "2025年度 中山 礼都【巨人】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 7,
+    "updated_at": "2025-08-09T02:08:18.318Z"
+  },
+  {
+    "player_id": "2000008",
+    "name": "2025年度 伊藤 優輔【ソフトバンク】打撃成績詳細",
+    "team": "ソフトバンク",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 8,
+    "updated_at": "2025-08-09T02:08:19.404Z"
+  },
+  {
+    "player_id": "2000009",
+    "name": "2025年度 秋広 優人【ソフトバンク】打撃成績詳細",
+    "team": "ソフトバンク",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 9,
+    "updated_at": "2025-08-09T02:08:20.520Z"
+  },
+  {
+    "player_id": "2000010",
+    "name": "2023年度 山本 一輝【巨人】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 10,
+    "updated_at": "2025-08-09T02:08:21.612Z"
+  },
+  {
+    "player_id": "2000011",
+    "name": "2024年度 萩原 哲【巨人】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 11,
+    "updated_at": "2025-08-09T02:08:23.686Z"
+  },
+  {
+    "player_id": "2000012",
+    "name": "2024年度 岡本 大翔【巨人】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 12,
+    "updated_at": "2025-08-09T02:08:24.769Z"
+  },
+  {
+    "player_id": "2000013",
+    "name": "2025年度 喜多 隆介【巨人】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 13,
+    "updated_at": "2025-08-09T02:08:25.842Z"
+  },
+  {
+    "player_id": "2000014",
+    "name": "2024年度 笠島 尚樹【巨人】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 14,
+    "updated_at": "2025-08-09T02:08:26.959Z"
+  },
+  {
+    "player_id": "2000015",
+    "name": "2025年度 木下 幹也【巨人】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 15,
+    "updated_at": "2025-08-09T02:08:28.096Z"
+  },
+  {
+    "player_id": "2000016",
+    "name": "2024年度 前田 研輝【巨人】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 16,
+    "updated_at": "2025-08-09T02:08:29.232Z"
+  },
+  {
+    "player_id": "2000017",
+    "name": "2025年度 坂本 勇人【巨人】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 17,
+    "updated_at": "2025-08-09T02:08:30.334Z"
+  },
+  {
+    "player_id": "2000018",
+    "name": "2025年度 戸田 懐生【巨人】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 18,
+    "updated_at": "2025-08-09T02:08:31.431Z"
+  },
+  {
+    "player_id": "2000019",
+    "name": "2023年度 阿部 剣友【巨人】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 19,
+    "updated_at": "2025-08-09T02:08:32.815Z"
+  },
+  {
+    "player_id": "2000020",
+    "name": "2023年度 奈良木 陸【巨人】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 20,
+    "updated_at": "2025-08-09T02:08:34.158Z"
+  },
+  {
+    "player_id": "2000021",
+    "name": "2024年度 山﨑 友輔【巨人】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 21,
+    "updated_at": "2025-08-09T02:08:36.250Z"
+  },
+  {
+    "player_id": "2000022",
+    "name": "2023年度 保科 広一【巨人】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 22,
+    "updated_at": "2025-08-09T02:08:37.325Z"
+  },
+  {
+    "player_id": "2000023",
+    "name": "2024年度 加藤 廉【巨人】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 23,
+    "updated_at": "2025-08-09T02:08:38.411Z"
+  },
+  {
+    "player_id": "2000024",
+    "name": "2025年度 木澤 尚文【ヤクルト】打撃成績詳細",
+    "team": "ヤクルト",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 24,
+    "updated_at": "2025-08-09T02:08:39.682Z"
+  },
+  {
+    "player_id": "2000025",
+    "name": "2025年度 山野 太一【ヤクルト】打撃成績詳細",
+    "team": "ヤクルト",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 25,
+    "updated_at": "2025-08-09T02:08:41.292Z"
+  },
+  {
+    "player_id": "2000026",
+    "name": "2025年度 内山 壮真【ヤクルト】打撃成績詳細",
+    "team": "ヤクルト",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 26,
+    "updated_at": "2025-08-09T02:08:42.406Z"
+  },
+  {
+    "player_id": "2000027",
+    "name": "2025年度 元山 飛優【西武】打撃成績詳細",
+    "team": "西武",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 27,
+    "updated_at": "2025-08-09T02:08:43.705Z"
+  },
+  {
+    "player_id": "2000028",
+    "name": "2025年度 並木 秀尊【ヤクルト】打撃成績詳細",
+    "team": "ヤクルト",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 28,
+    "updated_at": "2025-08-09T02:08:44.997Z"
+  },
+  {
+    "player_id": "2000029",
+    "name": "2024年度 嘉手苅 浩太【ヤクルト】打撃成績詳細",
+    "team": "ヤクルト",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 29,
+    "updated_at": "2025-08-09T02:08:46.131Z"
+  },
+  {
+    "player_id": "2000030",
+    "name": "2024年度 下 慎之介【ヤクルト】打撃成績詳細",
+    "team": "ヤクルト",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 30,
+    "updated_at": "2025-08-09T02:08:47.409Z"
+  },
+  {
+    "player_id": "2000031",
+    "name": "2025年度 赤羽 由紘【ヤクルト】打撃成績詳細",
+    "team": "ヤクルト",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 31,
+    "updated_at": "2025-08-09T02:08:49.701Z"
+  },
+  {
+    "player_id": "2000032",
+    "name": "2023年度 松井 聖【ヤクルト】打撃成績詳細",
+    "team": "ヤクルト",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 32,
+    "updated_at": "2025-08-09T02:08:50.996Z"
+  },
+  {
+    "player_id": "2000033",
+    "name": "2025年度 丸山 翔大【ヤクルト】打撃成績詳細",
+    "team": "ヤクルト",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 33,
+    "updated_at": "2025-08-09T02:08:52.648Z"
+  },
+  {
+    "player_id": "2000034",
+    "name": "2025年度 入江 大生【DeNA】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 34,
+    "updated_at": "2025-08-09T02:08:54.095Z"
+  },
+  {
+    "player_id": "2000035",
+    "name": "2025年度 牧 秀悟【DeNA】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 35,
+    "updated_at": "2025-08-09T02:08:55.386Z"
+  },
+  {
+    "player_id": "2000036",
+    "name": "2025年度 松本 隆之介【DeNA】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 36,
+    "updated_at": "2025-08-09T02:08:57.495Z"
+  },
+  {
+    "player_id": "2000037",
+    "name": "2024年度 小深田 大地【ＤｅＮＡ】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 37,
+    "updated_at": "2025-08-09T02:08:58.584Z"
+  },
+  {
+    "player_id": "2000038",
+    "name": "2023年度 池谷 蒼大【ＤｅＮＡ】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 38,
+    "updated_at": "2025-08-09T02:08:59.863Z"
+  },
+  {
+    "player_id": "2000039",
+    "name": "2024年度 髙田 琢登【ＤｅＮＡ】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 39,
+    "updated_at": "2025-08-09T02:09:01.148Z"
+  },
+  {
+    "player_id": "2000040",
+    "name": "2025年度 石川 達也【巨人】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 40,
+    "updated_at": "2025-08-09T02:09:02.481Z"
+  },
+  {
+    "player_id": "2000041",
+    "name": "2023年度 加藤 大【ＤｅＮＡ】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 41,
+    "updated_at": "2025-08-09T02:09:04.796Z"
+  },
+  {
+    "player_id": "2000042",
+    "name": "2025年度 髙橋 宏斗【中日】打撃成績詳細",
+    "team": "中日",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 42,
+    "updated_at": "2025-08-09T02:09:05.938Z"
+  },
+  {
+    "player_id": "2000043",
+    "name": "2025年度 森 博人【中日】打撃成績詳細",
+    "team": "中日",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 43,
+    "updated_at": "2025-08-09T02:09:07.217Z"
+  },
+  {
+    "player_id": "2000044",
+    "name": "2025年度 土田 龍空【中日】打撃成績詳細",
+    "team": "中日",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 44,
+    "updated_at": "2025-08-09T02:09:08.477Z"
+  },
+  {
+    "player_id": "2000045",
+    "name": "2024年度 福島 章太【中日】打撃成績詳細",
+    "team": "中日",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 45,
+    "updated_at": "2025-08-09T02:09:09.763Z"
+  },
+  {
+    "player_id": "2000046",
+    "name": "2024年度 加藤 翼【中日】打撃成績詳細",
+    "team": "中日",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 46,
+    "updated_at": "2025-08-09T02:09:11.059Z"
+  },
+  {
+    "player_id": "2000047",
+    "name": "2024年度 三好 大倫【中日】打撃成績詳細",
+    "team": "中日",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 47,
+    "updated_at": "2025-08-09T02:09:12.357Z"
+  },
+  {
+    "player_id": "2000048",
+    "name": "2025年度 近藤 廉【中日】打撃成績詳細",
+    "team": "中日",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 48,
+    "updated_at": "2025-08-09T02:09:13.613Z"
+  },
+  {
+    "player_id": "2000049",
+    "name": "2024年度 上田 洸太朗【中日】打撃成績詳細",
+    "team": "中日",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 49,
+    "updated_at": "2025-08-09T02:09:15.323Z"
+  },
+  {
+    "player_id": "2000050",
+    "name": "2025年度 松木平 優太【中日】打撃成績詳細",
+    "team": "中日",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 50,
+    "updated_at": "2025-08-09T02:09:16.609Z"
+  },
+  {
+    "player_id": "2000051",
+    "name": "2025年度 佐藤 輝明【阪神】打撃成績詳細",
+    "team": "阪神",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 51,
+    "updated_at": "2025-08-09T02:09:18.957Z"
+  },
+  {
+    "player_id": "2000052",
+    "name": "2025年度 伊藤 将司【阪神】打撃成績詳細",
+    "team": "阪神",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 52,
+    "updated_at": "2025-08-09T02:09:20.262Z"
+  },
+  {
+    "player_id": "2000053",
+    "name": "2025年度 佐藤 蓮【阪神】打撃成績詳細",
+    "team": "阪神",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 53,
+    "updated_at": "2025-08-09T02:09:21.553Z"
+  },
+  {
+    "player_id": "2000054",
+    "name": "2025年度 榮枝 裕貴【阪神】打撃成績詳細",
+    "team": "阪神",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 54,
+    "updated_at": "2025-08-09T02:09:22.834Z"
+  },
+  {
+    "player_id": "2000055",
+    "name": "2025年度 村上 頌樹【阪神】打撃成績詳細",
+    "team": "阪神",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 55,
+    "updated_at": "2025-08-09T02:09:24.115Z"
+  },
+  {
+    "player_id": "2000056",
+    "name": "2025年度 中野 拓夢【阪神】打撃成績詳細",
+    "team": "阪神",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 56,
+    "updated_at": "2025-08-09T02:09:25.414Z"
+  },
+  {
+    "player_id": "2000057",
+    "name": "2025年度 髙寺 望夢【阪神】打撃成績詳細",
+    "team": "阪神",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 57,
+    "updated_at": "2025-08-09T02:09:27.129Z"
+  },
+  {
+    "player_id": "2000058",
+    "name": "2025年度 石井 大智【阪神】打撃成績詳細",
+    "team": "阪神",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 58,
+    "updated_at": "2025-08-09T02:09:28.479Z"
+  },
+  {
+    "player_id": "2000059",
+    "name": "2025年度 岩田 将貴【DeNA】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 59,
+    "updated_at": "2025-08-09T02:09:29.753Z"
+  },
+  {
+    "player_id": "2000060",
+    "name": "2025年度 栗林 良吏【広島】打撃成績詳細",
+    "team": "広島",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 60,
+    "updated_at": "2025-08-09T02:09:31.146Z"
+  },
+  {
+    "player_id": "2000061",
+    "name": "2025年度 森浦 大輔【広島】打撃成績詳細",
+    "team": "広島",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 61,
+    "updated_at": "2025-08-09T02:09:33.517Z"
+  },
+  {
+    "player_id": "2000062",
+    "name": "2025年度 大道 温貴【広島】打撃成績詳細",
+    "team": "広島",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 62,
+    "updated_at": "2025-08-09T02:09:34.814Z"
+  },
+  {
+    "player_id": "2000063",
+    "name": "2025年度 小林 樹斗【広島】打撃成績詳細",
+    "team": "広島",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 63,
+    "updated_at": "2025-08-09T02:09:36.093Z"
+  },
+  {
+    "player_id": "2000064",
+    "name": "2023年度 行木 俊【広島】打撃成績詳細",
+    "team": "広島",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 64,
+    "updated_at": "2025-08-09T02:09:37.368Z"
+  },
+  {
+    "player_id": "2000065",
+    "name": "2025年度 矢野 雅哉【広島】打撃成績詳細",
+    "team": "広島",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 65,
+    "updated_at": "2025-08-09T02:09:38.672Z"
+  },
+  {
+    "player_id": "2000066",
+    "name": "2025年度 二俣 翔一【広島】打撃成績詳細",
+    "team": "広島",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 66,
+    "updated_at": "2025-08-09T02:09:39.975Z"
+  },
+  {
+    "player_id": "2000067",
+    "name": "2025年度 渡部 健人【西武】打撃成績詳細",
+    "team": "西武",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 67,
+    "updated_at": "2025-08-09T02:09:41.279Z"
+  },
+  {
+    "player_id": "2000068",
+    "name": "2025年度 佐々木 健【西武】打撃成績詳細",
+    "team": "西武",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 68,
+    "updated_at": "2025-08-09T02:09:42.556Z"
+  },
+  {
+    "player_id": "2000069",
+    "name": "2025年度 山村 崇嘉【西武】打撃成績詳細",
+    "team": "西武",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 69,
+    "updated_at": "2025-08-09T02:09:43.869Z"
+  },
+  {
+    "player_id": "2000070",
+    "name": "2025年度 若林 楽人【巨人】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 70,
+    "updated_at": "2025-08-09T02:09:45.187Z"
+  },
+  {
+    "player_id": "2000071",
+    "name": "2025年度 大曲 錬【西武】打撃成績詳細",
+    "team": "西武",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 71,
+    "updated_at": "2025-08-09T02:09:47.474Z"
+  },
+  {
+    "player_id": "2000072",
+    "name": "2024年度 ブランドン【西武】打撃成績詳細",
+    "team": "西武",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 72,
+    "updated_at": "2025-08-09T02:09:48.758Z"
+  },
+  {
+    "player_id": "2000073",
+    "name": "2025年度 仲三河 優太【西武】打撃成績詳細",
+    "team": "西武",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 73,
+    "updated_at": "2025-08-09T02:09:50.429Z"
+  },
+  {
+    "player_id": "2000074",
+    "name": "2024年度 赤上 優人【西武】打撃成績詳細",
+    "team": "西武",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 74,
+    "updated_at": "2025-08-09T02:09:52.141Z"
+  },
+  {
+    "player_id": "2000075",
+    "name": "2025年度 長谷川 信哉【西武】打撃成績詳細",
+    "team": "西武",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 75,
+    "updated_at": "2025-08-09T02:09:53.538Z"
+  },
+  {
+    "player_id": "2000076",
+    "name": "2024年度 ジョセフ【西武】打撃成績詳細",
+    "team": "西武",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 76,
+    "updated_at": "2025-08-09T02:09:54.820Z"
+  },
+  {
+    "player_id": "2000077",
+    "name": "2025年度 豆田 泰志【西武】打撃成績詳細",
+    "team": "西武",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 77,
+    "updated_at": "2025-08-09T02:09:56.099Z"
+  },
+  {
+    "player_id": "2000078",
+    "name": "2025年度 水上 由伸【西武】打撃成績詳細",
+    "team": "西武",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 78,
+    "updated_at": "2025-08-09T02:09:57.372Z"
+  },
+  {
+    "player_id": "2000079",
+    "name": "2025年度 伊藤 大海【日本ハム】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 79,
+    "updated_at": "2025-08-09T02:09:59.663Z"
+  },
+  {
+    "player_id": "2000080",
+    "name": "2025年度 五十幡 亮汰【日本ハム】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 80,
+    "updated_at": "2025-08-09T02:10:01.530Z"
+  },
+  {
+    "player_id": "2000081",
+    "name": "2025年度 古川 裕大【日本ハム】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 81,
+    "updated_at": "2025-08-09T02:10:03.829Z"
+  },
+  {
+    "player_id": "2000082",
+    "name": "2025年度 細川 凌平【日本ハム】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 82,
+    "updated_at": "2025-08-09T02:10:05.110Z"
+  },
+  {
+    "player_id": "2000083",
+    "name": "2025年度 根本 悠楓【日本ハム】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 83,
+    "updated_at": "2025-08-09T02:10:06.399Z"
+  },
+  {
+    "player_id": "2000084",
+    "name": "2025年度 今川 優馬【日本ハム】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 84,
+    "updated_at": "2025-08-09T02:10:07.689Z"
+  },
+  {
+    "player_id": "2000085",
+    "name": "2025年度 松本 遼大【日本ハム】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 85,
+    "updated_at": "2025-08-09T02:10:08.975Z"
+  },
+  {
+    "player_id": "2000086",
+    "name": "2024年度 齊藤 伸治【日本ハム】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 86,
+    "updated_at": "2025-08-09T02:10:10.263Z"
+  },
+  {
+    "player_id": "2000087",
+    "name": "2025年度 鈴木 昭汰【ロッテ】打撃成績詳細",
+    "team": "ロッテ",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 87,
+    "updated_at": "2025-08-09T02:10:11.538Z"
+  },
+  {
+    "player_id": "2000088",
+    "name": "2025年度 中森 俊介【ロッテ】打撃成績詳細",
+    "team": "ロッテ",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 88,
+    "updated_at": "2025-08-09T02:10:12.823Z"
+  },
+  {
+    "player_id": "2000089",
+    "name": "2025年度 小川 龍成【ロッテ】打撃成績詳細",
+    "team": "ロッテ",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 89,
+    "updated_at": "2025-08-09T02:10:14.133Z"
+  },
+  {
+    "player_id": "2000090",
+    "name": "2025年度 河村 説人【ロッテ】打撃成績詳細",
+    "team": "ロッテ",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 90,
+    "updated_at": "2025-08-09T02:10:15.419Z"
+  },
+  {
+    "player_id": "2000091",
+    "name": "2023年度 西川 僚祐【ロッテ】打撃成績詳細",
+    "team": "ロッテ",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 91,
+    "updated_at": "2025-08-09T02:10:18.007Z"
+  },
+  {
+    "player_id": "2000092",
+    "name": "2023年度 谷川 唯人【ロッテ】打撃成績詳細",
+    "team": "ロッテ",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 92,
+    "updated_at": "2025-08-09T02:10:19.285Z"
+  },
+  {
+    "player_id": "2000093",
+    "name": "2024年度 小沼 健太【巨人】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 93,
+    "updated_at": "2025-08-09T02:10:20.568Z"
+  },
+  {
+    "player_id": "2000094",
+    "name": "2025年度 山本 大斗【ロッテ】打撃成績詳細",
+    "team": "ロッテ",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 94,
+    "updated_at": "2025-08-09T02:10:21.895Z"
+  },
+  {
+    "player_id": "2000095",
+    "name": "2023年度 佐藤 奨真【ロッテ】打撃成績詳細",
+    "team": "ロッテ",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 95,
+    "updated_at": "2025-08-09T02:10:23.173Z"
+  },
+  {
+    "player_id": "2000096",
+    "name": "2025年度 山下 舜平大【オリックス】打撃成績詳細",
+    "team": "オリックス",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 96,
+    "updated_at": "2025-08-09T02:10:24.456Z"
+  },
+  {
+    "player_id": "2000097",
+    "name": "2025年度 元 謙太【オリックス】打撃成績詳細",
+    "team": "オリックス",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 97,
+    "updated_at": "2025-08-09T02:10:25.740Z"
+  },
+  {
+    "player_id": "2000098",
+    "name": "2025年度 来田 涼斗【オリックス】打撃成績詳細",
+    "team": "オリックス",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 98,
+    "updated_at": "2025-08-09T02:10:27.024Z"
+  },
+  {
+    "player_id": "2000099",
+    "name": "2025年度 颯【DeNA】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 99,
+    "updated_at": "2025-08-09T02:10:28.316Z"
+  },
+  {
+    "player_id": "2000100",
+    "name": "2025年度 中川 拓真【ヤクルト】打撃成績詳細",
+    "team": "ヤクルト",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 100,
+    "updated_at": "2025-08-09T02:10:29.592Z"
+  },
+  {
+    "player_id": "2000101",
+    "name": "2025年度 阿部 翔太【オリックス】打撃成績詳細",
+    "team": "オリックス",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 101,
+    "updated_at": "2025-08-09T02:10:31.883Z"
+  },
+  {
+    "player_id": "2000102",
+    "name": "2025年度 川瀬 堅斗【オリックス】打撃成績詳細",
+    "team": "オリックス",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 102,
+    "updated_at": "2025-08-09T02:10:33.168Z"
+  },
+  {
+    "player_id": "2000103",
+    "name": "2023年度 辻垣 高良【オリックス】打撃成績詳細",
+    "team": "オリックス",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 103,
+    "updated_at": "2025-08-09T02:10:34.446Z"
+  },
+  {
+    "player_id": "2000104",
+    "name": "2025年度 宇田川 優希【オリックス】打撃成績詳細",
+    "team": "オリックス",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 104,
+    "updated_at": "2025-08-09T02:10:35.728Z"
+  },
+  {
+    "player_id": "2000105",
+    "name": "2023年度 釣 寿生【オリックス】打撃成績詳細",
+    "team": "オリックス",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 105,
+    "updated_at": "2025-08-09T02:10:36.999Z"
+  },
+  {
+    "player_id": "2000106",
+    "name": "2023年度 佐野 如一【オリックス】打撃成績詳細",
+    "team": "オリックス",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 106,
+    "updated_at": "2025-08-09T02:10:38.303Z"
+  },
+  {
+    "player_id": "2000107",
+    "name": "2021年度版 古長 拓【オリックス】打撃成績詳細",
+    "team": "オリックス",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 107,
+    "updated_at": "2025-08-09T02:10:39.584Z"
+  },
+  {
+    "player_id": "2000108",
+    "name": "2025年度 井上 朋也【ソフトバンク】打撃成績詳細",
+    "team": "ソフトバンク",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 108,
+    "updated_at": "2025-08-09T02:10:40.875Z"
+  },
+  {
+    "player_id": "2000109",
+    "name": "2025年度 笹川 吉康【ソフトバンク】打撃成績詳細",
+    "team": "ソフトバンク",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 109,
+    "updated_at": "2025-08-09T02:10:42.173Z"
+  },
+  {
+    "player_id": "2000110",
+    "name": "2025年度 牧原 巧汰【ソフトバンク】打撃成績詳細",
+    "team": "ソフトバンク",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 110,
+    "updated_at": "2025-08-09T02:10:43.458Z"
+  },
+  {
+    "player_id": "2000111",
+    "name": "2025年度 川原田 純平【ソフトバンク】打撃成績詳細",
+    "team": "ソフトバンク",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 111,
+    "updated_at": "2025-08-09T02:10:46.111Z"
+  },
+  {
+    "player_id": "2000112",
+    "name": "2025年度 田上 奏大【ソフトバンク】打撃成績詳細",
+    "team": "ソフトバンク",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 112,
+    "updated_at": "2025-08-09T02:10:47.386Z"
+  },
+  {
+    "player_id": "2000113",
+    "name": "2024年度 佐藤 宏樹【ソフトバンク】打撃成績詳細",
+    "team": "ソフトバンク",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 113,
+    "updated_at": "2025-08-09T02:10:48.669Z"
+  },
+  {
+    "player_id": "2000114",
+    "name": "2023年度 中道 佑哉【ソフトバンク】打撃成績詳細",
+    "team": "ソフトバンク",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 114,
+    "updated_at": "2025-08-09T02:10:49.952Z"
+  },
+  {
+    "player_id": "2000115",
+    "name": "2025年度 桑原 秀侍【ソフトバンク】打撃成績詳細",
+    "team": "ソフトバンク",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 115,
+    "updated_at": "2025-08-09T02:10:51.239Z"
+  },
+  {
+    "player_id": "2000116",
+    "name": "2023年度 早 真之介【ソフトバンク】打撃成績詳細",
+    "team": "ソフトバンク",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 116,
+    "updated_at": "2025-08-09T02:10:52.516Z"
+  },
+  {
+    "player_id": "2000117",
+    "name": "2025年度 緒方 理貢【ソフトバンク】打撃成績詳細",
+    "team": "ソフトバンク",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 117,
+    "updated_at": "2025-08-09T02:10:53.819Z"
+  },
+  {
+    "player_id": "2000118",
+    "name": "2023年度 居谷 匠真【ソフトバンク】打撃成績詳細",
+    "team": "ソフトバンク",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 118,
+    "updated_at": "2025-08-09T02:10:55.097Z"
+  },
+  {
+    "player_id": "2000119",
+    "name": "2025年度 大城 真乃【ソフトバンク】打撃成績詳細",
+    "team": "ソフトバンク",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 119,
+    "updated_at": "2025-08-09T02:10:56.382Z"
+  },
+  {
+    "player_id": "2000120",
+    "name": "2025年度 中村 亮太【ロッテ】打撃成績詳細",
+    "team": "ロッテ",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 120,
+    "updated_at": "2025-08-09T02:10:57.664Z"
+  },
+  {
+    "player_id": "2000121",
+    "name": "2025年度 早川 隆久【楽天】打撃成績詳細",
+    "team": "楽天",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 121,
+    "updated_at": "2025-08-09T02:10:59.953Z"
+  },
+  {
+    "player_id": "2000122",
+    "name": "2024年度 高田 孝一【楽天】打撃成績詳細",
+    "team": "楽天",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 122,
+    "updated_at": "2025-08-09T02:11:01.223Z"
+  },
+  {
+    "player_id": "2000123",
+    "name": "2025年度 藤井 聖【楽天】打撃成績詳細",
+    "team": "楽天",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 123,
+    "updated_at": "2025-08-09T02:11:02.512Z"
+  },
+  {
+    "player_id": "2000124",
+    "name": "2024年度 内間 拓馬【広島】打撃成績詳細",
+    "team": "広島",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 124,
+    "updated_at": "2025-08-09T02:11:03.798Z"
+  },
+  {
+    "player_id": "2000125",
+    "name": "2025年度 入江 大樹【楽天】打撃成績詳細",
+    "team": "楽天",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 125,
+    "updated_at": "2025-08-09T02:11:05.087Z"
+  },
+  {
+    "player_id": "2000126",
+    "name": "2025年度 内 星龍【楽天】打撃成績詳細",
+    "team": "楽天",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 126,
+    "updated_at": "2025-08-09T02:11:06.380Z"
+  },
+  {
+    "player_id": "2000127",
+    "name": "2022年度 石田 駿【楽天】打撃成績詳細",
+    "team": "楽天",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 127,
+    "updated_at": "2025-08-09T02:11:07.645Z"
+  },
+  {
+    "player_id": "2000128",
+    "name": "2021年度版 クロン【広島】打撃成績詳細",
+    "team": "広島",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 128,
+    "updated_at": "2025-08-09T02:11:08.955Z"
+  },
+  {
+    "player_id": "2000129",
+    "name": "2021年度版 ネバラスカス【広島】打撃成績詳細",
+    "team": "広島",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 129,
+    "updated_at": "2025-08-09T02:11:10.230Z"
+  },
+  {
+    "player_id": "2000130",
+    "name": "2023年度 スターリン【ＤｅＮＡ】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 130,
+    "updated_at": "2025-08-09T02:11:11.482Z"
+  },
+  {
+    "player_id": "2000131",
+    "name": "2021年度版 シャッケルフォード【ＤｅＮＡ】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 131,
+    "updated_at": "2025-08-09T02:11:13.775Z"
+  },
+  {
+    "player_id": "2000132",
+    "name": "2021年度版 バード【広島】打撃成績詳細",
+    "team": "広島",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 132,
+    "updated_at": "2025-08-09T02:11:15.111Z"
+  },
+  {
+    "player_id": "2000133",
+    "name": "2025年度 オスナ【ヤクルト】打撃成績詳細",
+    "team": "ヤクルト",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 133,
+    "updated_at": "2025-08-09T02:11:16.412Z"
+  },
+  {
+    "player_id": "2000134",
+    "name": "2021年度版 R.ロドリゲス【日本ハム】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 134,
+    "updated_at": "2025-08-09T02:11:17.714Z"
+  },
+  {
+    "player_id": "2000135",
+    "name": "2025年度 サンタナ【ヤクルト】打撃成績詳細",
+    "team": "ヤクルト",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 135,
+    "updated_at": "2025-08-09T02:11:19.020Z"
+  },
+  {
+    "player_id": "2000136",
+    "name": "2021年度版 アーリン【日本ハム】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 136,
+    "updated_at": "2025-08-09T02:11:20.312Z"
+  },
+  {
+    "player_id": "2000137",
+    "name": "2021年度 ガーバー【中日】打撃成績詳細",
+    "team": "中日",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 137,
+    "updated_at": "2025-08-09T02:11:21.594Z"
+  },
+  {
+    "player_id": "2000138",
+    "name": "2021年度版 ロサリオ【中日】打撃成績詳細",
+    "team": "中日",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 138,
+    "updated_at": "2025-08-09T02:11:22.890Z"
+  },
+  {
+    "player_id": "2000139",
+    "name": "2024年度 サイスニード【ヤクルト】打撃成績詳細",
+    "team": "ヤクルト",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 139,
+    "updated_at": "2025-08-09T02:11:24.203Z"
+  },
+  {
+    "player_id": "2000140",
+    "name": "2021年度版 ディクソン【楽天】打撃成績詳細",
+    "team": "楽天",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 140,
+    "updated_at": "2025-08-09T02:11:25.933Z"
+  },
+  {
+    "player_id": "2000141",
+    "name": "2021年度 コンリー【楽天】打撃成績詳細",
+    "team": "楽天",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 141,
+    "updated_at": "2025-08-09T02:11:28.202Z"
+  },
+  {
+    "player_id": "2000142",
+    "name": "2022年度 ワカマツ【中日】打撃成績詳細",
+    "team": "中日",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 142,
+    "updated_at": "2025-08-09T02:11:29.471Z"
+  },
+  {
+    "player_id": "2000144",
+    "name": "2022年度 アルカンタラ【阪神】打撃成績詳細",
+    "team": "阪神",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 144,
+    "updated_at": "2025-08-09T02:11:32.462Z"
+  },
+  {
+    "player_id": "2000145",
+    "name": "2022年度 ロメロ【ＤｅＮＡ】打撃成績詳細",
+    "team": "巨人",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 145,
+    "updated_at": "2025-08-09T02:11:33.751Z"
+  },
+  {
+    "player_id": "2000146",
+    "name": "2022年度 エチェバリア【ロッテ】打撃成績詳細",
+    "team": "ロッテ",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 146,
+    "updated_at": "2025-08-09T02:11:35.035Z"
+  },
+  {
+    "player_id": "2000147",
+    "name": "2022年度 ロハス・ジュニア【阪神】打撃成績詳細",
+    "team": "阪神",
+    "position": "2",
+    "player_type": "batter",
+    "entry_year": 2000,
+    "year_number": 147,
+    "updated_at": "2025-08-09T02:11:36.335Z"
+  }
+]

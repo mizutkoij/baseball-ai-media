@@ -1,0 +1,21 @@
+{
+  "url": "https://npb.jp/bis/players/03005157.html",
+  "team": "読売ジャイアンツ",
+  "team_code": "g",
+  "current_status": "active",
+  "name": "Ｅ．ルシアーノ",
+  "name_kana": "エルビス・ルシアーノ　(ELVIS LUCIANO)",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "右投右打",
+    "身長／体重": "190cm／95kg",
+    "生年月日": "2000年2月15日",
+    "経歴": "ビタリーナモルダンデクルーズ校 - ブルージェイズ",
+    "ドラフト": ""
+  },
+  "birth_date": "2000-02-15 00:00:00",
+  "nationality_code": "2",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "100021200002150"
+}

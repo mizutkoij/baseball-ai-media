@@ -1,0 +1,34 @@
+[Unit]
+Description=Baseball AI Media - Next.js Web Application
+After=network.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=baseball
+Group=baseball
+WorkingDirectory=/opt/baseball-ai-media
+ExecStart=/usr/bin/npm start
+Environment=NODE_ENV=production
+Environment=LIVE_API_BASE=http://127.0.0.1:8787
+Environment=PORT=3000
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=baseball-nextjs
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/baseball-ai-media/data /opt/baseball-ai-media/.next /opt/baseball-ai-media/logs
+
+# Resource limits
+LimitNOFILE=65536
+MemoryMax=2G
+TasksMax=1024
+
+[Install]
+WantedBy=multi-user.target

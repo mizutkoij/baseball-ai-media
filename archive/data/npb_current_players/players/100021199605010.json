@@ -1,0 +1,21 @@
+{
+  "url": "https://npb.jp/bis/players/43745159.html",
+  "team": "横浜DeNAベイスターズ",
+  "team_code": "db",
+  "current_status": "active",
+  "name": "Ａ．ジャクソン",
+  "name_kana": "アンドレ・ジャクソン　(ANDRE JACKSON)",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "右投右打",
+    "身長／体重": "190cm／95kg",
+    "生年月日": "1996年5月1日",
+    "経歴": "ユタ大 - ドジャース - パイレーツ",
+    "ドラフト": ""
+  },
+  "birth_date": "1996-05-01 00:00:00",
+  "nationality_code": "2",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "100021199605010"
+}

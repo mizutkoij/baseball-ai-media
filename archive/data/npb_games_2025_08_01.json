@@ -1,0 +1,106 @@
+{
+  "2025-08-01": {
+    "C-D": {
+      "date": "2025-08-01",
+      "matchup": "C-D",
+      "homeTeam": "中日",
+      "awayTeam": "広島",
+      "venue": "東京ドーム",
+      "time": "18:01",
+      "endTime": "21:35",
+      "gameTime": "3時間34分",
+      "attendance": "29,169人",
+      "homeScore": 0,
+      "awayScore": 5,
+      "status": "finished",
+      "league": "central",
+      "inningScores": {
+        "away": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "home": [
+          0,
+          0,
+          0,
+          0,
+          2,
+          1,
+          0,
+          0,
+          3
+        ]
+      },
+      "homeHits": 0,
+      "awayHits": 0,
+      "homeErrors": 0,
+      "awayErrors": 0
+    },
+    "DB-G": {
+      "date": "2025-08-01",
+      "matchup": "DB-G",
+      "homeTeam": "巨人",
+      "awayTeam": "DeNA",
+      "venue": "東京ドーム",
+      "time": "18:00",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "finished",
+      "league": "central",
+      "homeHits": 0,
+      "awayHits": 0,
+      "homeErrors": 0,
+      "awayErrors": 0
+    },
+    "S-T": {
+      "date": "2025-08-01",
+      "matchup": "S-T",
+      "homeTeam": "阪神",
+      "awayTeam": "ヤクルト",
+      "venue": "東京ドーム",
+      "time": "18:00",
+      "endTime": "21:37",
+      "gameTime": "3時間37分",
+      "attendance": "28,891人",
+      "homeScore": 0,
+      "awayScore": 5,
+      "status": "finished",
+      "league": "central",
+      "inningScores": {
+        "away": [
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "home": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0
+        ]
+      },
+      "homeHits": 0,
+      "awayHits": 1,
+      "homeErrors": 0,
+      "awayErrors": 0
+    }
+  }
+}

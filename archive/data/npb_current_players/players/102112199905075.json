@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/71875155.html",
+  "team": "中日ドラゴンズ",
+  "team_code": "d",
+  "current_status": "active",
+  "name": "ブライト　健太",
+  "name_kana": "ぶらいと・けんた",
+  "profile": {
+    "ポジション": "外野手",
+    "投打": "右投右打",
+    "身長／体重": "184cm／92kg",
+    "生年月日": "1999年5月7日",
+    "経歴": "葛飾野高 - 上武大",
+    "ドラフト": "2021年ドラフト1位"
+  },
+  "birth_date": "1999-05-07 00:00:00",
+  "entry_year": 2021,
+  "nationality_code": "1",
+  "position_code": "2",
+  "position": "野手",
+  "player_id": "102112199905075"
+}

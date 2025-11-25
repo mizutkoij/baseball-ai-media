@@ -1,0 +1,206 @@
+import Link from "next/link";
+import { TrendingUp, Target, BarChart3, Zap } from "lucide-react";
+
+// Force dynamic rendering to prevent build-time API calls
+export const dynamic = 'force-dynamic';
+
+// Minimal stats overview without external dependencies
+function StatsOverview() {
+  const stats = [
+    {
+      icon: <TrendingUp className="w-6 h-6" />,
+      label: "WAR Leaders",
+      value: "中立化指標",
+      description: "球場補正適用"
+    },
+    {
+      icon: <Target className="w-6 h-6" />,
+      label: "Matchup Analysis", 
+      value: "プラトーン効果",
+      description: "対戦相性分析"
+    },
+    {
+      icon: <BarChart3 className="w-6 h-6" />,
+      label: "Park Factors",
+      value: "12球場環境",
+      description: "補正係数適用"
+    },
+    {
+      icon: <Zap className="w-6 h-6" />,
+      label: "Real-time",
+      value: "AI予測",
+      description: "WP・RE分析"
+    }
+  ];
+
+  return (
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      {stats.map((stat, index) => (
+        <div 
+          key={stat.label} 
+          className={`stat-card animate-fade-in animation-delay-${index * 150}`}
+        >
+          <div className="flex items-center justify-between mb-2">
+            <div className="text-blue-400">
+              {stat.icon}
+            </div>
+            <span className="text-xs text-slate-400">LIVE</span>
+          </div>
+          <h3 className="font-semibold text-sm mb-1">{stat.label}</h3>
+          <p className="text-lg font-bold text-gradient">{stat.value}</p>
+          <p className="text-xs text-slate-400">{stat.description}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// Minimal CTA buttons without external dependencies
+function CTAButtons() {
+  return (
+    <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+      <Link 
+        href="/players" 
+        className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors"
+      >
+        選手分析
+      </Link>
+      <Link 
+        href="/standings" 
+        className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors"
+      >
+        順位表
+      </Link>
+      <Link 
+        href="/schedule" 
+        className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors"
+      >
+        試合日程
+      </Link>
+    </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <main className="min-h-screen">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-baseball-gradient opacity-20"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="text-center mb-12">
+            <h1 className="text-4xl lg:text-6xl font-bold mb-6 animate-fade-in">
+              <span className="text-gradient">NPB AI Analytics</span>
+            </h1>
+            <p className="text-xl text-slate-300 mb-8 max-w-3xl mx-auto animate-fade-in animation-delay-150">
+              <strong>完全独立のNPBセイバーメトリクス基盤</strong>を実現。
+              自前推定の係数・定数による高精度な統計分析で、第三者データベースとは一線を画す独自の洞察を提供。
+              透明性保証・学術準拠の分析手法により、真のデータドリブン野球観戦をサポートします。
+              <br />
+              日本プロ野球の新しい分析体験
+            </p>
+            
+            {/* 3-Button Navigation */}
+            <CTAButtons />
+          </div>
+          
+          {/* Stats Overview */}
+          <StatsOverview />
+        </div>
+      </section>
+
+      {/* Main Content */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        {/* Build Test Status */}
+        <div className="mb-8 animate-slide-up">
+          <div className="bg-green-600/20 border border-green-400/30 rounded-lg p-6">
+            <h2 className="text-xl font-bold text-green-400 mb-4">✅ Minimal Build Test</h2>
+            <p className="text-slate-300 mb-4">
+              This is a minimal version of the homepage without problematic components. 
+              If you see this page, the core Next.js build process is working correctly.
+            </p>
+            <div className="text-sm text-slate-400 space-y-1">
+              <p>• No external API calls during build</p>
+              <p>• No file system operations during build</p>
+              <p>• No complex component dependencies</p>
+              <p>• Basic routing and styling only</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Navigation Links */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <Link 
+            href="/players" 
+            className="card hover:bg-white/5 transition-colors"
+          >
+            <h3 className="font-bold mb-3 flex items-center">
+              👤 選手データ
+            </h3>
+            <p className="text-sm text-slate-400">
+              NPB選手の詳細な統計データと分析
+            </p>
+          </Link>
+
+          <Link 
+            href="/standings" 
+            className="card hover:bg-white/5 transition-colors"
+          >
+            <h3 className="font-bold mb-3 flex items-center">
+              📊 順位表
+            </h3>
+            <p className="text-sm text-slate-400">
+              両リーグの最新順位と統計
+            </p>
+          </Link>
+
+          <Link 
+            href="/schedule" 
+            className="card hover:bg-white/5 transition-colors"
+          >
+            <h3 className="font-bold mb-3 flex items-center">
+              📅 試合日程
+            </h3>
+            <p className="text-sm text-slate-400">
+              今後の試合予定と結果
+            </p>
+          </Link>
+        </div>
+
+        {/* Information Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          {/* AI Analysis Info */}
+          <div className="card">
+            <h3 className="font-bold mb-3 flex items-center">
+              🤖 AI Analytics
+            </h3>
+            <p className="text-sm text-slate-400 mb-4">
+              機械学習による高度な野球分析システム
+            </p>
+            <ul className="text-sm text-slate-400 space-y-1">
+              <li>• WAR（勝利貢献度）計算</li>
+              <li>• Park Factor（球場補正）</li>
+              <li>• Platoon Advantage（左右相性）</li>
+              <li>• Win Probability（勝利確率）</li>
+            </ul>
+          </div>
+
+          {/* Data Source Info */}
+          <div className="card">
+            <h3 className="font-bold mb-3 flex items-center">
+              📊 独自データ
+            </h3>
+            <ul className="text-sm text-slate-400 space-y-1">
+              <li>• NPB公式サイト（公開統計のみ）</li>
+              <li>• 自前算出指標（wOBA, FIP等）</li>
+              <li>• 透明性保証（式・係数を公開）</li>
+              <li className="text-xs text-slate-500">第三者DB複製なし</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}

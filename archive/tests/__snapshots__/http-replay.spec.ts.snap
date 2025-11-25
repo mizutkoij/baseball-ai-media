@@ -1,0 +1,93 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`HTTP Recording/Replay > game detail fetching > fetches game preview page > game-detail-html 1`] = `
+"<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>NPB Game Preview</title>
+</head>
+<body>
+    <!-- NPB先発投手詳細サンプルHTML -->
+    <div class="preview-container">
+        <div class="starting-pitchers">
+            <div class="home-pitcher">
+                <div class="pitcher-name">菅野 智之</div>
+                <div class="pitcher-hand">右</div>
+                <div class="pitcher-stats">
+                    <span class="era">2.45</span>
+                    <span class="wins">12</span>
+                    <span class="losses">4</span>
+                </div>
+            </div>
+            
+            <div class="away-pitcher">
+                <div class="pitcher-name">髙橋 遥人</div>
+                <div class="pitcher-hand">左</div>
+                <div class="pitcher-stats">
+                    <span class="era">3.12</span>
+                    <span class="wins">8</span>
+                    <span class="losses">6</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 代替セレクタパターン -->
+        <div class="starting-lineups">
+            <div class="home-team-starter">
+                <div class="name">山本 由伸</div>
+                <div class="throw">右投</div>
+                <div class="record">15勝3敗 防御率1.98</div>
+            </div>
+            
+            <div class="away-team-starter">
+                <div class="name">有原 航平</div>
+                <div class="throw">右投</div>
+                <div class="record">9勝7敗 防御率2.87</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>"
+`;
+
+exports[`HTTP Recording/Replay > schedule page fetching > fetches schedule page successfully > schedule-page-html 1`] = `
+"<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>NPB Official Site - Game Schedule</title>
+</head>
+<body>
+    <!-- NPB試合日程サンプルHTML -->
+    <div class="schedule-container">
+        <div class="game-card">
+            <div class="teams">
+                <div class="team-name">読売ジャイアンツ</div>
+                <div class="team-name">阪神タイガース</div>
+            </div>
+            <div class="venue">東京ドーム</div>
+            <div class="time">18:00</div>
+        </div>
+        
+        <div class="game-card">
+            <div class="teams">
+                <div class="team-name">横浜DeNAベイスターズ</div>
+                <div class="team-name">広島東洋カープ</div>
+            </div>
+            <div class="venue">横浜スタジアム</div>
+            <div class="time">18:00</div>
+        </div>
+        
+        <div class="game-card">
+            <div class="teams">
+                <div class="team-name">福岡ソフトバンクホークス</div>
+                <div class="team-name">オリックス・バファローズ</div>
+            </div>
+            <div class="venue">福岡PayPayドーム</div>
+            <div class="time">18:00</div>
+        </div>
+    </div>
+</body>
+</html>"
+`;

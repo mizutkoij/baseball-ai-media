@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/91695138.html",
+  "team": "横浜DeNAベイスターズ",
+  "team_code": "db",
+  "current_status": "active",
+  "name": "益子　京右",
+  "name_kana": "ましこ・きょうすけ",
+  "profile": {
+    "ポジション": "捕手",
+    "投打": "右投右打",
+    "身長／体重": "176cm／95kg",
+    "生年月日": "2000年12月27日",
+    "経歴": "青藍泰斗高",
+    "ドラフト": "2018年ドラフト5位"
+  },
+  "birth_date": "2000-12-27 00:00:00",
+  "entry_year": 2018,
+  "nationality_code": "1",
+  "position_code": "2",
+  "position": "野手",
+  "player_id": "101812200012276"
+}

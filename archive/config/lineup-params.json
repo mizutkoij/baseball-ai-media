@@ -1,0 +1,15 @@
+{
+  "enable": true,
+  "mode": "weight",
+  "weight": {
+    "early_inning_max": 3,
+    "w_min_delta_confirmed": -0.03,
+    "w_min_delta_partial": -0.015,
+    "w_min_delta_unknown": 0.0
+  },
+  "prior": {
+    "max_shift": 0.02,
+    "per_star_absence": 0.005,
+    "cap_by_conf": true
+  }
+}

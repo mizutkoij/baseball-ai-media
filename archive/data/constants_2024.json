@@ -1,0 +1,13 @@
+{
+  "woba_coefficients": {
+    "1B": 0.889,
+    "2B": 1.269,
+    "3B": 1.619,
+    "HR": 2.099
+  },
+  "metadata": {
+    "year": 2024,
+    "updated_at": "2025-08-01T05:34:22.173Z",
+    "sample_size": 23
+  }
+}

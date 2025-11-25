@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/71175132.html",
+  "team": "東京ヤクルトスワローズ",
+  "team_code": "s",
+  "current_status": "active",
+  "name": "青柳　晃洋",
+  "name_kana": "あおやぎ・こうよう",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "右投右打",
+    "身長／体重": "183cm／83kg",
+    "生年月日": "1993年12月11日",
+    "経歴": "川崎工科高 - 帝京大",
+    "ドラフト": "2015年ドラフト5位"
+  },
+  "birth_date": "1993-12-11 00:00:00",
+  "entry_year": 2015,
+  "nationality_code": "1",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "101511199312110"
+}

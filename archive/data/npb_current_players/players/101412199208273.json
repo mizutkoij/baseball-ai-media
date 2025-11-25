@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/31235130.html",
+  "team": "東北楽天ゴールデンイーグルス",
+  "team_code": "e",
+  "current_status": "active",
+  "name": "田中　貴也",
+  "name_kana": "たなか・たかや",
+  "profile": {
+    "ポジション": "捕手",
+    "投打": "右投左打",
+    "身長／体重": "178cm／85kg",
+    "生年月日": "1992年8月27日",
+    "経歴": "八重山商工 - 山梨学院大",
+    "ドラフト": "2014年育成選手ドラフト3位"
+  },
+  "birth_date": "1992-08-27 00:00:00",
+  "entry_year": 2014,
+  "nationality_code": "1",
+  "position_code": "2",
+  "position": "野手",
+  "player_id": "101412199208273"
+}

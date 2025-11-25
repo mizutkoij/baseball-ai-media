@@ -1,0 +1,21 @@
+{
+  "url": "https://npb.jp/bis/players/03705159.html",
+  "team": "福岡ソフトバンクホークス",
+  "team_code": "h",
+  "current_status": "active",
+  "name": "Ｄ．サルディ",
+  "name_kana": "ダリオ・サルディ　(DARIO SARDUY)",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "左投左打",
+    "身長／体重": "186cm／81kg",
+    "生年月日": "2005年11月12日",
+    "経歴": "エイデヘクトルルイスペレスサンタクララ高",
+    "ドラフト": ""
+  },
+  "birth_date": "2005-11-12 00:00:00",
+  "nationality_code": "2",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "100021200511123"
+}

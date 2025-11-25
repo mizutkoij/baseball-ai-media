@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/01705150.html",
+  "team": "東北楽天ゴールデンイーグルス",
+  "team_code": "e",
+  "current_status": "active",
+  "name": "岸本　佑也",
+  "name_kana": "きしもと・ゆうや",
+  "profile": {
+    "ポジション": "内野手",
+    "投打": "右投右打",
+    "身長／体重": "180cm／74kg",
+    "生年月日": "2007年1月30日",
+    "経歴": "奈良大付高",
+    "ドラフト": "2024年育成選手ドラフト1位"
+  },
+  "birth_date": "2007-01-30 00:00:00",
+  "entry_year": 2024,
+  "nationality_code": "1",
+  "position_code": "2",
+  "position": "野手",
+  "player_id": "102412200701301"
+}

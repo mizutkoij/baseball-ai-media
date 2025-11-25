@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/11715155.html",
+  "team": "福岡ソフトバンクホークス",
+  "team_code": "h",
+  "current_status": "active",
+  "name": "川村　友斗",
+  "name_kana": "かわむら・ゆうと",
+  "profile": {
+    "ポジション": "外野手",
+    "投打": "右投左打",
+    "身長／体重": "181cm／88kg",
+    "生年月日": "1999年8月13日",
+    "経歴": "北海高 - 仙台大",
+    "ドラフト": "2021年育成選手ドラフト2位"
+  },
+  "birth_date": "1999-08-13 00:00:00",
+  "entry_year": 2021,
+  "nationality_code": "1",
+  "position_code": "2",
+  "position": "野手",
+  "player_id": "102112199908131"
+}

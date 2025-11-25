@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/01305138.html",
+  "team": "横浜DeNAベイスターズ",
+  "team_code": "db",
+  "current_status": "active",
+  "name": "大貫　晋一",
+  "name_kana": "おおぬき・しんいち",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "右投右打",
+    "身長／体重": "181cm／76kg",
+    "生年月日": "1994年2月3日",
+    "経歴": "桐陽高 - 日本体育大 - 新日鉄住金鹿島",
+    "ドラフト": "2018年ドラフト3位"
+  },
+  "birth_date": "1994-02-03 00:00:00",
+  "entry_year": 2018,
+  "nationality_code": "1",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "101811199402030"
+}

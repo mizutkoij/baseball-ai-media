@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/61065138.html",
+  "team": "オリックス・バファローズ",
+  "team_code": "b",
+  "current_status": "active",
+  "name": "富山　凌雅",
+  "name_kana": "とみやま・りょうが",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "左投左打",
+    "身長／体重": "178cm／88kg",
+    "生年月日": "1997年5月3日",
+    "経歴": "九州国際大付高 - トヨタ自動車",
+    "ドラフト": "2018年ドラフト4位"
+  },
+  "birth_date": "1997-05-03 00:00:00",
+  "entry_year": 2018,
+  "nationality_code": "1",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "101811199705033"
+}

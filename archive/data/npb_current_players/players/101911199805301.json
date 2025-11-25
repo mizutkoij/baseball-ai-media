@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/81785151.html",
+  "team": "北海道日本ハムファイターズ",
+  "team_code": "f",
+  "current_status": "active",
+  "name": "河野　竜生",
+  "name_kana": "かわの・りゅうせい",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "左投左打",
+    "身長／体重": "175cm／88kg",
+    "生年月日": "1998年5月30日",
+    "経歴": "鳴門高 - JFE西日本",
+    "ドラフト": "2019年ドラフト1位"
+  },
+  "birth_date": "1998-05-30 00:00:00",
+  "entry_year": 2019,
+  "nationality_code": "1",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "101911199805301"
+}

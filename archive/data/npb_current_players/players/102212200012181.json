@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/01505157.html",
+  "team": "東京ヤクルトスワローズ",
+  "team_code": "s",
+  "current_status": "active",
+  "name": "北村　恵吾",
+  "name_kana": "きたむら・けいご",
+  "profile": {
+    "ポジション": "内野手",
+    "投打": "右投右打",
+    "身長／体重": "182cm／90kg",
+    "生年月日": "2000年12月18日",
+    "経歴": "近江高 - 中央大",
+    "ドラフト": "2022年ドラフト5位"
+  },
+  "birth_date": "2000-12-18 00:00:00",
+  "entry_year": 2022,
+  "nationality_code": "1",
+  "position_code": "2",
+  "position": "野手",
+  "player_id": "102212200012181"
+}

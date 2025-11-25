@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/41745135.html",
+  "team": "福岡ソフトバンクホークス",
+  "team_code": "h",
+  "current_status": "active",
+  "name": "近藤　健介",
+  "name_kana": "こんどう・けんすけ",
+  "profile": {
+    "ポジション": "外野手",
+    "投打": "右投左打",
+    "身長／体重": "173cm／85kg",
+    "生年月日": "1993年8月9日",
+    "経歴": "横浜高",
+    "ドラフト": "2011年ドラフト4位"
+  },
+  "birth_date": "1993-08-09 00:00:00",
+  "entry_year": 2011,
+  "nationality_code": "1",
+  "position_code": "2",
+  "position": "野手",
+  "player_id": "101112199308091"
+}

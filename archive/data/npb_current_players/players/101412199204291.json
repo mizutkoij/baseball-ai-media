@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/41545130.html",
+  "team": "中日ドラゴンズ",
+  "team_code": "d",
+  "current_status": "active",
+  "name": "加藤　匠馬",
+  "name_kana": "かとう・たくま",
+  "profile": {
+    "ポジション": "捕手",
+    "投打": "右投右打",
+    "身長／体重": "175cm／85kg",
+    "生年月日": "1992年4月29日",
+    "経歴": "三重高 - 青山学院大",
+    "ドラフト": "2014年ドラフト5位"
+  },
+  "birth_date": "1992-04-29 00:00:00",
+  "entry_year": 2014,
+  "nationality_code": "1",
+  "position_code": "2",
+  "position": "野手",
+  "player_id": "101412199204291"
+}

@@ -1,0 +1,12 @@
+[Unit]
+Description=NPB Step1 Schedule Incremental (polite)
+After=network-online.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/default/npb-scraper
+WorkingDirectory=%E{BASE_DIR}
+Environment=TZ=%E{TZ}
+ExecStart=/bin/bash -lc 'source %E{VENV}/bin/activate && python scripts/step_1_schedule_scraper_polite.py'
+Nice=10
+IOSchedulingClass=best-effort

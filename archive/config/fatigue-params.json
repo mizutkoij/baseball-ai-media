@@ -1,0 +1,41 @@
+{
+  "enable": true,
+  "max_shift": 0.02,
+  "late_inning_curve": "quadratic",
+  "default_pitches_per_appearance": 25,
+  "fatigue_calculation": {
+    "lookback_days": 10,
+    "pitch_count_weight": 0.7,
+    "rest_days_weight": 0.3,
+    "b2b_penalty": 1.5,
+    "max_daily_pitches": 120,
+    "optimal_rest_days": 4
+  },
+  "starter_config": {
+    "high_fatigue_threshold": 100,
+    "medium_fatigue_threshold": 80,
+    "early_exit_penalty": 0.8
+  },
+  "reliever_config": {
+    "high_fatigue_threshold": 30,
+    "medium_fatigue_threshold": 20,
+    "b2b_usage_penalty": 1.2
+  },
+  "confidence_thresholds": {
+    "high": 0.8,
+    "medium": 0.6,
+    "low": 0.4
+  },
+  "_description": {
+    "enable": "Feature flag for pitcher fatigue adjustment",
+    "max_shift": "Maximum win probability shift (±2pt)",
+    "late_inning_curve": "How fatigue effect scales by inning",
+    "default_pitches_per_appearance": "Fallback when pitch count unavailable",
+    "lookback_days": "Days to analyze for fatigue calculation",
+    "pitch_count_weight": "Weight for pitch count vs rest in fatigue",
+    "b2b_penalty": "Multiplier for back-to-back appearances",
+    "optimal_rest_days": "Ideal rest days between starts"
+  },
+  "_generated": "2025-08-12T06:45:00Z",
+  "_version": "1.0.0"
+}

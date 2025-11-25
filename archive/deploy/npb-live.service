@@ -1,0 +1,36 @@
+[Unit]
+Description=NPB Live Prediction API Server
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=npb
+Group=npb
+WorkingDirectory=/opt/npb/baseball-ai-media
+Environment=NODE_ENV=production
+Environment=PORT=8787
+Environment=DATA_DIR=/opt/npb/data
+Environment=LOG_LEVEL=info
+ExecStart=/usr/bin/node server/live-api.js
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=npb-live
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/npb/data
+ReadOnlyPaths=/opt/npb/baseball-ai-media
+
+# Resource limits
+LimitNOFILE=65536
+MemoryMax=1G
+CPUQuota=200%
+
+[Install]
+WantedBy=multi-user.target

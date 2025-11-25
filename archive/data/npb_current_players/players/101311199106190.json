@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/31335139.html",
+  "team": "阪神タイガース",
+  "team_code": "t",
+  "current_status": "active",
+  "name": "岩崎　優",
+  "name_kana": "いわざき・すぐる",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "左投左打",
+    "身長／体重": "185cm／92kg",
+    "生年月日": "1991年6月19日",
+    "経歴": "清水東高 - 国士舘大",
+    "ドラフト": "2013年ドラフト6位"
+  },
+  "birth_date": "1991-06-19 00:00:00",
+  "entry_year": 2013,
+  "nationality_code": "1",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "101311199106190"
+}

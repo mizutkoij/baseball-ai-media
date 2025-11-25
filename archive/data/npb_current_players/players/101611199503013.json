@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/11415134.html",
+  "team": "広島東洋カープ",
+  "team_code": "c",
+  "current_status": "active",
+  "name": "床田　寛樹",
+  "name_kana": "とこだ・ひろき",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "左投左打",
+    "身長／体重": "181cm／97kg",
+    "生年月日": "1995年3月1日",
+    "経歴": "箕面学園高 - 中部学院大",
+    "ドラフト": "2016年ドラフト3位"
+  },
+  "birth_date": "1995-03-01 00:00:00",
+  "entry_year": 2016,
+  "nationality_code": "1",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "101611199503013"
+}

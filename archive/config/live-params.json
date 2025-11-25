@@ -1,0 +1,24 @@
+{
+  "mix": {
+    "w_min": 0.2966676489971921,
+    "w_max": 0.9624697564232603,
+    "curve": "linear"
+  },
+  "smooth": {
+    "alpha_base": 0.30383761337271953,
+    "alpha_score_event": 0.5035327776949776
+  },
+  "clip": {
+    "lo": 0.026592355727671643,
+    "hi": 0.9668159334879097
+  },
+  "calibration": {
+    "mode": "none",
+    "by_phase": false,
+    "params": {}
+  },
+  "confidence": {
+    "high": 0.15,
+    "medium": 0.08
+  }
+}

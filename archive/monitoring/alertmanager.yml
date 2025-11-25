@@ -1,0 +1,111 @@
+global:
+  smtp_smarthost: 'localhost:587'
+  smtp_from: 'baseball-ai-alerts@your-domain.com'
+
+# ルーティングとグルーピング設定
+route:
+  group_by: ['alertname', 'severity', 'component']
+  group_wait: 10s
+  group_interval: 5m
+  repeat_interval: 12h
+  receiver: 'default-receiver'
+  routes:
+  # 🚨 緊急アラート → Discord + PagerDuty
+  - match:
+      severity: page
+    receiver: 'critical-alerts'
+    group_wait: 0s
+    repeat_interval: 1h
+
+  # ⚠️ 警告アラート → Discord のみ
+  - match:
+      severity: warn
+    receiver: 'warning-alerts'
+    repeat_interval: 4h
+
+  # 🔄 業務時間外はサイレント（平日 9-21時 以外）
+  - match_re:
+      severity: warn
+    receiver: 'silent'
+    active_time_intervals:
+    - business_hours_only
+
+receivers:
+# 🚨 緊急通知先
+- name: 'critical-alerts'
+  discord_configs:
+  - webhook_url: '{{ .ExternalURL }}/webhook/discord/critical'
+    title: '🚨 NPB Baseball AI - CRITICAL ALERT'
+    message: |
+      **{{ range .Alerts }}{{ .Annotations.summary }}{{ end }}**
+      
+      **Component**: {{ .CommonLabels.component }}
+      **Severity**: {{ .CommonLabels.severity }}
+      **Time**: {{ .CommonLabels.alertname }} 
+      
+      {{ range .Alerts }}
+      📋 **Details**: {{ .Annotations.description }}
+      📚 **Runbook**: {{ .Annotations.runbook_url }}
+      {{ end }}
+      
+      🔗 **Grafana**: {{ .ExternalURL }}/grafana
+      📊 **Prometheus**: {{ .ExternalURL }}/prometheus
+    color: 16711680  # Red
+
+  # PagerDuty統合（本格運用時）
+  # pagerduty_configs:
+  # - routing_key: 'your-pagerduty-integration-key'
+  #   description: '{{ .CommonLabels.alertname }}: {{ .CommonLabels.component }}'
+
+# ⚠️ 警告通知先
+- name: 'warning-alerts'
+  discord_configs:
+  - webhook_url: '{{ .ExternalURL }}/webhook/discord/warning'
+    title: '⚠️ NPB Baseball AI - Warning'
+    message: |
+      **{{ range .Alerts }}{{ .Annotations.summary }}{{ end }}**
+      
+      **Component**: {{ .CommonLabels.component }}
+      **Time**: {{ (.Alerts | first).StartsAt.Format "2006-01-02 15:04:05 JST" }}
+      
+      {{ range .Alerts }}{{ .Annotations.description }}{{ end }}
+      
+      📚 **Runbook**: {{ range .Alerts }}{{ .Annotations.runbook_url }}{{ end }}
+    color: 16776960  # Yellow
+
+# デフォルト（フォールバック）
+- name: 'default-receiver'
+  discord_configs:
+  - webhook_url: '{{ .ExternalURL }}/webhook/discord/general'
+    title: '📢 NPB Baseball AI - Alert'
+    message: '{{ range .Alerts }}{{ .Annotations.summary }}{{ end }}'
+
+# サイレント
+- name: 'silent'
+
+# 抑制ルール（複数アラートの重複を防ぐ）
+inhibit_rules:
+# ScrapeFailureSpike が発生中は他のスクレーピングアラートを抑制
+- source_match:
+    alertname: ScrapeFailureSpike
+    severity: page
+  target_match:
+    component: scraper
+  equal: ['component']
+
+# MetricsServerDown 中は他のメトリクス関連警告を抑制  
+- source_match:
+    alertname: MetricsServerDown
+  target_match:
+    component: monitoring
+  equal: ['job']
+
+# 時間帯設定
+time_intervals:
+- name: business_hours_only
+  time_intervals:
+  - times:
+    - start_time: '09:00'
+      end_time: '21:00'
+    weekdays: ['monday:friday']
+    location: 'Asia/Tokyo'

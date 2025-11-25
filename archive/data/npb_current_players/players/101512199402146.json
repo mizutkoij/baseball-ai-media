@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/61865132.html",
+  "team": "東京ヤクルトスワローズ",
+  "team_code": "s",
+  "current_status": "active",
+  "name": "茂木　栄五郎",
+  "name_kana": "もぎ・えいごろう",
+  "profile": {
+    "ポジション": "内野手",
+    "投打": "右投左打",
+    "身長／体重": "173cm／78kg",
+    "生年月日": "1994年2月14日",
+    "経歴": "桐蔭学園高 - 早稲田大",
+    "ドラフト": "2015年ドラフト3位"
+  },
+  "birth_date": "1994-02-14 00:00:00",
+  "entry_year": 2015,
+  "nationality_code": "1",
+  "position_code": "2",
+  "position": "野手",
+  "player_id": "101512199402146"
+}

@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/51655155.html",
+  "team": "埼玉西武ライオンズ",
+  "team_code": "l",
+  "current_status": "active",
+  "name": "羽田　慎之介",
+  "name_kana": "はだ・しんのすけ",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "左投左打",
+    "身長／体重": "191cm／84kg",
+    "生年月日": "2003年12月25日",
+    "経歴": "八王子学園八王子高",
+    "ドラフト": "2021年ドラフト4位"
+  },
+  "birth_date": "2003-12-25 00:00:00",
+  "entry_year": 2021,
+  "nationality_code": "1",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "102111200312255"
+}

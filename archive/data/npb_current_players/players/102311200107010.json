@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/51155159.html",
+  "team": "広島東洋カープ",
+  "team_code": "c",
+  "current_status": "active",
+  "name": "赤塚　健利",
+  "name_kana": "あかつか・けんと",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "右投右打",
+    "身長／体重": "195cm／118kg",
+    "生年月日": "2001年7月1日",
+    "経歴": "中京学院大中京高 - 中京学院大",
+    "ドラフト": "2023年ドラフト5位"
+  },
+  "birth_date": "2001-07-01 00:00:00",
+  "entry_year": 2023,
+  "nationality_code": "1",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "102311200107010"
+}

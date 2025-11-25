@@ -49,3 +49,26 @@ dev*.log
 *test*.json
 *report*.json
 snapshots/
+
+# --- NEW RULES ---
+
+# Ignore artifacts from the moved application
+/archive/node_modules
+/archive/.next
+/archive/out
+/archive/.cache
+/archive/*.tsbuildinfo
+
+# Ignore top-level generated/temp folders that were untracked
+/output/
+/.cache/
+/html_archive/
+/src/
+/参照/
+
+# Ignore other misc untracked files
+*.xlsx
+*.html
+*.txt
+gemini_log.txt
+GEMINI.md

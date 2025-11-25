@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/51755136.html",
+  "team": "東京ヤクルトスワローズ",
+  "team_code": "s",
+  "current_status": "active",
+  "name": "鈴木　康平",
+  "name_kana": "すずき・こうへい",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "右投右打",
+    "身長／体重": "186cm／92kg",
+    "生年月日": "1994年1月21日",
+    "経歴": "千葉明徳高 - 国際武道大 - 日立製作所",
+    "ドラフト": "2017年ドラフト2位"
+  },
+  "birth_date": "1994-01-21 00:00:00",
+  "entry_year": 2017,
+  "nationality_code": "1",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "101711199401212"
+}

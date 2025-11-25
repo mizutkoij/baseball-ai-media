@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/03105157.html",
+  "team": "中日ドラゴンズ",
+  "team_code": "d",
+  "current_status": "active",
+  "name": "村松　開人",
+  "name_kana": "むらまつ・かいと",
+  "profile": {
+    "ポジション": "内野手",
+    "投打": "右投左打",
+    "身長／体重": "172cm／80kg",
+    "生年月日": "2001年1月6日",
+    "経歴": "静岡高 - 明治大",
+    "ドラフト": "2022年ドラフト2位"
+  },
+  "birth_date": "2001-01-06 00:00:00",
+  "entry_year": 2022,
+  "nationality_code": "1",
+  "position_code": "2",
+  "position": "野手",
+  "player_id": "102212200101066"
+}

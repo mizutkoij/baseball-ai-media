@@ -1,5 +1,95 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites name="vitest tests" tests="12" failures="0" errors="0" time="0.8">
-    <testsuite name="__tests__/game-invariants.test.ts" timestamp="2025-08-03T06:14:19.919Z" hostname="test-host" tests="12" failures="0" errors="0" skipped="0" time="0.8">
+<testsuites name="vitest tests" tests="12" failures="0" errors="0" time="0.4364055">
+    <testsuite name="__tests__/game-invariants.test.ts" timestamp="2025-08-04T03:38:19.906Z" hostname="DESKTOP-F7OMCVS" tests="12" failures="0" errors="0" skipped="0" time="0.4364055">
+        <testcase classname="__tests__/game-invariants.test.ts" name="Game Invariant Tests - Box Score Consistency &gt; Box合計=スコアボード (R/H/HR Consistency) &gt; should have runs match between game score and batting totals" time="0.047343">
+            <system-out>
+
+## Stratified Sampling Report
+
+**Total Games Selected**: 5
+
+**Category Distribution**:
+- Recent (0): Last 7 days coverage
+- Historic (5): Random sampling from past data
+- High Scoring (0): Edge case validation
+- Extra Innings (0): Extended game scenarios
+
+**Coverage Analysis**:
+- Recent Coverage: 0.0%
+- Edge Case Coverage: 0.0%
+
+**Sample Quality**: ⚠️ Limited 
+(Needs improvement sample size)
+
+            </system-out>
+        </testcase>
+        <testcase classname="__tests__/game-invariants.test.ts" name="Game Invariant Tests - Box Score Consistency &gt; Box合計=スコアボード (R/H/HR Consistency) &gt; should have hits consistency between team and player totals" time="0.1334738">
+            <system-err>
+Auto-relaxed tolerance for hits: 2 → 3 (sample size: 0)
+
+Auto-relaxed tolerance for hits: 2 → 3 (sample size: 0)
+
+Auto-relaxed tolerance for hits: 2 → 3 (sample size: 0)
+
+Auto-relaxed tolerance for hits: 2 → 3 (sample size: 0)
+
+Auto-relaxed tolerance for hits: 2 → 3 (sample size: 0)
+
+Auto-relaxed tolerance for hits: 2 → 3 (sample size: 0)
+
+Auto-relaxed tolerance for hits: 2 → 3 (sample size: 0)
+
+Auto-relaxed tolerance for hits: 2 → 3 (sample size: 0)
+
+Auto-relaxed tolerance for hits: 2 → 3 (sample size: 0)
+
+Auto-relaxed tolerance for hits: 2 → 3 (sample size: 0)
+
+Auto-relaxed tolerance for hits: 2 → 3 (sample size: 0)
+
+Auto-relaxed tolerance for hits: 2 → 3 (sample size: 0)
+
+Auto-relaxed tolerance for hits: 2 → 3 (sample size: 0)
+
+Auto-relaxed tolerance for hits: 2 → 3 (sample size: 0)
+
+Auto-relaxed tolerance for hits: 2 → 3 (sample size: 0)
+
+Auto-relaxed tolerance for hits: 2 → 3 (sample size: 0)
+
+Auto-relaxed tolerance for hits: 2 → 3 (sample size: 0)
+
+Auto-relaxed tolerance for hits: 2 → 3 (sample size: 0)
+
+Auto-relaxed tolerance for hits: 2 → 3 (sample size: 0)
+
+Auto-relaxed tolerance for hits: 2 → 3 (sample size: 0)
+
+            </system-err>
+        </testcase>
+        <testcase classname="__tests__/game-invariants.test.ts" name="Game Invariant Tests - Box Score Consistency &gt; Box合計=スコアボード (R/H/HR Consistency) &gt; should have home run consistency in box scores" time="0.0321237">
+        </testcase>
+        <testcase classname="__tests__/game-invariants.test.ts" name="Game Invariant Tests - Box Score Consistency &gt; チーム合計=選手合計 (Team vs Player Aggregation) &gt; should have at-bats match between team total and player sum" time="0.0696275">
+        </testcase>
+        <testcase classname="__tests__/game-invariants.test.ts" name="Game Invariant Tests - Box Score Consistency &gt; チーム合計=選手合計 (Team vs Player Aggregation) &gt; should have walks consistency in team aggregation" time="0.0320542">
+        </testcase>
+        <testcase classname="__tests__/game-invariants.test.ts" name="Game Invariant Tests - Box Score Consistency &gt; チーム合計=選手合計 (Team vs Player Aggregation) &gt; should have strikeouts consistency between batting and pitching" time="0.0141117">
+        </testcase>
+        <testcase classname="__tests__/game-invariants.test.ts" name="Game Invariant Tests - Box Score Consistency &gt; Advanced Invariant Validation &gt; should validate PA decomposition (PA = AB + BB + HBP + SF + SH)" time="0.0129191">
+        </testcase>
+        <testcase classname="__tests__/game-invariants.test.ts" name="Game Invariant Tests - Box Score Consistency &gt; Advanced Invariant Validation &gt; should validate IP_outs consistency (IP_outs ≈ 3 * defensive_innings)" time="0.0163813">
+        </testcase>
+        <testcase classname="__tests__/game-invariants.test.ts" name="Game Invariant Tests - Box Score Consistency &gt; Advanced Invariant Validation &gt; should validate team vs player box score totals" time="0.0639479">
+        </testcase>
+        <testcase classname="__tests__/game-invariants.test.ts" name="Game Invariant Tests - Box Score Consistency &gt; Game Consistency Meta-Validation &gt; should have valid game state for all tested games" time="0.0038641">
+        </testcase>
+        <testcase classname="__tests__/game-invariants.test.ts" name="Game Invariant Tests - Box Score Consistency &gt; Game Consistency Meta-Validation &gt; should have reasonable game score distributions" time="0.0031834">
+        </testcase>
+        <testcase classname="__tests__/game-invariants.test.ts" name="Game Invariant Tests - Box Score Consistency &gt; Game Consistency Meta-Validation &gt; should have data coverage for invariant testing" time="0.0044179">
+            <system-out>
+Game Invariant Test Coverage: 23 games, 78.3% with box scores
+
+            </system-out>
+        </testcase>
     </testsuite>
 </testsuites>

@@ -1,0 +1,21 @@
+{
+  "url": "https://npb.jp/bis/players/03205159.html",
+  "team": "横浜DeNAベイスターズ",
+  "team_code": "db",
+  "current_status": "active",
+  "name": "Ｍ．フォード",
+  "name_kana": "マイク・フォード　(MIKE FORD)",
+  "profile": {
+    "ポジション": "内野手",
+    "投打": "右投左打",
+    "身長／体重": "183cm／102kg",
+    "生年月日": "1992年7月4日",
+    "経歴": "プリンストン大 - ヤンキース - ジャイアンツ - マリナーズ - ブレーブス - エンゼルス - マリナーズ - レッズ",
+    "ドラフト": ""
+  },
+  "birth_date": "1992-07-04 00:00:00",
+  "nationality_code": "2",
+  "position_code": "2",
+  "position": "野手",
+  "player_id": "100022199207046"
+}

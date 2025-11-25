@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/31735132.html",
+  "team": "中日ドラゴンズ",
+  "team_code": "d",
+  "current_status": "active",
+  "name": "木下　拓哉",
+  "name_kana": "きのした・たくや",
+  "profile": {
+    "ポジション": "捕手",
+    "投打": "右投右打",
+    "身長／体重": "183cm／95kg",
+    "生年月日": "1991年12月18日",
+    "経歴": "高知高 - 法政大 - トヨタ自動車",
+    "ドラフト": "2015年ドラフト3位"
+  },
+  "birth_date": "1991-12-18 00:00:00",
+  "entry_year": 2015,
+  "nationality_code": "1",
+  "position_code": "2",
+  "position": "野手",
+  "player_id": "101512199112181"
+}

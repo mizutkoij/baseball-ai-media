@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/21425151.html",
+  "team": "中日ドラゴンズ",
+  "team_code": "d",
+  "current_status": "active",
+  "name": "橋本　侑樹",
+  "name_kana": "はしもと・ゆうき",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "左投左打",
+    "身長／体重": "180cm／80kg",
+    "生年月日": "1998年1月8日",
+    "経歴": "大垣日大高 - 大阪商業大",
+    "ドラフト": "2019年ドラフト2位"
+  },
+  "birth_date": "1998-01-08 00:00:00",
+  "entry_year": 2019,
+  "nationality_code": "1",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "101911199801085"
+}

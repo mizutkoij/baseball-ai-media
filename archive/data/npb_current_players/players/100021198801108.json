@@ -1,0 +1,21 @@
+{
+  "url": "https://npb.jp/bis/players/03505132.html",
+  "team": "阪神タイガース",
+  "team_code": "t",
+  "current_status": "active",
+  "name": "Ｒ．ドリス",
+  "name_kana": "ラファエル・ドリス　(RAFAEL DOLIS)",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "右投右打",
+    "身長／体重": "196cm／106kg",
+    "生年月日": "1988年1月10日",
+    "経歴": "ディビナプロビデンシア高 - カブス",
+    "ドラフト": ""
+  },
+  "birth_date": "1988-01-10 00:00:00",
+  "nationality_code": "2",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "100021198801108"
+}

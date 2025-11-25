@@ -1,0 +1,11 @@
+{
+  "url": "https://example.com/test",
+  "headers": {
+    "etag": "\"test-etag\"",
+    "lastModified": "Wed, 21 Oct 2015 07:28:00 GMT"
+  },
+  "content": "<html>test</html>",
+  "contentType": "text/html",
+  "timestamp": 1754884874100,
+  "hits": 0
+}

@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/61265153.html",
+  "team": "中日ドラゴンズ",
+  "team_code": "d",
+  "current_status": "active",
+  "name": "髙橋　宏斗",
+  "name_kana": "たかはし・ひろと",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "右投右打",
+    "身長／体重": "186cm／86kg",
+    "生年月日": "2002年8月9日",
+    "経歴": "中京大中京高",
+    "ドラフト": "2020年ドラフト1位"
+  },
+  "birth_date": "2002-08-09 00:00:00",
+  "entry_year": 2020,
+  "nationality_code": "1",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "102011200208093"
+}

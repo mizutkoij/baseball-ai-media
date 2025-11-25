@@ -1,0 +1,8 @@
+{
+  "url": "https://httpbin.org/status/200",
+  "headers": {},
+  "content": "",
+  "contentType": "text/html; charset=utf-8",
+  "timestamp": 1754885543049,
+  "hits": 0
+}

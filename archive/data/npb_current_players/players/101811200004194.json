@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/81285138.html",
+  "team": "中日ドラゴンズ",
+  "team_code": "d",
+  "current_status": "active",
+  "name": "根尾　昂",
+  "name_kana": "ねお・あきら",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "右投左打",
+    "身長／体重": "177cm／85kg",
+    "生年月日": "2000年4月19日",
+    "経歴": "大阪桐蔭高",
+    "ドラフト": "2018年ドラフト1位"
+  },
+  "birth_date": "2000-04-19 00:00:00",
+  "entry_year": 2018,
+  "nationality_code": "1",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "101811200004194"
+}

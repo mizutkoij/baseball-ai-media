@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/91795151.html",
+  "team": "阪神タイガース",
+  "team_code": "t",
+  "current_status": "active",
+  "name": "及川　雅貴",
+  "name_kana": "およかわ・まさき",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "左投左打",
+    "身長／体重": "184cm／84kg",
+    "生年月日": "2001年4月18日",
+    "経歴": "横浜高",
+    "ドラフト": "2019年ドラフト3位"
+  },
+  "birth_date": "2001-04-18 00:00:00",
+  "entry_year": 2019,
+  "nationality_code": "1",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "101911200104180"
+}

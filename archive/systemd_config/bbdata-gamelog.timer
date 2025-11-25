@@ -1,0 +1,11 @@
+[Unit]
+Description=BaseballData.jp Player Gamelog Daily Timer
+Requires=bbdata-gamelog.service
+
+[Timer]
+OnCalendar=*-*-* 04:30:00
+Persistent=true
+RandomizedDelaySec=60
+
+[Install]
+WantedBy=timers.target

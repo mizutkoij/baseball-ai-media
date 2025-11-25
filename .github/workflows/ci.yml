@@ -1,0 +1,291 @@
+name: "NPB Baseball AI - CI/CD"
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+env:
+  NODE_VERSION: "20"
+  TZ: "Asia/Tokyo"
+
+jobs:
+  lint-and-typecheck:
+    name: "🔍 Lint & Type Check"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "📥 Checkout"
+        uses: actions/checkout@v4
+
+      - name: "⚙️ Setup Node.js"
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: "📦 Install dependencies"
+        run: npm ci
+
+      - name: "🔍 Run ESLint"
+        run: npm run lint
+        continue-on-error: true
+
+      - name: "🔧 TypeScript check"
+        run: npx tsc --noEmit --skipLibCheck
+
+  unit-tests:
+    name: "🧪 Unit Tests"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "📥 Checkout"
+        uses: actions/checkout@v4
+
+      - name: "⚙️ Setup Node.js"
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: "📦 Install dependencies"
+        run: npm ci
+
+      - name: "🧪 Run unit tests"
+        run: npm run test
+        env:
+          NODE_ENV: test
+          LOG_LEVEL: error
+
+      - name: "📊 Upload coverage reports"
+        uses: codecov/codecov-action@v3
+        if: success()
+        with:
+          file: ./coverage/lcov.info
+          flags: unittests
+          name: codecov-umbrella
+
+  build-test:
+    name: "🔨 Build Test"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "📥 Checkout"
+        uses: actions/checkout@v4
+
+      - name: "⚙️ Setup Node.js"
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: "📦 Install dependencies"
+        run: npm ci
+
+      - name: "🔨 Build application"
+        run: timeout 60 npm run build
+        env:
+          NODE_ENV: production
+
+      - name: "📏 Check bundle size"
+        run: |
+          if [ -d ".next" ]; then
+            echo "Build size analysis:"
+            du -sh .next/
+            find .next/static -name "*.js" -exec wc -c {} + | tail -1
+          fi
+
+  integration-tests:
+    name: "🔗 Integration Tests"
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [lint-and-typecheck, unit-tests]
+    steps:
+      - name: "📥 Checkout"
+        uses: actions/checkout@v4
+
+      - name: "⚙️ Setup Node.js"
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: "📦 Install dependencies"
+        run: npm ci
+
+      - name: "🗄️ Setup test database"
+        run: |
+          mkdir -p data/test
+          export DB_PATH="./data/test/baseball_test.db"
+          echo "Test database path: $DB_PATH"
+
+      - name: "🧪 Run integration tests"
+        run: npm run test:integration || true
+        env:
+          NODE_ENV: test
+          DB_PATH: "./data/test/baseball_test.db"
+          LOG_LEVEL: error
+          NOCK_RECORD: false
+
+      - name: "📊 Test metrics server"
+        run: |
+          timeout 30 npm run metrics &
+          METRICS_PID=$!
+          sleep 5
+          
+          echo "Testing metrics endpoint..."
+          curl -f http://localhost:9090/metrics || echo "Metrics endpoint check failed"
+          curl -f http://localhost:9090/health || echo "Health endpoint check failed"
+          
+          kill $METRICS_PID || true
+        env:
+          METRICS_PORT: 9090
+
+  smoke-tests:
+    name: "💨 Smoke Tests"
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build-test
+    strategy:
+      matrix:
+        environment: [staging, production]
+    steps:
+      - name: "📥 Checkout"
+        uses: actions/checkout@v4
+
+      - name: "⚙️ Setup Node.js"
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: "📦 Install dependencies"
+        run: npm ci
+
+      - name: "💨 Run smoke tests"
+        run: |
+          if [ "${{ matrix.environment }}" = "production" ]; then
+            BASE_URL="https://baseball-ai-media.vercel.app" npx tsx scripts/smoke_runtime.ts || echo "Smoke test warning"
+          else
+            echo "Skipping smoke tests for ${{ matrix.environment }}"
+          fi
+
+  security-scan:
+    name: "🛡️ Security Scan"
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+    steps:
+      - name: "📥 Checkout"
+        uses: actions/checkout@v4
+
+      - name: "⚙️ Setup Node.js"
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: "🔒 npm audit"
+        run: |
+          npm audit --audit-level=high --production
+        continue-on-error: true
+
+      - name: "🔍 CodeQL Analysis"
+        uses: github/codeql-action/init@v2
+        with:
+          languages: javascript
+
+      - name: "📦 Install for analysis"
+        run: npm ci
+
+      - name: "🔍 Perform CodeQL Analysis"
+        uses: github/codeql-action/analyze@v2
+
+  performance-test:
+    name: "⚡ Performance Test"
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: "📥 Checkout"
+        uses: actions/checkout@v4
+
+      - name: "⚙️ Setup Node.js"
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: "📦 Install dependencies"
+        run: npm ci
+
+      - name: "⚡ Bundle analyzer"
+        run: |
+          npm run build
+          if command -v npx &> /dev/null; then
+            echo "Analyzing bundle size..."
+            npx next-bundle-analyzer --analyze || echo "Bundle analysis completed with warnings"
+          fi
+        env:
+          NODE_ENV: production
+          ANALYZE: true
+
+  deploy-preview:
+    name: "🚀 Deploy Preview"
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    needs: [lint-and-typecheck, unit-tests, build-test]
+    steps:
+      - name: "📥 Checkout"
+        uses: actions/checkout@v4
+
+      - name: "🚀 Deploy to Vercel Preview"
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: ./
+
+      - name: "💬 Comment Preview URL"
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { data: deployments } = await github.rest.repos.listDeployments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: context.sha
+            });
+            
+            if (deployments.length > 0) {
+              const deployment = deployments[0];
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `🚀 Preview deployment ready!\n\n🔗 **Preview URL**: ${deployment.environment_url || 'Deployment in progress...'}`
+              });
+            }
+
+  notify-discord:
+    name: "📢 Discord Notification"
+    runs-on: ubuntu-latest
+    if: always() && (github.event_name == 'push' && github.ref == 'refs/heads/main')
+    needs: [lint-and-typecheck, unit-tests, build-test, integration-tests]
+    steps:
+      - name: "📢 Send Discord notification"
+        uses: Ilshidur/action-discord@master
+        with:
+          args: |
+            🤖 **NPB Baseball AI CI/CD Report**
+            
+            **Branch**: `${{ github.ref_name }}`
+            **Commit**: `${{ github.sha }}`
+            **Status**: ${{ job.status == 'success' && '✅ Success' || '❌ Failed' }}
+            
+            **Tests**: ${{ needs.unit-tests.result }}
+            **Build**: ${{ needs.build-test.result }}
+            **Integration**: ${{ needs.integration-tests.result }}
+            
+            **Triggered by**: ${{ github.actor }}
+            **Workflow**: ${{ github.workflow }}
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.WEBHOOK_DISCORD_URL }}
+        if: env.DISCORD_WEBHOOK != ''

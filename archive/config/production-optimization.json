@@ -1,0 +1,49 @@
+{
+  "alertSuppression": {
+    "restDays": {
+      "enabled": true,
+      "suppressedHttpCodes": [404, 429, 503],
+      "logLevel": "INFO",
+      "discordSilent": true
+    },
+    "offSeason": {
+      "enabled": true,
+      "months": [12, 1, 2],
+      "logLevel": "SILENT"
+    }
+  },
+  "gameInitialization": {
+    "enabled": true,
+    "preCreateDirectories": true,
+    "preCreateTemplates": true,
+    "upsertMesTable": true
+  },
+  "databaseMaintenance": {
+    "dailyVacuum": {
+      "enabled": true,
+      "schedule": "0 3 * * *",
+      "tables": ["pitches", "plate_appearances", "games", "players", "teams"]
+    },
+    "weeklyPartition": {
+      "enabled": true,
+      "schedule": "0 2 * * 1",
+      "retentionMonths": 3
+    }
+  },
+  "firstGameCheck": {
+    "enabled": true,
+    "thresholds": {
+      "yahoo304RatioMin": 0.60,
+      "error429RateMax": 0.01,
+      "pbpLagP95Max": 15000,
+      "coverageMin": 0.98
+    },
+    "alertOnFail": true
+  },
+  "continuousCollection": {
+    "intervalSeconds": 300,
+    "maxRetries": 6,
+    "backoffMultiplier": 1.5,
+    "healthCheckInterval": 900
+  }
+}

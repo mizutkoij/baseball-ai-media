@@ -1,0 +1,32 @@
+[
+  {
+    "player_id": "2100009",
+    "name": "2023年度版　木村 大成【ソフトバンク】打撃成績詳細",
+    "team": "",
+    "position": "野手",
+    "player_type": "batter",
+    "entry_year": 2022,
+    "year_number": 9,
+    "updated_at": "2025-08-09T16:34:56.779Z"
+  },
+  {
+    "player_id": "2100010",
+    "name": "2023年度版　大津 綾也【巨人】打撃成績詳細",
+    "team": "",
+    "position": "野手",
+    "player_type": "batter",
+    "entry_year": 2022,
+    "year_number": 10,
+    "updated_at": "2025-08-09T16:34:58.011Z"
+  },
+  {
+    "player_id": "2100027",
+    "name": "2023年度版　福島 蓮【日本ハム】打撃成績詳細",
+    "team": "",
+    "position": "野手",
+    "player_type": "batter",
+    "entry_year": 2022,
+    "year_number": 27,
+    "updated_at": "2025-08-09T16:35:19.142Z"
+  }
+]

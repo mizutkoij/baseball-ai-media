@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/11515131.html",
+  "team": "中日ドラゴンズ",
+  "team_code": "d",
+  "current_status": "active",
+  "name": "岡田　俊哉",
+  "name_kana": "おかだ・としや",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "左投左打",
+    "身長／体重": "178cm／69kg",
+    "生年月日": "1991年12月5日",
+    "経歴": "智弁和歌山高",
+    "ドラフト": "2009年ドラフト1位"
+  },
+  "birth_date": "1991-12-05 00:00:00",
+  "entry_year": 2009,
+  "nationality_code": "1",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "100911199112050"
+}

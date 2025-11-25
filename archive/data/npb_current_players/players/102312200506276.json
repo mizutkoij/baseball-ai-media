@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/03305159.html",
+  "team": "読売ジャイアンツ",
+  "team_code": "g",
+  "current_status": "active",
+  "name": "村山　源",
+  "name_kana": "むらやま・げん",
+  "profile": {
+    "ポジション": "内野手",
+    "投打": "右投右打",
+    "身長／体重": "179cm／66kg",
+    "生年月日": "2005年6月27日",
+    "経歴": "鹿屋中央高",
+    "ドラフト": "2023年育成選手ドラフト2位"
+  },
+  "birth_date": "2005-06-27 00:00:00",
+  "entry_year": 2023,
+  "nationality_code": "1",
+  "position_code": "2",
+  "position": "野手",
+  "player_id": "102312200506276"
+}

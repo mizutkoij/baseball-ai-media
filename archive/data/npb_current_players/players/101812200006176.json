@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/01605138.html",
+  "team": "読売ジャイアンツ",
+  "team_code": "g",
+  "current_status": "active",
+  "name": "増田　陸",
+  "name_kana": "ますだ・りく",
+  "profile": {
+    "ポジション": "内野手",
+    "投打": "右投右打",
+    "身長／体重": "179cm／88kg",
+    "生年月日": "2000年6月17日",
+    "経歴": "明秀学園日立高",
+    "ドラフト": "2018年ドラフト2位"
+  },
+  "birth_date": "2000-06-17 00:00:00",
+  "entry_year": 2018,
+  "nationality_code": "1",
+  "position_code": "2",
+  "position": "野手",
+  "player_id": "101812200006176"
+}

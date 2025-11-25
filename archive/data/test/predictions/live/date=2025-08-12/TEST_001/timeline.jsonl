@@ -1,0 +1,2 @@
+{"ts":"2025-08-12T01:43:01.155Z","gameId":"TEST_001","inning":3,"top":false,"outs":1,"bases":3,"homeScore":2,"awayScore":1,"scoreDiff":1,"p_pregame":0.55,"p_state":0.68,"w":0.4,"p_home_raw":0.62,"p_home":0.6,"p_away":0.4,"conf":"medium"}
+{"ts":"2025-08-12T01:43:01.155Z","gameId":"TEST_001","inning":4,"top":false,"outs":0,"bases":0,"homeScore":2,"awayScore":1,"scoreDiff":1,"p_pregame":0.55,"p_state":0.68,"w":0.4,"p_home_raw":0.62,"p_home":0.65,"p_away":0.4,"conf":"medium"}

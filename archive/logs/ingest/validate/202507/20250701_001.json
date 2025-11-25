@@ -1,0 +1,34 @@
+{
+  "gameId": "20250701_001",
+  "findings": [
+    {
+      "rule": "runs_cross_check",
+      "severity": "error",
+      "key": {
+        "gameId": "20250701_001",
+        "team": "巨人"
+      },
+      "detail": {
+        "runs_scored": 1,
+        "runs_allowed": 5,
+        "diff": 4
+      }
+    },
+    {
+      "rule": "runs_cross_check",
+      "severity": "error",
+      "key": {
+        "gameId": "20250701_001",
+        "team": "阪神"
+      },
+      "detail": {
+        "runs_scored": 1,
+        "runs_allowed": 3,
+        "diff": 2
+      }
+    }
+  ],
+  "hasErrors": true,
+  "hasWarnings": false,
+  "timestamp": "2025-08-01T00:10:01.152Z"
+}

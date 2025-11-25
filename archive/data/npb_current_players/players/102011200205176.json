@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/03105153.html",
+  "team": "北海道日本ハムファイターズ",
+  "team_code": "f",
+  "current_status": "active",
+  "name": "松本　遼大",
+  "name_kana": "まつもと・りょうだい",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "右投右打",
+    "身長／体重": "188cm／97kg",
+    "生年月日": "2002年5月17日",
+    "経歴": "花巻東高",
+    "ドラフト": "2020年育成選手ドラフト1位"
+  },
+  "birth_date": "2002-05-17 00:00:00",
+  "entry_year": 2020,
+  "nationality_code": "1",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "102011200205176"
+}

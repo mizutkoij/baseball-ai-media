@@ -1,0 +1,21 @@
+{
+  "url": "https://npb.jp/bis/players/33035150.html",
+  "team": "千葉ロッテマリーンズ",
+  "team_code": "m",
+  "current_status": "active",
+  "name": "Ａ．ボス",
+  "name_kana": "オースティン・ボス　(AUSTIN VOTH)",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "右投右打",
+    "身長／体重": "186cm／97kg",
+    "生年月日": "1992年6月26日",
+    "経歴": "ワシントン大 - ナショナルズ - オリオールズ - マリナーズ",
+    "ドラフト": ""
+  },
+  "birth_date": "1992-06-26 00:00:00",
+  "nationality_code": "2",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "100021199206260"
+}

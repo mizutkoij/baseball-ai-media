@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/71875153.html",
+  "team": "東北楽天ゴールデンイーグルス",
+  "team_code": "e",
+  "current_status": "active",
+  "name": "藤井　聖",
+  "name_kana": "ふじい・まさる",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "左投左打",
+    "身長／体重": "176cm／80kg",
+    "生年月日": "1996年10月3日",
+    "経歴": "富士市立高 - 東洋大 - JX-ENEOS",
+    "ドラフト": "2020年ドラフト3位"
+  },
+  "birth_date": "1996-10-03 00:00:00",
+  "entry_year": 2020,
+  "nationality_code": "1",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "102011199610035"
+}

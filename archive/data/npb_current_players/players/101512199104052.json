@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/61965132.html",
+  "team": "オリックス・バファローズ",
+  "team_code": "b",
+  "current_status": "active",
+  "name": "杉本　裕太郎",
+  "name_kana": "すぎもと・ゆうたろう",
+  "profile": {
+    "ポジション": "外野手",
+    "投打": "右投右打",
+    "身長／体重": "190cm／104kg",
+    "生年月日": "1991年4月5日",
+    "経歴": "徳島商 - 青山学院大 - JR西日本",
+    "ドラフト": "2015年ドラフト10位"
+  },
+  "birth_date": "1991-04-05 00:00:00",
+  "entry_year": 2015,
+  "nationality_code": "1",
+  "position_code": "2",
+  "position": "野手",
+  "player_id": "101512199104052"
+}

@@ -1,0 +1,21 @@
+{
+  "url": "https://npb.jp/bis/players/03905150.html",
+  "team": "千葉ロッテマリーンズ",
+  "team_code": "m",
+  "current_status": "active",
+  "name": "Ｂ．サモンズ",
+  "name_kana": "ブライアン・サモンズ　(BRYAN SAMMONS)",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "左投左打",
+    "身長／体重": "193cm／106kg",
+    "生年月日": "1995年4月27日",
+    "経歴": "ウエスタンカロライナ大 - タイガース",
+    "ドラフト": ""
+  },
+  "birth_date": "1995-04-27 00:00:00",
+  "nationality_code": "2",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "100021199504275"
+}

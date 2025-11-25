@@ -1,0 +1,31 @@
+{
+  "timestamp": "2025-08-21T08:04:07.683Z",
+  "totalGames": 17,
+  "passedTests": 0,
+  "failedTests": 0,
+  "qualityScore": 90.29,
+  "invariantViolations": [
+    "Missing meta.json for 20250821_C-F_01",
+    "Missing meta.json for 20250821_C-H_01",
+    "Missing meta.json for 20250821_D-DB_01",
+    "Missing meta.json for 20250821_H-D_01",
+    "Missing meta.json for 20250821_H-S_01",
+    "Missing meta.json for 20250820_D-T_01",
+    "Missing meta.json for 20250820_DB-G_01",
+    "Missing meta.json for 20250820_DB-S_01",
+    "Missing meta.json for 20250820_F-H_01",
+    "Missing meta.json for 20250820_G-T_01",
+    "Missing meta.json for 20250820_T-C_01",
+    "Missing meta.json for 20250819_C-F_01",
+    "Missing meta.json for 20250819_D-H_01",
+    "Missing meta.json for 20250819_F-D_01",
+    "Missing meta.json for 20250819_F-S_01",
+    "Missing meta.json for 20250819_G-D_01",
+    "Missing meta.json for 20250819_T-F_01"
+  ],
+  "recommendations": [
+    "Data invariant violations detected - review data integrity",
+    "High duplicate rate: 5.56%"
+  ],
+  "status": "WARN"
+}

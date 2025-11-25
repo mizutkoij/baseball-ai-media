@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/31335132.html",
+  "team": "オリックス・バファローズ",
+  "team_code": "b",
+  "current_status": "active",
+  "name": "井口　和朋",
+  "name_kana": "いぐち・かずとも",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "右投右打",
+    "身長／体重": "175cm／75kg",
+    "生年月日": "1994年1月7日",
+    "経歴": "武相高 - 東京農業大北海道オホーツク",
+    "ドラフト": "2015年ドラフト3位"
+  },
+  "birth_date": "1994-01-07 00:00:00",
+  "entry_year": 2015,
+  "nationality_code": "1",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "101511199401070"
+}

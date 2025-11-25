@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites name="vitest tests" tests="174" failures="0" errors="0" time="0.1250266">
-    <testsuite name="__tests__/golden-sample.test.ts" timestamp="2025-08-04T02:03:27.262Z" hostname="DESKTOP-F7OMCVS" tests="174" failures="0" errors="0" skipped="0" time="0.1250266">
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 大谷翔平 (000011194405194) &gt; should have valid ERA range for pitcher 大谷翔平" time="0.003347">
+<testsuites name="vitest tests" tests="174" failures="0" errors="0" time="0.1409908">
+    <testsuite name="__tests__/golden-sample.test.ts" timestamp="2025-08-04T03:37:41.882Z" hostname="DESKTOP-F7OMCVS" tests="174" failures="0" errors="0" skipped="0" time="0.1409908">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 大谷翔平 (000011194405194) &gt; should have valid ERA range for pitcher 大谷翔平" time="0.005079">
             <system-err>
 Failed to fetch ERA for player 000011194405194 year 2021: schema mismatch
 
@@ -11,25 +11,25 @@ Failed to fetch ERA for player 000011194405194 year 2023: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 村上宗隆 (000011194507273) &gt; should have wRC_plus 2024 within [90, 220]" time="0.0013038">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 村上宗隆 (000011194507273) &gt; should have wRC_plus 2024 within [90, 220]" time="0.0019065">
             <system-err>
 Using fallback stats for batter 000011194507273 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 村上宗隆 (000011194507273) &gt; should have OPS 2024 within [0.75, 1.3]" time="0.0005777">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 村上宗隆 (000011194507273) &gt; should have OPS 2024 within [0.75, 1.3]" time="0.0011265">
             <system-err>
 Using fallback stats for batter 000011194507273 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 村上宗隆 (000011194507273) &gt; should have 本塁打 2024 within [10, 60]" time="0.0004233">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 村上宗隆 (000011194507273) &gt; should have 本塁打 2024 within [10, 60]" time="0.0005206">
             <system-err>
 Using fallback stats for batter 000011194507273 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 村上宗隆 (000011194507273) &gt; should have valid wRC+ range for batter 村上宗隆" time="0.0007724">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 村上宗隆 (000011194507273) &gt; should have valid wRC+ range for batter 村上宗隆" time="0.000684">
             <system-err>
 Failed to fetch wRC_plus for player 000011194507273 year 2022: schema mismatch
 
@@ -39,25 +39,25 @@ Failed to fetch wRC_plus for player 000011194507273 year 2024: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 佐々木朗希 (000011194202252) &gt; should have ERA 2024 within [1.5, 4.5]" time="0.000479">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 佐々木朗希 (000011194202252) &gt; should have ERA 2024 within [1.5, 4.5]" time="0.0006293">
             <system-err>
 Using fallback stats for pitcher 000011194202252 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 佐々木朗希 (000011194202252) &gt; should have FIP 2024 within [2, 4]" time="0.000487">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 佐々木朗希 (000011194202252) &gt; should have FIP 2024 within [2, 4]" time="0.0006538">
             <system-err>
 Using fallback stats for pitcher 000011194202252 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 佐々木朗希 (000011194202252) &gt; should have K_pct 2024 within [20, 45]" time="0.0003727">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 佐々木朗希 (000011194202252) &gt; should have K_pct 2024 within [20, 45]" time="0.0003504">
             <system-err>
 Using fallback stats for pitcher 000011194202252 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 佐々木朗希 (000011194202252) &gt; should have valid ERA range for pitcher 佐々木朗希" time="0.0005329">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 佐々木朗希 (000011194202252) &gt; should have valid ERA range for pitcher 佐々木朗希" time="0.0004552">
             <system-err>
 Failed to fetch ERA for player 000011194202252 year 2022: schema mismatch
 
@@ -67,25 +67,25 @@ Failed to fetch ERA for player 000011194202252 year 2024: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 山川穂高 (000011194104160) &gt; should have wRC_plus 2024 within [80, 160]" time="0.0005894">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 山川穂高 (000011194104160) &gt; should have wRC_plus 2024 within [80, 160]" time="0.0006122">
             <system-err>
 Using fallback stats for batter 000011194104160 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 山川穂高 (000011194104160) &gt; should have 本塁打 2024 within [15, 45]" time="0.0003868">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 山川穂高 (000011194104160) &gt; should have 本塁打 2024 within [15, 45]" time="0.0003638">
             <system-err>
 Using fallback stats for batter 000011194104160 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 山川穂高 (000011194104160) &gt; should have OPS 2024 within [0.7, 1.1]" time="0.0004459">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 山川穂高 (000011194104160) &gt; should have OPS 2024 within [0.7, 1.1]" time="0.0004238">
             <system-err>
 Using fallback stats for batter 000011194104160 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 山川穂高 (000011194104160) &gt; should have valid wRC+ range for batter 山川穂高" time="0.0004473">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 山川穂高 (000011194104160) &gt; should have valid wRC+ range for batter 山川穂高" time="0.0006545">
             <system-err>
 Failed to fetch wRC_plus for player 000011194104160 year 2022: schema mismatch
 
@@ -95,7 +95,7 @@ Failed to fetch wRC_plus for player 000011194104160 year 2024: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 山本由伸 (096511194405222) &gt; should have valid ERA range for pitcher 山本由伸" time="0.0006772">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 山本由伸 (096511194405222) &gt; should have valid ERA range for pitcher 山本由伸" time="0.0007912">
             <system-err>
 Failed to fetch ERA for player 096511194405222 year 2021: schema mismatch
 
@@ -105,7 +105,7 @@ Failed to fetch ERA for player 096511194405222 year 2023: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 柳田悠岐 (000011194004055) &gt; should have valid wRC+ range for batter 柳田悠岐" time="0.0004759">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 柳田悠岐 (000011194004055) &gt; should have valid wRC+ range for batter 柳田悠岐" time="0.0004945">
             <system-err>
 Failed to fetch wRC_plus for player 000011194004055 year 2021: schema mismatch
 
@@ -115,7 +115,7 @@ Failed to fetch wRC_plus for player 000011194004055 year 2023: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 森下暢仁 (000011193806184) &gt; should have valid ERA range for pitcher 森下暢仁" time="0.000322">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 森下暢仁 (000011193806184) &gt; should have valid ERA range for pitcher 森下暢仁" time="0.0003771">
             <system-err>
 Failed to fetch ERA for player 000011193806184 year 2021: schema mismatch
 
@@ -125,25 +125,25 @@ Failed to fetch ERA for player 000011193806184 year 2023: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 牧秀悟 (000011194309031) &gt; should have wRC_plus 2024 within [80, 140]" time="0.0004218">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 牧秀悟 (000011194309031) &gt; should have wRC_plus 2024 within [80, 140]" time="0.0004937">
             <system-err>
 Using fallback stats for batter 000011194309031 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 牧秀悟 (000011194309031) &gt; should have OPS 2024 within [0.7, 1]" time="0.0003269">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 牧秀悟 (000011194309031) &gt; should have OPS 2024 within [0.7, 1]" time="0.0003608">
             <system-err>
 Using fallback stats for batter 000011194309031 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 牧秀悟 (000011194309031) &gt; should have 打率 2024 within [0.25, 0.32]" time="0.0003226">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 牧秀悟 (000011194309031) &gt; should have 打率 2024 within [0.25, 0.32]" time="0.0004615">
             <system-err>
 Using fallback stats for batter 000011194309031 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 牧秀悟 (000011194309031) &gt; should have valid wRC+ range for batter 牧秀悟" time="0.0003989">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 牧秀悟 (000011194309031) &gt; should have valid wRC+ range for batter 牧秀悟" time="0.000536">
             <system-err>
 Failed to fetch wRC_plus for player 000011194309031 year 2022: schema mismatch
 
@@ -153,43 +153,43 @@ Failed to fetch wRC_plus for player 000011194309031 year 2024: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 宮城大弥 (000011194501033) &gt; should have ERA 2024 within [2.8, 4.5]" time="0.0004108">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 宮城大弥 (000011194501033) &gt; should have ERA 2024 within [2.8, 4.5]" time="0.0006326">
             <system-err>
 Using fallback stats for pitcher 000011194501033 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 宮城大弥 (000011194501033) &gt; should have FIP 2024 within [3.2, 4.8]" time="0.0003686">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 宮城大弥 (000011194501033) &gt; should have FIP 2024 within [3.2, 4.8]" time="0.0010026">
             <system-err>
 Using fallback stats for pitcher 000011194501033 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 宮城大弥 (000011194501033) &gt; should have 登板 2024 within [20, 35]" time="0.0002752">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 宮城大弥 (000011194501033) &gt; should have 登板 2024 within [20, 35]" time="0.0005824">
             <system-err>
 Using fallback stats for pitcher 000011194501033 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 宮城大弥 (000011194501033) &gt; should have valid ERA range for pitcher 宮城大弥" time="0.0001483">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 宮城大弥 (000011194501033) &gt; should have valid ERA range for pitcher 宮城大弥" time="0.0003162">
             <system-err>
 Failed to fetch ERA for player 000011194501033 year 2024: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 近本光司 (000011194408172) &gt; should have wRC_plus 2024 within [90, 130]" time="0.0002787">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 近本光司 (000011194408172) &gt; should have wRC_plus 2024 within [90, 130]" time="0.0006189">
             <system-err>
 Using fallback stats for batter 000011194408172 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 近本光司 (000011194408172) &gt; should have OPS 2024 within [0.7, 0.9]" time="0.0002451">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 近本光司 (000011194408172) &gt; should have OPS 2024 within [0.7, 0.9]" time="0.0004088">
             <system-err>
 Using fallback stats for batter 000011194408172 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 近本光司 (000011194408172) &gt; should have 盗塁 2024 within [15, 40]" time="0.0003049">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 近本光司 (000011194408172) &gt; should have 盗塁 2024 within [15, 40]" time="0.0004112">
             <system-err>
 Using fallback stats for batter 000011194408172 in 2024
 
@@ -197,61 +197,61 @@ SCHEMA FALLBACK: 盗塁 for 近本光司 2024 using fallback value 5 (expected 1
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 近本光司 (000011194408172) &gt; should have valid wRC+ range for batter 近本光司" time="0.0001332">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 近本光司 (000011194408172) &gt; should have valid wRC+ range for batter 近本光司" time="0.0001395">
             <system-err>
 Failed to fetch wRC_plus for player 000011194408172 year 2024: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 山田哲人 (000011194506180) &gt; should have wRC_plus 2024 within [100, 160]" time="0.000316">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 山田哲人 (000011194506180) &gt; should have wRC_plus 2024 within [100, 160]" time="0.0003822">
             <system-err>
 Using fallback stats for batter 000011194506180 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 山田哲人 (000011194506180) &gt; should have OPS 2024 within [0.75, 1.1]" time="0.0002521">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 山田哲人 (000011194506180) &gt; should have OPS 2024 within [0.75, 1.1]" time="0.0003623">
             <system-err>
 Using fallback stats for batter 000011194506180 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 山田哲人 (000011194506180) &gt; should have 本塁打 2024 within [15, 35]" time="0.0002416">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 山田哲人 (000011194506180) &gt; should have 本塁打 2024 within [15, 35]" time="0.0002936">
             <system-err>
 Using fallback stats for batter 000011194506180 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 山田哲人 (000011194506180) &gt; should have valid wRC+ range for batter 山田哲人" time="0.0001546">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 山田哲人 (000011194506180) &gt; should have valid wRC+ range for batter 山田哲人" time="0.0001472">
             <system-err>
 Failed to fetch wRC_plus for player 000011194506180 year 2024: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 坂本勇人 (000011194403122) &gt; should have wRC_plus 2024 within [85, 140]" time="0.0002619">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 坂本勇人 (000011194403122) &gt; should have wRC_plus 2024 within [85, 140]" time="0.0002768">
             <system-err>
 Using fallback stats for batter 000011194403122 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 坂本勇人 (000011194403122) &gt; should have OPS 2024 within [0.7, 1]" time="0.0002227">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 坂本勇人 (000011194403122) &gt; should have OPS 2024 within [0.7, 1]" time="0.0002336">
             <system-err>
 Using fallback stats for batter 000011194403122 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 坂本勇人 (000011194403122) &gt; should have 打率 2024 within [0.26, 0.32]" time="0.0002147">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 坂本勇人 (000011194403122) &gt; should have 打率 2024 within [0.26, 0.32]" time="0.0002015">
             <system-err>
 Using fallback stats for batter 000011194403122 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 坂本勇人 (000011194403122) &gt; should have valid wRC+ range for batter 坂本勇人" time="0.0001241">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 坂本勇人 (000011194403122) &gt; should have valid wRC+ range for batter 坂本勇人" time="0.0001063">
             <system-err>
 Failed to fetch wRC_plus for player 000011194403122 year 2024: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 吉田正尚 (000011194708055) &gt; should have wRC_plus 2024 within [120, 180]" time="0.000335">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 吉田正尚 (000011194708055) &gt; should have wRC_plus 2024 within [120, 180]" time="0.0003051">
             <system-err>
 Using fallback stats for batter 000011194708055 in 2024
 
@@ -259,7 +259,7 @@ SCHEMA FALLBACK: wRC_plus for 吉田正尚 2024 using fallback value 100 (expect
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 吉田正尚 (000011194708055) &gt; should have OPS 2024 within [0.85, 1.2]" time="0.000345">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 吉田正尚 (000011194708055) &gt; should have OPS 2024 within [0.85, 1.2]" time="0.0003501">
             <system-err>
 Using fallback stats for batter 000011194708055 in 2024
 
@@ -267,7 +267,7 @@ SCHEMA FALLBACK: OPS for 吉田正尚 2024 using fallback value 0.75 (expected 0
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 吉田正尚 (000011194708055) &gt; should have 打率 2024 within [0.28, 0.35]" time="0.0004359">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 吉田正尚 (000011194708055) &gt; should have 打率 2024 within [0.28, 0.35]" time="0.0004092">
             <system-err>
 Using fallback stats for batter 000011194708055 in 2024
 
@@ -275,19 +275,19 @@ SCHEMA FALLBACK: 打率 for 吉田正尚 2024 using fallback value 0.27 (expecte
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 吉田正尚 (000011194708055) &gt; should have valid wRC+ range for batter 吉田正尚" time="0.0001204">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 吉田正尚 (000011194708055) &gt; should have valid wRC+ range for batter 吉田正尚" time="0.0001012">
             <system-err>
 Failed to fetch wRC_plus for player 000011194708055 year 2024: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 鈴木誠也 (000011194607241) &gt; should have wRC_plus 2024 within [100, 170]" time="0.0002732">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 鈴木誠也 (000011194607241) &gt; should have wRC_plus 2024 within [100, 170]" time="0.0002912">
             <system-err>
 Using fallback stats for batter 000011194607241 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 鈴木誠也 (000011194607241) &gt; should have OPS 2024 within [0.8, 1.15]" time="0.0003223">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 鈴木誠也 (000011194607241) &gt; should have OPS 2024 within [0.8, 1.15]" time="0.0003006">
             <system-err>
 Using fallback stats for batter 000011194607241 in 2024
 
@@ -295,7 +295,7 @@ SCHEMA FALLBACK: OPS for 鈴木誠也 2024 using fallback value 0.75 (expected 0
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 鈴木誠也 (000011194607241) &gt; should have 本塁打 2024 within [20, 40]" time="0.0002975">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 鈴木誠也 (000011194607241) &gt; should have 本塁打 2024 within [20, 40]" time="0.000281">
             <system-err>
 Using fallback stats for batter 000011194607241 in 2024
 
@@ -303,13 +303,13 @@ SCHEMA FALLBACK: 本塁打 for 鈴木誠也 2024 using fallback value 15 (expect
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 鈴木誠也 (000011194607241) &gt; should have valid wRC+ range for batter 鈴木誠也" time="0.0001328">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 鈴木誠也 (000011194607241) &gt; should have valid wRC+ range for batter 鈴木誠也" time="0.000111">
             <system-err>
 Failed to fetch wRC_plus for player 000011194607241 year 2024: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 岡本和真 (000011194208194) &gt; should have wRC_plus 2024 within [110, 180]" time="0.0003536">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 岡本和真 (000011194208194) &gt; should have wRC_plus 2024 within [110, 180]" time="0.0003459">
             <system-err>
 Using fallback stats for batter 000011194208194 in 2024
 
@@ -317,7 +317,7 @@ SCHEMA FALLBACK: wRC_plus for 岡本和真 2024 using fallback value 100 (expect
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 岡本和真 (000011194208194) &gt; should have OPS 2024 within [0.8, 1.2]" time="0.000307">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 岡本和真 (000011194208194) &gt; should have OPS 2024 within [0.8, 1.2]" time="0.0002975">
             <system-err>
 Using fallback stats for batter 000011194208194 in 2024
 
@@ -325,7 +325,7 @@ SCHEMA FALLBACK: OPS for 岡本和真 2024 using fallback value 0.75 (expected 0
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 岡本和真 (000011194208194) &gt; should have 本塁打 2024 within [25, 45]" time="0.0003094">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 岡本和真 (000011194208194) &gt; should have 本塁打 2024 within [25, 45]" time="0.0002881">
             <system-err>
 Using fallback stats for batter 000011194208194 in 2024
 
@@ -333,73 +333,73 @@ SCHEMA FALLBACK: 本塁打 for 岡本和真 2024 using fallback value 15 (expect
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 岡本和真 (000011194208194) &gt; should have valid wRC+ range for batter 岡本和真" time="0.0001246">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 岡本和真 (000011194208194) &gt; should have valid wRC+ range for batter 岡本和真" time="0.0001202">
             <system-err>
 Failed to fetch wRC_plus for player 000011194208194 year 2024: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 森友哉 (000011194309172) &gt; should have wRC_plus 2024 within [90, 140]" time="0.0002165">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 森友哉 (000011194309172) &gt; should have wRC_plus 2024 within [90, 140]" time="0.0002338">
             <system-err>
 Using fallback stats for batter 000011194309172 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 森友哉 (000011194309172) &gt; should have OPS 2024 within [0.72, 1]" time="0.0019489">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 森友哉 (000011194309172) &gt; should have OPS 2024 within [0.72, 1]" time="0.0001939">
             <system-err>
 Using fallback stats for batter 000011194309172 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 森友哉 (000011194309172) &gt; should have 打率 2024 within [0.25, 0.32]" time="0.0003386">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 森友哉 (000011194309172) &gt; should have 打率 2024 within [0.25, 0.32]" time="0.0001986">
             <system-err>
 Using fallback stats for batter 000011194309172 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 森友哉 (000011194309172) &gt; should have valid wRC+ range for batter 森友哉" time="0.0001569">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 森友哉 (000011194309172) &gt; should have valid wRC+ range for batter 森友哉" time="0.0003109">
             <system-err>
 Failed to fetch wRC_plus for player 000011194309172 year 2024: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 外崎修汰 (000011194105033) &gt; should have wRC_plus 2024 within [85, 130]" time="0.0002874">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 外崎修汰 (000011194105033) &gt; should have wRC_plus 2024 within [85, 130]" time="0.0003762">
             <system-err>
 Using fallback stats for batter 000011194105033 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 外崎修汰 (000011194105033) &gt; should have OPS 2024 within [0.7, 0.95]" time="0.0002723">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 外崎修汰 (000011194105033) &gt; should have OPS 2024 within [0.7, 0.95]" time="0.0003112">
             <system-err>
 Using fallback stats for batter 000011194105033 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 外崎修汰 (000011194105033) &gt; should have 打率 2024 within [0.26, 0.32]" time="0.0002279">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 外崎修汰 (000011194105033) &gt; should have 打率 2024 within [0.26, 0.32]" time="0.0002742">
             <system-err>
 Using fallback stats for batter 000011194105033 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 外崎修汰 (000011194105033) &gt; should have valid wRC+ range for batter 外崎修汰" time="0.0001139">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 外崎修汰 (000011194105033) &gt; should have valid wRC+ range for batter 外崎修汰" time="0.0001052">
             <system-err>
 Failed to fetch wRC_plus for player 000011194105033 year 2024: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 中野拓夢 (000011194408211) &gt; should have wRC_plus 2024 within [85, 125]" time="0.0002677">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 中野拓夢 (000011194408211) &gt; should have wRC_plus 2024 within [85, 125]" time="0.0002695">
             <system-err>
 Using fallback stats for batter 000011194408211 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 中野拓夢 (000011194408211) &gt; should have OPS 2024 within [0.68, 0.9]" time="0.0003368">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 中野拓夢 (000011194408211) &gt; should have OPS 2024 within [0.68, 0.9]" time="0.0003541">
             <system-err>
 Using fallback stats for batter 000011194408211 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 中野拓夢 (000011194408211) &gt; should have 盗塁 2024 within [10, 30]" time="0.0003457">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 中野拓夢 (000011194408211) &gt; should have 盗塁 2024 within [10, 30]" time="0.0003136">
             <system-err>
 Using fallback stats for batter 000011194408211 in 2024
 
@@ -407,169 +407,169 @@ SCHEMA FALLBACK: 盗塁 for 中野拓夢 2024 using fallback value 5 (expected 1
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 中野拓夢 (000011194408211) &gt; should have valid wRC+ range for batter 中野拓夢" time="0.0001067">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 中野拓夢 (000011194408211) &gt; should have valid wRC+ range for batter 中野拓夢" time="0.0000904">
             <system-err>
 Failed to fetch wRC_plus for player 000011194408211 year 2024: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 松本剛 (000011194207155) &gt; should have wRC_plus 2024 within [80, 120]" time="0.0002216">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 松本剛 (000011194207155) &gt; should have wRC_plus 2024 within [80, 120]" time="0.0002169">
             <system-err>
 Using fallback stats for batter 000011194207155 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 松本剛 (000011194207155) &gt; should have OPS 2024 within [0.65, 0.85]" time="0.0002113">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 松本剛 (000011194207155) &gt; should have OPS 2024 within [0.65, 0.85]" time="0.0003135">
             <system-err>
 Using fallback stats for batter 000011194207155 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 松本剛 (000011194207155) &gt; should have 盗塁 2024 within [5, 25]" time="0.0001863">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 松本剛 (000011194207155) &gt; should have 盗塁 2024 within [5, 25]" time="0.0002136">
             <system-err>
 Using fallback stats for batter 000011194207155 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 松本剛 (000011194207155) &gt; should have valid wRC+ range for batter 松本剛" time="0.0001046">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 松本剛 (000011194207155) &gt; should have valid wRC+ range for batter 松本剛" time="0.000097">
             <system-err>
 Failed to fetch wRC_plus for player 000011194207155 year 2024: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 今永昇太 (000011194305184) &gt; should have ERA 2024 within [2.2, 4]" time="0.0002139">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 今永昇太 (000011194305184) &gt; should have ERA 2024 within [2.2, 4]" time="0.000242">
             <system-err>
 Using fallback stats for pitcher 000011194305184 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 今永昇太 (000011194305184) &gt; should have FIP 2024 within [2.8, 4.2]" time="0.0001907">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 今永昇太 (000011194305184) &gt; should have FIP 2024 within [2.8, 4.2]" time="0.0002759">
             <system-err>
 Using fallback stats for pitcher 000011194305184 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 今永昇太 (000011194305184) &gt; should have WHIP 2024 within [0.9, 1.4]" time="0.0001956">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 今永昇太 (000011194305184) &gt; should have WHIP 2024 within [0.9, 1.4]" time="0.0002241">
             <system-err>
 Using fallback stats for pitcher 000011194305184 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 今永昇太 (000011194305184) &gt; should have valid ERA range for pitcher 今永昇太" time="0.0001336">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 今永昇太 (000011194305184) &gt; should have valid ERA range for pitcher 今永昇太" time="0.0001141">
             <system-err>
 Failed to fetch ERA for player 000011194305184 year 2024: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 戸郷翔征 (000011194504091) &gt; should have ERA 2024 within [2.5, 4.5]" time="0.0002144">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 戸郷翔征 (000011194504091) &gt; should have ERA 2024 within [2.5, 4.5]" time="0.0001979">
             <system-err>
 Using fallback stats for pitcher 000011194504091 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 戸郷翔征 (000011194504091) &gt; should have FIP 2024 within [3, 4.5]" time="0.0002174">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 戸郷翔征 (000011194504091) &gt; should have FIP 2024 within [3, 4.5]" time="0.0001691">
             <system-err>
 Using fallback stats for pitcher 000011194504091 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 戸郷翔征 (000011194504091) &gt; should have 勝利 2024 within [8, 18]" time="0.0001886">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 戸郷翔征 (000011194504091) &gt; should have 勝利 2024 within [8, 18]" time="0.0001913">
             <system-err>
 Using fallback stats for pitcher 000011194504091 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 戸郷翔征 (000011194504091) &gt; should have valid ERA range for pitcher 戸郷翔征" time="0.0001124">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 戸郷翔征 (000011194504091) &gt; should have valid ERA range for pitcher 戸郷翔征" time="0.0001278">
             <system-err>
 Failed to fetch ERA for player 000011194504091 year 2024: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 菅野智之 (000011194402266) &gt; should have ERA 2024 within [2.8, 4.8]" time="0.0002218">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 菅野智之 (000011194402266) &gt; should have ERA 2024 within [2.8, 4.8]" time="0.0002145">
             <system-err>
 Using fallback stats for pitcher 000011194402266 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 菅野智之 (000011194402266) &gt; should have FIP 2024 within [3.2, 4.8]" time="0.0001903">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 菅野智之 (000011194402266) &gt; should have FIP 2024 within [3.2, 4.8]" time="0.0002073">
             <system-err>
 Using fallback stats for pitcher 000011194402266 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 菅野智之 (000011194402266) &gt; should have WHIP 2024 within [1, 1.5]" time="0.0003081">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 菅野智之 (000011194402266) &gt; should have WHIP 2024 within [1, 1.5]" time="0.0002702">
             <system-err>
 Using fallback stats for pitcher 000011194402266 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 菅野智之 (000011194402266) &gt; should have valid ERA range for pitcher 菅野智之" time="0.0001164">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 菅野智之 (000011194402266) &gt; should have valid ERA range for pitcher 菅野智之" time="0.0001076">
             <system-err>
 Failed to fetch ERA for player 000011194402266 year 2024: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 高橋宏斗 (000011194203193) &gt; should have ERA 2024 within [2.5, 4.5]" time="0.0002486">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 高橋宏斗 (000011194203193) &gt; should have ERA 2024 within [2.5, 4.5]" time="0.0002166">
             <system-err>
 Using fallback stats for pitcher 000011194203193 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 高橋宏斗 (000011194203193) &gt; should have FIP 2024 within [3, 4.5]" time="0.0002069">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 高橋宏斗 (000011194203193) &gt; should have FIP 2024 within [3, 4.5]" time="0.0001693">
             <system-err>
 Using fallback stats for pitcher 000011194203193 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 高橋宏斗 (000011194203193) &gt; should have K_pct 2024 within [18, 32]" time="0.0001947">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 高橋宏斗 (000011194203193) &gt; should have K_pct 2024 within [18, 32]" time="0.0001507">
             <system-err>
 Using fallback stats for pitcher 000011194203193 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 高橋宏斗 (000011194203193) &gt; should have valid ERA range for pitcher 高橋宏斗" time="0.000112">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 高橋宏斗 (000011194203193) &gt; should have valid ERA range for pitcher 高橋宏斗" time="0.0000999">
             <system-err>
 Failed to fetch ERA for player 000011194203193 year 2024: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 伊藤将司 (000011194408062) &gt; should have ERA 2024 within [3, 5]" time="0.0001965">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 伊藤将司 (000011194408062) &gt; should have ERA 2024 within [3, 5]" time="0.0001921">
             <system-err>
 Using fallback stats for pitcher 000011194408062 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 伊藤将司 (000011194408062) &gt; should have FIP 2024 within [3.5, 5]" time="0.0002052">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 伊藤将司 (000011194408062) &gt; should have FIP 2024 within [3.5, 5]" time="0.00018">
             <system-err>
 Using fallback stats for pitcher 000011194408062 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 伊藤将司 (000011194408062) &gt; should have 登板 2024 within [25, 45]" time="0.0001899">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 伊藤将司 (000011194408062) &gt; should have 登板 2024 within [25, 45]" time="0.0001981">
             <system-err>
 Using fallback stats for pitcher 000011194408062 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 伊藤将司 (000011194408062) &gt; should have valid ERA range for pitcher 伊藤将司" time="0.0001215">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 伊藤将司 (000011194408062) &gt; should have valid ERA range for pitcher 伊藤将司" time="0.000165">
             <system-err>
 Failed to fetch ERA for player 000011194408062 year 2024: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 本田圭佑 (000011194106244) &gt; should have ERA 2024 within [2.8, 4.8]" time="0.0002217">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 本田圭佑 (000011194106244) &gt; should have ERA 2024 within [2.8, 4.8]" time="0.0002982">
             <system-err>
 Using fallback stats for pitcher 000011194106244 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 本田圭佑 (000011194106244) &gt; should have FIP 2024 within [3.2, 4.8]" time="0.0001796">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 本田圭佑 (000011194106244) &gt; should have FIP 2024 within [3.2, 4.8]" time="0.0002136">
             <system-err>
 Using fallback stats for pitcher 000011194106244 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 本田圭佑 (000011194106244) &gt; should have セーブ 2024 within [15, 35]" time="0.0002673">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 本田圭佑 (000011194106244) &gt; should have セーブ 2024 within [15, 35]" time="0.0002625">
             <system-err>
 Using fallback stats for pitcher 000011194106244 in 2024
 
@@ -577,25 +577,25 @@ No セーブ data found for 本田圭佑 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 本田圭佑 (000011194106244) &gt; should have valid ERA range for pitcher 本田圭佑" time="0.0000922">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 本田圭佑 (000011194106244) &gt; should have valid ERA range for pitcher 本田圭佑" time="0.0000982">
             <system-err>
 Failed to fetch ERA for player 000011194106244 year 2024: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 藤原恭大 (000011194707151) &gt; should have wRC_plus 2024 within [80, 120]" time="0.0001933">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 藤原恭大 (000011194707151) &gt; should have wRC_plus 2024 within [80, 120]" time="0.0001868">
             <system-err>
 Using fallback stats for batter 000011194707151 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 藤原恭大 (000011194707151) &gt; should have OPS 2024 within [0.65, 0.85]" time="0.0001817">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 藤原恭大 (000011194707151) &gt; should have OPS 2024 within [0.65, 0.85]" time="0.0001915">
             <system-err>
 Using fallback stats for batter 000011194707151 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 藤原恭大 (000011194707151) &gt; should have 盗塁 2024 within [8, 25]" time="0.0002398">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 藤原恭大 (000011194707151) &gt; should have 盗塁 2024 within [8, 25]" time="0.0002246">
             <system-err>
 Using fallback stats for batter 000011194707151 in 2024
 
@@ -603,73 +603,73 @@ SCHEMA FALLBACK: 盗塁 for 藤原恭大 2024 using fallback value 5 (expected 8
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 藤原恭大 (000011194707151) &gt; should have valid wRC+ range for batter 藤原恭大" time="0.0000923">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 藤原恭大 (000011194707151) &gt; should have valid wRC+ range for batter 藤原恭大" time="0.0000762">
             <system-err>
 Failed to fetch wRC_plus for player 000011194707151 year 2024: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 安田尚憲 (000011194408133) &gt; should have wRC_plus 2024 within [85, 125]" time="0.0002088">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 安田尚憲 (000011194408133) &gt; should have wRC_plus 2024 within [85, 125]" time="0.0001997">
             <system-err>
 Using fallback stats for batter 000011194408133 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 安田尚憲 (000011194408133) &gt; should have OPS 2024 within [0.7, 0.9]" time="0.0001923">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 安田尚憲 (000011194408133) &gt; should have OPS 2024 within [0.7, 0.9]" time="0.0001597">
             <system-err>
 Using fallback stats for batter 000011194408133 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 安田尚憲 (000011194408133) &gt; should have 本塁打 2024 within [10, 25]" time="0.0001729">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 安田尚憲 (000011194408133) &gt; should have 本塁打 2024 within [10, 25]" time="0.0001757">
             <system-err>
 Using fallback stats for batter 000011194408133 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 安田尚憲 (000011194408133) &gt; should have valid wRC+ range for batter 安田尚憲" time="0.0000981">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 安田尚憲 (000011194408133) &gt; should have valid wRC+ range for batter 安田尚憲" time="0.000083">
             <system-err>
 Failed to fetch wRC_plus for player 000011194408133 year 2024: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 万波中正 (000011194509088) &gt; should have wRC_plus 2024 within [90, 140]" time="0.0001983">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 万波中正 (000011194509088) &gt; should have wRC_plus 2024 within [90, 140]" time="0.0001812">
             <system-err>
 Using fallback stats for batter 000011194509088 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 万波中正 (000011194509088) &gt; should have OPS 2024 within [0.75, 1.05]" time="0.0002051">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 万波中正 (000011194509088) &gt; should have OPS 2024 within [0.75, 1.05]" time="0.0001674">
             <system-err>
 Using fallback stats for batter 000011194509088 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 万波中正 (000011194509088) &gt; should have 本塁打 2024 within [15, 35]" time="0.0001804">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 万波中正 (000011194509088) &gt; should have 本塁打 2024 within [15, 35]" time="0.0001908">
             <system-err>
 Using fallback stats for batter 000011194509088 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 万波中正 (000011194509088) &gt; should have valid wRC+ range for batter 万波中正" time="0.0000918">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 万波中正 (000011194509088) &gt; should have valid wRC+ range for batter 万波中正" time="0.000109">
             <system-err>
 Failed to fetch wRC_plus for player 000011194509088 year 2024: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 西川遥輝 (000011194607193) &gt; should have wRC_plus 2024 within [85, 125]" time="0.000208">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 西川遥輝 (000011194607193) &gt; should have wRC_plus 2024 within [85, 125]" time="0.000207">
             <system-err>
 Using fallback stats for batter 000011194607193 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 西川遥輝 (000011194607193) &gt; should have OPS 2024 within [0.68, 0.9]" time="0.0001795">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 西川遥輝 (000011194607193) &gt; should have OPS 2024 within [0.68, 0.9]" time="0.0001622">
             <system-err>
 Using fallback stats for batter 000011194607193 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 西川遥輝 (000011194607193) &gt; should have 盗塁 2024 within [10, 30]" time="0.0002334">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 西川遥輝 (000011194607193) &gt; should have 盗塁 2024 within [10, 30]" time="0.0002148">
             <system-err>
 Using fallback stats for batter 000011194607193 in 2024
 
@@ -677,407 +677,407 @@ SCHEMA FALLBACK: 盗塁 for 西川遥輝 2024 using fallback value 5 (expected 1
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 西川遥輝 (000011194607193) &gt; should have valid wRC+ range for batter 西川遥輝" time="0.0001061">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 西川遥輝 (000011194607193) &gt; should have valid wRC+ range for batter 西川遥輝" time="0.0000987">
             <system-err>
 Failed to fetch wRC_plus for player 000011194607193 year 2024: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 清宮幸太郎 (000011194609144) &gt; should have wRC_plus 2024 within [80, 130]" time="0.0001946">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 清宮幸太郎 (000011194609144) &gt; should have wRC_plus 2024 within [80, 130]" time="0.0001844">
             <system-err>
 Using fallback stats for batter 000011194609144 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 清宮幸太郎 (000011194609144) &gt; should have OPS 2024 within [0.7, 1]" time="0.0002303">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 清宮幸太郎 (000011194609144) &gt; should have OPS 2024 within [0.7, 1]" time="0.0001754">
             <system-err>
 Using fallback stats for batter 000011194609144 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 清宮幸太郎 (000011194609144) &gt; should have 本塁打 2024 within [8, 25]" time="0.0003125">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 清宮幸太郎 (000011194609144) &gt; should have 本塁打 2024 within [8, 25]" time="0.0001773">
             <system-err>
 Using fallback stats for batter 000011194609144 in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 清宮幸太郎 (000011194609144) &gt; should have valid wRC+ range for batter 清宮幸太郎" time="0.0001318">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Player Statistics Validation &gt; 清宮幸太郎 (000011194609144) &gt; should have valid wRC+ range for batter 清宮幸太郎" time="0.0000854">
             <system-err>
 Failed to fetch wRC_plus for player 000011194609144 year 2024: schema mismatch
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 阪神タイガース (T) &gt; should have 勝率 2024 within [0.4, 0.7]" time="0.0005415">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 阪神タイガース (T) &gt; should have 勝率 2024 within [0.4, 0.7]" time="0.0004982">
             <system-err>
 Using fallback stats for team T in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 阪神タイガース (T) &gt; should have 得点 2024 within [400, 800]" time="0.0003382">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 阪神タイガース (T) &gt; should have 得点 2024 within [400, 800]" time="0.0003031">
             <system-err>
 Using fallback stats for team T in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 阪神タイガース (T) &gt; should have 失点 2024 within [400, 800]" time="0.0005762">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 阪神タイガース (T) &gt; should have 失点 2024 within [400, 800]" time="0.000233">
             <system-err>
 Using fallback stats for team T in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 阪神タイガース (T) &gt; should have 本塁打 2024 within [80, 200]" time="0.0003058">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 阪神タイガース (T) &gt; should have 本塁打 2024 within [80, 200]" time="0.0001888">
             <system-err>
 Using fallback stats for team T in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 阪神タイガース (T) &gt; should have realistic win percentage for 阪神タイガース" time="0.0011334">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 阪神タイガース (T) &gt; should have realistic win percentage for 阪神タイガース" time="0.001039">
             <system-err>
 Using fallback stats for team T in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 読売ジャイアンツ (G) &gt; should have 勝率 2024 within [0.4, 0.7]" time="0.0003702">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 読売ジャイアンツ (G) &gt; should have 勝率 2024 within [0.4, 0.7]" time="0.0003209">
             <system-err>
 Using fallback stats for team G in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 読売ジャイアンツ (G) &gt; should have 得点 2024 within [400, 800]" time="0.0002753">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 読売ジャイアンツ (G) &gt; should have 得点 2024 within [400, 800]" time="0.000231">
             <system-err>
 Using fallback stats for team G in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 読売ジャイアンツ (G) &gt; should have 失点 2024 within [400, 800]" time="0.0002463">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 読売ジャイアンツ (G) &gt; should have 失点 2024 within [400, 800]" time="0.0002179">
             <system-err>
 Using fallback stats for team G in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 読売ジャイアンツ (G) &gt; should have 本塁打 2024 within [80, 200]" time="0.000228">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 読売ジャイアンツ (G) &gt; should have 本塁打 2024 within [80, 200]" time="0.0002178">
             <system-err>
 Using fallback stats for team G in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 読売ジャイアンツ (G) &gt; should have realistic win percentage for 読売ジャイアンツ" time="0.0003356">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 読売ジャイアンツ (G) &gt; should have realistic win percentage for 読売ジャイアンツ" time="0.000328">
             <system-err>
 Using fallback stats for team G in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 広島東洋カープ (C) &gt; should have 勝率 2024 within [0.35, 0.65]" time="0.0002481">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 広島東洋カープ (C) &gt; should have 勝率 2024 within [0.35, 0.65]" time="0.0002585">
             <system-err>
 Using fallback stats for team C in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 広島東洋カープ (C) &gt; should have 得点 2024 within [350, 750]" time="0.000208">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 広島東洋カープ (C) &gt; should have 得点 2024 within [350, 750]" time="0.000235">
             <system-err>
 Using fallback stats for team C in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 広島東洋カープ (C) &gt; should have 失点 2024 within [400, 800]" time="0.0002553">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 広島東洋カープ (C) &gt; should have 失点 2024 within [400, 800]" time="0.0002156">
             <system-err>
 Using fallback stats for team C in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 広島東洋カープ (C) &gt; should have 本塁打 2024 within [70, 180]" time="0.0002296">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 広島東洋カープ (C) &gt; should have 本塁打 2024 within [70, 180]" time="0.0002529">
             <system-err>
 Using fallback stats for team C in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 広島東洋カープ (C) &gt; should have realistic win percentage for 広島東洋カープ" time="0.0003011">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 広島東洋カープ (C) &gt; should have realistic win percentage for 広島東洋カープ" time="0.0004008">
             <system-err>
 Using fallback stats for team C in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 中日ドラゴンズ (D) &gt; should have 勝率 2024 within [0.35, 0.65]" time="0.0002604">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 中日ドラゴンズ (D) &gt; should have 勝率 2024 within [0.35, 0.65]" time="0.0002626">
             <system-err>
 Using fallback stats for team D in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 中日ドラゴンズ (D) &gt; should have 得点 2024 within [350, 750]" time="0.0002169">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 中日ドラゴンズ (D) &gt; should have 得点 2024 within [350, 750]" time="0.0002481">
             <system-err>
 Using fallback stats for team D in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 中日ドラゴンズ (D) &gt; should have 失点 2024 within [400, 800]" time="0.0001895">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 中日ドラゴンズ (D) &gt; should have 失点 2024 within [400, 800]" time="0.0002916">
             <system-err>
 Using fallback stats for team D in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 中日ドラゴンズ (D) &gt; should have 本塁打 2024 within [70, 180]" time="0.00023">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 中日ドラゴンズ (D) &gt; should have 本塁打 2024 within [70, 180]" time="0.0005223">
             <system-err>
 Using fallback stats for team D in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 中日ドラゴンズ (D) &gt; should have realistic win percentage for 中日ドラゴンズ" time="0.0002987">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 中日ドラゴンズ (D) &gt; should have realistic win percentage for 中日ドラゴンズ" time="0.0003958">
             <system-err>
 Using fallback stats for team D in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 東京ヤクルトスワローズ (S) &gt; should have 勝率 2024 within [0.4, 0.7]" time="0.0002496">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 東京ヤクルトスワローズ (S) &gt; should have 勝率 2024 within [0.4, 0.7]" time="0.0002602">
             <system-err>
 Using fallback stats for team S in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 東京ヤクルトスワローズ (S) &gt; should have 得点 2024 within [400, 800]" time="0.0002388">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 東京ヤクルトスワローズ (S) &gt; should have 得点 2024 within [400, 800]" time="0.0002437">
             <system-err>
 Using fallback stats for team S in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 東京ヤクルトスワローズ (S) &gt; should have 失点 2024 within [350, 750]" time="0.0002013">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 東京ヤクルトスワローズ (S) &gt; should have 失点 2024 within [350, 750]" time="0.0002244">
             <system-err>
 Using fallback stats for team S in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 東京ヤクルトスワローズ (S) &gt; should have 本塁打 2024 within [80, 200]" time="0.0001865">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 東京ヤクルトスワローズ (S) &gt; should have 本塁打 2024 within [80, 200]" time="0.0001866">
             <system-err>
 Using fallback stats for team S in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 東京ヤクルトスワローズ (S) &gt; should have realistic win percentage for 東京ヤクルトスワローズ" time="0.0002941">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 東京ヤクルトスワローズ (S) &gt; should have realistic win percentage for 東京ヤクルトスワローズ" time="0.0002971">
             <system-err>
 Using fallback stats for team S in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 横浜DeNAベイスターズ (DB) &gt; should have 勝率 2024 within [0.4, 0.65]" time="0.0002667">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 横浜DeNAベイスターズ (DB) &gt; should have 勝率 2024 within [0.4, 0.65]" time="0.0002542">
             <system-err>
 Using fallback stats for team DB in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 横浜DeNAベイスターズ (DB) &gt; should have 得点 2024 within [400, 750]" time="0.0002038">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 横浜DeNAベイスターズ (DB) &gt; should have 得点 2024 within [400, 750]" time="0.0002321">
             <system-err>
 Using fallback stats for team DB in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 横浜DeNAベイスターズ (DB) &gt; should have 失点 2024 within [400, 800]" time="0.002129">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 横浜DeNAベイスターズ (DB) &gt; should have 失点 2024 within [400, 800]" time="0.0002669">
             <system-err>
 Using fallback stats for team DB in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 横浜DeNAベイスターズ (DB) &gt; should have 本塁打 2024 within [80, 200]" time="0.0004432">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 横浜DeNAベイスターズ (DB) &gt; should have 本塁打 2024 within [80, 200]" time="0.0028276">
             <system-err>
 Using fallback stats for team DB in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 横浜DeNAベイスターズ (DB) &gt; should have realistic win percentage for 横浜DeNAベイスターズ" time="0.0004306">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 横浜DeNAベイスターズ (DB) &gt; should have realistic win percentage for 横浜DeNAベイスターズ" time="0.0008295">
             <system-err>
 Using fallback stats for team DB in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 福岡ソフトバンクホークス (H) &gt; should have 勝率 2024 within [0.45, 0.7]" time="0.00027">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 福岡ソフトバンクホークス (H) &gt; should have 勝率 2024 within [0.45, 0.7]" time="0.0004586">
             <system-err>
 Using fallback stats for team H in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 福岡ソフトバンクホークス (H) &gt; should have 得点 2024 within [450, 800]" time="0.0003963">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 福岡ソフトバンクホークス (H) &gt; should have 得点 2024 within [450, 800]" time="0.0004439">
             <system-err>
 Using fallback stats for team H in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 福岡ソフトバンクホークス (H) &gt; should have 失点 2024 within [350, 700]" time="0.0002502">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 福岡ソフトバンクホークス (H) &gt; should have 失点 2024 within [350, 700]" time="0.0002425">
             <system-err>
 Using fallback stats for team H in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 福岡ソフトバンクホークス (H) &gt; should have 本塁打 2024 within [90, 220]" time="0.0003428">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 福岡ソフトバンクホークス (H) &gt; should have 本塁打 2024 within [90, 220]" time="0.0002778">
             <system-err>
 Using fallback stats for team H in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 福岡ソフトバンクホークス (H) &gt; should have realistic win percentage for 福岡ソフトバンクホークス" time="0.0004302">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 福岡ソフトバンクホークス (H) &gt; should have realistic win percentage for 福岡ソフトバンクホークス" time="0.0003653">
             <system-err>
 Using fallback stats for team H in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 埼玉西武ライオンズ (L) &gt; should have 勝率 2024 within [0.35, 0.6]" time="0.0002711">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 埼玉西武ライオンズ (L) &gt; should have 勝率 2024 within [0.35, 0.6]" time="0.0002535">
             <system-err>
 Using fallback stats for team L in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 埼玉西武ライオンズ (L) &gt; should have 得点 2024 within [350, 700]" time="0.0002236">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 埼玉西武ライオンズ (L) &gt; should have 得点 2024 within [350, 700]" time="0.0002127">
             <system-err>
 Using fallback stats for team L in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 埼玉西武ライオンズ (L) &gt; should have 失点 2024 within [400, 800]" time="0.0002204">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 埼玉西武ライオンズ (L) &gt; should have 失点 2024 within [400, 800]" time="0.0001779">
             <system-err>
 Using fallback stats for team L in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 埼玉西武ライオンズ (L) &gt; should have 本塁打 2024 within [70, 180]" time="0.0002144">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 埼玉西武ライオンズ (L) &gt; should have 本塁打 2024 within [70, 180]" time="0.0001766">
             <system-err>
 Using fallback stats for team L in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 埼玉西武ライオンズ (L) &gt; should have realistic win percentage for 埼玉西武ライオンズ" time="0.0002648">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 埼玉西武ライオンズ (L) &gt; should have realistic win percentage for 埼玉西武ライオンズ" time="0.0002339">
             <system-err>
 Using fallback stats for team L in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 千葉ロッテマリーンズ (M) &gt; should have 勝率 2024 within [0.35, 0.65]" time="0.0002047">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 千葉ロッテマリーンズ (M) &gt; should have 勝率 2024 within [0.35, 0.65]" time="0.0001916">
             <system-err>
 Using fallback stats for team M in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 千葉ロッテマリーンズ (M) &gt; should have 得点 2024 within [350, 750]" time="0.0001848">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 千葉ロッテマリーンズ (M) &gt; should have 得点 2024 within [350, 750]" time="0.0002167">
             <system-err>
 Using fallback stats for team M in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 千葉ロッテマリーンズ (M) &gt; should have 失点 2024 within [400, 800]" time="0.0002824">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 千葉ロッテマリーンズ (M) &gt; should have 失点 2024 within [400, 800]" time="0.0002513">
             <system-err>
 Using fallback stats for team M in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 千葉ロッテマリーンズ (M) &gt; should have 本塁打 2024 within [70, 200]" time="0.0002407">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 千葉ロッテマリーンズ (M) &gt; should have 本塁打 2024 within [70, 200]" time="0.0001717">
             <system-err>
 Using fallback stats for team M in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 千葉ロッテマリーンズ (M) &gt; should have realistic win percentage for 千葉ロッテマリーンズ" time="0.0002915">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 千葉ロッテマリーンズ (M) &gt; should have realistic win percentage for 千葉ロッテマリーンズ" time="0.0002625">
             <system-err>
 Using fallback stats for team M in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 東北楽天ゴールデンイーグルス (E) &gt; should have 勝率 2024 within [0.35, 0.65]" time="0.0002564">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 東北楽天ゴールデンイーグルス (E) &gt; should have 勝率 2024 within [0.35, 0.65]" time="0.000213">
             <system-err>
 Using fallback stats for team E in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 東北楽天ゴールデンイーグルス (E) &gt; should have 得点 2024 within [350, 750]" time="0.0002162">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 東北楽天ゴールデンイーグルス (E) &gt; should have 得点 2024 within [350, 750]" time="0.0001873">
             <system-err>
 Using fallback stats for team E in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 東北楽天ゴールデンイーグルス (E) &gt; should have 失点 2024 within [400, 800]" time="0.0001903">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 東北楽天ゴールデンイーグルス (E) &gt; should have 失点 2024 within [400, 800]" time="0.0001716">
             <system-err>
 Using fallback stats for team E in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 東北楽天ゴールデンイーグルス (E) &gt; should have 本塁打 2024 within [70, 180]" time="0.0001789">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 東北楽天ゴールデンイーグルス (E) &gt; should have 本塁打 2024 within [70, 180]" time="0.000186">
             <system-err>
 Using fallback stats for team E in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 東北楽天ゴールデンイーグルス (E) &gt; should have realistic win percentage for 東北楽天ゴールデンイーグルス" time="0.000441">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 東北楽天ゴールデンイーグルス (E) &gt; should have realistic win percentage for 東北楽天ゴールデンイーグルス" time="0.0003877">
             <system-err>
 Using fallback stats for team E in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 北海道日本ハムファイターズ (F) &gt; should have 勝率 2024 within [0.35, 0.65]" time="0.0003046">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 北海道日本ハムファイターズ (F) &gt; should have 勝率 2024 within [0.35, 0.65]" time="0.0002161">
             <system-err>
 Using fallback stats for team F in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 北海道日本ハムファイターズ (F) &gt; should have 得点 2024 within [350, 750]" time="0.0002207">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 北海道日本ハムファイターズ (F) &gt; should have 得点 2024 within [350, 750]" time="0.0001635">
             <system-err>
 Using fallback stats for team F in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 北海道日本ハムファイターズ (F) &gt; should have 失点 2024 within [400, 800]" time="0.0002144">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 北海道日本ハムファイターズ (F) &gt; should have 失点 2024 within [400, 800]" time="0.0001561">
             <system-err>
 Using fallback stats for team F in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 北海道日本ハムファイターズ (F) &gt; should have 本塁打 2024 within [80, 200]" time="0.0002113">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 北海道日本ハムファイターズ (F) &gt; should have 本塁打 2024 within [80, 200]" time="0.0001553">
             <system-err>
 Using fallback stats for team F in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 北海道日本ハムファイターズ (F) &gt; should have realistic win percentage for 北海道日本ハムファイターズ" time="0.0002931">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; 北海道日本ハムファイターズ (F) &gt; should have realistic win percentage for 北海道日本ハムファイターズ" time="0.0002413">
             <system-err>
 Using fallback stats for team F in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; オリックス・バファローズ (B) &gt; should have 勝率 2024 within [0.4, 0.7]" time="0.0002215">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; オリックス・バファローズ (B) &gt; should have 勝率 2024 within [0.4, 0.7]" time="0.0002183">
             <system-err>
 Using fallback stats for team B in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; オリックス・バファローズ (B) &gt; should have 得点 2024 within [400, 800]" time="0.0001863">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; オリックス・バファローズ (B) &gt; should have 得点 2024 within [400, 800]" time="0.0001783">
             <system-err>
 Using fallback stats for team B in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; オリックス・バファローズ (B) &gt; should have 失点 2024 within [350, 750]" time="0.0001701">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; オリックス・バファローズ (B) &gt; should have 失点 2024 within [350, 750]" time="0.0001907">
             <system-err>
 Using fallback stats for team B in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; オリックス・バファローズ (B) &gt; should have 本塁打 2024 within [90, 220]" time="0.0001864">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; オリックス・バファローズ (B) &gt; should have 本塁打 2024 within [90, 220]" time="0.000152">
             <system-err>
 Using fallback stats for team B in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; オリックス・バファローズ (B) &gt; should have realistic win percentage for オリックス・バファローズ" time="0.0002396">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Team Statistics Validation &gt; オリックス・バファローズ (B) &gt; should have realistic win percentage for オリックス・バファローズ" time="0.0002021">
             <system-err>
 Using fallback stats for team B in 2024
 
             </system-err>
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Data Consistency Checks &gt; should have all golden sample players in database" time="0.0358922">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Data Consistency Checks &gt; should have all golden sample players in database" time="0.0526063">
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Data Consistency Checks &gt; should have all golden sample teams in database" time="0.0145609">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Data Consistency Checks &gt; should have all golden sample teams in database" time="0.0117268">
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Data Consistency Checks &gt; should have data for expected test years" time="0.003707">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Data Consistency Checks &gt; should have data for expected test years" time="0.0026712">
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Golden Sample Metadata &gt; should have valid golden sample structure" time="0.0019023">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Golden Sample Metadata &gt; should have valid golden sample structure" time="0.0015416">
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Golden Sample Metadata &gt; should have required fields for all players" time="0.0050363">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Golden Sample Metadata &gt; should have required fields for all players" time="0.0039146">
         </testcase>
-        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Golden Sample Metadata &gt; should have required fields for all teams" time="0.0015074">
+        <testcase classname="__tests__/golden-sample.test.ts" name="Golden Sample Validation &gt; Golden Sample Metadata &gt; should have required fields for all teams" time="0.0012056">
         </testcase>
     </testsuite>
 </testsuites>

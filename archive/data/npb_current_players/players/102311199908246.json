@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/93195159.html",
+  "team": "阪神タイガース",
+  "team_code": "t",
+  "current_status": "active",
+  "name": "松原　快",
+  "name_kana": "まつばら・かい",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "右投右打",
+    "身長／体重": "180cm／91kg",
+    "生年月日": "1999年8月24日",
+    "経歴": "高朋高 - ロキテクノ富山 - 日本海・富山",
+    "ドラフト": "2023年育成選手ドラフト1位"
+  },
+  "birth_date": "1999-08-24 00:00:00",
+  "entry_year": 2023,
+  "nationality_code": "1",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "102311199908246"
+}

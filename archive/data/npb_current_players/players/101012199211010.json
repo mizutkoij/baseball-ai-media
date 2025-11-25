@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/81185133.html",
+  "team": "広島東洋カープ",
+  "team_code": "c",
+  "current_status": "active",
+  "name": "磯村　嘉孝",
+  "name_kana": "いそむら・よしたか",
+  "profile": {
+    "ポジション": "捕手",
+    "投打": "右投右打",
+    "身長／体重": "178cm／92kg",
+    "生年月日": "1992年11月1日",
+    "経歴": "中京大中京高",
+    "ドラフト": "2010年ドラフト5位"
+  },
+  "birth_date": "1992-11-01 00:00:00",
+  "entry_year": 2010,
+  "nationality_code": "1",
+  "position_code": "2",
+  "position": "野手",
+  "player_id": "101012199211010"
+}

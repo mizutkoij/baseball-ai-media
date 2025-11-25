@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/01905150.html",
+  "team": "福岡ソフトバンクホークス",
+  "team_code": "h",
+  "current_status": "active",
+  "name": "ザイレン（曽布川　ザイレン）",
+  "name_kana": "ざいれん（そぶかわ・ざいれん）",
+  "profile": {
+    "ポジション": "内野手",
+    "投打": "右投右打",
+    "身長／体重": "178cm／82kg",
+    "生年月日": "2006年5月29日",
+    "経歴": "浜松商",
+    "ドラフト": "2024年育成選手ドラフト2位"
+  },
+  "birth_date": "2006-05-29 00:00:00",
+  "entry_year": 2024,
+  "nationality_code": "1",
+  "position_code": "2",
+  "position": "野手",
+  "player_id": "102412200605292"
+}

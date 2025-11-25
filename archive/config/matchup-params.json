@@ -1,0 +1,21 @@
+{
+  "enable": true,
+  "confidence": {
+    "high": 0.20,
+    "medium": 0.10
+  },
+  "calibration": {
+    "mode": "temperature",
+    "T": 1.1
+  },
+  "quality_gate": {
+    "min_logloss": 0.69,
+    "max_brier": 0.22
+  },
+  "features": {
+    "use_fatigue": true,
+    "use_rap": true,
+    "use_splits": true,
+    "lookback_days": 30
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "2025-08-07": {
+    "G-S": {
+      "date": "2025-08-07",
+      "matchup": "G-S",
+      "homeTeam": "ヤクルト",
+      "awayTeam": "巨人",
+      "venue": "球場情報取得中",
+      "time": "18:00",
+      "homeScore": 1,
+      "awayScore": 71379438,
+      "status": "finished",
+      "league": "central"
+    },
+    "DB-C": {
+      "date": "2025-08-07",
+      "matchup": "DB-C",
+      "homeTeam": "広島",
+      "awayTeam": "DeNA",
+      "venue": "球場情報取得中",
+      "time": "17:45",
+      "homeScore": 1,
+      "awayScore": 71379438,
+      "status": "finished",
+      "league": "central"
+    }
+  }
+}

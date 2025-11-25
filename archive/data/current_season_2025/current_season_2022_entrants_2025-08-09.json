@@ -1,0 +1,107 @@
+[
+  {
+    "player_id": "2100009",
+    "name": "木村 大成",
+    "team": "",
+    "entry_year": 2022,
+    "current_season_stats": {
+      "player_id": "2100009",
+      "season": 2025,
+      "games": 0,
+      "at_bats": 0,
+      "hits": 0,
+      "doubles": 0,
+      "triples": 0,
+      "home_runs": 0,
+      "rbis": 0,
+      "runs": 0,
+      "walks": 0,
+      "strikeouts": 0,
+      "stolen_bases": 0,
+      "batting_average": 0,
+      "on_base_percentage": 0,
+      "slugging_percentage": 0,
+      "ops": 0,
+      "updated_at": "2025-08-09T18:21:19.344Z"
+    },
+    "stats_comparison": {
+      "games_diff": 0,
+      "avg_diff": 0,
+      "hr_diff": 0,
+      "rbi_diff": 0,
+      "ops_diff": 0,
+      "improvement_indicators": []
+    },
+    "last_updated": "2025-08-09T18:21:19.100Z"
+  },
+  {
+    "player_id": "2100010",
+    "name": "大津 綾也",
+    "team": "",
+    "entry_year": 2022,
+    "current_season_stats": {
+      "player_id": "2100010",
+      "season": 2025,
+      "games": 0,
+      "at_bats": 0,
+      "hits": 0,
+      "doubles": 0,
+      "triples": 0,
+      "home_runs": 0,
+      "rbis": 0,
+      "runs": 0,
+      "walks": 0,
+      "strikeouts": 0,
+      "stolen_bases": 0,
+      "batting_average": 0,
+      "on_base_percentage": 0,
+      "slugging_percentage": 0,
+      "ops": 0,
+      "updated_at": "2025-08-09T18:21:19.416Z"
+    },
+    "stats_comparison": {
+      "games_diff": 0,
+      "avg_diff": 0,
+      "hr_diff": 0,
+      "rbi_diff": 0,
+      "ops_diff": 0,
+      "improvement_indicators": []
+    },
+    "last_updated": "2025-08-09T18:21:19.101Z"
+  },
+  {
+    "player_id": "2100027",
+    "name": "福島 蓮",
+    "team": "",
+    "entry_year": 2022,
+    "current_season_stats": {
+      "player_id": "2100027",
+      "season": 2025,
+      "games": 0,
+      "at_bats": 0,
+      "hits": 0,
+      "doubles": 0,
+      "triples": 0,
+      "home_runs": 0,
+      "rbis": 0,
+      "runs": 0,
+      "walks": 0,
+      "strikeouts": 0,
+      "stolen_bases": 0,
+      "batting_average": 0,
+      "on_base_percentage": 0,
+      "slugging_percentage": 0,
+      "ops": 0,
+      "updated_at": "2025-08-09T18:21:21.006Z"
+    },
+    "stats_comparison": {
+      "games_diff": 0,
+      "avg_diff": 0,
+      "hr_diff": 0,
+      "rbi_diff": 0,
+      "ops_diff": 0,
+      "improvement_indicators": []
+    },
+    "last_updated": "2025-08-09T18:21:20.981Z"
+  }
+]

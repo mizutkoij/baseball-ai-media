@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/61665151.html",
+  "team": "北海道日本ハムファイターズ",
+  "team_code": "f",
+  "current_status": "active",
+  "name": "松岡　洸希",
+  "name_kana": "まつおか・こうき",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "右投右打",
+    "身長／体重": "180cm／84kg",
+    "生年月日": "2000年8月31日",
+    "経歴": "桶川西高 - BC・武蔵",
+    "ドラフト": "2019年ドラフト3位"
+  },
+  "birth_date": "2000-08-31 00:00:00",
+  "entry_year": 2019,
+  "nationality_code": "1",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "101911200008316"
+}

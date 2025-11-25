@@ -1,0 +1,21 @@
+{
+  "url": "https://npb.jp/bis/players/03005159.html",
+  "team": "中日ドラゴンズ",
+  "team_code": "d",
+  "current_status": "active",
+  "name": "Ｃ．ロドリゲス",
+  "name_kana": "クリスチャン・ロドリゲス　(CHRISTIAN RODRIGUEZ)",
+  "profile": {
+    "ポジション": "内野手",
+    "投打": "右投右打",
+    "身長／体重": "184cm／74kg",
+    "生年月日": "2002年3月31日",
+    "経歴": "エスクエラエイデ高 - キューバ・ビジャクララ",
+    "ドラフト": ""
+  },
+  "birth_date": "2002-03-31 00:00:00",
+  "nationality_code": "2",
+  "position_code": "2",
+  "position": "野手",
+  "player_id": "100022200203311"
+}

@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/91395132.html",
+  "team": "中日ドラゴンズ",
+  "team_code": "d",
+  "current_status": "active",
+  "name": "板山　祐太郎",
+  "name_kana": "いたやま・ゆうたろう",
+  "profile": {
+    "ポジション": "内野手",
+    "投打": "右投左打",
+    "身長／体重": "180cm／88kg",
+    "生年月日": "1994年3月27日",
+    "経歴": "成立学園高 - 亜細亜大",
+    "ドラフト": "2015年ドラフト6位"
+  },
+  "birth_date": "1994-03-27 00:00:00",
+  "entry_year": 2015,
+  "nationality_code": "1",
+  "position_code": "2",
+  "position": "野手",
+  "player_id": "101512199403270"
+}

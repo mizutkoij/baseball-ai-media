@@ -1,0 +1,27 @@
+{
+  "entry_year": 2022,
+  "players_found": 3,
+  "players": [
+    {
+      "id": "2100009",
+      "name": "2023年度版　木村 大成",
+      "team": "",
+      "type": "batter",
+      "position": "野手"
+    },
+    {
+      "id": "2100010",
+      "name": "2023年度版　大津 綾也",
+      "team": "",
+      "type": "batter",
+      "position": "野手"
+    },
+    {
+      "id": "2100027",
+      "name": "2023年度版　福島 蓮",
+      "team": "",
+      "type": "batter",
+      "position": "野手"
+    }
+  ]
+}

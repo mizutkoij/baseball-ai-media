@@ -1,0 +1,24 @@
+{
+  "enable": true,
+  "lookback_days": 14,
+  "min_app": 6,
+  "half_life_days": 7,
+  "metric": "kbb_pct",
+  "league_zscore_cap": 2.0,
+  "beta": 0.25,
+  "max_shift": 0.03,
+  "late_inning_curve": "cubic",
+  "_description": {
+    "enable": "Feature flag for bullpen strength adjustment",
+    "lookback_days": "Days to look back for relief appearances",
+    "min_app": "Minimum relief appearances required for rating",
+    "half_life_days": "Half-life for time decay weighting",
+    "metric": "kbb_pct (K-BB)/BF or fip_proxy -((13*HR+3*BB-2*K)/IP)",
+    "league_zscore_cap": "Maximum z-score clipping (±cap)",
+    "beta": "Adjustment strength coefficient in logit space",
+    "max_shift": "Maximum final win probability shift (±3pt)",
+    "late_inning_curve": "How adjustment scales by inning: linear/quadratic/cubic"
+  },
+  "_generated": "2025-08-12T05:30:00Z",
+  "_version": "1.0.0"
+}

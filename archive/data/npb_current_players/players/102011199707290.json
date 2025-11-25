@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/41145153.html",
+  "team": "阪神タイガース",
+  "team_code": "t",
+  "current_status": "active",
+  "name": "石井　大智",
+  "name_kana": "いしい・だいち",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "右投右打",
+    "身長／体重": "175cm／80kg",
+    "生年月日": "1997年7月29日",
+    "経歴": "秋田工高専 - 四国・高知",
+    "ドラフト": "2020年ドラフト8位"
+  },
+  "birth_date": "1997-07-29 00:00:00",
+  "entry_year": 2020,
+  "nationality_code": "1",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "102011199707290"
+}

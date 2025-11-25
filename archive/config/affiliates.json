@@ -1,0 +1,113 @@
+{
+  "providers": {
+    "amazon": {
+      "name": "Amazonアソシエイト",
+      "tag": "baseballaimedi-22",
+      "enabled": true,
+      "tracking": "amazon"
+    },
+    "rakuten": {
+      "name": "楽天アフィリエイト", 
+      "partner_id": "YOUR_RAKUTEN_ID",
+      "enabled": true,
+      "tracking": "rakuten"
+    },
+    "valuecommerce": {
+      "name": "バリューコマース",
+      "sid": "YOUR_VC_SID",
+      "enabled": true,
+      "tracking": "valuecommerce"
+    },
+    "a8": {
+      "name": "A8.net",
+      "media_id": "YOUR_A8_MEDIA_ID",
+      "enabled": true,
+      "tracking": "a8"
+    }
+  },
+  "teams": {
+    "G": {
+      "name": "読売ジャイアンツ",
+      "shop": {
+        "amazon": "https://www.amazon.co.jp/s?k=%E3%82%B8%E3%83%A3%E3%82%A4%E3%82%A2%E3%83%B3%E3%83%84+%E3%82%B0%E3%83%83%E3%82%BA&tag=baseballaimedi-22",
+        "rakuten": "https://hb.afl.rakuten.co.jp/hgc/YOUR_ID/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%25E3%2582%25B8%25E3%2583%25A3%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2584%2B%25E3%2582%25B0%25E3%2583%2583%25E3%2582%25BA%2F",
+        "a8": "https://px.a8.net/svt/ejp?a8mat=XXXXX&a8via=A8&a8adtype=p"
+      },
+      "tickets": {
+        "valuecommerce": "https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=YOUR_SID&pid=YOUR_PID&vc_url=https%3A%2F%2Fshopping.yahoo.co.jp%2Fsearch%3Fp%3D%25E3%2582%25B8%25E3%2583%25A3%25E3%2582%25A4%25E3%2582%25A2%25E3%2583%25B3%25E3%2583%2584%2B%25E3%2583%2581%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2588"
+      }
+    },
+    "T": {
+      "name": "阪神タイガース",
+      "shop": {
+        "amazon": "https://www.amazon.co.jp/s?k=%E9%98%AA%E7%A5%9E%E3%82%BF%E3%82%A4%E3%82%AC%E3%83%BC%E3%82%B9+%E3%82%B0%E3%83%83%E3%82%BA&tag=baseballaimedi-22",
+        "rakuten": "https://hb.afl.rakuten.co.jp/hgc/YOUR_ID/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%25E9%2598%25AA%25E7%25A5%259E%25E3%2582%25BF%25E3%2582%25A4%25E3%2582%25AC%25E3%2583%25BC%25E3%2582%25B9%2B%25E3%2582%25B0%25E3%2583%2583%25E3%2582%25BA%2F"
+      },
+      "tickets": {
+        "a8": "https://px.a8.net/svt/ejp?a8mat=XXXXX&a8via=A8&a8adtype=p"
+      }
+    },
+    "C": {
+      "name": "広島東洋カープ",
+      "shop": {
+        "amazon": "https://www.amazon.co.jp/s?k=%E5%BA%83%E5%B3%B6%E3%82%AB%E3%83%BC%E3%83%97+%E3%82%B0%E3%83%83%E3%82%BA&tag=baseballaimedi-22",
+        "rakuten": "https://hb.afl.rakuten.co.jp/hgc/YOUR_ID/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%25E5%25BA%2583%25E5%25B3%25B6%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%2597%2B%25E3%2582%25B0%25E3%2583%2583%25E3%2582%25BA%2F"
+      }
+    }
+  },
+  "generic": {
+    "baseball_equipment": {
+      "name": "野球用品",
+      "amazon": "https://www.amazon.co.jp/s?k=%E9%87%8E%E7%90%83%E7%94%A8%E5%93%81&tag=baseballaimedi-22",
+      "rakuten": "https://hb.afl.rakuten.co.jp/hgc/YOUR_ID/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%25E9%2587%258E%25E7%2590%2583%25E7%2594%25A8%25E5%2593%2581%2F"
+    },
+    "bats": {
+      "name": "バット",
+      "amazon": "https://www.amazon.co.jp/s?k=%E9%87%8E%E7%90%83%E3%83%90%E3%83%83%E3%83%88&tag=baseballaimedi-22",
+      "rakuten": "https://hb.afl.rakuten.co.jp/hgc/YOUR_ID/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%25E9%2587%258E%25E7%2590%2583%25E3%2583%2590%25E3%2583%2583%25E3%2583%2588%2F"
+    },
+    "gloves": {
+      "name": "グローブ",
+      "amazon": "https://www.amazon.co.jp/s?k=%E9%87%8E%E7%90%83%E3%82%B0%E3%83%AD%E3%83%BC%E3%83%96&tag=baseballaimedi-22",
+      "rakuten": "https://hb.afl.rakuten.co.jp/hgc/YOUR_ID/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%25E9%2587%258E%25E7%2590%2583%25E3%2582%25B0%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2596%2F"
+    },
+    "scorebook": {
+      "name": "スコアブック",
+      "amazon": "https://www.amazon.co.jp/s?k=%E9%87%8E%E7%90%83%E3%82%B9%E3%82%B3%E3%82%A2%E3%83%96%E3%83%83%E3%82%AF&tag=baseballaimedi-22",
+      "rakuten": "https://hb.afl.rakuten.co.jp/hgc/YOUR_ID/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%25E3%2582%25B9%25E3%2582%25B3%25E3%2582%25A2%25E3%2583%2596%25E3%2583%2583%25E3%2582%25AF%2F"
+    },
+    "books": {
+      "name": "野球本・DVD",
+      "amazon": "https://www.amazon.co.jp/s?k=%E9%87%8E%E7%90%83%E6%9C%AC&tag=baseballaimedi-22",
+      "rakuten": "https://hb.afl.rakuten.co.jp/hgc/YOUR_ID/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%25E9%2587%258E%25E7%2590%2583%25E6%259C%25AC%2F"
+    },
+    "streaming": {
+      "name": "配信サービス",
+      "dazn": "https://px.a8.net/svt/ejp?a8mat=XXXXX&a8via=A8&a8adtype=p",
+      "parire_tv": "https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=YOUR_SID&pid=YOUR_PID"
+    }
+  },
+  "disclosure": {
+    "text_jp": "当サイトは、Amazon.co.jp、楽天市場、Yahoo!ショッピング等のアフィリエイトプログラムに参加しており、商品の紹介にアフィリエイトリンクを使用することがあります。これらのリンクを通じてお客様が商品を購入された場合、当サイトに紹介料が支払われることがあります。商品の価格や在庫状況は記載時点のものであり、変更される場合があります。また、商品選択の際は、価格、レビュー、配送条件等を十分ご確認ください。",
+    "text_short": "※当サイトは、アフィリエイトプログラムに参加しており、リンクを通じた購入で紹介料を得ることがあります。",
+    "required_by_law": true,
+    "updated": "2025-08-13"
+  },
+  "settings": {
+    "click_tracking": true,
+    "conversion_tracking": false,
+    "a_b_testing": {
+      "enabled": true,
+      "variants": ["default", "minimal", "enhanced"]
+    },
+    "display_rules": {
+      "game_page": {
+        "pre_game_minutes": 60,
+        "during_game": true,
+        "post_game_hours": 2
+      },
+      "max_links_per_page": 3,
+      "rotation_enabled": true
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/21525139.html",
+  "team": "東北楽天ゴールデンイーグルス",
+  "team_code": "e",
+  "current_status": "active",
+  "name": "加治屋　蓮",
+  "name_kana": "かじや・れん",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "右投右打",
+    "身長／体重": "185cm／90kg",
+    "生年月日": "1991年11月25日",
+    "経歴": "宮崎・福島高 - JR九州",
+    "ドラフト": "2013年ドラフト1位"
+  },
+  "birth_date": "1991-11-25 00:00:00",
+  "entry_year": 2013,
+  "nationality_code": "1",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "101311199111251"
+}

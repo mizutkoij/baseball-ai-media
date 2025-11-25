@@ -1,0 +1,8 @@
+{
+  "mykbostats": null,
+  "koreabaseball_en": null,
+  "koreabaseball_kr": {
+    "accessible": false,
+    "error": "'cp932' codec can't encode character '\\uba54' in position 7: illegal multibyte sequence"
+  }
+}

@@ -1,0 +1,344 @@
+{
+  "wikipedia_kbo": {
+    "title": "KBO League",
+    "tables": [
+      {
+        "headers": [
+          "Team",
+          "City",
+          "Stadium",
+          "Capacity",
+          "Founded",
+          "Joined"
+        ],
+        "data": [
+          [
+            "Doosan Bears",
+            "Seoul",
+            "Jamsil Baseball Stadium",
+            "25,000",
+            "1982"
+          ],
+          [
+            "Hanwha Eagles",
+            "Daejeon",
+            "Daejeon Hanwha Life Ballpark",
+            "20,000",
+            "1985",
+            "1986"
+          ],
+          [
+            "Kia Tigers",
+            "Gwangju",
+            "Gwangju-Kia Champions Field",
+            "20,500",
+            "1982"
+          ],
+          [
+            "Kiwoom Heroes",
+            "Seoul",
+            "Gocheok Sky Dome",
+            "16,744",
+            "2008"
+          ],
+          [
+            "KT Wiz",
+            "Suwon",
+            "Suwon kt wiz Park",
+            "20,000",
+            "2013",
+            "2015"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Defunct clubs"
+        ],
+        "data": [
+          [
+            "Team",
+            "City",
+            "Stadium",
+            "Founded",
+            "Joined",
+            "Ceased"
+          ],
+          [
+            "Hyundai Unicorns",
+            "Suwon",
+            "Suwon Baseball Stadium",
+            "1982",
+            "2008"
+          ],
+          [
+            "Ssangbangwool Raiders",
+            "Jeonju",
+            "Jeonju Baseball Stadium",
+            "1990",
+            "1991",
+            "1999"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Doosan Bears",
+          "LG Twins",
+          "Hanwha Eagles",
+          "Kia Tigers",
+          "Kiwoom Heroes"
+        ],
+        "data": [
+          [
+            "Jamsil Baseball Stadium",
+            "Daejeon Hanwha Life Ballpark",
+            "Gwangju-Kia Champions Field",
+            "Gocheok Sky Dome"
+          ],
+          [
+            "Capacity:25,000",
+            "Capacity:20,000",
+            "Capacity:20,500",
+            "Capacity:16,744"
+          ],
+          [
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "KT Wiz",
+            "Lotte Giants",
+            "NC Dinos",
+            "Samsung Lions",
+            "SSG Landers"
+          ],
+          [
+            "Suwon kt wiz Park",
+            "Sajik Baseball Stadium",
+            "Changwon NC Park",
+            "Daegu Samsung Lions Park",
+            "Incheon SSG Landers Field"
+          ]
+        ]
+      }
+    ],
+    "teams_found": [
+      "Doosan Bears",
+      "KT Wiz",
+      "LG Twins",
+      "NC Dinos",
+      "Samsung Lions",
+      "SSG Landers",
+      "Lotte Giants",
+      "Hanwha Eagles",
+      "Kia Tigers"
+    ]
+  },
+  "wikipedia_teams": null,
+  "wikipedia_2024": {
+    "title": "2024 KBO League season",
+    "tables": [
+      {
+        "headers": [
+          "Rank",
+          "Team",
+          "GP",
+          "W",
+          "L",
+          "D",
+          "PCT",
+          "GB",
+          "Home",
+          "Road"
+        ],
+        "data": [
+          [
+            "1",
+            "Doosan Bears",
+            "9",
+            "8",
+            "0",
+            "1",
+            "1.000",
+            "-",
+            "4–0–0",
+            "4–0–1"
+          ],
+          [
+            "2",
+            "LG Twins",
+            "8",
+            "6",
+            "2",
+            "0",
+            "0.750",
+            "2",
+            "2–0–0",
+            "4–2–0"
+          ],
+          [
+            "3",
+            "Hanwha Eagles",
+            "10",
+            "5",
+            "3",
+            "2",
+            "0.625",
+            "3",
+            "3–3–2",
+            "2–0–0"
+          ],
+          [
+            "4",
+            "NC Dinos",
+            "10",
+            "6",
+            "4",
+            "0",
+            "0.600",
+            "4–2–0",
+            "2–2–0"
+          ],
+          [
+            "5",
+            "KT Wiz",
+            "9",
+            "4",
+            "4",
+            "1",
+            "0.500",
+            "4",
+            "3–2–0",
+            "1–2–1"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Rank",
+          "Team",
+          "GP",
+          "W",
+          "L",
+          "D",
+          "PCT",
+          "GB",
+          "Home",
+          "Road",
+          "STRK",
+          "Postseason"
+        ],
+        "data": [
+          [
+            "1",
+            "Kia Tigers",
+            "144",
+            "87",
+            "55",
+            "2",
+            "0.613",
+            "-",
+            "42-30-1",
+            "45-25-1",
+            "W2",
+            "Korean Series"
+          ],
+          [
+            "2",
+            "Samsung Lions",
+            "144",
+            "78",
+            "64",
+            "2",
+            "0.549",
+            "9",
+            "41-32-0",
+            "37-32-2",
+            "L1",
+            "Playoff"
+          ],
+          [
+            "3",
+            "LG Twins",
+            "144",
+            "76",
+            "66",
+            "2",
+            "0.535",
+            "11",
+            "39-33-1",
+            "37-33-1",
+            "W2",
+            "Semi-Playoff"
+          ],
+          [
+            "4",
+            "Doosan Bears",
+            "144",
+            "74",
+            "68",
+            "2",
+            "0.521",
+            "13",
+            "39-31-1",
+            "35-37-1",
+            "W4",
+            "Wild Card Game"
+          ],
+          [
+            "5",
+            "KT Wiz",
+            "144",
+            "72",
+            "70",
+            "2",
+            "0.507",
+            "15",
+            "34-36-1",
+            "38-34-1",
+            "W3"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Team",
+          "All-Star Team"
+        ],
+        "data": [
+          [
+            "Kia Tigers",
+            "Nanum All-Stars"
+          ],
+          [
+            "Hanwha Eagles"
+          ],
+          [
+            "LG Twins"
+          ],
+          [
+            "NC Dinos"
+          ],
+          [
+            "Kiwoom Heroes"
+          ]
+        ]
+      }
+    ],
+    "teams_found": [
+      "Doosan Bears",
+      "KT Wiz",
+      "LG Twins",
+      "NC Dinos",
+      "Samsung Lions",
+      "SSG Landers",
+      "Lotte Giants",
+      "Hanwha Eagles",
+      "Kia Tigers"
+    ]
+  },
+  "baseball_reference": null
+}

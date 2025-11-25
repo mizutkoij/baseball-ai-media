@@ -1,0 +1,64 @@
+{
+  "gameDate": "2025-08-21",
+  "gameId": "db-c-20",
+  "venue": "横浜スタジアム",
+  "boxScore": {
+    "awayTeam": {
+      "teamName": "Away Team",
+      "players": [],
+      "pitchers": [],
+      "teamTotals": {
+        "atBats": 0,
+        "runs": 0,
+        "hits": 0,
+        "rbis": 0,
+        "steals": 0
+      }
+    },
+    "homeTeam": {
+      "teamName": "Home Team",
+      "players": [],
+      "pitchers": [],
+      "teamTotals": {
+        "atBats": 0,
+        "runs": 0,
+        "hits": 0,
+        "rbis": 0,
+        "steals": 0
+      }
+    }
+  },
+  "roster": {
+    "gameId": "",
+    "homeTeam": "Home Team",
+    "awayTeam": "Away Team",
+    "homeRoster": [
+      {
+        "number": "0",
+        "name": "0",
+        "position": "1",
+        "age": "1",
+        "bats": "1",
+        "throws": "0",
+        "height": "1",
+        "weight": "0",
+        "career": "0",
+        "birthplace": "4"
+      },
+      {
+        "number": "0",
+        "name": "5",
+        "position": "0",
+        "age": "0",
+        "bats": "0",
+        "throws": "2",
+        "height": "0",
+        "weight": "0",
+        "career": "x",
+        "birthplace": "7"
+      }
+    ],
+    "awayRoster": []
+  },
+  "scrapedAt": "2025-08-21T06:40:59.222Z"
+}

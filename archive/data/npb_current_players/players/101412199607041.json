@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/01705130.html",
+  "team": "福岡ソフトバンクホークス",
+  "team_code": "h",
+  "current_status": "active",
+  "name": "栗原　陵矢",
+  "name_kana": "くりはら・りょうや",
+  "profile": {
+    "ポジション": "内野手",
+    "投打": "右投左打",
+    "身長／体重": "179cm／83kg",
+    "生年月日": "1996年7月4日",
+    "経歴": "春江工",
+    "ドラフト": "2014年ドラフト2位"
+  },
+  "birth_date": "1996-07-04 00:00:00",
+  "entry_year": 2014,
+  "nationality_code": "1",
+  "position_code": "2",
+  "position": "野手",
+  "player_id": "101412199607041"
+}

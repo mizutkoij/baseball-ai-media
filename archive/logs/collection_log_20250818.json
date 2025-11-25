@@ -1,0 +1,21 @@
+{
+  "daily_result": {
+    "date": "2025-08-18",
+    "games_processed": 0,
+    "success": false
+  },
+  "usage_report": {
+    "total_collections": 0,
+    "successful_collections": 0,
+    "success_rate": 0,
+    "npb_only_rate": 0,
+    "yahoo_backup": {
+      "requests_made": 0,
+      "data_collected": 0,
+      "last_used": null,
+      "reduction_vs_full_usage": 100
+    },
+    "request_reduction": "~100% reduction vs pure Yahoo scraping"
+  },
+  "collection_log": []
+}

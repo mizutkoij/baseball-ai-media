@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/71575136.html",
+  "team": "横浜DeNAベイスターズ",
+  "team_code": "db",
+  "current_status": "active",
+  "name": "神里　和毅",
+  "name_kana": "かみざと・かずき",
+  "profile": {
+    "ポジション": "外野手",
+    "投打": "右投左打",
+    "身長／体重": "179cm／86kg",
+    "生年月日": "1994年1月17日",
+    "経歴": "糸満高 - 中央大 - 日本生命",
+    "ドラフト": "2017年ドラフト2位"
+  },
+  "birth_date": "1994-01-17 00:00:00",
+  "entry_year": 2017,
+  "nationality_code": "1",
+  "position_code": "2",
+  "position": "野手",
+  "player_id": "101712199401171"
+}

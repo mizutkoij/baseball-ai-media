@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/71475155.html",
+  "team": "千葉ロッテマリーンズ",
+  "team_code": "m",
+  "current_status": "active",
+  "name": "永島田　輝斗",
+  "name_kana": "ながしまだ・きらと",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "右投右打",
+    "身長／体重": "182cm／90kg",
+    "生年月日": "2003年11月30日",
+    "経歴": "立花学園高",
+    "ドラフト": "2021年育成選手ドラフト3位"
+  },
+  "birth_date": "2003-11-30 00:00:00",
+  "entry_year": 2021,
+  "nationality_code": "1",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "102111200311304"
+}

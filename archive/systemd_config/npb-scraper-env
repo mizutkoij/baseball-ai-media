@@ -1,0 +1,7 @@
+BASE_DIR=/home/mizu/baseball-ai-media
+VENV=$BASE_DIR/.venv
+TZ=Asia/Tokyo
+# Discord（実値は既に発行済みのものをセット）
+DISCORD_WEBHOOK_STATUS=https://discord.com/api/webhooks/1400884270846972085/ysQh2gYRelm3U5cw9QoyKw6rw02rzlqEY8corHm0SdMLFQnuu_7WD43wwhvqF33fgcR_
+DISCORD_WEBHOOK_DATA=https://discord.com/api/webhooks/1400884270846972085/ysQh2gYRelm3U5cw9QoyKw6rw02rzlqEY8corHm0SdMLFQnuu_7WD43wwhvqF33fgcR_
+DISCORD_WEBHOOK_ALERTS=https://discord.com/api/webhooks/1400884270846972085/ysQh2gYRelm3U5cw9QoyKw6rw02rzlqEY8corHm0SdMLFQnuu_7WD43wwhvqF33fgcR_

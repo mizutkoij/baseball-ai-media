@@ -1,0 +1,18 @@
+[Unit]
+Description=BaseballData.jp Player Stats Daily Collection
+After=network.target bbdata-roster.service
+
+[Service]
+Type=oneshot
+User=mizu
+Group=mizu
+WorkingDirectory=/home/mizu/baseball-ai-media
+Environment=VIRTUAL_ENV=/home/mizu/baseball-ai-media/.venv
+Environment=PATH=/home/mizu/baseball-ai-media/.venv/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=/home/mizu/baseball-ai-media/.venv/bin/python scripts/bbdata_player_stats.py --date $(date +%%Y-%%m-%%d) --discord
+StandardOutput=journal
+StandardError=journal
+TimeoutStartSec=2400
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,19 @@
+{
+  "years_processed": 3,
+  "total_active_players": 0,
+  "yearly_breakdown": {
+    "2008": 0,
+    "2009": 0,
+    "2010": 0
+  },
+  "discovery_notes": [
+    "2008年: 現役選手なし (データ未存在)",
+    "2009年: 現役選手なし (データ未存在)",
+    "2010年: 現役選手なし (データ未存在)"
+  ],
+  "period": "2008-2010",
+  "strategy": "2011年以前入団選手の2011年以降現役検索",
+  "constraint_explanation": "BaseballData.jpにデータ存在 = 2011年以降現役の証拠",
+  "generated_at": "2025-08-09T15:48:03.732Z",
+  "max_sample_per_year": 20
+}

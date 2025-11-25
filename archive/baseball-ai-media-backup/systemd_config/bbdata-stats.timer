@@ -1,0 +1,11 @@
+[Unit]
+Description=BaseballData.jp Player Stats Daily Timer
+Requires=bbdata-stats.service
+
+[Timer]
+OnCalendar=*-*-* 04:20:00
+Persistent=true
+RandomizedDelaySec=60
+
+[Install]
+WantedBy=timers.target

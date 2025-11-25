@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/11515132.html",
+  "team": "オリックス・バファローズ",
+  "team_code": "b",
+  "current_status": "active",
+  "name": "大城　滉二",
+  "name_kana": "おおしろ・こうじ",
+  "profile": {
+    "ポジション": "内野手",
+    "投打": "右投右打",
+    "身長／体重": "175cm／80kg",
+    "生年月日": "1993年6月14日",
+    "経歴": "興南高 - 立教大",
+    "ドラフト": "2015年ドラフト3位"
+  },
+  "birth_date": "1993-06-14 00:00:00",
+  "entry_year": 2015,
+  "nationality_code": "1",
+  "position_code": "2",
+  "position": "野手",
+  "player_id": "101512199306140"
+}

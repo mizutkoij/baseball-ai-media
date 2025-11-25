@@ -1,0 +1,15 @@
+{
+  "years_processed": 5,
+  "total_players": 137,
+  "yearly_breakdown": {
+    "2021": 134,
+    "2022": 3,
+    "2023": 0,
+    "2024": 0,
+    "2025": 0
+  },
+  "period": "2021-2025",
+  "generated_at": "2025-08-09T16:37:58.796Z",
+  "data_source": "baseballdata.jp (modern players)",
+  "id_structure": "入団年-1 + 連番 (例: 2000001 = 2021年入団1番目)"
+}

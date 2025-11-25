@@ -1,0 +1,11 @@
+{
+  "total_games": 22,
+  "games_with_errors": 0,
+  "games_with_warnings": 0,
+  "total_findings": 0,
+  "error_count": 0,
+  "warning_count": 0,
+  "timestamp": "2025-08-01T00:10:32.112Z",
+  "error_games": [],
+  "common_rules": {}
+}

@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/31935155.html",
+  "team": "横浜DeNAベイスターズ",
+  "team_code": "db",
+  "current_status": "active",
+  "name": "小園　健太",
+  "name_kana": "こぞの・けんた",
+  "profile": {
+    "ポジション": "投手",
+    "投打": "右投右打",
+    "身長／体重": "185cm／90kg",
+    "生年月日": "2003年4月9日",
+    "経歴": "市立和歌山高",
+    "ドラフト": "2021年ドラフト1位"
+  },
+  "birth_date": "2003-04-09 00:00:00",
+  "entry_year": 2021,
+  "nationality_code": "1",
+  "position_code": "1",
+  "position": "投手",
+  "player_id": "102111200304091"
+}

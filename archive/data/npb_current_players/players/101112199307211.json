@@ -1,0 +1,22 @@
+{
+  "url": "https://npb.jp/bis/players/51755135.html",
+  "team": "横浜DeNAベイスターズ",
+  "team_code": "db",
+  "current_status": "active",
+  "name": "桑原　将志",
+  "name_kana": "くわはら・まさゆき",
+  "profile": {
+    "ポジション": "外野手",
+    "投打": "右投右打",
+    "身長／体重": "174cm／80kg",
+    "生年月日": "1993年7月21日",
+    "経歴": "福知山成美高",
+    "ドラフト": "2011年ドラフト4位"
+  },
+  "birth_date": "1993-07-21 00:00:00",
+  "entry_year": 2011,
+  "nationality_code": "1",
+  "position_code": "2",
+  "position": "野手",
+  "player_id": "101112199307211"
+}
