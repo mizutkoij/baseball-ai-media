@@ -6,7 +6,7 @@ import MobileNav from './components/MobileNav'
 import QualityBadge from '@/components/QualityBadge'
 import { ToastProvider } from '@/components/Toast'
 import { currentSeasonYear } from '@/lib/time'
-import AnalyticsRouter from '@/components/AnalyticsRouter'
+// import AnalyticsRouter from '@/components/AnalyticsRouter'
 
 const inter = Inter({ subsets: ['latin'] })
 const notoSansJP = Noto_Sans_JP({ 
@@ -94,7 +94,7 @@ export default function RootLayout({
             "logo":"https://baseball-ai-media.vercel.app/icon.png"
           }}
         />
-        <AnalyticsRouter />
+        {/* <AnalyticsRouter /> */}
         <ToastProvider>
           <div className="min-h-screen flex flex-col">
           {/* Navigation Header */}
