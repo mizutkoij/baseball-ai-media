@@ -2,7 +2,7 @@
 
 /**
  * Prometheusメトリクスサーバー
- * 
+ *
  * 機能:
  * - /metrics エンドポイントでPrometheus形式のメトリクス公開
  * - ヘルスチェック
@@ -13,16 +13,14 @@ import * as http from "http";
 import { registry } from "../lib/prometheus-metrics";
 import { logger } from "../lib/logger";
 
-const port = Number(process.env.METRICS_PORT ?? 9464);
-const host = process.env.METRICS_HOST ?? "127.0.0.1";
+let serverInstance: http.Server | null = null;
 
 // リクエストハンドラ
-const server = http.createServer(async (req, res) => {
+const requestHandler = async (req: http.IncomingMessage, res: http.ServerResponse) => {
   const startTime = Date.now();
   
   try {
     if (req.url === "/metrics") {
-      // Prometheusメトリクス
       res.setHeader("Content-Type", registry.contentType);
       const metrics = await registry.metrics();
       res.end(metrics);
@@ -35,7 +33,6 @@ const server = http.createServer(async (req, res) => {
       }, 'Metrics served');
       
     } else if (req.url === "/health") {
-      // ヘルスチェック
       const health = {
         status: "healthy",
         timestamp: new Date().toISOString(),
@@ -54,7 +51,6 @@ const server = http.createServer(async (req, res) => {
       }, 'Health check served');
       
     } else if (req.url === "/") {
-      // ルートページ
       const info = `
 <!DOCTYPE html>
 <html>
@@ -74,7 +70,6 @@ const server = http.createServer(async (req, res) => {
       res.end(info);
       
     } else {
-      // 404
       res.statusCode = 404;
       res.end("Not Found");
       
@@ -97,49 +92,74 @@ const server = http.createServer(async (req, res) => {
       error: error instanceof Error ? error.message : String(error),
     }, 'Metrics server error');
   }
-});
+};
 
-// サーバー起動
-server.listen(port, host, () => {
-  logger.info({
-    port,
-    host,
-    pid: process.pid,
-    endpoints: ["/metrics", "/health"],
-  }, `Metrics server started on ${host}:${port}`);
-});
+export function startMetricsServer(port: number, host: string = "127.0.0.1"): Promise<http.Server> {
+  return new Promise((resolve) => {
+    const server = http.createServer(requestHandler);
+    serverInstance = server;
 
-// Graceful shutdown
-process.on('SIGTERM', () => {
-  logger.info({}, 'SIGTERM received, shutting down gracefully');
-  server.close(() => {
-    logger.info({}, 'Metrics server closed');
-    process.exit(0);
+    server.listen(port, host, () => {
+      logger.info({
+        port,
+        host,
+        pid: process.pid,
+        endpoints: ["/metrics", "/health"],
+      }, `Metrics server started on ${host}:${port}`);
+      resolve(server);
+    });
   });
-});
+}
 
-process.on('SIGINT', () => {
-  logger.info({}, 'SIGINT received, shutting down gracefully');
-  server.close(() => {
-    logger.info({}, 'Metrics server closed');
-    process.exit(0);
+export function stopMetricsServer(): Promise<void> {
+  return new Promise((resolve, reject) => {
+    if (serverInstance) {
+      serverInstance.close((err) => {
+        if (err) {
+          logger.error({ error: err.message }, "Error closing metrics server");
+          return reject(err);
+        }
+        logger.info({}, 'Metrics server closed');
+        serverInstance = null;
+        resolve();
+      });
+    } else {
+      resolve();
+    }
   });
-});
+}
 
-// エラーハンドリング
-process.on('uncaughtException', (error) => {
-  logger.error({
-    error: error.message,
-    stack: error.stack,
-  }, 'Uncaught exception');
-  process.exit(1);
-});
+// Main execution block for running as a standalone script
+if (require.main === module) {
+  const port = Number(process.env.METRICS_PORT ?? 9464);
+  const host = process.env.METRICS_HOST ?? "127.0.0.1";
 
-process.on('unhandledRejection', (reason) => {
-  logger.error({
-    error: String(reason),
-  }, 'Unhandled promise rejection');
-  process.exit(1);
-});
+  startMetricsServer(port, host);
 
-export { server };
+  // Graceful shutdown
+  process.on('SIGTERM', () => {
+    logger.info({}, 'SIGTERM received, shutting down gracefully');
+    stopMetricsServer().finally(() => process.exit(0));
+  });
+
+  process.on('SIGINT', () => {
+    logger.info({}, 'SIGINT received, shutting down gracefully');
+    stopMetricsServer().finally(() => process.exit(0));
+  });
+
+  // Error handling
+  process.on('uncaughtException', (error) => {
+    logger.error({
+      error: error.message,
+      stack: error.stack,
+    }, 'Uncaught exception');
+    process.exit(1);
+  });
+
+  process.on('unhandledRejection', (reason) => {
+    logger.error({
+      error: String(reason),
+    }, 'Unhandled promise rejection');
+    process.exit(1);
+  });
+}

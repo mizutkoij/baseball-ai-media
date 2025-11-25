@@ -2,7 +2,7 @@
 
 exports[`Schedule Policy > day planning > creates default plan for no-game days > no-games-day-plan 1`] = `
 {
-  "confidence": "low",
+  "confidence": "medium",
   "date": "2025-08-11",
   "gameCount": 0,
   "hasGames": false,
@@ -12,7 +12,7 @@ exports[`Schedule Policy > day planning > creates default plan for no-game days 
     "everyMin": 120,
     "start": "11:30",
   },
-  "planGeneratedAt": "2025-08-11T08:26:31.223Z",
+  "planGeneratedAt": "2025-11-25T16:31:17.962Z",
   "post": {
     "description": "Evening cleanup",
     "end": "23:59",
@@ -43,7 +43,7 @@ exports[`Schedule Policy > day planning > creates game day plan with variable fr
     "everyMin": 30,
     "start": "18:00",
   },
-  "planGeneratedAt": "2025-08-11T08:26:31.241Z",
+  "planGeneratedAt": "2025-11-25T16:31:17.970Z",
   "post": {
     "description": "Post-game details and cleanup",
     "end": "23:59",

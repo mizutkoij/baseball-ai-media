@@ -61,7 +61,7 @@ export default function ColumnIndexPage() {
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-slate-900 mb-4">コラム一覧</h1>
         <p className="text-slate-600">
-          NPBの"使える分析"を短時間で学べる記事をまとめました。セイバーメトリクスの実践的な活用方法から指標の使い分けまで、
+          NPBの&quot;使える分析&quot;を短時間で学べる記事をまとめました。セイバーメトリクスの実践的な活用方法から指標の使い分けまで、
           データ分析の実務に役立つ情報を提供しています。
         </p>
       </div>

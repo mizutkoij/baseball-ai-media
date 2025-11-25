@@ -209,7 +209,7 @@ export default function DMCAPage() {
                     <div className="text-sm space-y-1">
                       <p><strong>組織:</strong> Baseball AI Media 運営チーム</p>
                       <p><strong>Email:</strong> dmca@baseball-ai-media.example.com</p>
-                      <p><strong>件名:</strong> "DMCA Takedown Notice" または "DMCA Counter-Notice"</p>
+                      <p><strong>件名:</strong> &quot;DMCA Takedown Notice&quot; または &quot;DMCA Counter-Notice&quot;</p>
                     </div>
                   </div>
                   

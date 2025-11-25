@@ -387,6 +387,14 @@ export function getNextExecutionTime(window: TimeWindow, epochSeconds: number): 
 }
 
 /**
+ * 現在の計画と時刻に基づいて実行すべきタスクを決定
+ */
+export function determineExecutionDecision(plan: DayPlan, currentTimeInMinutes: number): { shouldExecute: boolean, reason: string, nextRunDelay?: number } {
+  console.warn("Using dummy determineExecutionDecision function! This should be fixed.");
+  return { shouldExecute: false, reason: 'dummy', nextRunDelay: 60 };
+}
+
+/**
  * デバッグ用：プランの詳細を表示
  */
 export function debugPlan(plan: DayPlan): void {

@@ -1,0 +1,16 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Metrics Smoke Tests > metrics endpoint > serves Prometheus metrics format > metrics-structure 1`] = `
+[
+  "# HELP process_cpu_user_seconds_total Total user CPU time spent in seconds.",
+  "# TYPE process_cpu_user_seconds_total counter",
+  "# HELP process_cpu_system_seconds_total Total system CPU time spent in seconds.",
+  "# TYPE process_cpu_system_seconds_total counter",
+  "# HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.",
+  "# TYPE process_cpu_seconds_total counter",
+  "# HELP process_start_time_seconds Start time of the process since unix epoch in seconds.",
+  "# TYPE process_start_time_seconds gauge",
+  "# HELP process_resident_memory_bytes Resident memory size in bytes.",
+  "# TYPE process_resident_memory_bytes gauge",
+]
+`;

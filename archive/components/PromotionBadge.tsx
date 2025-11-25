@@ -222,10 +222,6 @@ export const PromotionList: React.FC<PromotionListProps> = ({
   promotions,
   title = "昇格注目選手"
 }) => {
-  if (!promotions || promotions.length === 0) {
-    return null;
-  }
-
   // Track analytics for promotion list view
   React.useEffect(() => {
     if (typeof window !== 'undefined' && (window as any).gtag && promotions.length > 0) {
@@ -238,6 +234,10 @@ export const PromotionList: React.FC<PromotionListProps> = ({
       });
     }
   }, [promotions]);
+
+  if (!promotions || promotions.length === 0) {
+    return null;
+  }
 
   return (
     <div className="bg-black/20 backdrop-blur-md border border-white/10 rounded-lg p-6">

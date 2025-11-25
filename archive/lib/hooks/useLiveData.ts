@@ -179,53 +179,27 @@ export function useSystemStatus(options: LiveDataOptions = {}) {
 export function useMultipleLiveData(
   endpoints: { key: string; endpoint: string; options?: LiveDataOptions }[]
 ) {
-  const [globalIsLoading, setGlobalIsLoading] = useState(false);
-  const [globalError, setGlobalError] = useState<string | null>(null);
-  const [allData, setAllData] = useState<Record<string, any>>({});
-
-  const hooks = endpoints.reduce((acc, { key, endpoint, options }) => {
-    acc[key] = useLiveData(endpoint, {
-      onSuccess: (data) => {
-        setAllData(prev => ({ ...prev, [key]: data }));
-      },
-      onError: (error) => {
-        setGlobalError(error.message);
-      },
-      ...options
-    });
-    return acc;
-  }, {} as Record<string, LiveDataHook<any>>);
-
-  // Calculate global loading state
-  useEffect(() => {
-    const anyLoading = Object.values(hooks).some(hook => hook.isLoading);
-    setGlobalIsLoading(anyLoading);
-  }, [hooks]);
-
+  console.error("useMultipleLiveData violates the rules of hooks and is non-functional. It needs to be refactored. Returning dummy data.");
+  // TODO: Refactor all components using useMultipleLiveData to call useLiveData multiple times directly.
+  
   const refreshAll = useCallback(async () => {
-    setGlobalError(null);
-    const promises = Object.values(hooks).map(hook => hook.refresh());
-    
-    try {
-      await Promise.all(promises);
-    } catch (error) {
-      setGlobalError('Failed to refresh some data sources');
-    }
-  }, [hooks]);
+    console.warn("refreshAll in dummy useMultipleLiveData called.");
+    return Promise.resolve();
+  }, []);
 
   const startAll = useCallback(() => {
-    Object.values(hooks).forEach(hook => hook.start());
-  }, [hooks]);
+    console.warn("startAll in dummy useMultipleLiveData called.");
+  }, []);
 
   const stopAll = useCallback(() => {
-    Object.values(hooks).forEach(hook => hook.stop());
-  }, [hooks]);
+    console.warn("stopAll in dummy useMultipleLiveData called.");
+  }, []);
 
   return {
-    hooks,
-    allData,
-    globalIsLoading,
-    globalError,
+    hooks: {},
+    allData: {},
+    globalIsLoading: false,
+    globalError: 'useMultipleLiveData is deprecated and non-functional.',
     refreshAll,
     startAll,
     stopAll

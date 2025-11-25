@@ -932,7 +932,7 @@ export default function KBOLeaguePage() {
                 <p className="text-slate-700">
                   KBO has gained global attention, especially after several Korean players succeeded in MLB. 
                   The league features high-quality baseball with passionate fan culture and is considered 
-                  one of Asia's premier professional baseball leagues.
+                  one of Asia&apos;s premier professional baseball leagues.
                 </p>
               </div>
 

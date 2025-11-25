@@ -31,10 +31,6 @@ const TeamDistribution: React.FC<TeamDistributionProps> = ({
   team,
   distributions
 }) => {
-  if (!distributions || distributions.length === 0) {
-    return null;
-  }
-
   // Track analytics for distribution view
   React.useEffect(() => {
     if (typeof window !== 'undefined' && (window as any).gtag && distributions.length > 0) {
@@ -49,6 +45,10 @@ const TeamDistribution: React.FC<TeamDistributionProps> = ({
       });
     }
   }, [year, team, distributions]);
+
+  if (!distributions || distributions.length === 0) {
+    return null;
+  }
 
   const getBarColor = (type: 'wRC_plus' | 'FIP_minus') => {
     return type === 'wRC_plus' 
