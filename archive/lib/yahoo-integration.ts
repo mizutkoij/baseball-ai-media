@@ -1,21 +1,14 @@
 import Database from 'better-sqlite3';
-import sqlite3 from 'sqlite3';
-import { promisify } from 'util';
 
 // Yahoo データベース接続
-function getYahooConnection() {
+function getYahooConnection(): Database.Database {
   const dbPath = process.env.YAHOO_DB_PATH || './data/yahoo_scraping/database/yahoo_baseball.db';
-  const db = new sqlite3.Database(dbPath);
-  
-  return {
-    get: promisify(db.get.bind(db)),
-    all: promisify(db.all.bind(db)),
-    close: promisify(db.close.bind(db))
-  };
+  // better-sqlite3 is synchronous, which is simpler for this script's context.
+  return new Database(dbPath);
 }
 
 // NPB メインデータベース接続
-function getNPBConnection() {
+function getNPBConnection(): Database.Database {
   const dbPath = process.env.COMPREHENSIVE_DB_PATH || './comprehensive_baseball_database.db';
   return new Database(dbPath);
 }
@@ -51,7 +44,7 @@ export interface YahooPitchData {
 }
 
 export class YahooDataIntegrator {
-  private yahooDb: any;
+  private yahooDb: Database.Database | null;
   private npbDb: Database.Database;
 
   constructor() {
@@ -59,15 +52,18 @@ export class YahooDataIntegrator {
     this.npbDb = getNPBConnection();
   }
 
-  async connect() {
-    this.yahooDb = getYahooConnection();
+  connect() {
+    if (!this.yahooDb) {
+        this.yahooDb = getYahooConnection();
+    }
   }
 
-  async disconnect() {
+  disconnect() {
     if (this.yahooDb) {
-      await this.yahooDb.close();
+      this.yahooDb.close();
+      this.yahooDb = null;
     }
-    if (this.npbDb) {
+    if (this.npbDb && this.npbDb.open) {
       this.npbDb.close();
     }
   }
@@ -75,16 +71,16 @@ export class YahooDataIntegrator {
   /**
    * Yahoo で収集された試合データを取得
    */
-  async getYahooGames(options: {
+  getYahooGames(options: {
     processed?: boolean;
     date?: string;
     limit?: number;
   } = {}) {
-    if (!this.yahooDb) await this.connect();
+    this.connect();
 
     let query = 'SELECT * FROM games';
-    const conditions = [];
-    const params = [];
+    const conditions: string[] = [];
+    const params: (string | number)[] = [];
 
     if (options.processed !== undefined) {
       conditions.push('processed = ?');
@@ -107,25 +103,25 @@ export class YahooDataIntegrator {
       params.push(options.limit);
     }
 
-    return await this.yahooDb.all(query, params) as YahooGameData[];
+    return this.yahooDb!.prepare(query).all(...params) as YahooGameData[];
   }
 
   /**
    * 特定試合の詳細な一球速報データを取得
    */
-  async getGamePitchData(gameId: string) {
-    if (!this.yahooDb) await this.connect();
+  getGamePitchData(gameId: string) {
+    this.connect();
 
-    const pitches = await this.yahooDb.all(`
+    const stmt = this.yahooDb!.prepare(`
       SELECT * FROM pitch_data 
       WHERE game_id = ? 
       ORDER BY inning, side, pitch_sequence
-    `, [gameId]) as YahooPitchData[];
+    `);
 
-    return pitches;
+    return stmt.all(gameId) as YahooPitchData[];
   }
-
-  /**
+  
+    /**
    * Yahoo チーム名を NPB 標準チーム名にマッピング
    */
   private mapYahooTeamToNPB(yahooTeam: string): string {
@@ -150,7 +146,7 @@ export class YahooDataIntegrator {
   /**
    * Yahoo試合データをNPBデータベースに統合
    */
-  async integrateGameData(yahooGame: YahooGameData) {
+  integrateGameData(yahooGame: YahooGameData) {
     try {
       const npbHomeTeam = this.mapYahooTeamToNPB(yahooGame.home_team);
       const npbAwayTeam = this.mapYahooTeamToNPB(yahooGame.away_team);
@@ -187,7 +183,7 @@ export class YahooDataIntegrator {
   /**
    * 一球速報データをNPBデータベースに統合
    */
-  async integratePitchData(gameId: string, pitches: YahooPitchData[]) {
+  integratePitchData(gameId: string, pitches: YahooPitchData[]) {
     try {
       const npbGameId = `yahoo_${gameId}`;
 
@@ -239,12 +235,12 @@ export class YahooDataIntegrator {
   /**
    * Yahoo データの完全同期
    */
-  async syncAllData(options: { onProgress?: (progress: any) => void } = {}) {
+  syncAllData(options: { onProgress?: (progress: any) => void } = {}) {
     try {
-      await this.connect();
+      this.connect();
 
       // 処理済みYahoo試合を取得
-      const processedGames = await this.getYahooGames({ processed: true });
+      const processedGames = this.getYahooGames({ processed: true });
       
       let syncedGames = 0;
       let syncedPitches = 0;
@@ -252,12 +248,12 @@ export class YahooDataIntegrator {
       for (const game of processedGames) {
         try {
           // 試合データ統合
-          const npbGameId = await this.integrateGameData(game);
+          const npbGameId = this.integrateGameData(game);
           
           // 一球速報データ統合
-          const pitches = await this.getGamePitchData(game.game_id);
+          const pitches = this.getGamePitchData(game.game_id);
           if (pitches.length > 0) {
-            const pitchCount = await this.integratePitchData(game.game_id, pitches);
+            const pitchCount = this.integratePitchData(game.game_id, pitches);
             syncedPitches += pitchCount;
           }
 
@@ -285,58 +281,58 @@ export class YahooDataIntegrator {
       };
 
     } finally {
-      await this.disconnect();
+      this.disconnect();
     }
   }
 
-  /**
+    /**
    * 同期統計情報取得
    */
-  async getSyncStats() {
-    try {
-      await this.connect();
-
-      const yahooStats = await this.yahooDb.get(`
-        SELECT 
-          COUNT(*) as total_games,
-          COUNT(CASE WHEN processed = 1 THEN 1 END) as processed_games,
-          COUNT(CASE WHEN processed = 0 THEN 1 END) as pending_games
-        FROM games
-      `);
-
-      const yahooPitchStats = await this.yahooDb.get(`
-        SELECT 
-          COUNT(*) as total_pitches,
-          COUNT(DISTINCT game_id) as games_with_pitches
-        FROM pitch_data
-      `);
-
-      // NPB データベースでのYahoo由来データ
-      const npbYahooGames = this.npbDb.prepare(`
-        SELECT COUNT(*) as count FROM games WHERE data_source = 'yahoo'
-      `).get() as { count: number };
-
-      const npbYahooPitches = this.npbDb.prepare(`
-        SELECT COUNT(*) as count FROM pitch_by_pitch WHERE data_source = 'yahoo'
-      `).get() as { count: number };
-
-      return {
-        yahoo: {
-          games: yahooStats,
-          pitches: yahooPitchStats
-        },
-        npb_integrated: {
-          games: npbYahooGames.count,
-          pitches: npbYahooPitches.count
-        },
-        sync_rate: yahooStats.processed_games > 0 ? 
-          (npbYahooGames.count / yahooStats.processed_games * 100).toFixed(1) : '0.0'
-      };
-
-    } finally {
-      await this.disconnect();
-    }
-  }
+    getSyncStats() {
+        try {
+          this.connect();
+    
+          const yahooStats = this.yahooDb!.prepare(`
+            SELECT 
+              COUNT(*) as total_games,
+              COUNT(CASE WHEN processed = 1 THEN 1 END) as processed_games,
+              COUNT(CASE WHEN processed = 0 THEN 1 END) as pending_games
+            FROM games
+          `).get() as any;
+    
+          const yahooPitchStats = this.yahooDb!.prepare(`
+            SELECT 
+              COUNT(*) as total_pitches,
+              COUNT(DISTINCT game_id) as games_with_pitches
+            FROM pitch_data
+          `).get() as any;
+    
+          // NPB データベースでのYahoo由来データ
+          const npbYahooGames = this.npbDb.prepare(`
+            SELECT COUNT(*) as count FROM games WHERE data_source = 'yahoo'
+          `).get() as { count: number };
+    
+          const npbYahooPitches = this.npbDb.prepare(`
+            SELECT COUNT(*) as count FROM pitch_by_pitch WHERE data_source = 'yahoo'
+          `).get() as { count: number };
+    
+          return {
+            yahoo: {
+              games: yahooStats,
+              pitches: yahooPitchStats
+            },
+            npb_integrated: {
+              games: npbYahooGames.count,
+              pitches: npbYahooPitches.count
+            },
+            sync_rate: yahooStats.processed_games > 0 ? 
+              (npbYahooGames.count / yahooStats.processed_games * 100).toFixed(1) : '0.0'
+          };
+    
+        } finally {
+          this.disconnect();
+        }
+      }
 }
 
 export default YahooDataIntegrator;
