@@ -53,12 +53,8 @@ snapshots/
 
 # --- NEW RULES ---
 
-# Ignore artifacts from the moved application
-/archive/node_modules
-/archive/.next
-/archive/out
-/archive/.cache
-/archive/*.tsbuildinfo
+# Ignore the entire archive directory
+/archive/
 
 # Ignore top-level generated/temp folders that were untracked
 /output/
