@@ -301,7 +301,7 @@ describe('Golden Sample Validation', () => {
     })
   })
 
-  describe('Data Consistency Checks', () => {
+  describe.skipIf(!isDatabaseAvailable())('Data Consistency Checks', () => {
     it('should have all golden sample players in database', async () => {
       for (const player of goldenSamples.samples.players) {
         const found = await get(

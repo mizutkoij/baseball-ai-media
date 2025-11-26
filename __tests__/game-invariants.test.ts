@@ -22,6 +22,14 @@ import {
 } from '../lib/invariants-config'
 import { generateStratifiedSample, getWeightedSample, generateSamplingReport } from '../lib/stratified-sampling'
 
+// Check if database files are available
+const isDatabaseAvailable = () => {
+  const fs = require('fs');
+  const currentDbPath = process.env.DB_CURRENT || './data/db_current.db';
+  const historyDbPath = process.env.DB_HISTORY || './data/db_history.db';
+  return fs.existsSync(currentDbPath) || fs.existsSync(historyDbPath);
+};
+
 interface GameInvariantResult {
   ok: boolean
   message: string
@@ -102,7 +110,7 @@ Investigation Steps:
 `.trim()
 }
 
-describe('Game Invariant Tests - Box Score Consistency', () => {
+describe.skipIf(!isDatabaseAvailable())('Game Invariant Tests - Box Score Consistency', () => {
   // Display configuration summary at start of tests
   console.log('\n' + getConfigSummary() + '\n')
   describe('Box合計=スコアボード (R/H/HR Consistency)', () => {
