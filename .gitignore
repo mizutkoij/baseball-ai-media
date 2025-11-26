@@ -37,6 +37,7 @@ next-env.d.ts
 
 # Baseball AI Media specific
 /data
+!data/golden_samples.json
 /logs
 *.duckdb
 *.db
