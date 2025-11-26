@@ -1,0 +1,21 @@
+{
+  "name": "baseball-ai-media-api-server",
+  "version": "1.0.0",
+  "description": "Standalone API server for serving player detailed statistics",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["baseball", "npb", "api"],
+  "author": "Baseball AI Media Team",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "compression": "^1.7.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

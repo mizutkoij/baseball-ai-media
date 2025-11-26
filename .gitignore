@@ -73,3 +73,5 @@ snapshots/
 *.txt
 gemini_log.txt
 GEMINI.md
+# API Server
+/api-server/node_modules
