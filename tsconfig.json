@@ -38,6 +38,10 @@
   "exclude": [
     "node_modules",
     "archive",
-    ".next"
+    ".next",
+    "__tests__",
+    "scripts",
+    "**/*.test.ts",
+    "**/*.test.tsx"
   ]
 }

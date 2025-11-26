@@ -7,9 +7,10 @@ export default defineConfig({
     setupFiles: ["./tests/setup.ts"],
     environment: 'node',
     include: ['**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
-    exclude: ['node_modules', '.next', 'dist', 'archive', '__tests__'],
+    exclude: ['node_modules', '.next', 'dist', 'archive', 'scripts/**/*.test.ts'],
     testTimeout: 30000, // 30s for database operations
-    coverage: { 
+    coverage: {
+      provider: 'v8',
       reporter: ["text", "lcov", "html"],
       exclude: [
         "**/tests/**",

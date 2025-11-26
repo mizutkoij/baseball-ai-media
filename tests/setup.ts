@@ -18,7 +18,7 @@ process.env.TZ = "Asia/Tokyo";
 // テスト用データディレクトリ
 const TEST_DATA_DIR = path.join(process.cwd(), "tmp_test_data");
 process.env.DATA_DIR = TEST_DATA_DIR;
-process.env.NODE_ENV = "test";
+(process.env as any).NODE_ENV = "test";
 
 // ログレベルを抑制（テスト出力をクリーンに）
 process.env.LOG_LEVEL = "warn";
