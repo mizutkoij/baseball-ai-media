@@ -30,8 +30,8 @@ export async function GET(
         'Accept': 'application/json',
       },
       // Cache for 5 minutes
-      next: { revalidate: 300 }
-    });
+      cache: 'no-store'
+    } as RequestInit);
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
