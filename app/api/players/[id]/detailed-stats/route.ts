@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 // External API server URL - update this after deployment
-const API_SERVER_URL = process.env.NEXT_PUBLIC_STATS_API_URL || 'http://133.18.111.227:3001';
+const API_SERVER_URL = process.env.NEXT_PUBLIC_STATS_API_URL || 'http://133.18.115.175:3001';
 
 export async function GET(
   request: NextRequest,
