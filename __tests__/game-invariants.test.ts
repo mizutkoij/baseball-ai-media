@@ -10,17 +10,17 @@
  */
 
 import { describe, it, expect } from 'vitest'
-import { query, get } from '@/lib/db'
-import { 
-  getAdjustedTolerance, 
-  buildExclusionClause, 
+import { query, get } from '../lib/db'
+import {
+  getAdjustedTolerance,
+  buildExclusionClause,
   getSamplingConfig,
   getStratifiedSamplingConfig,
   isInvariantEnabled,
   getInvariantConfig,
-  getConfigSummary 
-} from '@/lib/invariants-config'
-import { generateStratifiedSample, getWeightedSample, generateSamplingReport } from '@/lib/stratified-sampling'
+  getConfigSummary
+} from '../lib/invariants-config'
+import { generateStratifiedSample, getWeightedSample, generateSamplingReport } from '../lib/stratified-sampling'
 
 interface GameInvariantResult {
   ok: boolean

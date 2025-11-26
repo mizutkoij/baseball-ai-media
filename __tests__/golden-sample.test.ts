@@ -5,8 +5,8 @@
  */
 
 import { describe, it, expect, beforeAll } from 'vitest'
-import { query, get } from '@/lib/db'
-import goldenSamples from '@/data/golden_samples.json'
+import { query, get } from '../lib/db'
+import goldenSamples from '../data/golden_samples.json'
 import { 
   inRangeWithSampleGuard, 
   isExpectedYear, 

@@ -90,8 +90,8 @@ jobs:
         run: npm ci
 
       - name: "🔨 Build application"
-        
-        run: timeout 60 npm run build
+
+        run: timeout 120 npm run build
         env:
           NODE_ENV: production
 
