@@ -1,0 +1,116 @@
+{
+  "central_league": [
+    {
+      "team": "阪神",
+      "games": 0,
+      "wins": 0,
+      "losses": 0,
+      "draws": 0,
+      "win_rate": 0.000,
+      "games_behind": 0.0
+    },
+    {
+      "team": "巨人",
+      "games": 0,
+      "wins": 0,
+      "losses": 0,
+      "draws": 0,
+      "win_rate": 0.000,
+      "games_behind": 0.0
+    },
+    {
+      "team": "広島",
+      "games": 0,
+      "wins": 0,
+      "losses": 0,
+      "draws": 0,
+      "win_rate": 0.000,
+      "games_behind": 0.0
+    },
+    {
+      "team": "DeNA",
+      "games": 0,
+      "wins": 0,
+      "losses": 0,
+      "draws": 0,
+      "win_rate": 0.000,
+      "games_behind": 0.0
+    },
+    {
+      "team": "中日",
+      "games": 0,
+      "wins": 0,
+      "losses": 0,
+      "draws": 0,
+      "win_rate": 0.000,
+      "games_behind": 0.0
+    },
+    {
+      "team": "ヤクルト",
+      "games": 0,
+      "wins": 0,
+      "losses": 0,
+      "draws": 0,
+      "win_rate": 0.000,
+      "games_behind": 0.0
+    }
+  ],
+  "pacific_league": [
+    {
+      "team": "ソフトバンク",
+      "games": 0,
+      "wins": 0,
+      "losses": 0,
+      "draws": 0,
+      "win_rate": 0.000,
+      "games_behind": 0.0
+    },
+    {
+      "team": "オリックス",
+      "games": 0,
+      "wins": 0,
+      "losses": 0,
+      "draws": 0,
+      "win_rate": 0.000,
+      "games_behind": 0.0
+    },
+    {
+      "team": "楽天",
+      "games": 0,
+      "wins": 0,
+      "losses": 0,
+      "draws": 0,
+      "win_rate": 0.000,
+      "games_behind": 0.0
+    },
+    {
+      "team": "ロッテ",
+      "games": 0,
+      "wins": 0,
+      "losses": 0,
+      "draws": 0,
+      "win_rate": 0.000,
+      "games_behind": 0.0
+    },
+    {
+      "team": "西武",
+      "games": 0,
+      "wins": 0,
+      "losses": 0,
+      "draws": 0,
+      "win_rate": 0.000,
+      "games_behind": 0.0
+    },
+    {
+      "team": "日本ハム",
+      "games": 0,
+      "wins": 0,
+      "losses": 0,
+      "draws": 0,
+      "win_rate": 0.000,
+      "games_behind": 0.0
+    }
+  ],
+  "last_updated": "2025-11-26",
+  "season": 2025
+}
