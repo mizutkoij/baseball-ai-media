@@ -148,8 +148,9 @@ export default function HistoricalGameDetail({ gameId }: HistoricalGameDetailPro
             const awayTeamName = game.away_team || game.awayTeam || '';
             
             // APIの実際の形式に対応: team名でアクセス
-            const homeTeamData = batting[homeTeamName] || batting['阪神'] || batting['DeNA'];
-            const awayTeamData = batting[awayTeamName] || batting['巨人'] || batting['阪神'];
+            const battingData = apiResponse.data.batting;
+            const homeTeamData = battingData[homeTeamName] || battingData['阪神'] || battingData['DeNA'];
+            const awayTeamData = battingData[awayTeamName] || battingData['巨人'] || battingData['阪神'];
             
             if (homeTeamData) {
               setHomePlayerStats(homeTeamData.map((p: any) => ({
