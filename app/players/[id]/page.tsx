@@ -10,6 +10,7 @@ import PlayerSummary, { PlayerSummaryLoading, PlayerSummaryError } from "@/compo
 import SimilarPlayers from "@/components/SimilarPlayers";
 import { NextNav } from "@/components/NextNav";
 import { ExportButton } from "@/components/ExportButton";
+import PlayerDetailedStats from "@/components/PlayerDetailedStats";
 // Remove direct DB import - will use API route instead
 export type PlayerDensityData = {
   has2024Data: boolean
@@ -184,6 +185,17 @@ export default function PlayerDetailPage({ params }: { params: { id: string } })
         .catch(console.error);
     }
   }, [player]);
+
+  // 詳細統計データの取得 (output/2025からのデータ)
+  const teamName = player?.batting?.[0]?.所属球団 || player?.pitching?.[0]?.所属球団;
+  const { data: detailedStats } = useSWR(
+    player && teamName ? `/api/players/${params.id}/detailed-stats?year=2025&team=${teamName}&name=${player.name}` : null,
+    fetcher,
+    {
+      revalidateOnFocus: false,
+      dedupingInterval: 600000,
+    }
+  );
 
   if (isLoading) {
     return (
@@ -736,6 +748,13 @@ export default function PlayerDetailPage({ params }: { params: { id: string } })
             ]}
           />
         </div>
+
+        {/* 詳細統計データ (2025シーズン) */}
+        {detailedStats && (
+          <div className="mt-8">
+            <PlayerDetailedStats stats={detailedStats} />
+          </div>
+        )}
 
         {/* 関連ナビゲーション - 深掘り導線固定 */}
         <div className="mt-8">
