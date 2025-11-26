@@ -1,0 +1,68 @@
+{
+  "player_id": "00002219700928X",
+  "name": "Ｂ．バンクス",
+  "name_kana": "BRIAN BANKS",
+  "url": "https://npb.jp/bis/players/73375111.html",
+  "first_year": 2000,
+  "last_year": 2000,
+  "primary_pos": "B",
+  "is_active": false,
+  "active_source": "confirmed_retired",
+  "batting": [
+    {
+      "年度": 2000,
+      "所属球団": "福岡ダイエー",
+      "試合": 32.0,
+      "打席": 83.0,
+      "打数": 74.0,
+      "得点": 6.0,
+      "安打": 11.0,
+      "二塁打": 2.0,
+      "三塁打": 0.0,
+      "本塁打": 0.0,
+      "塁打": 13.0,
+      "打点": 4.0,
+      "盗塁": 0.0,
+      "盗塁刺": 0.0,
+      "犠打": 0.0,
+      "犠飛": 0.0,
+      "四球": 8.0,
+      "死球": 1.0,
+      "三振": 23.0,
+      "併殺打": 1.0,
+      "打率": 0.149,
+      "長打率": 0.176,
+      "出塁率": 0.241,
+      "stats_type": "batting",
+      "OPS": 0.417,
+      "1B": 9.0,
+      "ISO": 0.027,
+      "BABIP": 0.216,
+      "OPS_plus_simple": 56.5,
+      "wOBA_simple": 0.2,
+      "wRC_plus_simple": 62.6
+    }
+  ],
+  "pitching": [],
+  "career": {
+    "batting": {
+      "年度数": 1,
+      "試合": 32.0,
+      "打席": 83.0,
+      "安打": 11.0,
+      "本塁打": 0.0,
+      "打点": 4.0,
+      "OPS": null
+    },
+    "pitching": {
+      "年度数": 0,
+      "登板": null,
+      "投球回": null,
+      "勝利": null,
+      "敗北": null,
+      "奪三振": null,
+      "防御率": null
+    }
+  },
+  "active_confidence": "確定"
+}

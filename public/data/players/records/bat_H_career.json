@@ -1,0 +1,628 @@
+{
+  "stat": "H",
+  "stat_name": "安打数",
+  "better": "high",
+  "type": "career",
+  "data": [
+    {
+      "player_id": "000012194006195",
+      "name": "張本　勲",
+      "total": 3085.0,
+      "seasons": 23,
+      "first_year": 1959,
+      "last_year": 1981,
+      "teams": [
+        "日本ハム",
+        "東映",
+        "ロッテ",
+        "読売",
+        "日拓"
+      ]
+    },
+    {
+      "player_id": "000012193506294",
+      "name": "野村　克也",
+      "total": 2901.0,
+      "seasons": 25,
+      "first_year": 1956,
+      "last_year": 1980,
+      "teams": [
+        "西武",
+        "ロッテ",
+        "南海"
+      ]
+    },
+    {
+      "player_id": "096912194802261",
+      "name": "門田　博光",
+      "total": 2566.0,
+      "seasons": 23,
+      "first_year": 1970,
+      "last_year": 1992,
+      "teams": [
+        "福岡ダイエー",
+        "オリックス",
+        "南海"
+      ]
+    },
+    {
+      "player_id": "000012194701181",
+      "name": "衣笠　祥雄",
+      "total": 2543.0,
+      "seasons": 23,
+      "first_year": 1965,
+      "last_year": 1987,
+      "teams": [
+        "広島東洋",
+        "広島"
+      ]
+    },
+    {
+      "player_id": "096812194711075",
+      "name": "福本　豊",
+      "total": 2543.0,
+      "seasons": 20,
+      "first_year": 1969,
+      "last_year": 1988,
+      "teams": [
+        "阪急"
+      ]
+    },
+    {
+      "player_id": "099112196804031",
+      "name": "金本　知憲",
+      "total": 2539.0,
+      "seasons": 20,
+      "first_year": 1993,
+      "last_year": 2012,
+      "teams": [
+        "広島東洋",
+        "阪神"
+      ]
+    },
+    {
+      "player_id": "098712196908193",
+      "name": "立浪　和義",
+      "total": 2480.0,
+      "seasons": 22,
+      "first_year": 1988,
+      "last_year": 2009,
+      "teams": [
+        "中日"
+      ]
+    },
+    {
+      "player_id": "000012193602204",
+      "name": "長嶋　茂雄",
+      "total": 2471.0,
+      "seasons": 17,
+      "first_year": 1958,
+      "last_year": 1974,
+      "teams": [
+        "読売"
+      ]
+    },
+    {
+      "player_id": "000012194312083",
+      "name": "土井　正博",
+      "total": 2452.0,
+      "seasons": 20,
+      "first_year": 1962,
+      "last_year": 1981,
+      "teams": [
+        "西武",
+        "クラウン",
+        "太平洋",
+        "近鉄"
+      ]
+    },
+    {
+      "player_id": "000612198812142",
+      "name": "坂本　勇人",
+      "total": 2432.0,
+      "seasons": 18,
+      "first_year": 2008,
+      "last_year": 2025,
+      "teams": [
+        "読売"
+      ]
+    },
+    {
+      "player_id": "098811197008250",
+      "name": "石井　琢朗",
+      "total": 2429.0,
+      "seasons": 21,
+      "first_year": 1992,
+      "last_year": 2012,
+      "teams": [
+        "広島東洋",
+        "横浜",
+        "横浜大洋"
+      ]
+    },
+    {
+      "player_id": "097812195312090",
+      "name": "落合　博満",
+      "total": 2371.0,
+      "seasons": 20,
+      "first_year": 1979,
+      "last_year": 1998,
+      "teams": [
+        "読売",
+        "ロッテ",
+        "日本ハム",
+        "中日"
+      ]
+    },
+    {
+      "player_id": "096812194610257",
+      "name": "山本　浩二",
+      "total": 2339.0,
+      "seasons": 18,
+      "first_year": 1969,
+      "last_year": 1986,
+      "teams": [
+        "広島東洋"
+      ]
+    },
+    {
+      "player_id": "000012193612050",
+      "name": "榎本　喜八",
+      "total": 2314.0,
+      "seasons": 18,
+      "first_year": 1955,
+      "last_year": 1972,
+      "teams": [
+        "ロッテ",
+        "毎日",
+        "東京",
+        "大毎",
+        "西鉄"
+      ]
+    },
+    {
+      "player_id": "000011192003231",
+      "name": "川上　哲治",
+      "total": 2309.0,
+      "seasons": 17,
+      "first_year": 1939,
+      "last_year": 1958,
+      "teams": [
+        "巨人",
+        "読売"
+      ]
+    },
+    {
+      "player_id": "000012194107173",
+      "name": "高木　守道",
+      "total": 2274.0,
+      "seasons": 21,
+      "first_year": 1960,
+      "last_year": 1980,
+      "teams": [
+        "中日"
+      ]
+    },
+    {
+      "player_id": "000012193205017",
+      "name": "山内　一弘",
+      "total": 2271.0,
+      "seasons": 19,
+      "first_year": 1952,
+      "last_year": 1970,
+      "teams": [
+        "広島東洋",
+        "大毎",
+        "阪神",
+        "毎日"
+      ]
+    },
+    {
+      "player_id": "000012194503050",
+      "name": "大杉　勝男",
+      "total": 2228.0,
+      "seasons": 19,
+      "first_year": 1965,
+      "last_year": 1983,
+      "teams": [
+        "東映",
+        "ヤクルト",
+        "日本ハム",
+        "日拓"
+      ]
+    },
+    {
+      "player_id": "096812195010160",
+      "name": "大島　康徳",
+      "total": 2204.0,
+      "seasons": 24,
+      "first_year": 1971,
+      "last_year": 1994,
+      "teams": [
+        "日本ハム",
+        "中日"
+      ]
+    },
+    {
+      "player_id": "099812197701300",
+      "name": "新井　貴浩",
+      "total": 2203.0,
+      "seasons": 20,
+      "first_year": 1999,
+      "last_year": 2018,
+      "teams": [
+        "広島東洋",
+        "阪神"
+      ]
+    },
+    {
+      "player_id": "000012198208040",
+      "name": "内川　聖一",
+      "total": 2182.0,
+      "seasons": 19,
+      "first_year": 2002,
+      "last_year": 2021,
+      "teams": [
+        "東京ヤクルト",
+        "福岡ソフトバンク",
+        "横浜"
+      ]
+    },
+    {
+      "player_id": "097012194704179",
+      "name": "若松　勉",
+      "total": 2173.0,
+      "seasons": 19,
+      "first_year": 1971,
+      "last_year": 1989,
+      "teams": [
+        "ヤクルト"
+      ]
+    },
+    {
+      "player_id": "099412197208030",
+      "name": "稲葉　篤紀",
+      "total": 2167.0,
+      "seasons": 20,
+      "first_year": 1995,
+      "last_year": 2014,
+      "teams": [
+        "ヤクルト",
+        "北海道日本ハム"
+      ]
+    },
+    {
+      "player_id": "000011193608275",
+      "name": "広瀬　叔功",
+      "total": 2157.0,
+      "seasons": 22,
+      "first_year": 1956,
+      "last_year": 1977,
+      "teams": [
+        "南海"
+      ]
+    },
+    {
+      "player_id": "098012196204060",
+      "name": "秋山　幸二",
+      "total": 2156.0,
+      "seasons": 19,
+      "first_year": 1984,
+      "last_year": 2002,
+      "teams": [
+        "西武",
+        "福岡ダイエー"
+      ]
+    },
+    {
+      "player_id": "000112198309031",
+      "name": "栗山　巧",
+      "total": 2149.0,
+      "seasons": 21,
+      "first_year": 2005,
+      "last_year": 2025,
+      "teams": [
+        "西武",
+        "埼玉西武"
+      ]
+    },
+    {
+      "player_id": "099412197011056",
+      "name": "宮本　慎也",
+      "total": 2133.0,
+      "seasons": 19,
+      "first_year": 1995,
+      "last_year": 2013,
+      "teams": [
+        "ヤクルト",
+        "東京ヤクルト"
+      ]
+    },
+    {
+      "player_id": "000012197903200",
+      "name": "阿部　慎之助",
+      "total": 2132.0,
+      "seasons": 19,
+      "first_year": 2001,
+      "last_year": 2019,
+      "teams": [
+        "読売"
+      ]
+    },
+    {
+      "player_id": "098512196708181",
+      "name": "清原　和博",
+      "total": 2122.0,
+      "seasons": 22,
+      "first_year": 1986,
+      "last_year": 2008,
+      "teams": [
+        "西武",
+        "読売",
+        "オリックス"
+      ]
+    },
+    {
+      "player_id": "099612197310250",
+      "name": "小笠原　道大",
+      "total": 2120.0,
+      "seasons": 19,
+      "first_year": 1997,
+      "last_year": 2015,
+      "teams": [
+        "中日",
+        "北海道日本ハム",
+        "日本ハム",
+        "読売"
+      ]
+    },
+    {
+      "player_id": "098912197106146",
+      "name": "前田　智徳",
+      "total": 2115.0,
+      "seasons": 22,
+      "first_year": 1990,
+      "last_year": 2012,
+      "teams": [
+        "広島東洋"
+      ]
+    },
+    {
+      "player_id": "098812197012213",
+      "name": "谷繁　元信",
+      "total": 2108.0,
+      "seasons": 27,
+      "first_year": 1989,
+      "last_year": 2015,
+      "teams": [
+        "横浜",
+        "中日",
+        "横浜大洋"
+      ]
+    },
+    {
+      "player_id": "099112197307244",
+      "name": "中村　紀洋",
+      "total": 2100.0,
+      "seasons": 21,
+      "first_year": 1992,
+      "last_year": 2014,
+      "teams": [
+        "横浜DeNA",
+        "中日",
+        "近鉄",
+        "大阪近鉄",
+        "オリックス",
+        "東北楽天",
+        "横浜"
+      ]
+    },
+    {
+      "player_id": "000312198106263",
+      "name": "鳥谷　敬",
+      "total": 2099.0,
+      "seasons": 18,
+      "first_year": 2004,
+      "last_year": 2021,
+      "teams": [
+        "阪神",
+        "千葉ロッテ"
+      ]
+    },
+    {
+      "player_id": "000012194401136",
+      "name": "松原　誠",
+      "total": 2092.0,
+      "seasons": 19,
+      "first_year": 1962,
+      "last_year": 1981,
+      "teams": [
+        "読売",
+        "大洋",
+        "横浜大洋"
+      ]
+    },
+    {
+      "player_id": "098912196508065",
+      "name": "古田　敦也",
+      "total": 2091.0,
+      "seasons": 17,
+      "first_year": 1990,
+      "last_year": 2006,
+      "teams": [
+        "ヤクルト",
+        "東京ヤクルト"
+      ]
+    },
+    {
+      "player_id": "099312197510236",
+      "name": "松井　稼頭央",
+      "total": 2090.0,
+      "seasons": 17,
+      "first_year": 1995,
+      "last_year": 2018,
+      "teams": [
+        "西武",
+        "埼玉西武",
+        "東北楽天"
+      ]
+    },
+    {
+      "player_id": "000012194612227",
+      "name": "山崎　裕之",
+      "total": 2081.0,
+      "seasons": 20,
+      "first_year": 1965,
+      "last_year": 1984,
+      "teams": [
+        "東京",
+        "西武",
+        "ロッテ"
+      ]
+    },
+    {
+      "player_id": "096512194710195",
+      "name": "藤田　平",
+      "total": 2064.0,
+      "seasons": 19,
+      "first_year": 1966,
+      "last_year": 1984,
+      "teams": [
+        "阪神"
+      ]
+    },
+    {
+      "player_id": "096912194709227",
+      "name": "谷沢　健一",
+      "total": 2060.0,
+      "seasons": 16,
+      "first_year": 1970,
+      "last_year": 1986,
+      "teams": [
+        "中日"
+      ]
+    },
+    {
+      "player_id": "000912198511090",
+      "name": "大島　洋平",
+      "total": 2059.0,
+      "seasons": 16,
+      "first_year": 2010,
+      "last_year": 2025,
+      "teams": [
+        "中日"
+      ]
+    },
+    {
+      "player_id": "000012193710060",
+      "name": "江藤　慎一",
+      "total": 2057.0,
+      "seasons": 18,
+      "first_year": 1959,
+      "last_year": 1976,
+      "teams": [
+        "太平洋",
+        "ロッテ",
+        "大洋",
+        "中日"
+      ]
+    },
+    {
+      "player_id": "096812194612170",
+      "name": "有藤　道世",
+      "total": 2057.0,
+      "seasons": 18,
+      "first_year": 1969,
+      "last_year": 1986,
+      "teams": [
+        "ロッテ"
+      ]
+    },
+    {
+      "player_id": "096812194805241",
+      "name": "加藤　英司",
+      "total": 2054.0,
+      "seasons": 18,
+      "first_year": 1970,
+      "last_year": 1987,
+      "teams": [
+        "阪急",
+        "読売",
+        "近鉄",
+        "広島東洋",
+        "南海"
+      ]
+    },
+    {
+      "player_id": "099612197206199",
+      "name": "和田　一浩",
+      "total": 2050.0,
+      "seasons": 19,
+      "first_year": 1997,
+      "last_year": 2015,
+      "teams": [
+        "西武",
+        "中日"
+      ]
+    },
+    {
+      "player_id": "099512197709130",
+      "name": "荒木　雅博",
+      "total": 2042.0,
+      "seasons": 19,
+      "first_year": 1997,
+      "last_year": 2018,
+      "teams": [
+        "中日"
+      ]
+    },
+    {
+      "player_id": "099312197110081",
+      "name": "小久保　裕紀",
+      "total": 2041.0,
+      "seasons": 18,
+      "first_year": 1994,
+      "last_year": 2012,
+      "teams": [
+        "読売",
+        "福岡ダイエー",
+        "福岡ソフトバンク"
+      ]
+    },
+    {
+      "player_id": "097412195204260",
+      "name": "新井　宏昌",
+      "total": 2038.0,
+      "seasons": 18,
+      "first_year": 1975,
+      "last_year": 1992,
+      "teams": [
+        "南海",
+        "近鉄"
+      ]
+    },
+    {
+      "player_id": "000812199011120",
+      "name": "浅村　栄斗",
+      "total": 2023.0,
+      "seasons": 16,
+      "first_year": 2010,
+      "last_year": 2025,
+      "teams": [
+        "埼玉西武",
+        "東北楽天"
+      ]
+    },
+    {
+      "player_id": "098812196609194",
+      "name": "野村　謙二郎",
+      "total": 2020.0,
+      "seasons": 17,
+      "first_year": 1989,
+      "last_year": 2005,
+      "teams": [
+        "広島東洋"
+      ]
+    }
+  ]
+}

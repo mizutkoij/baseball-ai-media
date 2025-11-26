@@ -1,0 +1,34 @@
+{
+  "player_id": "002312200508207",
+  "name": "山田　脩也",
+  "name_kana": "やまだ・しゅうや",
+  "url": "https://npb.jp/bis/players/63365159.html",
+  "first_year": null,
+  "last_year": null,
+  "primary_pos": "B",
+  "is_active": false,
+  "active_source": "heuristic",
+  "batting": [],
+  "pitching": [],
+  "career": {
+    "batting": {
+      "年度数": 0,
+      "試合": null,
+      "打席": null,
+      "安打": null,
+      "本塁打": null,
+      "打点": null,
+      "OPS": null
+    },
+    "pitching": {
+      "年度数": 0,
+      "登板": null,
+      "投球回": null,
+      "勝利": null,
+      "敗北": null,
+      "奪三振": null,
+      "防御率": null
+    }
+  },
+  "active_confidence": "推定"
+}
