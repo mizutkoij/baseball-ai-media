@@ -3,6 +3,23 @@ import Database from 'better-sqlite3';
 import path from 'path';
 import fs from 'fs';
 
+interface Player {
+  player_id: string;
+  name: string;
+  name_english: string;
+  team: string;
+  position: string;
+  uniform_number: number;
+  height: number;
+  weight: number;
+  birthdate: string;
+  debut_date: string;
+  throws: string;
+  bats: string;
+  created_at: string;
+  updated_at: string;
+}
+
 export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
@@ -47,7 +64,7 @@ export async function GET(
         WHERE player_id = ?
       `;
       
-      const player = db.prepare(playerQuery).get(playerId);
+      const player = db.prepare(playerQuery).get(playerId) as Player | undefined;
       
       // Try to load detailed stats from JSON file first
       const jsonFilePath = path.join(process.cwd(), 'data', 'player_database_npb', 'players', `${playerId}.json`);

@@ -3,6 +3,37 @@ import Database from 'better-sqlite3';
 
 const DB_PATH = process.env.COMPREHENSIVE_DB_PATH || './comprehensive_baseball_database.db';
 
+interface PitchStats {
+  total_pitches: number;
+  unique_pitchers: number;
+  unique_batters: number;
+  max_inning: number;
+}
+
+interface PitcherStat {
+  pitcher_name: string;
+  pitches_thrown: number;
+  strikes: number;
+  balls: number;
+  hits_allowed: number;
+  home_runs_allowed: number;
+  walks_allowed: number;
+  strikeouts: number;
+  avg_velocity: number;
+  first_inning: number;
+  last_inning: number;
+}
+
+interface BatterStat {
+  batter_name: string;
+  plate_appearances: number;
+  hits: number;
+  home_runs: number;
+  walks: number;
+  strikeouts: number;
+  rbis: number;
+}
+
 export async function GET(
   request: NextRequest,
   { params }: { params: { gameId: string } }
@@ -32,7 +63,7 @@ export async function GET(
         MAX(inning) as max_inning
       FROM pitch_by_pitch 
       WHERE game_id = ?
-    `).get(params.gameId);
+    `).get(params.gameId) as PitchStats | undefined;
 
     // 投手別統計
     const pitcherStats = db.prepare(`
@@ -52,7 +83,7 @@ export async function GET(
       WHERE game_id = ? 
       GROUP BY pitcher_name
       ORDER BY MIN(inning), COUNT(*) DESC
-    `).all(params.gameId);
+    `).all(params.gameId) as PitcherStat[];
 
     // 打者別統計
     const batterStats = db.prepare(`
@@ -68,7 +99,7 @@ export async function GET(
       WHERE game_id = ? 
       GROUP BY batter_name
       ORDER BY COUNT(*) DESC
-    `).all(params.gameId);
+    `).all(params.gameId) as BatterStat[];
 
     // イニング別得点（模擬データ - 実際の実装では別途スコアデータが必要）
     const inningScores = {
@@ -92,7 +123,7 @@ export async function GET(
         unique_batters: pitchStats?.unique_batters || 0,
         max_inning: pitchStats?.max_inning || 9
       },
-      pitcher_statistics: pitcherStats.map(pitcher => ({
+      pitcher_statistics: pitcherStats.map((pitcher: PitcherStat) => ({
         player_name: pitcher.pitcher_name,
         pitches_thrown: pitcher.pitches_thrown,
         strikes: pitcher.strikes,
@@ -104,7 +135,7 @@ export async function GET(
         avg_velocity: pitcher.avg_velocity ? Math.round(pitcher.avg_velocity) : null,
         innings_range: `${pitcher.first_inning}-${pitcher.last_inning}回`
       })),
-      batter_statistics: batterStats.map(batter => ({
+      batter_statistics: batterStats.map((batter: BatterStat) => ({
         player_name: batter.batter_name,
         plate_appearances: batter.plate_appearances,
         hits: batter.hits,

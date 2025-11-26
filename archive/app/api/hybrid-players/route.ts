@@ -13,9 +13,29 @@ interface NPBPlayer {
     生年月日: string;
     経歴: string;
     ドラフト: string;
+    ポジション?: string;
   };
   url: string;
   stats: any[];
+}
+
+interface DBPlayer {
+  player_id: string;
+  name: string;
+  team: string;
+  position: string;
+  uniform_number: number;
+  height: number;
+  weight: number;
+  birthdate: string;
+  debut_date: string;
+  throws: string;
+  bats: string;
+  batting_average: number;
+  home_runs: number;
+  rbis: number;
+  games: number;
+  data_source: string;
 }
 
 // Read NPB JSON player data
@@ -85,9 +105,9 @@ export async function GET(request: NextRequest) {
       dbSql += ' ORDER BY p.name LIMIT ? OFFSET ?';
       dbParams.push(limit, offset);
 
-      const dbPlayers = await query(dbSql, dbParams);
+      const dbPlayers = await query(dbSql, dbParams) as DBPlayer[];
       
-      allPlayers = allPlayers.concat(dbPlayers.map(p => ({
+      allPlayers = allPlayers.concat(dbPlayers.map((p: DBPlayer) => ({
         ...p,
         source: 'database',
         has_stats: p.batting_average !== null,

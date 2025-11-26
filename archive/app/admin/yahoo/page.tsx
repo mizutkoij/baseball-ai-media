@@ -21,7 +21,7 @@ export default function YahooAdminPage() {
         {/* リアルタイム一球速報 */}
         <section>
           <h2 className="text-2xl font-semibold mb-4">最新の一球速報</h2>
-          <LivePitchTracker autoRefresh={true} refreshInterval={30000} />
+          <LivePitchTracker />
         </section>
 
         {/* システム情報 */}

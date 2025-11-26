@@ -12,7 +12,7 @@ import TeamDistribution from "@/components/TeamDistribution";
 import { PromotionList } from "@/components/PromotionBadge";
 import TeamSchedule from "@/components/TeamSchedule";
 import TeamSplits from "@/components/TeamSplits";
-import { JsonLd } from "@/components/JsonLd";
+import JsonLd from "@/components/JsonLd";
 import { NextNav } from "@/components/NextNav";
 import { ExportButton } from "@/components/ExportButton";
 import RelatedNavigation from "@/components/RelatedNavigation";
@@ -303,11 +303,8 @@ export default function TeamPage({ params }: TeamPageProps) {
             <div className="flex items-center gap-2">
               {/* CSV エクスポートボタン */}
               <ExportButton 
-                scope="team" 
-                id={team}
-                season={year}
-                label="チームCSV出力"
-                className="text-sm"
+                data={teamData}
+                filename={`${teamName}_${year}`}
               />
               
               <button

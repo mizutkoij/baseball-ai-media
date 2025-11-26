@@ -21,6 +21,15 @@ const NPB_TEAMS = {
   'F': { code: 'F', shortName: '日本ハム', fullName: '北海道日本ハムファイターズ', league: 'pacific', primaryColor: '#87CEEB' }
 };
 
+interface PlayerStats {
+  batting_average: number;
+  home_runs: number;
+  rbis: number;
+  ops: number;
+  woba: number;
+  games: number;
+}
+
 export async function GET(request: NextRequest) {
   const searchParams = new URLSearchParams(request.url.split('?')[1] || '');
   
@@ -112,30 +121,30 @@ export async function GET(request: NextRequest) {
         ${league ? 'AND league = ?' : ''}
       `;
       
-      const allPlayersParams = [year];
+      const allPlayersParams: any[] = [year];
       if (league) allPlayersParams.push(league);
       
-      const allPlayers = db.prepare(allPlayersQuery).all(...allPlayersParams);
+      const allPlayers = db.prepare(allPlayersQuery).all(...allPlayersParams) as PlayerStats[];
       
       const leagueAverages = {
         batting_average: allPlayers.length > 0 ? 
-          Math.round((allPlayers.reduce((sum, p) => sum + p.batting_average, 0) / allPlayers.length) * 1000) / 1000 : 0,
+          Math.round((allPlayers.reduce((sum, p: PlayerStats) => sum + p.batting_average, 0) / allPlayers.length) * 1000) / 1000 : 0,
         home_runs: allPlayers.length > 0 ? 
-          Math.round((allPlayers.reduce((sum, p) => sum + p.home_runs, 0) / allPlayers.length) * 10) / 10 : 0,
+          Math.round((allPlayers.reduce((sum, p: PlayerStats) => sum + p.home_runs, 0) / allPlayers.length) * 10) / 10 : 0,
         rbis: allPlayers.length > 0 ? 
-          Math.round((allPlayers.reduce((sum, p) => sum + p.rbis, 0) / allPlayers.length) * 10) / 10 : 0,
+          Math.round((allPlayers.reduce((sum, p: PlayerStats) => sum + p.rbis, 0) / allPlayers.length) * 10) / 10 : 0,
         ops: allPlayers.length > 0 ? 
-          Math.round((allPlayers.reduce((sum, p) => sum + p.ops, 0) / allPlayers.length) * 1000) / 1000 : 0,
+          Math.round((allPlayers.reduce((sum, p: PlayerStats) => sum + p.ops, 0) / allPlayers.length) * 1000) / 1000 : 0,
         woba: allPlayers.length > 0 && allPlayers.some(p => p.woba) ? 
-          Math.round((allPlayers.filter(p => p.woba).reduce((sum, p) => sum + p.woba, 0) / allPlayers.filter(p => p.woba).length) * 1000) / 1000 : null
+          Math.round((allPlayers.filter(p => p.woba).reduce((sum, p: any) => sum + p.woba, 0) / allPlayers.filter(p => p.woba).length) * 1000) / 1000 : null
       };
       
       // Find league leaders
       const leaders = {
-        batting_average: allPlayers.length > 0 ? Math.max(...allPlayers.map(p => p.batting_average)) : 0,
-        home_runs: allPlayers.length > 0 ? Math.max(...allPlayers.map(p => p.home_runs)) : 0,
-        rbis: allPlayers.length > 0 ? Math.max(...allPlayers.map(p => p.rbis)) : 0,
-        ops: allPlayers.length > 0 ? Math.max(...allPlayers.map(p => p.ops)) : 0
+        batting_average: allPlayers.length > 0 ? Math.max(...allPlayers.map((p: PlayerStats) => p.batting_average)) : 0,
+        home_runs: allPlayers.length > 0 ? Math.max(...allPlayers.map((p: PlayerStats) => p.home_runs)) : 0,
+        rbis: allPlayers.length > 0 ? Math.max(...allPlayers.map((p: PlayerStats) => p.rbis)) : 0,
+        ops: allPlayers.length > 0 ? Math.max(...allPlayers.map((p: PlayerStats) => p.ops)) : 0
       };
       
       const response = {

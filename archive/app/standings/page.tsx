@@ -80,7 +80,7 @@ export default async function Page({ searchParams }: { searchParams: { year?: st
         </div>
         
         <div className="flex items-center gap-3">
-          <YearSelector currentYear={year} />
+          <YearSelector />
           
           <ShareButton 
             url={`https://baseball-ai-media.vercel.app/standings?year=${year}`}

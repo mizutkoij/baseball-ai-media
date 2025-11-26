@@ -16,6 +16,21 @@ const createConnection = async () => {
   })
 }
 
+interface NpbAvg {
+  league: string;
+  player_count: number;
+  avg_ops: number;
+  avg_woba: number;
+  avg_era: number;
+  avg_fip: number;
+}
+
+interface MlbAvg {
+  league: string;
+  player_count: number;
+  avg_metric: number;
+}
+
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
@@ -175,7 +190,7 @@ export async function GET(request: NextRequest) {
           AVG(CASE WHEN player_type = 'pitcher' THEN fip END) as avg_fip
         FROM npb_sabermetrics 
         WHERE season = ? AND player_type = ?
-      `, [npbSeason, playerType])
+      `, [npbSeason, playerType]) as [NpbAvg[], any];
 
       const [mlbAvg] = await connection.execute(`
         SELECT 
@@ -184,8 +199,8 @@ export async function GET(request: NextRequest) {
           AVG(${playerType === 'batter' ? 'ops' : 'era'}) as avg_metric
         FROM ${playerType === 'batter' ? 'mlb_batting_stats' : 'mlb_pitching_stats'}
         WHERE season = ?
-      `, [mlbSeason])
-
+      `, [mlbSeason]) as [MlbAvg[], any];
+      
       return createApiResponse({
         comparison: {
           npb: npbData,

@@ -87,6 +87,17 @@ function formatPlayerData(player: any, yearlyData: any[], league: string) {
   };
 }
 
+interface Player {
+  player_id: number;
+  full_name: string;
+  name: string;
+  name_kana: string;
+  official_url: string;
+  primary_position: string;
+  is_active: boolean;
+  league: string;
+}
+
 export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
@@ -106,7 +117,7 @@ export async function GET(
       WHERE player_id = ?
     `;
     
-    const player = db.prepare(playerQuery).get(playerId);
+    const player = db.prepare(playerQuery).get(playerId) as Player | undefined;
     
     if (!player) {
       return NextResponse.json({ error: 'Player not found' }, { status: 404 });

@@ -3,7 +3,7 @@
  */
 
 import { NextResponse } from 'next/server';
-import { openDatabase } from '@/lib/db';
+import { getLeagueConnection, League } from '@/lib/db';
 
 interface LiveGameData {
   gameId: string;
@@ -42,13 +42,41 @@ interface LiveGameData {
   };
 }
 
+interface Game {
+  game_id: string;
+  date: string;
+  home_team: string;
+  away_team: string;
+  venue: string;
+  status: 'scheduled' | 'live' | 'finished' | 'postponed';
+  home_score: number;
+  away_score: number;
+  inning: number;
+  top_bottom: 'top' | 'bottom';
+  updated_at: string;
+}
+
+interface Highlight {
+  type: 'homerun' | 'strikeout' | 'hit' | 'run';
+  description: string;
+  timestamp: string;
+}
+
+interface Pitcher {
+  team: string;
+  player_name: string;
+  era: number;
+  strikeouts: number;
+  pitch_count: number;
+}
+
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const date = searchParams.get('date') || new Date().toISOString().split('T')[0];
     const league = searchParams.get('league') || 'npb';
 
-    const db = openDatabase();
+    const db = getLeagueConnection(league as League);
     
     // Get today's games from database
     const query = `
@@ -70,9 +98,9 @@ export async function GET(request: Request) {
       ORDER BY g.scheduled_time ASC
     `;
     
-    const games = db.prepare(query).all(date, league);
+    const games = db.prepare(query).all(date, league) as Game[];
     
-    const liveGamesData: LiveGameData[] = games.map(game => {
+    const liveGamesData: LiveGameData[] = games.map((game: Game) => {
       const gameData: LiveGameData = {
         gameId: game.game_id,
         date: game.date,
@@ -108,7 +136,7 @@ export async function GET(request: Request) {
           ORDER BY timestamp DESC 
           LIMIT 3
         `;
-        const highlights = db.prepare(highlightsQuery).all(game.game_id);
+        const highlights = db.prepare(highlightsQuery).all(game.game_id) as Highlight[];
         if (highlights.length > 0) {
           gameData.highlights = highlights;
         }
@@ -130,11 +158,11 @@ export async function GET(request: Request) {
             JOIN player_stats p ON cp.player_id = p.player_id
             WHERE cp.game_id = ?
           `;
-          const pitchers = db.prepare(pitchingQuery).all(game.game_id);
+          const pitchers = db.prepare(pitchingQuery).all(game.game_id) as Pitcher[];
           
           if (pitchers.length >= 2) {
-            const homePitcher = pitchers.find(p => p.team === game.home_team);
-            const awayPitcher = pitchers.find(p => p.team === game.away_team);
+            const homePitcher = pitchers.find((p: Pitcher) => p.team === game.home_team);
+            const awayPitcher = pitchers.find((p: Pitcher) => p.team === game.away_team);
             
             if (homePitcher && awayPitcher) {
               gameData.pitchingStats = {

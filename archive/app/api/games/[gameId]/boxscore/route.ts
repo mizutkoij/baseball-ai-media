@@ -11,6 +11,35 @@ interface RouteContext {
   };
 }
 
+interface BattingStat {
+  team: string;
+  name: string;
+  batting_order: number;
+  position: string;
+  AB: number;
+  R: number;
+  H: number;
+  RBI: number;
+  BB: number;
+  SO: number;
+  HR: number;
+  AVG: number;
+  OPS: number;
+}
+
+interface PitchingStat {
+  team: string;
+  name: string;
+  result: string;
+  innings: string;
+  hits: number;
+  runs: number;
+  earned_runs: number;
+  walks: number;
+  strikeouts: number;
+  ERA: number;
+}
+
 export async function GET(request: NextRequest, context: RouteContext) {
   let resolvedParams: { gameId: string };
   try {
@@ -57,7 +86,7 @@ export async function GET(request: NextRequest, context: RouteContext) {
       ORDER BY team, batting_order
     `;
     
-    let battingStats = [];
+    let battingStats: BattingStat[] = [];
     try {
       battingStats = db.prepare(battingQuery).all(gameId) || [];
     } catch (error) {
@@ -73,7 +102,7 @@ export async function GET(request: NextRequest, context: RouteContext) {
       ORDER BY team
     `;
     
-    let pitchingStats = [];
+    let pitchingStats: PitchingStat[] = [];
     try {
       pitchingStats = db.prepare(pitchingQuery).all(gameId) || [];
     } catch (error) {

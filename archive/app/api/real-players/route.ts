@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { query } from '@/lib/db';
 
+interface CountResult {
+  total: number;
+}
+
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const limit = parseInt(searchParams.get('limit') || '50');
@@ -61,7 +65,7 @@ export async function GET(request: NextRequest) {
       ? 'SELECT COUNT(*) as total FROM players WHERE name LIKE ?'
       : 'SELECT COUNT(*) as total FROM players';
     const countParams = search ? [`%${search}%`] : [];
-    const countResult = await query(countSql, countParams);
+    const countResult = await query(countSql, countParams) as CountResult[];
     const total = countResult[0]?.total || 0;
 
     return NextResponse.json({

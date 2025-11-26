@@ -535,10 +535,8 @@ export default function PlayerDetailPage({ params }: { params: { id: string } })
               {/* CSV エクスポートボタン */}
               <div className="mb-3">
                 <ExportButton 
-                  scope="player" 
-                  id={player.player_id}
-                  label="選手データをCSV出力"
-                  className="mb-2"
+                  data={player}
+                  filename={`${player.name}_${player.player_id}`}
                 />
               </div>
 

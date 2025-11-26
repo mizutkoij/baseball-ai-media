@@ -3,7 +3,7 @@
  */
 
 import { NextResponse } from 'next/server';
-import { openDatabase } from '@/lib/db';
+import { getLeagueConnection, League } from '@/lib/db';
 
 interface LivePlayerStat {
   playerId: string;
@@ -47,7 +47,7 @@ export async function GET(request: Request) {
     const league = searchParams.get('league') || 'npb';
     const category = searchParams.get('category') || 'trending'; // trending, batters, pitchers, teams
 
-    const db = openDatabase();
+    const db = getLeagueConnection(league as League);
     
     let data: any = {};
 

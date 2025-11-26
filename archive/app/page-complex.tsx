@@ -46,7 +46,7 @@ export default function HomePage({ searchParams }: { searchParams: { filter?: st
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <FeatureCard
-              icon={BarChart3}
+              icon="BarChart3"
               title="リアルタイム順位表"
               description="セ・リーグ、パ・リーグの最新順位と勝敗記録を瞬時に更新"
               href={`/standings?league=${currentLeague}`}
@@ -59,7 +59,7 @@ export default function HomePage({ searchParams }: { searchParams: { filter?: st
             />
 
             <FeatureCard
-              icon={Target}
+              icon="Target"
               title="試合情報"
               description="スクレイピングデータによる正確な試合結果・スケジュール"
               href={`/games?league=${currentLeague}`}
@@ -71,7 +71,7 @@ export default function HomePage({ searchParams }: { searchParams: { filter?: st
             />
 
             <FeatureCard
-              icon={TrendingUp}
+              icon="TrendingUp"
               title="ランキング"
               description="wRC+・ERA-等主要指標のTOP20プレイヤー"
               href={`/rankings?league=${currentLeague}`}
@@ -83,7 +83,7 @@ export default function HomePage({ searchParams }: { searchParams: { filter?: st
             />
 
             <FeatureCard
-              icon={Zap}
+              icon="Zap"
               title="チーム比較"
               description="チーム間の詳細データ比較分析とマッチアップ予測"
               href="/teams/compare"
@@ -95,7 +95,7 @@ export default function HomePage({ searchParams }: { searchParams: { filter?: st
             />
 
             <FeatureCard
-              icon={Users}
+              icon="Users"
               title="選手比較"
               description="選手同士の成績・能力値の詳細比較"
               href="/players/compare"
@@ -107,7 +107,7 @@ export default function HomePage({ searchParams }: { searchParams: { filter?: st
             />
 
             <FeatureCard
-              icon={Database}
+              icon="Database"
               title="対戦分析"
               description="チーム間H2H成績・直近10試合の詳細分析"
               href="/matchups"
@@ -121,7 +121,7 @@ export default function HomePage({ searchParams }: { searchParams: { filter?: st
 
             {currentLeague === 'npb' && (
               <FeatureCard
-                icon={Sprout}
+                icon="Sprout"
                 title="NPB2 ファーム"
                 description="ファームリーグ試合・有望株監視（Prospect Watch）"
                 href="/?filter=NPB2"
@@ -135,7 +135,7 @@ export default function HomePage({ searchParams }: { searchParams: { filter?: st
             )}
 
             <FeatureCard
-              icon={Activity}
+              icon="Activity"
               title="高度分析"
               description="セイバーメトリクス・WAR・FIP等の詳細指標"
               href="/analytics"
@@ -148,7 +148,7 @@ export default function HomePage({ searchParams }: { searchParams: { filter?: st
             />
 
             <FeatureCard
-              icon={Globe}
+              icon="Globe"
               title="国際比較"
               description="NPB・MLB・KBO横断での選手・チーム比較"
               href="/?league=international"

@@ -1,7 +1,7 @@
 import Database from 'better-sqlite3';
 
 // Yahoo データベース接続
-function getYahooConnection(): Database.Database {
+export function getYahooConnection(): Database.Database {
   const dbPath = process.env.YAHOO_DB_PATH || './data/yahoo_scraping/database/yahoo_baseball.db';
   // better-sqlite3 is synchronous, which is simpler for this script's context.
   return new Database(dbPath);

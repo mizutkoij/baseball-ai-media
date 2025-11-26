@@ -29,30 +29,30 @@ export const metadata: Metadata = {
 // NPB選手データ（サンプル - 実際はDBから取得）
 const FEATURED_PLAYERS = [
   // セ・リーグ
-  { id: 'munetaka_murakami', name: '村上宗隆', team: 'S', position: '内野手', teamName: 'ヤクルト' },
-  { id: 'tetsuto_yamada', name: '山田哲人', team: 'S', position: '内野手', teamName: 'ヤクルト' },
-  { id: 'seiya_suzuki', name: '鈴木誠也', team: 'C', position: '外野手', teamName: '広島' },
-  { id: 'kensuke_kondo', name: '近藤健介', team: 'C', position: '外野手', teamName: '広島' },
-  { id: 'masataka_yoshida', name: '吉田正尚', team: 'B', position: '外野手', teamName: 'オリックス' },
-  { id: 'yutaro_sugimoto', name: '杉本裕太郎', team: 'B', position: '外野手', teamName: 'オリックス' },
-  { id: 'kazuma_okamoto', name: '岡本和真', team: 'G', position: '内野手', teamName: '巨人' },
-  { id: 'hayato_sakamoto', name: '坂本勇人', team: 'G', position: '内野手', teamName: '巨人' },
-  { id: 'kenta_maeda', name: '前田健太', team: 'T', position: '投手', teamName: '阪神' },
-  { id: 'teruaki_sato', name: '佐藤輝明', team: 'T', position: '内野手', teamName: '阪神' },
-  { id: 'dayan_viciedo', name: 'ビシエド', team: 'D', position: '内野手', teamName: '中日' },
-  { id: 'yota_kyoda', name: '京田陽太', team: 'D', position: '内野手', teamName: '中日' },
+  { player_id: 'munetaka_murakami', name: '村上宗隆', team: 'S', position: '内野手', teamName: 'ヤクルト' },
+  { player_id: 'tetsuto_yamada', name: '山田哲人', team: 'S', position: '内野手', teamName: 'ヤクルト' },
+  { player_id: 'seiya_suzuki', name: '鈴木誠也', team: 'C', position: '外野手', teamName: '広島' },
+  { player_id: 'kensuke_kondo', name: '近藤健介', team: 'C', position: '外野手', teamName: '広島' },
+  { player_id: 'masataka_yoshida', name: '吉田正尚', team: 'B', position: '外野手', teamName: 'オリックス' },
+  { player_id: 'yutaro_sugimoto', name: '杉本裕太郎', team: 'B', position: '外野手', teamName: 'オリックス' },
+  { player_id: 'kazuma_okamoto', name: '岡本和真', team: 'G', position: '内野手', teamName: '巨人' },
+  { player_id: 'hayato_sakamoto', name: '坂本勇人', team: 'G', position: '内野手', teamName: '巨人' },
+  { player_id: 'kenta_maeda', name: '前田健太', team: 'T', position: '投手', teamName: '阪神' },
+  { player_id: 'teruaki_sato', name: '佐藤輝明', team: 'T', position: '内野手', teamName: '阪神' },
+  { player_id: 'dayan_viciedo', name: 'ビシエド', team: 'D', position: '内野手', teamName: '中日' },
+  { player_id: 'yota_kyoda', name: '京田陽太', team: 'D', position: '内野手', teamName: '中日' },
 
   // パ・リーグ  
-  { id: 'yuki_yanagita', name: '柳田悠岐', team: 'H', position: '外野手', teamName: 'ソフトバンク' },
-  { id: 'akira_nakamura', name: '中村晃', team: 'H', position: '外野手', teamName: 'ソフトバンク' },
-  { id: 'hotaka_yamakawa', name: '山川穂高', team: 'L', position: '内野手', teamName: '西武' },
-  { id: 'sosuke_genda', name: '源田壮亮', team: 'L', position: '内野手', teamName: '西武' },
-  { id: 'shohei_ohtani', name: '大谷翔平', team: 'F', position: '投手/DH', teamName: '日本ハム' },
-  { id: 'kotaro_kiyomiya', name: '清宮幸太郎', team: 'F', position: '内野手', teamName: '日本ハム' },
-  { id: 'takahiro_laird', name: 'レアード', team: 'M', position: '内野手', teamName: 'ロッテ' },
-  { id: 'shogo_nakamura', name: '中村奨吾', team: 'M', position: '捕手', teamName: 'ロッテ' },
-  { id: 'yuma_mune', name: '宗佑磨', team: 'E', position: '外野手', teamName: '楽天' },
-  { id: 'hideto_asamura', name: '浅村栄斗', team: 'E', position: '内野手', teamName: '楽天' }
+  { player_id: 'yuki_yanagita', name: '柳田悠岐', team: 'H', position: '外野手', teamName: 'ソフトバンク' },
+  { player_id: 'akira_nakamura', name: '中村晃', team: 'H', position: '外野手', teamName: 'ソフトバンク' },
+  { player_id: 'hotaka_yamakawa', name: '山川穂高', team: 'L', position: '内野手', teamName: '西武' },
+  { player_id: 'sosuke_genda', name: '源田壮亮', team: 'L', position: '内野手', teamName: '西武' },
+  { player_id: 'shohei_ohtani', name: '大谷翔平', team: 'F', position: '投手/DH', teamName: '日本ハム' },
+  { player_id: 'kotaro_kiyomiya', name: '清宮幸太郎', team: 'F', position: '内野手', teamName: '日本ハム' },
+  { player_id: 'takahiro_laird', name: 'レアード', team: 'M', position: '内野手', teamName: 'ロッテ' },
+  { player_id: 'shogo_nakamura', name: '中村奨吾', team: 'M', position: '捕手', teamName: 'ロッテ' },
+  { player_id: 'yuma_mune', name: '宗佑磨', team: 'E', position: '外野手', teamName: '楽天' },
+  { player_id: 'hideto_asamura', name: '浅村栄斗', team: 'E', position: '内野手', teamName: '楽天' }
 ];
 
 const TEAM_COLORS = {
@@ -66,8 +66,7 @@ const TEAM_COLORS = {
   'L': 'bg-blue-400',
   'M': 'bg-black',
   'F': 'bg-blue-800',
-  'E': 'bg-red-700',
-  'B': 'bg-blue-900'
+  'E': 'bg-red-700'
 };
 
 export default function FavoriteVotePage() {

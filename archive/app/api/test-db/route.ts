@@ -41,7 +41,7 @@ export async function GET() {
     } catch (dbError) {
       return NextResponse.json({
         error: 'Database connection failed',
-        details: dbError.message,
+        details: dbError instanceof Error ? dbError.message : String(dbError),
         path: dbPath,
         size: `${sizeMB} MB`
       }, { status: 500 });
@@ -50,7 +50,7 @@ export async function GET() {
   } catch (error) {
     return NextResponse.json({
       error: 'System error',
-      details: error.message
+      details: error instanceof Error ? error.message : String(error)
     }, { status: 500 });
   }
 }

@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getDBConnection } from '@/lib/db';
 
 /**
  * Prospect Watch API

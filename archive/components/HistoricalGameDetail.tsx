@@ -11,11 +11,15 @@ interface GameData {
   date: string;
   home_team: string;
   away_team: string;
+  homeTeam?: string; // Add this
+  awayTeam?: string; // Add this
   home_score?: number;
   away_score?: number;
   venue: string;
+  ballpark?: string; // Add this
   status: string;
   start_time_jst?: string;
+  start_time?: string; // Add this
   league: 'central' | 'pacific';
   updated_at?: string;
 }
@@ -81,6 +85,16 @@ interface HistoricalGameDetailProps {
   gameId: string;
 }
 
+interface GameApiResponse {
+  game?: GameData;
+  data?: {
+    game?: GameData;
+    batting?: any;
+    pitching?: any;
+    lineups?: any;
+  };
+}
+
 export default function HistoricalGameDetail({ gameId }: HistoricalGameDetailProps) {
   const [gameData, setGameData] = useState<GameData | null>(null);
   const [lineupData, setLineupData] = useState<LineupData | null>(null);
@@ -109,19 +123,19 @@ export default function HistoricalGameDetail({ gameId }: HistoricalGameDetailPro
       // 基本試合情報を取得
       const gameResponse = await fetch(`/api/games/${gameId}`);
       if (gameResponse.ok) {
-        const gameData = await gameResponse.json();
+        const apiResponse: GameApiResponse = await gameResponse.json();
         // Handle both formats: {game: ...} and {data: {game: ...}}
-        const game = gameData.game || gameData.data?.game;
+        const game = apiResponse.game || apiResponse.data?.game;
         if (game) {
           // Convert API format to component format
           setGameData({
             game_id: game.game_id,
             date: game.date,
-            home_team: game.home_team || game.homeTeam,
-            away_team: game.away_team || game.awayTeam,
-            home_score: game.home_score || game.homeScore || game.away_score,
-            away_score: game.away_score || game.awayScore || game.home_score,
-            venue: game.venue || game.ballpark,
+            home_team: game.home_team || game.homeTeam || '',
+            away_team: game.away_team || game.awayTeam || '',
+            home_score: game.home_score || game.away_score,
+            away_score: game.away_score || game.home_score,
+            venue: game.venue || game.ballpark || '',
             status: game.status === 'final' ? 'finished' : game.status,
             start_time_jst: game.start_time_jst || game.start_time,
             league: game.league || 'central',
@@ -129,10 +143,9 @@ export default function HistoricalGameDetail({ gameId }: HistoricalGameDetailPro
           });
 
           // 実際のAPIデータから打撃・投手成績を取得
-          if (gameData.data?.batting) {
-            const batting = gameData.data.batting;
-            const homeTeamName = game.home_team || game.homeTeam;
-            const awayTeamName = game.away_team || game.awayTeam;
+          if (apiResponse.data?.batting) {
+            const homeTeamName = game.home_team || game.homeTeam || '';
+            const awayTeamName = game.away_team || game.awayTeam || '';
             
             // APIの実際の形式に対応: team名でアクセス
             const homeTeamData = batting[homeTeamName] || batting['阪神'] || batting['DeNA'];
@@ -164,8 +177,8 @@ export default function HistoricalGameDetail({ gameId }: HistoricalGameDetailPro
           }
 
           // 実際のAPIデータから投手成績を取得
-          if (gameData.data?.pitching) {
-            const pitching = gameData.data.pitching;
+          if (apiResponse.data?.pitching) {
+            const pitching = apiResponse.data.pitching;
             const homeTeamName = game.home_team || game.homeTeam;
             const awayTeamName = game.away_team || game.awayTeam;
             
@@ -210,10 +223,10 @@ export default function HistoricalGameDetail({ gameId }: HistoricalGameDetailPro
       }
 
       // 実際のAPIデータからスターティングラインアップを取得
-      if (gameData.data?.lineups) {
-        const apiLineups = gameData.data.lineups;
-        const homeTeamName = game.home_team || game.homeTeam;
-        const awayTeamName = game.away_team || game.awayTeam;
+      if (apiResponse.data?.lineups) {
+        const apiLineups = apiResponse.data.lineups;
+        const homeTeamName = gameData?.home_team || apiResponse.game?.home_team || apiResponse.data?.game?.home_team || 'Home';
+        const awayTeamName = gameData?.away_team || apiResponse.game?.away_team || apiResponse.data?.game?.away_team || 'Away';
         
         // APIの実際の形式に対応: team名でアクセス
         const homeLineupData = apiLineups[homeTeamName] || apiLineups['阪神'] || apiLineups['DeNA'];
@@ -222,16 +235,16 @@ export default function HistoricalGameDetail({ gameId }: HistoricalGameDetailPro
         if (homeLineupData || awayLineupData) {
           setLineupData({
             game: {
-              game_id: game.game_id,
-              date: game.date,
+              game_id: apiResponse.game?.game_id || apiResponse.data?.game?.game_id || gameId,
+              date: apiResponse.game?.date || apiResponse.data?.game?.date || '',
               away_team: awayTeamName,
               home_team: homeTeamName,
-              away_score: game.away_score,
-              home_score: game.home_score,
-              status: game.status,
-              venue: game.venue || game.ballpark,
-              start_time_jst: game.start_time_jst || game.start_time,
-              league: game.league || 'central'
+              away_score: apiResponse.game?.away_score || apiResponse.data?.game?.away_score,
+              home_score: apiResponse.game?.home_score || apiResponse.data?.game?.home_score,
+              status: apiResponse.game?.status || apiResponse.data?.game?.status || 'scheduled',
+              venue: apiResponse.game?.venue || apiResponse.data?.game?.venue || '未定',
+              start_time_jst: apiResponse.game?.start_time_jst || apiResponse.data?.game?.start_time_jst,
+              league: apiResponse.game?.league || apiResponse.data?.game?.league || 'central'
             },
             lineups: {
               home: homeLineupData?.map((p: any) => ({

@@ -340,7 +340,7 @@ function analyzeSituationImpact(prev: GameState, curr: GameState): { impact: num
   
   // カウント状況（ボール・ストライク）
   const favorableCounts = [30, 31, 20, 21]; // 3-0, 3-1, 2-0, 2-1
-  const unfavorableCounts = [02, 12, 01, 11]; // 0-2, 1-2, 0-1, 1-1
+  const unfavorableCounts = [2, 12, 1, 11]; // 0-2, 1-2, 0-1, 1-1
   
   const prevCount = prev.balls * 10 + prev.strikes;
   const currCount = curr.balls * 10 + curr.strikes;

@@ -90,7 +90,7 @@ export async function GET(request: NextRequest) {
         // ゲームリスト取得
         const gameQuery = 'SELECT DISTINCT game_id FROM pitch_data ORDER BY game_id;';
         const gameResults = await queryYahooDatabase(gameQuery);
-        const games = gameResults.split('\n').filter(g => g.trim());
+        const games = gameResults.split('\n').filter((g: string) => g.trim());
 
         responseData = {
           success: true,
@@ -118,9 +118,9 @@ export async function GET(request: NextRequest) {
         `;
         
         const gameResult = await queryYahooDatabase(query);
-        const gameRows = gameResult.split('\n').filter(row => row.trim());
+        const gameRows = gameResult.split('\n').filter((row: string) => row.trim());
         
-        const gameData = gameRows.map(row => {
+        const gameData = gameRows.map((row: string) => {
           const [game_id, index_code, pitch_sequence, pitch_type, velocity, result, count, zone] = row.split('|');
           return {
             game_id,
@@ -160,9 +160,9 @@ export async function GET(request: NextRequest) {
         `;
 
         const batterResult = await queryYahooDatabase(query);
-        const batterRows = batterResult.split('\n').filter(row => row.trim());
+        const batterRows = batterResult.split('\n').filter((row: string) => row.trim());
 
-        const batterData = batterRows.map(row => {
+        const batterData = batterRows.map((row: string) => {
           const [game_id, index_code, pitch_sequence, pitch_type, velocity, result, count, zone, scraped_at] = row.split('|');
           return {
             game_id,
@@ -196,9 +196,9 @@ export async function GET(request: NextRequest) {
         `;
 
         const liveResult = await queryYahooDatabase(query);
-        const liveRows = liveResult.split('\n').filter(row => row.trim());
+        const liveRows = liveResult.split('\n').filter((row: string) => row.trim());
 
-        const liveData = liveRows.map(row => {
+        const liveData = liveRows.map((row: string) => {
           const [game_id, index_code, pitch_sequence, pitch_type, velocity, result, count, scraped_at] = row.split('|');
           return {
             game_id,

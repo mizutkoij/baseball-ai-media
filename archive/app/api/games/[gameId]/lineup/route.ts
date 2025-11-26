@@ -11,6 +11,25 @@ interface RouteContext {
   };
 }
 
+interface LineupPlayer {
+  team: string;
+  batting_order: number;
+  player_name: string;
+  position_name: string;
+  position_code: string;
+}
+
+interface BenchPlayer {
+  team: string;
+  player_name: string;
+  position_name: string;
+}
+
+interface Official {
+  official_role: string;
+  official_name: string;
+}
+
 export async function GET(request: NextRequest, context: RouteContext) {
   let resolvedParams: { gameId: string };
   try {
@@ -56,7 +75,7 @@ export async function GET(request: NextRequest, context: RouteContext) {
       ORDER BY team, batting_order
     `;
     
-    let lineups = [];
+    let lineups: LineupPlayer[] = [];
     try {
       lineups = db.prepare(lineupQuery).all(gameId) || [];
     } catch (error) {
@@ -71,7 +90,7 @@ export async function GET(request: NextRequest, context: RouteContext) {
       ORDER BY team, player_name
     `;
     
-    let benchPlayers = [];
+    let benchPlayers: BenchPlayer[] = [];
     try {
       benchPlayers = db.prepare(benchQuery).all(gameId) || [];
     } catch (error) {
@@ -85,7 +104,7 @@ export async function GET(request: NextRequest, context: RouteContext) {
       WHERE game_id = ?
     `;
     
-    let officials = [];
+    let officials: Official[] = [];
     try {
       officials = db.prepare(officialsQuery).all(gameId) || [];
     } catch (error) {

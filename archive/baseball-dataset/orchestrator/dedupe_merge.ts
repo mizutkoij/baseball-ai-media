@@ -202,7 +202,7 @@ export function normalizePlayerName(rawName: string, teamId?: string): string {
   }
   
   // 名前のバリエーション統一
-  for (const [canonical, variations] of Object.entries(PLAYER_MAP.normalization_patterns.name_variations)) {
+  for (const [canonical, variations] of Object.entries(PLAYER_MAP.normalization_patterns.name_variations) as [string, string[]][]) {
     if (variations.includes(normalized)) {
       return canonical;
     }

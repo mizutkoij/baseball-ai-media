@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Search, Trophy, Users, TrendingUp, Clock, Star } from 'lucide-react';
 
 interface Player {
-  id: string;
+  player_id: string;
   name: string;
   team: string;
   position: string;
@@ -108,7 +108,7 @@ export default function VotingInterface({ players, teamColors }: VotingInterface
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          playerId: player.id,
+          playerId: player.player_id,
           playerName: player.name,
           teamCode: player.team,
         }),
@@ -226,7 +226,7 @@ export default function VotingInterface({ players, teamColors }: VotingInterface
           <div className="grid sm:grid-cols-2 gap-4">
             {filteredPlayers.map((player) => (
               <div
-                key={player.id}
+                key={player.player_id}
                 className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-4 hover:bg-white/10 transition-colors"
               >
                 <div className="flex items-center gap-3">
@@ -291,11 +291,11 @@ export default function VotingInterface({ players, teamColors }: VotingInterface
                 }`}>
                   {player.rank_overall}
                 </div>
-                <div className={`w-3 h-3 rounded-full ${teamColors[player.team_code]}`}></div>
+                <div className={`w-3 h-3 rounded-full ${teamColors[player.team]}`}></div>
                 <div className="flex-1 min-w-0">
-                  <div className="text-white font-medium truncate">{player.player_name}</div>
+                  <div className="text-white font-medium truncate">{player.name}</div>
                   <div className="text-xs text-gray-400">
-                    {teams.find(t => t.code === player.team_code)?.name}
+                    {teams.find(t => t.code === player.team)?.name}
                   </div>
                 </div>
                 <div className="text-right">

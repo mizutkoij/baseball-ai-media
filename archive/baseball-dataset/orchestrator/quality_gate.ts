@@ -283,10 +283,10 @@ export class QualityGate {
   private async notifyDiscord(report: QualityReport): Promise<void> {
     try {
       // 既存のDiscord通知システムを利用
-      const { notifyDiscord } = await import('../../lib/discord-notifier');
+      const { notifyStatus } = await import('../../lib/discord-notifier');
       
       const message = this.formatDiscordMessage(report);
-      await notifyDiscord(message);
+      await notifyStatus('Quality Gate Report', message);
       
     } catch (error) {
       console.warn('⚠️ Failed to send Discord notification:', error);
@@ -368,7 +368,14 @@ async function main() {
   try {
     const report = await gate.runQualityGate();
     
-    console.log(`\n${gate.getStatusEmoji(report.status)} Quality Gate Result: ${report.status}`);
+    let statusEmoji: string;
+    switch (report.status) {
+      case 'PASS': statusEmoji = '✅'; break;
+      case 'WARN': statusEmoji = '⚠️'; break;
+      case 'FAIL': statusEmoji = '❌'; break;
+      default: statusEmoji = '❓'; break;
+    }
+    console.log(`\n${statusEmoji} Quality Gate Result: ${report.status}`);
     console.log(`📊 Summary: ${report.totalGames} games, ${report.qualityScore.toFixed(1)}% avg quality`);
     
     if (report.recommendations.length > 0) {
