@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { TrendingUp, Target, BarChart3, Zap } from "lucide-react";
-import TodaysGames from "../components/TodaysGames";
+// import TodaysGames from "../components/TodaysGames";
 
 // Force dynamic rendering to prevent build-time API calls
 export const dynamic = 'force-dynamic';
