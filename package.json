@@ -30,6 +30,7 @@
     "auto:monthly": "npx tsx scripts/auto_update_schedule.ts --mode monthly"
   },
   "dependencies": {
+    "@prisma/client": "^7.0.1",
     "@types/cheerio": "^0.22.35",
     "@types/cli-progress": "^3.11.6",
     "@types/json2csv": "^5.0.7",
@@ -37,6 +38,7 @@
     "@types/node-fetch": "^2.6.13",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@vercel/postgres": "^0.10.0",
     "autoprefixer": "^10.0.1",
     "axios": "^1.11.0",
     "cheerio": "^1.1.0",
@@ -64,6 +66,7 @@
     "eslint-config-next": "14.0.4",
     "jsdom": "^25.0.1",
     "madge": "^8.0.0",
+    "prisma": "^7.0.1",
     "ts-prune": "^0.10.3",
     "vitest": "^3.2.4"
   }

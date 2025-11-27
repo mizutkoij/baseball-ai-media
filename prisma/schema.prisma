@@ -1,0 +1,311 @@
+// Prisma schema for Baseball AI Media
+// Vercel Postgres
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+// =====================================
+// Players Master Table
+// =====================================
+model Player {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Basic Info
+  league       String
+  originalId   Int?
+  fullName     String
+  firstName    String?
+  lastName     String?
+  nativeName   String?
+  nickname     String?
+  jerseyNumber Int?
+
+  // Physical Info
+  birthDate  DateTime?
+  age        Int?
+  heightCm   Int?
+  weightKg   Int?
+  bats       String? // L, R, S (switch)
+  throws     String? // L, R
+
+  // Birthplace
+  birthCity          String?
+  birthStateProvince String?
+  birthCountry       String?
+  nationality        String?
+
+  // Position & Team
+  primaryPosition      String?
+  secondaryPositions   String?
+  currentTeam          String?
+  teamLevel            String?
+
+  // Career Info
+  debutDate   DateTime?
+  debutAge    Int?
+  proYears    Int?
+  careerStatus String?
+
+  // Draft Info
+  draftYear     Int?
+  draftRound    Int?
+  draftPosition Int?
+  draftTeam     String?
+  signingBonus  BigInt?
+
+  // Contract
+  contractStatus String?
+  contractLength Int?
+  contractValue  BigInt?
+  currentSalary  BigInt?
+  salaryTier     String?
+
+  // Scouting
+  scoutingGrade        Float?
+  prospectRanking      Int?
+  prospectStatus       String?
+  overallFutureValue   Int?
+
+  // Relations
+  background         PlayerBackground?
+  yearlyPerformances YearlyPerformance[]
+  battingStats       BattingStats[]
+  pitchingStats      PitchingStats[]
+
+  @@index([fullName])
+  @@index([currentTeam])
+  @@index([league])
+  @@map("players")
+}
+
+// =====================================
+// Player Background
+// =====================================
+model PlayerBackground {
+  id        String   @id @default(cuid())
+  playerId  String   @unique
+  player    Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  // Education
+  highSchool            String?
+  highSchoolCountry     String?
+  highSchoolGradYear    Int?
+  collegeUniversity     String?
+  collegeCountry        String?
+  collegeGradYear       Int?
+  collegeMajor          String?
+
+  // Amateur
+  amateurTeams      String?
+  youthAchievements String?
+
+  // National Team
+  nationalTeamHistory     String?
+  internationalTournaments String?
+
+  // Personal
+  familyInfo         String?
+  languagesSpoken    String?
+  hobbiesInterests   String?
+  charityWork        String?
+  socialMediaHandles String?
+
+  @@map("player_backgrounds")
+}
+
+// =====================================
+// Yearly Performance
+// =====================================
+model YearlyPerformance {
+  id        String   @id @default(cuid())
+  playerId  String
+  player    Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  season   Int
+  age      Int?
+  teamName String?
+
+  // Games
+  gamesPlayed Int @default(0)
+  gamesStarted Int @default(0)
+
+  // Stats stored as JSON for flexibility
+  stats Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([playerId, season])
+  @@index([season])
+  @@map("yearly_performances")
+}
+
+// =====================================
+// Batting Stats
+// =====================================
+model BattingStats {
+  id        String   @id @default(cuid())
+  playerId  String
+  player    Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  year   Int
+  team   String?
+  league String?
+
+  // Plate Appearances
+  pa  Int @default(0) // Plate Appearances
+  ab  Int @default(0) // At Bats
+  h   Int @default(0) // Hits
+  h2  Int @default(0) // Doubles
+  h3  Int @default(0) // Triples
+  hr  Int @default(0) // Home Runs
+  rbi Int @default(0)
+  r   Int @default(0) // Runs
+  bb  Int @default(0) // Walks
+  so  Int @default(0) // Strikeouts
+  sb  Int @default(0) // Stolen Bases
+  cs  Int @default(0) // Caught Stealing
+
+  // Advanced Stats
+  avg   Float? // Batting Average
+  obp   Float? // On-Base Percentage
+  slg   Float? // Slugging Percentage
+  ops   Float? // OPS
+  woba  Float?
+  wrcPlus Float? // wRC+
+  war   Float?
+
+  // Additional stats as JSON
+  additionalStats Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([playerId, year, team])
+  @@index([year])
+  @@index([league])
+  @@map("batting_stats")
+}
+
+// =====================================
+// Pitching Stats
+// =====================================
+model PitchingStats {
+  id        String   @id @default(cuid())
+  playerId  String
+  player    Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  year   Int
+  team   String?
+  league String?
+
+  // Games
+  g   Int @default(0) // Games
+  gs  Int @default(0) // Games Started
+  cg  Int @default(0) // Complete Games
+  sho Int @default(0) // Shutouts
+  sv  Int @default(0) // Saves
+  hld Int @default(0) // Holds
+
+  // Innings & Results
+  ip  Float @default(0) // Innings Pitched
+  w   Int   @default(0) // Wins
+  l   Int   @default(0) // Losses
+
+  // Opponent Stats
+  h   Int @default(0) // Hits Allowed
+  r   Int @default(0) // Runs
+  er  Int @default(0) // Earned Runs
+  hr  Int @default(0) // Home Runs Allowed
+  bb  Int @default(0) // Walks
+  so  Int @default(0) // Strikeouts
+
+  // Advanced Stats
+  era     Float? // ERA
+  whip    Float? // WHIP
+  k9      Float? // K/9
+  bb9     Float? // BB/9
+  fip     Float? // FIP
+  war     Float?
+
+  // Additional stats as JSON
+  additionalStats Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([playerId, year, team])
+  @@index([year])
+  @@index([league])
+  @@map("pitching_stats")
+}
+
+// =====================================
+// Games
+// =====================================
+model Game {
+  id        String   @id @default(cuid())
+  gameId    String   @unique // e.g., "2025080301"
+
+  date      DateTime
+  year      Int
+  homeTeam  String
+  awayTeam  String
+  homeScore Int?
+  awayScore Int?
+
+  status    String? // scheduled, live, final
+  venue     String?
+
+  // Game details as JSON
+  details   Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([date])
+  @@index([year])
+  @@index([homeTeam])
+  @@index([awayTeam])
+  @@map("games")
+}
+
+// =====================================
+// Player Detailed Stats (from JSON files)
+// Blob Storage URLsを保存
+// =====================================
+model PlayerDetailedStats {
+  id        String   @id @default(cuid())
+
+  playerId  String
+  year      Int
+  team      String
+  playerName String
+
+  // Blob Storage URLs
+  basicInfoUrl      String? // basic_info.json
+  farmStatsUrl      String? // farm_stats.json
+  dayNightUrl       String? // Day_Nighter別成績.json
+  homeVisitorUrl    String? // Home_Visitor別成績.json
+  // ... etc (全統計ファイルのURL)
+
+  // Full JSON data (optional, for frequently accessed data)
+  cachedData Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([playerId, year, team])
+  @@index([year])
+  @@index([team])
+  @@map("player_detailed_stats")
+}
