@@ -1,13 +1,11 @@
-import Link from "next/link";
-import { TrendingUp, Target, BarChart3, Zap } from "lucide-react";
-// import TodaysGames from "../components/TodaysGames";
-
-// Force dynamic rendering to prevent build-time API calls
+// Minimal test to debug 500 error
 export const dynamic = 'force-dynamic';
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
+    <div className="min-h-screen p-12">
+      <h1 className="text-4xl">Baseball AI Media - Testing</h1>
+      <p className="mt-4">If you can see this, the page is working.</p>
       <div className="max-w-6xl mx-auto px-6 py-12">
         {/* Hero Section */}
         <div className="text-center mb-12">
