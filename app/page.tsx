@@ -125,8 +125,8 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Today's Games Section - Dynamic from scraped data */}
-        <TodaysGames />
+        {/* Today's Games Section - Temporarily disabled to debug 500 error */}
+        {/* <TodaysGames /> */}
 
         {/* Status Message */}
         <div className="text-center text-slate-400 text-sm">
