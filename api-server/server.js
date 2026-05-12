@@ -4,6 +4,22 @@ const compression = require('compression');
 const fs = require('fs');
 const path = require('path');
 
+let pgPool = null;
+try {
+  const { Pool } = require('pg');
+  pgPool = new Pool({
+    host: process.env.SCOUTING_DB_HOST || 'localhost',
+    port: parseInt(process.env.SCOUTING_DB_PORT || '5432', 10),
+    database: process.env.SCOUTING_DB_NAME || 'baseball_ai_v2',
+    user: process.env.SCOUTING_DB_USER || 'baseball_user',
+    password: process.env.SCOUTING_DB_PASSWORD,
+    max: 5,
+    idleTimeoutMillis: 30000,
+  });
+} catch (err) {
+  console.warn('[scouting] pg pool init skipped (install "pg" to enable):', err.message);
+}
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 const OUTPUT_DIR = process.env.OUTPUT_DIR || path.join(__dirname, '..', 'output');
@@ -189,6 +205,118 @@ app.get('/api/teams/:team/players', (req, res) => {
       error: 'Internal server error',
       message: error.message
     });
+  }
+});
+
+// ============================================================
+// Scouting Reports endpoints (Phase 6 of pitcher-probability-engine)
+// Data source: PostgreSQL scouting_reports table
+// ============================================================
+
+const SCOUTING_FIELDS = `
+    pitcher_id_npbplus, opponent_team_id,
+    to_char(game_date, 'YYYY-MM-DD') AS game_date,
+    pitcher_slug, team_slug, pitcher_name_ja, team_name_ja,
+    schema_version, season_year, generated_at, confidence,
+    payload, og_image_url, headline, finding_count,
+    meta_title, meta_description
+`;
+
+function ensurePool(res) {
+  if (!pgPool) {
+    res.status(503).json({ error: 'Database not configured' });
+    return false;
+  }
+  return true;
+}
+
+// Detail: one scouting report by slug + date
+app.get('/api/scouting/:pitcherSlug/:teamSlug/:date', async (req, res) => {
+  if (!ensurePool(res)) return;
+  const { pitcherSlug, teamSlug, date } = req.params;
+  try {
+    const sql = `
+      SELECT ${SCOUTING_FIELDS}
+      FROM scouting_reports
+      WHERE pitcher_slug = $1 AND team_slug = $2 AND game_date = $3
+      LIMIT 1
+    `;
+    const { rows } = await pgPool.query(sql, [pitcherSlug, teamSlug, date]);
+    if (!rows.length) {
+      return res.status(404).json({ error: 'Report not found' });
+    }
+    res.set('Cache-Control', 'public, max-age=300, stale-while-revalidate=86400');
+    res.json(rows[0]);
+  } catch (err) {
+    console.error('[scouting] detail error:', err);
+    res.status(500).json({ error: 'Internal error', message: err.message });
+  }
+});
+
+// Latest report per pitcher-team slug pair (for /scouting/[pitcher]/vs/[team] without date)
+app.get('/api/scouting/:pitcherSlug/:teamSlug/latest', async (req, res) => {
+  if (!ensurePool(res)) return;
+  const { pitcherSlug, teamSlug } = req.params;
+  try {
+    const sql = `
+      SELECT ${SCOUTING_FIELDS}
+      FROM scouting_reports
+      WHERE pitcher_slug = $1 AND team_slug = $2
+      ORDER BY game_date DESC, generated_at DESC
+      LIMIT 1
+    `;
+    const { rows } = await pgPool.query(sql, [pitcherSlug, teamSlug]);
+    if (!rows.length) {
+      return res.status(404).json({ error: 'No report for this pairing' });
+    }
+    res.set('Cache-Control', 'public, max-age=300, stale-while-revalidate=86400');
+    res.json(rows[0]);
+  } catch (err) {
+    console.error('[scouting] latest error:', err);
+    res.status(500).json({ error: 'Internal error', message: err.message });
+  }
+});
+
+// Index: recent reports across all matchups (for /scouting landing page)
+app.get('/api/scouting', async (req, res) => {
+  if (!ensurePool(res)) return;
+  const limit = Math.min(parseInt(req.query.limit || '30', 10), 100);
+  try {
+    const sql = `
+      SELECT pitcher_slug, team_slug, pitcher_name_ja, team_name_ja,
+             to_char(game_date, 'YYYY-MM-DD') AS game_date,
+             headline, confidence, finding_count,
+             og_image_url, generated_at
+      FROM scouting_reports
+      WHERE game_date >= CURRENT_DATE - INTERVAL '14 days'
+      ORDER BY game_date DESC, generated_at DESC
+      LIMIT $1
+    `;
+    const { rows } = await pgPool.query(sql, [limit]);
+    res.set('Cache-Control', 'public, max-age=300, stale-while-revalidate=86400');
+    res.json({ reports: rows });
+  } catch (err) {
+    console.error('[scouting] index error:', err);
+    res.status(500).json({ error: 'Internal error', message: err.message });
+  }
+});
+
+// Static params helper for Next.js generateStaticParams
+app.get('/api/scouting-slugs', async (req, res) => {
+  if (!ensurePool(res)) return;
+  try {
+    const sql = `
+      SELECT pitcher_slug, team_slug,
+             to_char(game_date, 'YYYY-MM-DD') AS game_date
+      FROM scouting_reports
+      WHERE game_date >= CURRENT_DATE - INTERVAL '30 days'
+    `;
+    const { rows } = await pgPool.query(sql);
+    res.set('Cache-Control', 'public, max-age=600');
+    res.json({ slugs: rows });
+  } catch (err) {
+    console.error('[scouting] slugs error:', err);
+    res.status(500).json({ error: 'Internal error', message: err.message });
   }
 });
 
